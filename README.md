@@ -98,7 +98,11 @@ npm start
 
 ## Deployment
 
-Recommended deployment on Vercel:
+This site is configured for automatic deployment on Vercel. Connected to GitHub repository for continuous deployment.
+
+**Live URL:** [lemonbrand.io](https://lemonbrand.io)
+
+Manual deployment via Vercel CLI:
 
 ```bash
 # Install Vercel CLI
@@ -108,7 +112,7 @@ npm i -g vercel
 vercel
 ```
 
-Or connect the GitHub repository to Vercel for automatic deployments.
+Every push to the `main` branch triggers an automatic deployment.
 
 ## Related Repositories
 
