@@ -14,11 +14,11 @@ export function Features() {
     >
       <Header>
         <h2 className="font-sans text-bold text-xl text-center md:text-4xl w-fit mx-auto font-bold tracking-tight text-neutral-8000 dark:text-neutral-100 text-neutral-800">
-          I only build systems that print money 💰
+          We only build systems that print money
         </h2>
       </Header>
       <p className="max-w-3xl text-base text-neutral-600 text-center mx-auto mt-4 dark:text-neutral-400">
-        Not interested in cool tech. Only interested in your P&L. Here&apos;s how we make clients money.
+        Three systems that directly impact your P&L.
       </p>
       <div className="mt-20  grid cols-1 md:grid-cols-5 gap-4 md:auto-rows-[25rem] max-w-7xl mx-auto">
         <Card className="flex flex-col justify-between md:col-span-3">
@@ -26,18 +26,18 @@ export function Features() {
             <SkeletonOne />
           </CardSkeletonBody>
           <CardContent className="h-40">
-            <CardTitle>Outbound that books while you sleep</CardTitle>
+            <CardTitle>Instant Lead Response</CardTitle>
             <CardDescription className="max-w-xl">
-              Your AI SDR prospects, personalizes, and follows up with 1,000 leads while you&apos;re at dinner. Books directly to your calendar. Qualifies before you talk. Cormis went from 2 to 12 demos weekly. ROI in 11 days.
+              Automated response when someone calls or emails for help. Works 24/7—even at 2 AM, even on weekends. Confirms receipt and sets expectations instantly.
             </CardDescription>
           </CardContent>
         </Card>
 
         <Card className="flex flex-col justify-between md:col-span-2">
           <CardContent className="h-40">
-            <CardTitle>One recording. 30 pieces. Six channels.</CardTitle>
+            <CardTitle>Quote Follow-up</CardTitle>
             <CardDescription className="max-w-xl">
-              Record once on Monday. By Friday you&apos;ve posted 30 times across LinkedIn, Twitter, TikTok, email, blog, and YouTube. St-Albert hit 2M TikTok views in 4 months. Zero additional headcount.
+              Automated reminders for leads who said "let me think about it." Sends follow-ups until they say yes or no. Converts quotes into jobs without manual chasing.
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
@@ -55,9 +55,9 @@ export function Features() {
 
         <Card className="flex flex-col justify-between md:col-span-5">
           <CardContent className="h-40">
-            <CardTitle>Your entire business in one dashboard</CardTitle>
+            <CardTitle>Reactivation Sprint</CardTitle>
             <CardDescription className="max-w-2xl">
-              Stop stitching 8 tools together for basic reports. AI pulls from everywhere, enriches everything, alerts on problems before they cost money. Found $45K in unbilled work for a manufacturer. Two hours to implement.
+              Finds and re-engages old customers who stopped calling. Sends personalized messages to bring them back. Turns past clients into recurring revenue.
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
