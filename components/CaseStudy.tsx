@@ -20,22 +20,22 @@ type TimelineEntry = {
 
 const timelineEntries: TimelineEntry[] = [
   {
-    id: "outbound-engine",
-    tabLabel: "Outbound Engine",
-    headline: "40 hours saved. 127% more meetings. One AI that never sleeps.",
-    problem: "Sales reps burned hours chasing cold lists and reply rates stayed flat.",
+    id: "hvac-emergency",
+    tabLabel: "HVAC Emergency",
+    headline: "$23K captured in month 1. Zero after-hours calls to voicemail.",
+    problem: "Emergency AC failures and heating outages went to voicemail after 6 PM. Customers called competitors who answered.",
     solution:
-      "We dropped in an AI seller that writes the first touch, keeps the follow-ups tight, and logs every reply so reps stay on live calls.",
+      "We built instant response automation that answers every call in under 2 minutes, confirms the emergency, and books the tech directly to the calendar—even at 2 AM.",
     results:
-      "Calendar filled itself, the team won back 40 hours a week, and replies jumped 34%.",
+      "Captured 31 emergency calls in the first month worth $23K. Customer called back rate dropped to zero.",
     metrics: [
-      { label: "Meetings booked", value: "+127%" },
-      { label: "Hours saved", value: "40 / week" },
-      { label: "Reply lift", value: "+34%" },
+      { label: "Emergency calls captured", value: "31" },
+      { label: "Revenue month 1", value: "$23K" },
+      { label: "After-hours answer rate", value: "100%" },
     ],
     image: {
       src: "https://assets.aceternity.com/templates/startup-1.webp",
-      alt: "Outbound automation dashboard showing booked calls pipeline",
+      alt: "HVAC emergency call response dashboard",
     },
     accent: {
       overlay: "#f97316",
@@ -43,22 +43,22 @@ const timelineEntries: TimelineEntry[] = [
     },
   },
   {
-    id: "content-repurpose",
-    tabLabel: "Content System",
-    headline: "One writer. Six channels. 8x the output. Here&apos;s how.",
-    problem: "Marketing rewrote every asset for each platform by hand and ran out of hours.",
+    id: "plumbing-quote-followup",
+    tabLabel: "Plumbing Quotes",
+    headline: "Conversion rate: 22%→41%. No manual follow-up. Just closed jobs.",
+    problem: "Quoted big-ticket water heater replacements and repiping jobs but never followed up. Estimates sat in email while customers ghosted.",
     solution:
-      "We trained an AI editor on the brand voice so one long-form post spins into shorts, emails, and captions in minutes.",
+      "We automated quote follow-up that sends reminders every 3 days, asks if they have questions, and books the install when they&apos;re ready—all without the owner lifting a finger.",
     results:
-      "Output jumped 8x without hiring, and every channel stays on message.",
+      "Quote-to-job conversion nearly doubled. Captured $47K in jobs that would have been lost.",
     metrics: [
-      { label: "Content output", value: "8x" },
-      { label: "Time per piece", value: "-85%" },
-      { label: "Channels live", value: "6" },
+      { label: "Conversion rate", value: "22%→41%" },
+      { label: "Jobs recovered", value: "$47K" },
+      { label: "Manual follow-ups", value: "0" },
     ],
     image: {
       src: "https://assets.aceternity.com/templates/startup-2.webp",
-      alt: "Content planner view with multi-channel assets",
+      alt: "Plumbing quote follow-up automation dashboard",
     },
     accent: {
       overlay: "#eab308",
@@ -66,22 +66,22 @@ const timelineEntries: TimelineEntry[] = [
     },
   },
   {
-    id: "ops-intelligence",
-    tabLabel: "Ops Intelligence",
-    headline: "Found $45K hiding in their data. Took 2 hours instead of 16.",
-    problem: "Leadership stitched eight tools together just to see profit and risk each week.",
+    id: "electrician-reactivation",
+    tabLabel: "Electrician Reactivation",
+    headline: "18 past customers booked. $31K in panel upgrades. 11 days.",
+    problem: "Hundreds of past commercial clients stopped calling. No system to re-engage them for annual inspections or code upgrades.",
     solution:
-      "We unified the data, built a live cockpit, and flagged at-risk work before it burned cash.",
+      "We built a reactivation sprint that finds dormant customers, sends personalized reminders about upcoming compliance deadlines, and books them back on the calendar.",
     results:
-      "Reporting fell to two hours and $45K stayed on the books.",
+      "Reactivated 18 commercial accounts in 11 days. Generated $31K in panel upgrades and maintenance contracts.",
     metrics: [
-      { label: "Reporting time", value: "-87%" },
-      { label: "Revenue saved", value: "$45K" },
-      { label: "Tools merged", value: "8 → 1" },
+      { label: "Customers reactivated", value: "18" },
+      { label: "Revenue generated", value: "$31K" },
+      { label: "Days to results", value: "11" },
     ],
     image: {
       src: "https://assets.aceternity.com/templates/startup-3.webp",
-      alt: "Operations dashboard with profit and capacity gauges",
+      alt: "Electrician customer reactivation dashboard",
     },
     accent: {
       overlay: "#3b82f6",
@@ -89,21 +89,22 @@ const timelineEntries: TimelineEntry[] = [
     },
   },
   {
-    id: "lead-qualification",
-    tabLabel: "Lead Qualification",
-    headline: "Close rate: 23%→46%. Sales cycle: 6 weeks→3. Same team.",
-    problem: "Reps chased cold inbound leads and guessed who was ready to buy.",
+    id: "seasonal-surge",
+    tabLabel: "Seasonal Surge",
+    headline: "Handled 2x summer volume. Zero new hires. Same 4-person crew.",
+    problem: "HVAC company drowned every summer when AC calls spiked. Either turned away jobs or paid overtime to keep up.",
     solution:
-      "We scored every lead on fifteen live signals and routed hot buyers to sales in seconds.",
-    results: "Close rate doubled and the cycle shrank by three weeks.",
+      "We automated intake, triage, and scheduling so emergency calls got instant response and routine maintenance auto-booked to open slots without burning staff hours.",
+    results:
+      "Handled double the summer call volume with the same team. Captured $89K in jobs that would have gone to competitors.",
     metrics: [
-      { label: "Close rate", value: "23%→46%" },
-      { label: "Sales cycle", value: "6w→3w" },
-      { label: "Conversions", value: "+60%" },
+      { label: "Call volume handled", value: "2x" },
+      { label: "New hires needed", value: "0" },
+      { label: "Revenue captured", value: "$89K" },
     ],
     image: {
       src: "https://assets.aceternity.com/templates/startup-4.webp",
-      alt: "Lead scoring interface highlighting qualified solar prospects",
+      alt: "Seasonal surge automation dashboard showing call routing",
     },
     accent: {
       overlay: "#a855f7",
@@ -124,10 +125,10 @@ export function CaseStudy() {
             Case Studies
           </p>
           <h2 className="mt-4 font-sans text-xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl">
-            Systems that pay for themselves before we send the invoice
+            Built for contractors. Proven by contractors.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-neutral-600 dark:text-neutral-400">
-            Four weeks. Four wins. Every client hit ROI before day 30. Here&apos;s the math.
+            Real automation systems generating revenue for HVAC, plumbing, and electrical contractors.
           </p>
         </div>
 

@@ -31,20 +31,20 @@ export function About() {
           {/* Bio Side */}
           <div className="flex flex-col justify-center">
             <h2 className="font-bold text-3xl md:text-4xl text-neutral-800 dark:text-neutral-100 mb-4">
-              One operator. Real systems.
+              Direct operators. Real systems.
             </h2>
             <div className="space-y-4 text-neutral-600 dark:text-neutral-300">
               <p>
-                <strong className="text-neutral-800 dark:text-neutral-100">I&apos;m Simon.</strong> I build AI systems that grow revenue. No agency overhead. No account managers. Just me designing, building, and deploying automation that works.
+                <strong className="text-neutral-800 dark:text-neutral-100">We&apos;re Simon and the team.</strong> We build AI systems that grow revenue. No agency overhead. No account managers. Just us designing, building, and deploying automation that works.
               </p>
               <p>
-                Design background. Developer skills. AI implementation experience across sales, marketing, and ops. I&apos;ve shipped 75+ workflows that handle everything from outbound prospecting to content distribution.
+                Design background. Developer skills. AI implementation experience across sales, marketing, and ops. We&apos;ve generated $1.7M+ in revenue from missed calls in the last 6 months for our contractor clients.
               </p>
               <p>
-                I work directly with founders and operators who want bespoke systems installed fast. Done-with-you builds. Real integration work. Measurable results.
+                We work directly with contractors and operators who want bespoke systems installed fast. Done-with-you builds. Real integration work. Measurable results.
               </p>
               <p className="text-sm">
-                I&apos;m currently working on CodeBrain,{" "}
+                We&apos;re currently working on CodeBrain,{" "}
                 <a
                   href="https://yourcodebrain.com"
                   target="_blank"

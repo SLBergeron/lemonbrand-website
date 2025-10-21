@@ -75,7 +75,7 @@ export function Hero() {
       <div className="text-balance relative z-20 mx-auto mb-4 mt-4 max-w-5xl text-center text-3xl font-semibold tracking-tight text-gray-700 dark:text-neutral-300 md:text-7xl">
         <Balancer>
           <motion.h2>
-            {"Your competitors automated. You're still copy-pasting."
+            {"Never Miss Another Emergency Call"
               .split(" ")
               .map((word, index) => (
                 <motion.span
@@ -108,7 +108,7 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.5 }}
         className="relative z-20 mx-auto mt-4 max-w-3xl px-4 text-center text-base/6 text-gray-600 dark:text-gray-200"
       >
-        Your team&apos;s drowning in busywork while leads slip through. Smart operators automated this months ago. Build once. Run forever.
+        20+ Qualified Booked Jobs in Month 1 or We Work Free
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -116,7 +116,7 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.6 }}
         className="relative z-20 mx-auto mt-2 max-w-2xl px-4 text-center text-sm text-gray-500 dark:text-gray-400"
       >
-        Direct builder. No agency markup. 75+ proven systems. First workflow live in 72 hours.
+        3 automations. 72 hours to live. $1,500 setup + $499/month.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -141,7 +141,7 @@ export function Hero() {
           variant="primary"
           className="hidden md:block w-48"
         >
-          Book a Call
+          Book Your 72-Hour Deployment
         </Button>
       </motion.div>
       <motion.div

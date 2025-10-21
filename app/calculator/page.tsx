@@ -18,12 +18,12 @@ interface CalculatorInputs {
 }
 
 const painPointOptions = [
-  { id: "slow-response", label: "Slow response times losing deals", dealImpact: 12000 },
-  { id: "manual-errors", label: "Manual data entry errors", dealImpact: 15000 },
-  { id: "bottlenecks", label: "Bottlenecks in lead handling", dealImpact: 18000 },
-  { id: "admin-tasks", label: "Repetitive admin tasks", dealImpact: 8000 },
-  { id: "content-creation", label: "Content creation takes forever", dealImpact: 10000 },
-  { id: "no-visibility", label: "No visibility into operations", dealImpact: 12000 },
+  { id: "missed-emergency-calls", label: "Emergency calls going to voicemail after hours", dealImpact: 24000 },
+  { id: "quote-followup", label: "Big-ticket quotes not being followed up", dealImpact: 18000 },
+  { id: "seasonal-surge", label: "Can't handle seasonal surge without overtime", dealImpact: 20000 },
+  { id: "maintenance-lapse", label: "Maintenance contracts lapsing without renewal", dealImpact: 16000 },
+  { id: "slow-response", label: "Slow response losing jobs to competitors", dealImpact: 15000 },
+  { id: "manual-scheduling", label: "Manual scheduling eating hours daily", dealImpact: 10000 },
 ];
 
 const industries = [
@@ -165,10 +165,10 @@ export default function CalculatorPage() {
             ROI Calculator
           </p>
           <h1 className="mt-4 font-sans text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-5xl">
-            See what you&apos;re leaving on the table
+            How much revenue are you missing?
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-neutral-600 dark:text-neutral-400">
-            Calculate your exact savings. Every manual task costs you money. Let&apos;s see how much.
+            Every missed call is a lost job. Every forgotten follow-up is money left on the table. Calculate what automation could recover.
           </p>
         </div>
 
@@ -244,7 +244,7 @@ export default function CalculatorPage() {
             {/* Pain points */}
             <div className="mb-8">
               <label className="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">
-                What&apos;s costing you deals? (Select all that apply)
+                What&apos;s costing you jobs? (Select all that apply)
               </label>
               <div className="space-y-2">
                 {painPointOptions.map((point) => (
@@ -415,12 +415,12 @@ export default function CalculatorPage() {
           <div className="relative flex flex-col items-center justify-center gap-6 text-center p-12 rounded-3xl bg-gradient-to-br from-neutral-100 to-white dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700">
             <motion.div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
               <LayoutTextFlip
-                text="Stop losing deals to "
-                words={["slow responses", "manual errors", "busywork", "copy-paste work"]}
+                text="Stop losing jobs to "
+                words={["missed calls", "forgotten follow-ups", "seasonal overwhelm", "manual chaos"]}
               />
             </motion.div>
             <p className="mt-2 text-center text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-              Your competitors automated months ago. Every day you wait is money left on the table.
+              Every emergency call that goes to voicemail is a job for your competitor. Express Core fixes this in 72 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <Button

@@ -8,17 +8,17 @@ const FAQs = [
   {
     question: "Who owns the automations you build?",
     answer:
-      "You do. Everything is built on your accounts. I don't hold anything hostage. You get full access, documentation, and control. If you want to take it in-house later, you can.",
+      "You do. Everything is built on your accounts. We don't hold anything hostage. You get full access, documentation, and control. If you want to take it in-house later, you can.",
   },
   {
     question: "How do you access my systems?",
     answer:
-      "You provide access during our kickoff call. I work directly in your tools—CRM, marketing platforms, workflow apps. Once we're done, you can revoke access anytime. Your data stays yours.",
+      "You provide access during our kickoff call. We work directly in your tools—CRM, marketing platforms, workflow apps. Once we're done, you can revoke access anytime. Your data stays yours.",
   },
   {
     question: "What's the typical timeline?",
     answer:
-      "Discovery takes 1-2 weeks. Design and build depends on complexity—simple workflows deploy in 2-3 weeks, multi-system integrations can take 4-6 weeks. We set clear milestones upfront. No surprises.",
+      "Express Core goes live in 72 hours. That's discovery, build, and deployment for all 3 core automations. Custom integrations and multi-system builds take 2-6 weeks depending on complexity. We set clear milestones upfront. No surprises.",
   },
   {
     question: "Do you offer ongoing support?",
@@ -28,22 +28,27 @@ const FAQs = [
   {
     question: "What if the automation breaks?",
     answer:
-      "I fix it. Part of the deal. Automations need maintenance—APIs change, platforms update. Retainer clients get priority support. One-off projects include 30 days of fixes post-launch.",
+      "We fix it. Part of the deal. Automations need maintenance—APIs change, platforms update. Retainer clients get priority support. One-off projects include 30 days of fixes post-launch.",
   },
   {
     question: "How much does this cost?",
     answer:
-      "Depends on scope. Simple workflow automation starts around $5K. Multi-department systems with custom integrations run $15K-$30K+. Retainers start at $2K/month for ongoing optimization and support. Book a call and we'll scope it out.",
+      "Express Core (our 3-automation booked-job engine) is $1,500 setup + $499/month. Goes live in 72 hours with a guarantee: 20+ qualified booked jobs in Month 1 or we work free. Custom integrations and enterprise systems run $15K-$30K+. Retainers start at $2K/month for ongoing optimization.",
   },
   {
     question: "Do you work with our team or replace them?",
     answer:
-      "I work with your team. Done-with-you, not for-you. Your people learn the systems as we build. Training is included. Goal is to make your team more effective, not dependent on me.",
+      "We work with your team. Done-with-you, not for-you. Your people learn the systems as we build. Training is included. Goal is to make your team more effective, not dependent on us.",
+  },
+  {
+    question: "What's the 20+ booked jobs guarantee?",
+    answer:
+      "If Express Core doesn't generate at least 20 qualified booked jobs in Month 1, we work free until it does. That's 20+ real jobs on your calendar—not just leads or inquiries. Actual scheduled work. We track every booking in your Jobs Ledger so you can verify the count.",
   },
   {
     question: "What platforms do you integrate with?",
     answer:
-      "CRMs (HubSpot, Salesforce), automation tools (Make, Zapier, n8n), AI platforms (OpenAI, Claude, custom agents), marketing tools (Google, Meta, LinkedIn), project management (ClickUp, Notion, Airtable), and more. If it has an API, we can connect it.",
+      "Home services CRMs (ServiceTitan, Jobber, Housecall Pro), plus standard tools: HubSpot, Salesforce, Make, Zapier, n8n, OpenAI, Claude, Google, Meta, ClickUp, Notion, Airtable. If it has an API, we can connect it.",
   },
 ];
 export function FrequentlyAskedQuestionsAccordion() {
