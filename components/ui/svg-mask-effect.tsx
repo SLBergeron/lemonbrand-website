@@ -117,13 +117,9 @@ export function MaskContainer({
         }}
         animate={{
           opacity: 1,
-          WebkitMaskSize: `${maskSize}px`,
-          maskSize: `${maskSize}px`,
         }}
         transition={{
           opacity: { duration: 0.2, ease: "easeOut" },
-          WebkitMaskSize: { duration: 0.4, ease: "easeInOut" },
-          maskSize: { duration: 0.4, ease: "easeInOut" },
         }}
       >
         {children}
