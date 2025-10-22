@@ -104,8 +104,10 @@ export function MaskContainer({
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!isRevealed) {
-      updateCoords(event.clientX, event.clientY);
+    updateCoords(event.clientX, event.clientY);
+    // Clear collapse coords when user moves cursor after collapsing
+    if (collapseCoords) {
+      setCollapseCoords(null);
     }
   };
 
@@ -138,8 +140,10 @@ export function MaskContainer({
   // Use collapseCoords if we just collapsed, otherwise use current coords
   const activeCoords = collapseCoords || coords;
   const clipPath = isRevealed
-    ? "circle(150% at 50% 50%)" // Fully revealed
-    : `circle(${size / 2}px at ${activeCoords.x}px ${activeCoords.y}px)`; // Peek hole following cursor
+    ? `circle(150% at ${coords.x}px ${coords.y}px)` // Fully revealed but still following cursor
+    : isHovering
+    ? `circle(${size / 2}px at ${activeCoords.x}px ${activeCoords.y}px)` // Peek hole following cursor
+    : "circle(0px at 50% 50%)"; // Hidden when not hovering
 
   return (
     <div
@@ -172,7 +176,7 @@ export function MaskContainer({
           clipPath,
           WebkitClipPath: clipPath,
           transition: isRevealed
-            ? "clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+            ? "clip-path 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)"
             : "none",
         }}
       >

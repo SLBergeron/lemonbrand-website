@@ -75,7 +75,7 @@ export function Hero() {
       <div className="text-balance relative z-20 mx-auto mb-4 mt-4 max-w-5xl text-center text-3xl font-semibold tracking-tight text-gray-700 dark:text-neutral-300 md:text-7xl">
         <Balancer>
           <motion.h2>
-            {"Never Miss Another Emergency Call"
+            {"Capture Every After-Hours Call, Convert More Leads"
               .split(" ")
               .map((word, index) => (
                 <motion.span
@@ -116,7 +116,7 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.6 }}
         className="relative z-20 mx-auto mt-2 max-w-2xl px-4 text-center text-sm text-gray-500 dark:text-gray-400"
       >
-        3 automations. 72 hours to live. $1,500 setup + $499/month.
+        3 automations. 72 hours to live. $1,500 USD setup + $499 USD/month.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 10 }}

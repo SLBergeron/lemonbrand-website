@@ -14,11 +14,11 @@ export function Features() {
     >
       <Header>
         <h2 className="font-sans text-bold text-xl text-center md:text-4xl w-fit mx-auto font-bold tracking-tight text-neutral-8000 dark:text-neutral-100 text-neutral-800">
-          We only build systems that print money
+          Express Core: Three Automations That Book Jobs
         </h2>
       </Header>
       <p className="max-w-3xl text-base text-neutral-600 text-center mx-auto mt-4 dark:text-neutral-400">
-        Three systems that directly impact your P&L.
+        Fast response. Persistent follow-up. Customer reactivation. Built for home service contractors who need revenue, not complexity.
       </p>
       <div className="mt-20  grid cols-1 md:grid-cols-5 gap-4 md:auto-rows-[25rem] max-w-7xl mx-auto">
         <Card className="flex flex-col justify-between md:col-span-3">

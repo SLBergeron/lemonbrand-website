@@ -1,6 +1,7 @@
 import { Features } from "@/components/features";
 import { Hero } from "@/components/hero";
 import { Pricing } from "@/components/pricing";
+import { PricingDetails } from "@/components/PricingDetails";
 import { LogoCloudMarquee } from "@/components/LogoCloudMarquee";
 import { About } from "@/components/about";
 import { FrequentlyAskedQuestionsAccordion } from "@/components/FAQ";
@@ -147,6 +148,7 @@ export default function Home() {
         <Hero />
         <LogoCloudMarquee />
         <Features />
+        <PricingDetails />
         <Pricing />
         <CaseStudy />
         <TestimonialsMasonryGrid />

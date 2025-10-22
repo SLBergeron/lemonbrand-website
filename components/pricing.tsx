@@ -55,10 +55,10 @@ export function Pricing() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-bold text-3xl md:text-4xl text-neutral-800 dark:text-neutral-100">
-            Four-Step Process
+            The 4D System
           </h2>
           <p className="max-w-2xl mx-auto text-base text-neutral-600 dark:text-neutral-400 mt-4">
-            From first call to measurable impact. No fluff, no surprises.
+            Discover. Design. Deploy. Optimize. From first call to measurable impact.
           </p>
         </div>
 
