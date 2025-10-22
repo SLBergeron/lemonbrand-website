@@ -5,6 +5,53 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
+function OrbitalText({ coords }: { coords: { x: number; y: number } }) {
+  const text = "TAP TO SHOW AUTOMATION";
+  const radius = 45;
+  const chars = text.split('');
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, rotate: 360 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        opacity: { duration: 0.2 },
+        rotate: {
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear",
+        },
+      }}
+      style={{
+        left: `${coords.x}px`,
+        top: `${coords.y}px`,
+      }}
+    >
+      {chars.map((char, i) => {
+        const angle = (i / chars.length) * 2 * Math.PI;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        return (
+          <span
+            key={i}
+            className="absolute text-[9px] font-medium uppercase tracking-wider text-neutral-400 dark:text-neutral-500"
+            style={{
+              left: `${x}px`,
+              top: `${y}px`,
+              transform: `translate(-50%, -50%) rotate(${(angle * 180) / Math.PI + 90}deg)`,
+            }}
+          >
+            {char}
+          </span>
+        );
+      })}
+    </motion.div>
+  );
+}
+
 type MaskContainerProps = {
   children?: ReactNode;
   revealText?: ReactNode;
@@ -84,22 +131,9 @@ export function MaskContainer({
     >
       <div className="relative z-0 h-full w-full">{revealText}</div>
 
-      {/* Cursor tooltip - only show when hovering and not revealed */}
+      {/* Orbital rotating text - only show when hovering and not revealed */}
       {isHovering && !isRevealed && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
-          className="pointer-events-none absolute z-50 rounded-md bg-white/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-orange-500 shadow-lg backdrop-blur-sm dark:bg-neutral-900/90 dark:text-orange-400"
-          style={{
-            left: `${coords.x}px`,
-            top: `${coords.y + 20}px`,
-            transform: "translateX(-50%)",
-          }}
-        >
-          Tap to show automation
-        </motion.div>
+        <OrbitalText coords={coords} />
       )}
 
       <motion.div
@@ -114,6 +148,7 @@ export function MaskContainer({
           maskPosition: `${maskPositionX}px ${maskPositionY}px`,
           WebkitMaskSize: `${maskSize}px`,
           maskSize: `${maskSize}px`,
+          transition: 'mask-size 0.4s ease-in-out, -webkit-mask-size 0.4s ease-in-out, mask-position 0.2s ease-out, -webkit-mask-position 0.2s ease-out',
         }}
         animate={{
           opacity: 1,
