@@ -120,16 +120,17 @@ export function MaskContainer({
     onRevealChange?.(newRevealedState);
   };
 
-  // Mask stays at fixed size, content scales inside
-  const maskPositionX = coords.x - size / 2;
-  const maskPositionY = coords.y - size / 2;
+  // Calculate mask size and position based on reveal state
+  const currentMaskSize = isRevealed ? revealSize : size;
+  const maskPositionX = coords.x - currentMaskSize / 2;
+  const maskPositionY = coords.y - currentMaskSize / 2;
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden cursor-pointer transition-shadow duration-300",
-        isHovering && !isRevealed && "shadow-2xl",
+        "relative overflow-hidden cursor-pointer",
+        isHovering && !isRevealed && "shadow-2xl transition-shadow duration-300",
         className
       )}
       onPointerEnter={handlePointerEnter}
@@ -155,21 +156,12 @@ export function MaskContainer({
           maskImage: `url(${maskImage})`,
           WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
           maskPosition: `${maskPositionX}px ${maskPositionY}px`,
-          WebkitMaskSize: `${size}px`,
-          maskSize: `${size}px`,
+          WebkitMaskSize: `${currentMaskSize}px`,
+          maskSize: `${currentMaskSize}px`,
+          transition: 'mask-size 0.4s ease-in-out, -webkit-mask-size 0.4s ease-in-out, mask-position 0.4s ease-in-out, -webkit-mask-position 0.4s ease-in-out',
         }}
       >
-        <motion.div
-          className="h-full w-full flex items-center justify-center"
-          initial={{ scale: 1 }}
-          animate={{ scale: isRevealed ? revealSize / size : 1 }}
-          transition={{
-            duration: 0.4,
-            ease: "easeInOut",
-          }}
-        >
-          {children}
-        </motion.div>
+        {children}
       </div>
     </div>
   );
