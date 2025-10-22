@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 function OrbitalText({ coords }: { coords: { x: number; y: number } }) {
@@ -63,7 +63,6 @@ type MaskContainerProps = {
   revealSize?: number;
   className?: string;
   overlayClassName?: string;
-  maskImage?: string;
   onRevealChange?: (isRevealed: boolean) => void;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -74,7 +73,6 @@ export function MaskContainer({
   revealSize = 640,
   className,
   overlayClassName,
-  maskImage = "/mask.svg",
   onRevealChange,
   ...rest
 }: MaskContainerProps) {
@@ -82,13 +80,14 @@ export function MaskContainer({
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [collapseCoords, setCollapseCoords] = useState<{ x: number; y: number } | null>(null);
 
   const updateCoords = useCallback((clientX: number, clientY: number) => {
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
 
-    const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
-    const y = Math.min(Math.max(clientY - rect.top, 0), rect.height);
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
     setCoords({ x, y });
   }, []);
 
@@ -105,7 +104,9 @@ export function MaskContainer({
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    updateCoords(event.clientX, event.clientY);
+    if (!isRevealed) {
+      updateCoords(event.clientX, event.clientY);
+    }
   };
 
   const handlePointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -113,24 +114,38 @@ export function MaskContainer({
     setIsHovering(false);
   };
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const newRevealedState = !isRevealed;
-    console.log('Mask clicked, revealing:', newRevealedState);
+
+    // If collapsing, store the click position for smooth collapse
+    if (isRevealed) {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (rect) {
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        setCollapseCoords({ x, y });
+        setCoords({ x, y });
+      }
+    } else {
+      setCollapseCoords(null);
+    }
+
     setIsRevealed(newRevealedState);
     onRevealChange?.(newRevealedState);
   };
 
-  // Calculate mask size and position based on reveal state
-  const currentMaskSize = isRevealed ? revealSize : size;
-  const maskPositionX = coords.x - currentMaskSize / 2;
-  const maskPositionY = coords.y - currentMaskSize / 2;
+  // Calculate clip-path based on reveal state
+  // Use collapseCoords if we just collapsed, otherwise use current coords
+  const activeCoords = collapseCoords || coords;
+  const clipPath = isRevealed
+    ? "circle(150% at 50% 50%)" // Fully revealed
+    : `circle(${size / 2}px at ${activeCoords.x}px ${activeCoords.y}px)`; // Peek hole following cursor
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative cursor-pointer",
-        !isRevealed && "overflow-hidden",
+        "relative cursor-pointer overflow-hidden",
         isHovering && !isRevealed && "shadow-2xl transition-shadow duration-300",
         className
       )}
@@ -140,42 +155,29 @@ export function MaskContainer({
       onClick={handleClick}
       {...rest}
     >
+      {/* Background layer - always visible */}
       <div className="relative z-0 h-full w-full">{revealText}</div>
 
       {/* Orbital rotating text - only show when hovering and not revealed */}
-      {isHovering && !isRevealed && (
-        <OrbitalText coords={coords} />
-      )}
+      <AnimatePresence>
+        {isHovering && !isRevealed && (
+          <OrbitalText coords={coords} />
+        )}
+      </AnimatePresence>
 
-      {isRevealed ? (
-        // When revealed, show children without mask with fade-in
-        <motion.div
-          className={cn("absolute inset-0 z-10", overlayClassName)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          {children}
-        </motion.div>
-      ) : (
-        // When not revealed, show children through mask
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
-            overlayClassName
-          )}
-          style={{
-            WebkitMaskImage: `url(${maskImage})`,
-            maskImage: `url(${maskImage})`,
-            WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
-            maskPosition: `${maskPositionX}px ${maskPositionY}px`,
-            WebkitMaskSize: `${currentMaskSize}px`,
-            maskSize: `${currentMaskSize}px`,
-          }}
-        >
-          {children}
-        </div>
-      )}
+      {/* Video overlay with clip-path reveal */}
+      <div
+        className={cn("absolute inset-0 z-10", overlayClassName)}
+        style={{
+          clipPath,
+          WebkitClipPath: clipPath,
+          transition: isRevealed
+            ? "clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+            : "none",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
