@@ -157,7 +157,7 @@ export default function CalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 py-20 px-4 md:px-8">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 pt-32 pb-20 px-4 md:px-8 md:pt-40">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
