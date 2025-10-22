@@ -129,7 +129,8 @@ export function MaskContainer({
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden cursor-pointer",
+        "relative cursor-pointer",
+        !isRevealed && "overflow-hidden",
         isHovering && !isRevealed && "shadow-2xl transition-shadow duration-300",
         className
       )}
@@ -146,23 +147,35 @@ export function MaskContainer({
         <OrbitalText coords={coords} />
       )}
 
-      <div
-        className={cn(
-          "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
-          overlayClassName
-        )}
-        style={{
-          WebkitMaskImage: `url(${maskImage})`,
-          maskImage: `url(${maskImage})`,
-          WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
-          maskPosition: `${maskPositionX}px ${maskPositionY}px`,
-          WebkitMaskSize: `${currentMaskSize}px`,
-          maskSize: `${currentMaskSize}px`,
-          transition: 'mask-size 0.4s ease-in-out, -webkit-mask-size 0.4s ease-in-out, mask-position 0.4s ease-in-out, -webkit-mask-position 0.4s ease-in-out',
-        }}
-      >
-        {children}
-      </div>
+      {isRevealed ? (
+        // When revealed, show children without mask with fade-in
+        <motion.div
+          className={cn("absolute inset-0 z-10", overlayClassName)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
+          {children}
+        </motion.div>
+      ) : (
+        // When not revealed, show children through mask
+        <div
+          className={cn(
+            "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
+            overlayClassName
+          )}
+          style={{
+            WebkitMaskImage: `url(${maskImage})`,
+            maskImage: `url(${maskImage})`,
+            WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
+            maskPosition: `${maskPositionX}px ${maskPositionY}px`,
+            WebkitMaskSize: `${currentMaskSize}px`,
+            maskSize: `${currentMaskSize}px`,
+          }}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 }

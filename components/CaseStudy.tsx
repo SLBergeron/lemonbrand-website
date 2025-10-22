@@ -152,7 +152,7 @@ function VideoPanel({ entry }: { entry: EntryWithAccent }) {
 
   return (
     <MaskContainer
-      className="mt-8 min-h-[32rem] overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-[0_24px_68px_rgba(15,23,42,0.12)] transition dark:border-neutral-800 dark:bg-neutral-900"
+      className="mt-8 min-h-[32rem] rounded-3xl border border-neutral-200 bg-white shadow-[0_24px_68px_rgba(15,23,42,0.12)] transition dark:border-neutral-800 dark:bg-neutral-900"
       size={80}
       revealSize={1600}
       onRevealChange={setIsRevealed}
