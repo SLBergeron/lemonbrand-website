@@ -37,13 +37,14 @@ export function LazyVideo({
       { rootMargin: "100px" }
     );
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
+    const currentVideo = videoRef.current;
+    if (currentVideo) {
+      observer.observe(currentVideo);
     }
 
     return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current);
+      if (currentVideo) {
+        observer.unobserve(currentVideo);
       }
     };
   }, []);

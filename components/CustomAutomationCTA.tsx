@@ -95,10 +95,10 @@ export function CustomAutomationCTA() {
           className="max-w-3xl mx-auto bg-gradient-to-br from-neutral-100 to-white dark:from-neutral-900 dark:to-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-2xl p-8 md:p-12 text-center"
         >
           <h3 className="font-bold text-2xl md:text-3xl text-neutral-800 dark:text-neutral-100 mb-4">
-            Let's Build Something Custom
+            Let&apos;s Build Something Custom
           </h3>
           <p className="text-base text-neutral-600 dark:text-neutral-400 mb-6 max-w-xl mx-auto">
-            Have a specific workflow in mind? Book a call and we'll scope out exactly what you need—no cookie-cutter solutions.
+            Have a specific workflow in mind? Book a call and we&apos;ll scope out exactly what you need—no cookie-cutter solutions.
           </p>
           <Button
             data-cal-namespace={calOptions.namespace}

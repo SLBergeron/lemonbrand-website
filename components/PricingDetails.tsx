@@ -89,10 +89,10 @@ export function PricingDetails() {
             </p>
           </div>
 
-          {/* What's Included */}
+          {/* What&apos;s Included */}
           <div className="mb-8">
             <h3 className="font-semibold text-xl text-neutral-800 dark:text-neutral-100 mb-4">
-              What's Included
+              What&apos;s Included
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
@@ -162,7 +162,7 @@ export function PricingDetails() {
               variant="dark"
               className="w-full sm:w-auto px-8"
             >
-              See What You'll Make
+              See What You&apos;ll Make
             </Button>
             <Button
               data-cal-namespace={calOptions.namespace}
