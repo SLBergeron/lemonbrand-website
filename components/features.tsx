@@ -37,7 +37,7 @@ export function Features() {
           <CardContent className="h-40">
             <CardTitle>Quote Follow-up</CardTitle>
             <CardDescription className="max-w-xl">
-              Automated reminders for leads who said "let me think about it." Sends follow-ups until they say yes or no. Converts quotes into jobs without manual chasing.
+              Automated reminders for leads who said &quot;let me think about it.&quot; Sends follow-ups until they say yes or no. Converts quotes into jobs without manual chasing.
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
