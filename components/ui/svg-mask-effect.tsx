@@ -120,9 +120,9 @@ export function MaskContainer({
     onRevealChange?.(newRevealedState);
   };
 
-  const maskSize = isRevealed ? revealSize : size;
-  const maskPositionX = coords.x - maskSize / 2;
-  const maskPositionY = coords.y - maskSize / 2;
+  // Mask stays at fixed size, content scales inside
+  const maskPositionX = coords.x - size / 2;
+  const maskPositionY = coords.y - size / 2;
 
   return (
     <div
@@ -145,36 +145,32 @@ export function MaskContainer({
         <OrbitalText coords={coords} />
       )}
 
-      <motion.div
+      <div
         className={cn(
           "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
           overlayClassName
         )}
-        initial="peek"
-        animate={isRevealed ? "reveal" : "peek"}
-        variants={{
-          peek: {
-            WebkitMaskSize: `${size}px`,
-            maskSize: `${size}px`,
-          },
-          reveal: {
-            WebkitMaskSize: `${revealSize}px`,
-            maskSize: `${revealSize}px`,
-          },
-        }}
-        transition={{
-          duration: 0.4,
-          ease: "easeInOut",
-        }}
         style={{
           WebkitMaskImage: `url(${maskImage})`,
           maskImage: `url(${maskImage})`,
           WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
           maskPosition: `${maskPositionX}px ${maskPositionY}px`,
+          WebkitMaskSize: `${size}px`,
+          maskSize: `${size}px`,
         }}
       >
-        {children}
-      </motion.div>
+        <motion.div
+          className="h-full w-full flex items-center justify-center"
+          initial={{ scale: 1 }}
+          animate={{ scale: isRevealed ? revealSize / size : 1 }}
+          transition={{
+            duration: 0.4,
+            ease: "easeInOut",
+          }}
+        >
+          {children}
+        </motion.div>
+      </div>
     </div>
   );
 }
