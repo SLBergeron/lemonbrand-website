@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { MaskContainer } from "@/components/ui/svg-mask-effect";
+import { LazyVideo } from "@/components/ui/LazyVideo";
 
 type TimelineEntry = {
   id: string;
@@ -14,7 +14,7 @@ type TimelineEntry = {
   solution: string;
   results: string;
   metrics: { label: string; value: string }[];
-  image: { src: string; alt: string };
+  video: { src: string; poster?: string };
   accent: { overlay: string; textClass: string };
 };
 
@@ -33,9 +33,8 @@ const timelineEntries: TimelineEntry[] = [
       { label: "Revenue month 1", value: "$23K" },
       { label: "After-hours answer rate", value: "100%" },
     ],
-    image: {
-      src: "https://assets.aceternity.com/templates/startup-1.webp",
-      alt: "HVAC emergency call response dashboard",
+    video: {
+      src: "/videos/hvac-emergency.mp4",
     },
     accent: {
       overlay: "#f97316",
@@ -56,9 +55,8 @@ const timelineEntries: TimelineEntry[] = [
       { label: "Jobs recovered", value: "$47K" },
       { label: "Manual follow-ups", value: "0" },
     ],
-    image: {
-      src: "https://assets.aceternity.com/templates/startup-2.webp",
-      alt: "Plumbing quote follow-up automation dashboard",
+    video: {
+      src: "/videos/plumbing-quotes.mp4",
     },
     accent: {
       overlay: "#eab308",
@@ -79,9 +77,8 @@ const timelineEntries: TimelineEntry[] = [
       { label: "Revenue generated", value: "$31K" },
       { label: "Days to results", value: "11" },
     ],
-    image: {
-      src: "https://assets.aceternity.com/templates/startup-3.webp",
-      alt: "Electrician customer reactivation dashboard",
+    video: {
+      src: "/videos/electrician-reactivation.mp4",
     },
     accent: {
       overlay: "#3b82f6",
@@ -102,9 +99,8 @@ const timelineEntries: TimelineEntry[] = [
       { label: "New hires needed", value: "0" },
       { label: "Revenue captured", value: "$89K" },
     ],
-    image: {
-      src: "https://assets.aceternity.com/templates/startup-4.webp",
-      alt: "Seasonal surge automation dashboard showing call routing",
+    video: {
+      src: "/videos/animation-preview-1.mp4",
     },
     accent: {
       overlay: "#a855f7",
@@ -146,17 +142,20 @@ type EntryWithAccent = TimelineEntry;
 function Narrative({ entry }: { entry: EntryWithAccent }) {
   return (
     <div className="flex flex-col">
-      <ImagePanel entry={entry} />
+      <VideoPanel entry={entry} />
     </div>
   );
 }
 
-function ImagePanel({ entry }: { entry: EntryWithAccent }) {
+function VideoPanel({ entry }: { entry: EntryWithAccent }) {
+  const [isRevealed, setIsRevealed] = useState(false);
+
   return (
     <MaskContainer
       className="mt-8 min-h-[32rem] overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-[0_24px_68px_rgba(15,23,42,0.12)] transition dark:border-neutral-800 dark:bg-neutral-900"
       size={80}
       revealSize={1600}
+      onRevealChange={setIsRevealed}
       revealText={
         <div className="flex h-full w-full flex-col justify-between gap-8 p-8">
           <div className="space-y-8">
@@ -200,19 +199,14 @@ function ImagePanel({ entry }: { entry: EntryWithAccent }) {
               </div>
             </section>
           </div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-            Hover to see the automation in action.
-          </p>
         </div>
       }
     >
-      <Image
-        src={entry.image.src}
-        height={2000}
-        width={2000}
+      <LazyVideo
+        src={entry.video.src}
+        poster={entry.video.poster}
+        autoPlay={isRevealed}
         className="h-full w-full object-cover object-center"
-        alt={entry.image.alt}
-        fetchPriority="high"
       />
     </MaskContainer>
   );
@@ -238,7 +232,7 @@ function CaseStudyMobile({ entries }: { entries: EntryWithAccent[] }) {
               <div className="h-1 w-1 flex-shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-700" />
             </div>
           </div>
-          <ImagePanel entry={entry} />
+          <VideoPanel entry={entry} />
         </div>
       ))}
     </div>

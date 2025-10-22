@@ -13,6 +13,7 @@ type MaskContainerProps = {
   className?: string;
   overlayClassName?: string;
   maskImage?: string;
+  onRevealChange?: (isRevealed: boolean) => void;
 } & HTMLAttributes<HTMLDivElement>;
 
 export function MaskContainer({
@@ -23,11 +24,13 @@ export function MaskContainer({
   className,
   overlayClassName,
   maskImage = "/mask.svg",
+  onRevealChange,
   ...rest
 }: MaskContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [isActive, setIsActive] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
 
   const updateCoords = useCallback((clientX: number, clientY: number) => {
     const rect = containerRef.current?.getBoundingClientRect();
@@ -47,46 +50,58 @@ export function MaskContainer({
   const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "touch") return;
     updateCoords(event.clientX, event.clientY);
-    setIsActive(true);
+    setIsHovering(true);
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "touch") return;
     updateCoords(event.clientX, event.clientY);
   };
 
   const handlePointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "touch") return;
-    setIsActive(false);
+    setIsHovering(false);
   };
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") return;
-    updateCoords(event.clientX, event.clientY);
-    setIsActive(true);
+  const handleClick = () => {
+    const newRevealedState = !isRevealed;
+    setIsRevealed(newRevealedState);
+    onRevealChange?.(newRevealedState);
   };
 
-  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") return;
-    setIsActive(false);
-  };
-
-  const maskSize = isActive ? revealSize : size;
+  const maskSize = isRevealed ? revealSize : size;
   const maskPositionX = coords.x - maskSize / 2;
   const maskPositionY = coords.y - maskSize / 2;
 
   return (
     <div
       ref={containerRef}
-      className={cn("relative overflow-hidden", className)}
+      className={cn("relative overflow-hidden cursor-pointer", className)}
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
+      onClick={handleClick}
       {...rest}
     >
       <div className="relative z-0 h-full w-full">{revealText}</div>
+
+      {/* Cursor tooltip - only show when hovering and not revealed */}
+      {isHovering && !isRevealed && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          className="pointer-events-none absolute z-50 rounded-md bg-white/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-orange-500 shadow-lg backdrop-blur-sm dark:bg-neutral-900/90 dark:text-orange-400"
+          style={{
+            left: `${coords.x}px`,
+            top: `${coords.y + 20}px`,
+            transform: "translateX(-50%)",
+          }}
+        >
+          Tap to show automation
+        </motion.div>
+      )}
+
       <motion.div
         className={cn(
           "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
@@ -101,10 +116,14 @@ export function MaskContainer({
           maskSize: `${maskSize}px`,
         }}
         animate={{
-          opacity: isActive ? 1 : 0,
+          opacity: 1,
+          WebkitMaskSize: `${maskSize}px`,
+          maskSize: `${maskSize}px`,
         }}
         transition={{
           opacity: { duration: 0.2, ease: "easeOut" },
+          WebkitMaskSize: { duration: 0.4, ease: "easeInOut" },
+          maskSize: { duration: 0.4, ease: "easeInOut" },
         }}
       >
         {children}
