@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu } from "@tabler/icons-react";
 
 export function BlogContentWithToc() {

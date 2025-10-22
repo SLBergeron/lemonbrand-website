@@ -6,7 +6,7 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export function PricingWithSwitchAndAddOn() {
   return (

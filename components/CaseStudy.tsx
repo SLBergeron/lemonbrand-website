@@ -34,7 +34,7 @@ const timelineEntries: TimelineEntry[] = [
       { label: "After-hours answer rate", value: "100%" },
     ],
     video: {
-      src: "/videos/hvac-emergency.mp4",
+      src: "/videos/animation-preview-1.mp4", // TODO: Replace with hvac-emergency.mp4
     },
     accent: {
       overlay: "#f97316",
@@ -56,7 +56,7 @@ const timelineEntries: TimelineEntry[] = [
       { label: "Manual follow-ups", value: "0" },
     ],
     video: {
-      src: "/videos/plumbing-quotes.mp4",
+      src: "/videos/animation-preview-1.mp4", // TODO: Replace with plumbing-quotes.mp4
     },
     accent: {
       overlay: "#eab308",
@@ -78,7 +78,7 @@ const timelineEntries: TimelineEntry[] = [
       { label: "Days to results", value: "11" },
     ],
     video: {
-      src: "/videos/electrician-reactivation.mp4",
+      src: "/videos/animation-preview-1.mp4", // TODO: Replace with electrician-reactivation.mp4
     },
     accent: {
       overlay: "#3b82f6",

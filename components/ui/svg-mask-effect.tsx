@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 function OrbitalText({ coords }: { coords: { x: number; y: number } }) {
@@ -98,12 +98,15 @@ export function MaskContainer({
   }, []);
 
   const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
+    // Touch devices will use tap to reveal directly, skip hover state
     if (event.pointerType === "touch") return;
     updateCoords(event.clientX, event.clientY);
     setIsHovering(true);
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    // Don't track touch movement, only mouse/pen
+    if (event.pointerType === "touch") return;
     updateCoords(event.clientX, event.clientY);
     // Clear collapse coords when user moves cursor after collapsing
     if (collapseCoords) {
