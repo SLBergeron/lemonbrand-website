@@ -10,6 +10,10 @@ function OrbitalText({ coords }: { coords: { x: number; y: number } }) {
   const radius = 45;
   const chars = text.split('');
 
+  // 85% arc coverage, centered at top
+  const startAngle = -Math.PI * 0.425; // Start position (top-left)
+  const arcLength = Math.PI * 2 * 0.85; // 85% of full circle
+
   return (
     <motion.div
       className="pointer-events-none absolute z-50"
@@ -30,7 +34,7 @@ function OrbitalText({ coords }: { coords: { x: number; y: number } }) {
       }}
     >
       {chars.map((char, i) => {
-        const angle = (i / chars.length) * 2 * Math.PI;
+        const angle = startAngle + (i / chars.length) * arcLength;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
 
@@ -111,6 +115,7 @@ export function MaskContainer({
 
   const handleClick = () => {
     const newRevealedState = !isRevealed;
+    console.log('Mask clicked, revealing:', newRevealedState);
     setIsRevealed(newRevealedState);
     onRevealChange?.(newRevealedState);
   };
@@ -122,7 +127,11 @@ export function MaskContainer({
   return (
     <div
       ref={containerRef}
-      className={cn("relative overflow-hidden cursor-pointer", className)}
+      className={cn(
+        "relative overflow-hidden cursor-pointer transition-shadow duration-300",
+        isHovering && !isRevealed && "shadow-2xl",
+        className
+      )}
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
@@ -141,20 +150,27 @@ export function MaskContainer({
           "pointer-events-none absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat]",
           overlayClassName
         )}
+        initial="peek"
+        animate={isRevealed ? "reveal" : "peek"}
+        variants={{
+          peek: {
+            WebkitMaskSize: `${size}px`,
+            maskSize: `${size}px`,
+          },
+          reveal: {
+            WebkitMaskSize: `${revealSize}px`,
+            maskSize: `${revealSize}px`,
+          },
+        }}
+        transition={{
+          duration: 0.4,
+          ease: "easeInOut",
+        }}
         style={{
           WebkitMaskImage: `url(${maskImage})`,
           maskImage: `url(${maskImage})`,
           WebkitMaskPosition: `${maskPositionX}px ${maskPositionY}px`,
           maskPosition: `${maskPositionX}px ${maskPositionY}px`,
-          WebkitMaskSize: `${maskSize}px`,
-          maskSize: `${maskSize}px`,
-          transition: 'mask-size 0.4s ease-in-out, -webkit-mask-size 0.4s ease-in-out, mask-position 0.2s ease-out, -webkit-mask-position 0.2s ease-out',
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        transition={{
-          opacity: { duration: 0.2, ease: "easeOut" },
         }}
       >
         {children}
