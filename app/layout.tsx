@@ -73,12 +73,21 @@ export const metadata: Metadata = {
     title: "Lemonbrand | AI Automation That Grows Revenue",
     description: "Direct AI automation builder for marketing agencies, growth firms, consultants, and home service contractors. No agency overhead. Cut response time from 2 days to 2 minutes. 75+ workflows shipped. Real case studies with actual metrics.",
     siteName: "Lemonbrand",
+    images: [
+      {
+        url: "https://lemonbrand.io/og-image.png", // TODO: Create 1200x630px social share image
+        width: 1200,
+        height: 630,
+        alt: "Lemonbrand - AI Automation Systems That Generate Revenue",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lemonbrand | AI Automation Systems That Generate Revenue",
     description: "Direct automation for marketing agencies, consultants, and contractors. Real results, no BS.",
     creator: "@simonbergeron",
+    images: ["https://lemonbrand.io/og-image.png"], // TODO: Create 1200x630px social share image
   },
   alternates: {
     canonical: "https://lemonbrand.io",
