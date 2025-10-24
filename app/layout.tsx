@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { CookieBanner } from "@/components/CookieConsent";
 import { ThemeProvider } from "@/context/providers";
 import { Analytics } from "@vercel/analytics/next";
+import { IntercomMessenger } from "@/components/intercom";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -118,6 +119,7 @@ export default function RootLayout({
           <Footer />
           <CookieBanner />
           <Analytics />
+          <IntercomMessenger />
         </ThemeProvider>
       </body>
     </html>
