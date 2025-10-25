@@ -9,8 +9,62 @@ export const metadata: Metadata = {
 };
 
 export default function AirProCaseStudyPage() {
+  // Structured data for the article
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "AirPro AI Implementation Guide: Use Many AI Models, Not One",
+    "description": "Complete guide to implementing AI solutions for AirPro operations, including ChatGPT, Claude, and custom automation agents.",
+    "author": {
+      "@type": "Person",
+      "name": "Simon Bergeron",
+      "url": "https://lemonbrand.io",
+      "jobTitle": "AI Automation Specialist"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lemonbrand",
+      "url": "https://lemonbrand.io"
+    },
+    "datePublished": "2025-09-30",
+    "dateModified": "2025-10-24",
+    "url": "https://lemonbrand.io/airpro-case-study",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://lemonbrand.io/airpro-case-study"
+    },
+    "articleSection": "AI Implementation",
+    "keywords": [
+      "AI implementation",
+      "ChatGPT",
+      "Claude",
+      "business automation",
+      "AI agents",
+      "multi-model AI strategy",
+      "LLM implementation",
+      "enterprise AI"
+    ],
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Artificial Intelligence",
+        "description": "AI implementation strategy using multiple models"
+      },
+      {
+        "@type": "Thing",
+        "name": "Business Automation",
+        "description": "Automating business processes with AI"
+      }
+    ]
+  };
+
   return (
     <main className="bg-white dark:bg-neutral-950">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+      />
       {/* Hero Section */}
       <section className="relative pt-[16rem] pb-[10rem] px-4 md:px-8 overflow-hidden">
         {/* Dot Background */}

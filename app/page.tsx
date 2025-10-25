@@ -14,6 +14,31 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "name": "Lemonbrand",
+        "url": "https://lemonbrand.io",
+        "logo": "https://cdn.prod.website-files.com/67f2c3d3da332df3a9d5d98a/67f2c845a1aa4919ed61743e_Company%20Logo%20Black.svg",
+        "description": "AI automation systems for marketing agencies, growth firms, consultants, and home service contractors. Direct builder with no agency overhead.",
+        "founder": {
+          "@type": "Person",
+          "name": "Simon Bergeron",
+          "jobTitle": "AI Automation Specialist",
+          "url": "https://lemonbrand.io"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CA"
+        },
+        "sameAs": [
+          "https://twitter.com/simonbergeron"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Sales",
+          "availableLanguage": ["English", "French"]
+        }
+      },
+      {
         "@type": "ProfessionalService",
         "name": "Lemonbrand",
         "description": "AI automation systems for home services contractors (HVAC, plumbing, electrical). Express Core: 3 automations, 72 hours to live, $1,500 setup + $499/month. 20+ qualified booked jobs in Month 1 or we work free. Capture emergency calls, follow up on quotes, reactivate past customers.",
