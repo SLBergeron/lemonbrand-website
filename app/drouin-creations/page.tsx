@@ -1351,28 +1351,29 @@ export default function DrouinCreationsPage() {
             <TabsContent value="websites">
               <Card>
                 <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
                     <TableBody>
                       {WEBSITES_SERVICES.map((service) => (
                         <TableRow key={service.id}>
                           <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
+                          <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
                             ${service.regular.toLocaleString()}
                           </TableCell>
                           <TableCell className="text-right font-semibold text-green-600">
                             ${service.drouin.toLocaleString()}
                             {service.recurring && <span className="text-xs">/mo</span>}
                           </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
+                          <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
                           <TableCell className="text-center">
                             <Button
                               size="sm"
@@ -1395,6 +1396,7 @@ export default function DrouinCreationsPage() {
                       ))}
                     </TableBody>
                   </Table>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -1403,257 +1405,29 @@ export default function DrouinCreationsPage() {
             <TabsContent value="branding">
               <Card>
                 <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {BRANDING_SERVICES.map((service) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
-                            ${service.regular.toLocaleString()}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            ${service.drouin.toLocaleString()}
-                          </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                addToCart({
-                                  id: service.id,
-                                  name: service.name,
-                                  regularPrice: service.regular,
-                                  drouinPrice: service.drouin,
-                                  delivery: service.delivery,
-                                  deliveryDays: service.days,
-                                })
-                              }
-                              className="bg-orange-500 hover:bg-orange-600"
-                            >
-                              Add
-                            </Button>
-                          </TableCell>
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Automation Tab */}
-            <TabsContent value="automation">
-              <Card>
-                <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {AUTOMATION_SERVICES.map((service: any) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
-                            ${service.regular.toLocaleString()}
-                            {service.recurring && (
-                              <div className="text-xs">+ ${service.recurringRegular}/mo</div>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            ${service.drouin.toLocaleString()}
-                            {service.recurring && (
-                              <div className="text-xs">+ ${service.recurringDrouin}/mo</div>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                addToCart({
-                                  id: service.id,
-                                  name: service.name,
-                                  regularPrice: service.regular,
-                                  drouinPrice: service.drouin,
-                                  delivery: service.delivery,
-                                  deliveryDays: service.days,
-                                  ...(service.recurring && {
-                                    recurring: {
-                                      regularPrice: service.recurringRegular,
-                                      drouinPrice: service.recurringDrouin,
-                                      period: "monthly",
-                                    },
-                                  }),
-                                })
-                              }
-                              className="bg-orange-500 hover:bg-orange-600"
-                            >
-                              Add
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* SEO Tab */}
-            <TabsContent value="seo">
-              <Card>
-                <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {SEO_SERVICES.map((service) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
-                            ${service.regular.toLocaleString()}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            ${service.drouin.toLocaleString()}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                addToCart({
-                                  id: service.id,
-                                  name: service.name,
-                                  regularPrice: service.regular,
-                                  drouinPrice: service.drouin,
-                                  delivery: service.delivery,
-                                  deliveryDays: service.days,
-                                })
-                              }
-                              className="bg-orange-500 hover:bg-orange-600"
-                            >
-                              Add
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Consulting Tab */}
-            <TabsContent value="consulting">
-              <Card>
-                <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {CONSULTING_SERVICES.map((service) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
-                            ${service.regular.toLocaleString()}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            ${service.drouin.toLocaleString()}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                addToCart({
-                                  id: service.id,
-                                  name: service.name,
-                                  regularPrice: service.regular,
-                                  drouinPrice: service.drouin,
-                                  delivery: service.delivery,
-                                  deliveryDays: service.days,
-                                })
-                              }
-                              className="bg-orange-500 hover:bg-orange-600"
-                            >
-                              Add
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Add-ons Tab */}
-            <TabsContent value="addons">
-              <Card>
-                <CardContent className="pt-6">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead className="text-right">Regular</TableHead>
-                        <TableHead className="text-right">Drouin Special</TableHead>
-                        <TableHead className="text-center">Delivery</TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {ADDONS_SERVICES.map((service: any) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">
-                            {service.name}
-                            {service.note && (
-                              <div className="text-xs text-neutral-500">{service.note}</div>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through">
-                            {service.regular > 0 ? `$${service.regular.toLocaleString()}` : service.note}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            {service.drouin > 0 ? `$${service.drouin.toLocaleString()}` : service.note}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-center text-sm">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            {service.regular > 0 && (
+                      </TableHeader>
+                      <TableBody>
+                        {BRANDING_SERVICES.map((service) => (
+                          <TableRow key={service.id}>
+                            <TableCell className="font-medium">{service.name}</TableCell>
+                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
+                              ${service.regular.toLocaleString()}
+                            </TableCell>
+                            <TableCell className="text-right font-semibold text-green-600">
+                              ${service.drouin.toLocaleString()}
+                            </TableCell>
+                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
+                            <TableCell className="text-center">
                               <Button
                                 size="sm"
                                 onClick={() =>
@@ -1670,12 +1444,250 @@ export default function DrouinCreationsPage() {
                               >
                                 Add
                               </Button>
-                            )}
-                          </TableCell>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Automation Tab */}
+            <TabsContent value="automation">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {AUTOMATION_SERVICES.map((service: any) => (
+                          <TableRow key={service.id}>
+                            <TableCell className="font-medium">{service.name}</TableCell>
+                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
+                              ${service.regular.toLocaleString()}
+                              {service.recurring && (
+                                <div className="text-xs">+ ${service.recurringRegular}/mo</div>
+                              )}
+                            </TableCell>
+                            <TableCell className="text-right font-semibold text-green-600">
+                              ${service.drouin.toLocaleString()}
+                              {service.recurring && (
+                                <div className="text-xs">+ ${service.recurringDrouin}/mo</div>
+                              )}
+                            </TableCell>
+                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
+                            <TableCell className="text-center">
+                              <Button
+                                size="sm"
+                                onClick={() =>
+                                  addToCart({
+                                    id: service.id,
+                                    name: service.name,
+                                    regularPrice: service.regular,
+                                    drouinPrice: service.drouin,
+                                    delivery: service.delivery,
+                                    deliveryDays: service.days,
+                                    ...(service.recurring && {
+                                      recurring: {
+                                        regularPrice: service.recurringRegular,
+                                        drouinPrice: service.recurringDrouin,
+                                        period: "monthly",
+                                      },
+                                    }),
+                                  })
+                                }
+                                className="bg-orange-500 hover:bg-orange-600"
+                              >
+                                Add
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* SEO Tab */}
+            <TabsContent value="seo">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {SEO_SERVICES.map((service) => (
+                          <TableRow key={service.id}>
+                            <TableCell className="font-medium">{service.name}</TableCell>
+                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
+                              ${service.regular.toLocaleString()}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-right font-semibold text-green-600">
+                              ${service.drouin.toLocaleString()}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
+                            <TableCell className="text-center">
+                              <Button
+                                size="sm"
+                                onClick={() =>
+                                  addToCart({
+                                    id: service.id,
+                                    name: service.name,
+                                    regularPrice: service.regular,
+                                    drouinPrice: service.drouin,
+                                    delivery: service.delivery,
+                                    deliveryDays: service.days,
+                                  })
+                                }
+                                className="bg-orange-500 hover:bg-orange-600"
+                              >
+                                Add
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Consulting Tab */}
+            <TabsContent value="consulting">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {CONSULTING_SERVICES.map((service) => (
+                          <TableRow key={service.id}>
+                            <TableCell className="font-medium">{service.name}</TableCell>
+                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
+                              ${service.regular.toLocaleString()}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-right font-semibold text-green-600">
+                              ${service.drouin.toLocaleString()}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
+                            <TableCell className="text-center">
+                              <Button
+                                size="sm"
+                                onClick={() =>
+                                  addToCart({
+                                    id: service.id,
+                                    name: service.name,
+                                    regularPrice: service.regular,
+                                    drouinPrice: service.drouin,
+                                    delivery: service.delivery,
+                                    deliveryDays: service.days,
+                                  })
+                                }
+                                className="bg-orange-500 hover:bg-orange-600"
+                              >
+                                Add
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Add-ons Tab */}
+            <TabsContent value="addons">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="overflow-x-auto -mx-6 px-6">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Service</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
+                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
+                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {ADDONS_SERVICES.map((service: any) => (
+                          <TableRow key={service.id}>
+                            <TableCell className="font-medium">
+                              {service.name}
+                              {service.note && (
+                                <div className="text-xs text-neutral-500">{service.note}</div>
+                              )}
+                            </TableCell>
+                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
+                              {service.regular > 0 ? `$${service.regular.toLocaleString()}` : service.note}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-right font-semibold text-green-600">
+                              {service.drouin > 0 ? `$${service.drouin.toLocaleString()}` : service.note}
+                              {service.recurring && <span className="text-xs">/mo</span>}
+                            </TableCell>
+                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
+                            <TableCell className="text-center">
+                              {service.regular > 0 && (
+                                <Button
+                                  size="sm"
+                                  onClick={() =>
+                                    addToCart({
+                                      id: service.id,
+                                      name: service.name,
+                                      regularPrice: service.regular,
+                                      drouinPrice: service.drouin,
+                                      delivery: service.delivery,
+                                      deliveryDays: service.days,
+                                    })
+                                  }
+                                  className="bg-orange-500 hover:bg-orange-600"
+                                >
+                                  Add
+                                </Button>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
