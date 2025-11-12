@@ -1,3 +1,136 @@
+/**
+ * ST-ALBERT Q4 2025 STRATEGIC PRIORITIES PAGE
+ * ===========================================
+ *
+ * PURPOSE:
+ * Password-protected page presenting 10 strategic routes for St-Albert Cheese Q4 2025
+ * planning. Built for Valerie (St-Albert) to review before November 13, 2025 meeting.
+ *
+ * CHANGELOG - November 12, 2025:
+ * ------------------------------
+ *
+ * INITIAL BUILD:
+ * - Created password-protected page with preview screen showing St-Albert logo and meeting date
+ * - Implemented full bilingual support (English/French) with language toggle
+ * - Built 10 strategic route cards organized into First Wave and Second Wave
+ * - Added executive summary with key metrics ($37-64K investment → $133-181K ROI, 3.6-4.9x return)
+ * - Included Next Steps section with 4 action items
+ * - Full dark mode support and mobile responsive design
+ * - Framer Motion animations for smooth transitions
+ *
+ * DESIGN DECISIONS:
+ * - Password: "stalbert2025" (can be changed at line 47)
+ * - Language toggle: Integrated into header below "November 2025 • Philosophy" text
+ * - Logo padding: Added pt-8 above St-Albert logo for breathing room
+ * - Color scheme: Orange-500 primary (LemonBrand aesthetic)
+ * - Meta tags: noindex, nofollow (search engine protection)
+ *
+ * CONTENT CUSTOMIZATION (Based on actual St-Albert business context):
+ *
+ * ROUTE 1 - Christmas Basket Campaign:
+ * - Last year: $4K revenue, started too late
+ * - Goal: Launch 3-4 weeks earlier, $8-10K target (2x growth)
+ * - Focus: Conversion tracking, checkout optimization
+ *
+ * ROUTE 2 - Data Automation for QA/Finance/Audit (URGENT):
+ * - Context: Karine going on medical leave (surgery scheduled soon)
+ * - Changed from generic Excel automation to deterministic scripts
+ * - Focus: QA/finance/audit processes with validation checks and audit trails
+ * - Timeline: 3-4 weeks (must start immediately)
+ * - Note: Updated name from "Karin" to "Karine" throughout both EN and FR
+ *
+ * ROUTE 3 - Local Events & Influencer Partnerships:
+ * - Actual data: 2,751 Google reviews (4.6 stars, +700 since Simon took over)
+ * - Strategy: Leverage reviews with Ottawa influencers and "What to do this weekend" platforms
+ * - Collaboration: Work with Pascal on event coordination
+ * - Target: 20-30% increase in weekend foot traffic
+ * - Replaced previous "Google My Business & Local SEO" route
+ *
+ * ROUTE 4 - Internal Work Orders App (NEW):
+ * - Mobile & desktop work order management system
+ * - Features: Photo uploads, status tracking, push notifications, completion reporting
+ * - Problem: Currently tracked on paper/whiteboards/scattered emails
+ * - ROI: $8-12K/year, 30% faster task completion
+ * - Replaced previous "HR Application Response Automation" route
+ *
+ * ROUTE 5 - Physical Loyalty Card Program:
+ * - Specific mechanic: Buy 5 purchases above $30 → free bag of cheese curds
+ * - Simon designs card and promotional materials
+ * - Track: Redemption rates, transaction value uplift, visit frequency
+ * - Target: 500+ active cardholders in 4 months
+ * - ROI: $18-28K additional annual revenue
+ * - Replaced previous digital points system concept
+ *
+ * ROUTE 6 - Recipe Community & Social Media Relaunch (NEW):
+ * - Launch recipe submission platform for locals and cheese lovers
+ * - Feature 2-3 community recipes per week on social media
+ * - Monthly contests with St-Albert product prizes
+ * - Pascal features winning recipes at restaurant
+ * - Target: 200+ contributors, 50% social engagement increase
+ * - Replaced previous "Restaurant POS Proof of Concept" route
+ *
+ * ROUTE 7 - Scott Strategic Conversations (NEW):
+ * - Monthly 30-minute strategic conversations with Scott
+ * - Document priorities, vision, pain points for next 12 months
+ * - Ensure alignment on all routes and strategic direction
+ * - Create priority tracking visible to Scott
+ * - Replaced previous "File Organization & Cloud Backup System" route
+ *
+ * ROUTE 8 - Automated Daily Dashboard Email:
+ * - Kept as-is from original plan
+ * - Daily 6:00 AM email with yesterday's numbers
+ * - Sales, production, inventory alerts, action items
+ * - ROI: $6-10K/year in leadership time savings
+ *
+ * ROUTE 9 - Performance Review System:
+ * - Kept as-is from original plan
+ * - Digital performance review template with automated reminders
+ * - Historical tracking for employee development
+ * - ROI: $5-8K/year in HR time savings
+ *
+ * ROUTE 10 - Website Launch & Monthly Campaign Infrastructure:
+ * - Focus: Launch the website (done over perfect) after 19 months in development
+ * - Build infrastructure for recurring monthly campaigns
+ * - Seasonal products, recipe spotlights, events
+ * - ROI: $25-45K annual revenue from online visibility
+ * - Replaced previous "Website Content Calendar + Research Training" route
+ *
+ * BILINGUAL IMPLEMENTATION:
+ * - All UI elements fully translated (labels, buttons, headings, next steps)
+ * - All 10 routes fully translated with contextually appropriate French
+ * - Language persists across password screen and main content
+ * - Toggle shows "English | Français" with active state in orange
+ *
+ * TECHNICAL STACK:
+ * - Next.js 14 App Router
+ * - Shadcn UI components (Card, Button, Input, Label, Badge)
+ * - Framer Motion for animations
+ * - Lucide React icons (Calendar, Lock, Globe, Target, DollarSign)
+ * - TypeScript for type safety
+ *
+ * FILE REFERENCES:
+ * - Content source: /ST-ALBERT-10-ROUTES-CONTENT.md
+ * - Build reference: /ST-ALBERT-PRIORITIES-REFERENCE.md
+ *
+ * DEPLOYMENT:
+ * - Pushed to GitHub: commit efe9a47
+ * - Vercel auto-deploy triggered
+ * - Environment variable needed: RESEND_API_KEY (for quote form on other pages)
+ *
+ * ACCESS:
+ * - URL: /st-albert-q4-2025
+ * - Password: stalbert2025
+ * - Meeting date: November 13, 2025
+ * - Contact: simon@lemonbrand.io
+ *
+ * FUTURE UPDATES:
+ * - Update password by changing const CORRECT_PASSWORD below
+ * - Update routes by modifying ROUTES_DATA object (lines ~132-572)
+ * - Add/remove routes by adjusting the array structure
+ * - Update translations in TRANSLATIONS object (lines ~46-129)
+ * - Change color scheme by replacing orange-500 references
+ */
+
 "use client";
 
 import { useState } from "react";
