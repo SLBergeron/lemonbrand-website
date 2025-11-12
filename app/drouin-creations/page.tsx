@@ -18,9 +18,41 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ShoppingCart, Printer, Mail, Calendar, X, Plus, Check } from "lucide-react";
+import { ShoppingCart, Printer, Mail, Calendar, X, Plus, Check, Globe } from "lucide-react";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
+
+type Language = 'en' | 'fr';
+
+// Language Toggle Component
+function LanguageToggle({ language, setLanguage }: { language: Language; setLanguage: (lang: Language) => void }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Globe className="h-4 w-4 text-neutral-500" />
+      <button
+        onClick={() => setLanguage('en')}
+        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          language === 'en'
+            ? 'bg-orange-500 text-white'
+            : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+        }`}
+      >
+        EN
+      </button>
+      <span className="text-neutral-300 dark:text-neutral-600">|</span>
+      <button
+        onClick={() => setLanguage('fr')}
+        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          language === 'fr'
+            ? 'bg-orange-500 text-white'
+            : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+        }`}
+      >
+        FR
+      </button>
+    </div>
+  );
+}
 
 // Types
 interface CartItem {
@@ -35,6 +67,10 @@ interface CartItem {
     drouinPrice: number;
     period: string;
   };
+  lineItems?: {
+    label: string;
+    value: string;
+  }[];
 }
 
 // Service data
@@ -162,9 +198,220 @@ const PACKAGES = [
   },
 ];
 
+// Translations
+const TRANSLATIONS = {
+  en: {
+    // Hero
+    discountBadge: "25% Drouin Client Discount Applied",
+    heroTitle: "Services & Pricing for Drouin Creations Clients",
+    heroSubtitle: "Select what you need. See your price. Print your quote. All prices in CAD.",
+    viewQuote: "View Quote",
+
+    // Calculator
+    calculatorTitle: "Website Pricing Calculator",
+    calculatorSubtitle: "Custom quote in 30 seconds.",
+    yourRequirements: "Your Requirements",
+    yourPrice: "Your Price",
+    numberOfPages: "Number of Pages",
+    complexityLevel: "Complexity Level",
+    basic: "Basic",
+    basicDesc: "Landing page, simple layout",
+    standard: "Standard",
+    standardDesc: "Multi-page, forms, basic SEO",
+    advanced: "Advanced",
+    advancedDesc: "Custom design, animations",
+    premium: "Premium",
+    premiumDesc: "Bespoke UX, advanced interactions",
+    ecommerce: "E-commerce",
+    noEcommerce: "No e-commerce",
+    basicStore: "Basic store",
+    standardStore: "Standard store",
+    advancedStore: "Advanced store",
+    additionalFeatures: "Additional Features",
+    bilingual: "Bilingual (EN/FR)",
+    cmsIntegration: "CMS Integration",
+    blogSetup: "Blog Setup",
+    seoPackage: "SEO Package",
+    analyticsSetup: "Analytics Setup",
+    emailIntegration: "Email Integration",
+    bookingSystem: "Booking System",
+    customForms: "Custom Forms",
+    selectedItems: "Selected Items",
+    regularPrice: "Regular Price",
+    drouinSpecial: "Drouin Special (25% off)",
+    estimatedDelivery: "Estimated Delivery",
+    fromProjectStart: "From project start",
+    addToQuote: "Add to Quote",
+    notSure: "Not sure where to start? Let's discuss your project together.",
+    bookACall: "Book a Call",
+
+    // Packages
+    packageDeals: "Package Deals",
+    delivery: "Delivery",
+
+    // Service Menu
+    aLaCarte: "À La Carte Services",
+    websites: "Websites",
+    branding: "Branding",
+    automation: "Automation",
+    seo: "SEO",
+    consulting: "Consulting",
+    addons: "Add-ons",
+    service: "Service",
+    regular: "Regular",
+    action: "Action",
+    add: "Add",
+
+    // Cart
+    yourQuote: "Your Quote",
+    reviewServices: "Review your selected services and pricing",
+    quoteEmpty: "Your quote is empty.",
+    quoteEmptyDesc: "Click \"Add to Quote\" on any service to get started.",
+    configDetails: "Configuration Details:",
+    subtotalRegular: "Subtotal (Regular):",
+    drouinDiscount: "Drouin Discount (25%):",
+    total: "TOTAL:",
+    totalDeliveryTime: "Total Delivery Time:",
+    weeksText: "weeks",
+    someServicesParallel: "(Some services run in parallel)",
+    printThisQuote: "Print This Quote",
+    sendQuoteToDrouin: "Send Quote to Drouin",
+
+    // Quote Form
+    sendYourQuote: "Send Your Quote",
+    fillDetails: "Fill in your details and we'll send this quote to you and Drouin Creations.",
+    name: "Name",
+    yourName: "Your name",
+    email: "Email",
+    yourEmail: "your@email.com",
+    phone: "Phone",
+    phoneNumber: "(123) 456-7890",
+    company: "Company",
+    companyName: "Your company name",
+    message: "Message (optional)",
+    additionalDetails: "Any additional details...",
+    sendQuote: "Send Quote",
+
+    // Bottom CTA
+    readyToStart: "Ready to Get Started?",
+    readyDesc: "Add services to your quote and send it to Drouin Creations, or book a call to discuss your project.",
+    viewYourQuote: "View Your Quote",
+
+    // Package items
+    starterPackage: "Starter Package",
+    growthPackage: "Growth Package",
+    premiumPackage: "Premium Package",
+  },
+  fr: {
+    // Hero
+    discountBadge: "25% de rabais client Drouin appliqué",
+    heroTitle: "Services et tarifs pour les clients Drouin Creations",
+    heroSubtitle: "Sélectionnez ce dont vous avez besoin. Voyez votre prix. Imprimez votre soumission. Tous les prix en CAD.",
+    viewQuote: "Voir la soumission",
+
+    // Calculator
+    calculatorTitle: "Calculateur de prix de site Web",
+    calculatorSubtitle: "Soumission personnalisée en 30 secondes.",
+    yourRequirements: "Vos besoins",
+    yourPrice: "Votre prix",
+    numberOfPages: "Nombre de pages",
+    complexityLevel: "Niveau de complexité",
+    basic: "Basique",
+    basicDesc: "Page d'atterrissage, mise en page simple",
+    standard: "Standard",
+    standardDesc: "Multi-pages, formulaires, SEO de base",
+    advanced: "Avancé",
+    advancedDesc: "Design personnalisé, animations",
+    premium: "Premium",
+    premiumDesc: "UX sur mesure, interactions avancées",
+    ecommerce: "Commerce électronique",
+    noEcommerce: "Pas de commerce électronique",
+    basicStore: "Boutique basique",
+    standardStore: "Boutique standard",
+    advancedStore: "Boutique avancée",
+    additionalFeatures: "Fonctionnalités additionnelles",
+    bilingual: "Bilingue (EN/FR)",
+    cmsIntegration: "Intégration CMS",
+    blogSetup: "Configuration de blog",
+    seoPackage: "Forfait SEO",
+    analyticsSetup: "Configuration Analytics",
+    emailIntegration: "Intégration courriel",
+    bookingSystem: "Système de réservation",
+    customForms: "Formulaires personnalisés",
+    selectedItems: "Items sélectionnés",
+    regularPrice: "Prix régulier",
+    drouinSpecial: "Spécial Drouin (25% de rabais)",
+    estimatedDelivery: "Livraison estimée",
+    fromProjectStart: "Depuis le début du projet",
+    addToQuote: "Ajouter à la soumission",
+    notSure: "Pas sûr par où commencer? Discutons de votre projet ensemble.",
+    bookACall: "Réserver un appel",
+
+    // Packages
+    packageDeals: "Forfaits",
+    delivery: "Livraison",
+
+    // Service Menu
+    aLaCarte: "Services à la carte",
+    websites: "Sites Web",
+    branding: "Image de marque",
+    automation: "Automatisation",
+    seo: "SEO",
+    consulting: "Consultation",
+    addons: "Extras",
+    service: "Service",
+    regular: "Régulier",
+    action: "Action",
+    add: "Ajouter",
+
+    // Cart
+    yourQuote: "Votre soumission",
+    reviewServices: "Examinez vos services sélectionnés et les prix",
+    quoteEmpty: "Votre soumission est vide.",
+    quoteEmptyDesc: "Cliquez sur \"Ajouter à la soumission\" sur n'importe quel service pour commencer.",
+    configDetails: "Détails de configuration:",
+    subtotalRegular: "Sous-total (Régulier):",
+    drouinDiscount: "Rabais Drouin (25%):",
+    total: "TOTAL:",
+    totalDeliveryTime: "Temps de livraison total:",
+    weeksText: "semaines",
+    someServicesParallel: "(Certains services s'exécutent en parallèle)",
+    printThisQuote: "Imprimer cette soumission",
+    sendQuoteToDrouin: "Envoyer la soumission à Drouin",
+
+    // Quote Form
+    sendYourQuote: "Envoyer votre soumission",
+    fillDetails: "Remplissez vos coordonnées et nous enverrons cette soumission à vous et Drouin Creations.",
+    name: "Nom",
+    yourName: "Votre nom",
+    email: "Courriel",
+    yourEmail: "votre@courriel.com",
+    phone: "Téléphone",
+    phoneNumber: "(123) 456-7890",
+    company: "Entreprise",
+    companyName: "Nom de votre entreprise",
+    message: "Message (optionnel)",
+    additionalDetails: "Détails supplémentaires...",
+    sendQuote: "Envoyer la soumission",
+
+    // Bottom CTA
+    readyToStart: "Prêt à commencer?",
+    readyDesc: "Ajoutez des services à votre soumission et envoyez-la à Drouin Creations, ou réservez un appel pour discuter de votre projet.",
+    viewYourQuote: "Voir votre soumission",
+
+    // Package items
+    starterPackage: "Forfait démarrage",
+    growthPackage: "Forfait croissance",
+    premiumPackage: "Forfait premium",
+  }
+};
+
 export default function DrouinCreationsPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>('en');
+
+  const t = TRANSLATIONS[language];
 
   // Cal.com embed options
   const calOptions = useCalEmbed({
@@ -345,6 +592,7 @@ export default function DrouinCreationsPage() {
       drouinPrice: websiteCalcResult.drouinPrice,
       delivery: websiteCalcResult.delivery,
       deliveryDays: websiteCalcResult.days,
+      lineItems: websiteCalcResult.lineItems,
     };
     addToCart(item);
   };
@@ -390,16 +638,29 @@ export default function DrouinCreationsPage() {
 
     const servicesRows = cart.map(item => `
       <tr style="border-bottom: 1px solid #e5e7eb;">
-        <td style="padding: 12px 8px; font-weight: 500;">${item.name}</td>
-        <td style="padding: 12px 8px; text-align: right; color: #9ca3af; text-decoration: line-through;">
+        <td style="padding: 12px 8px; font-weight: 500;">
+          ${item.name}
+          ${item.lineItems && item.lineItems.length > 0 ? `
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #f3f4f6;">
+              <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 4px;">Configuration Details:</div>
+              ${item.lineItems.map(lineItem => `
+                <div style="font-size: 11px; color: #6b7280; display: flex; justify-content: space-between; padding: 2px 0;">
+                  <span>${lineItem.label}</span>
+                  <span style="font-weight: 500;">${lineItem.value}</span>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </td>
+        <td style="padding: 12px 8px; text-align: right; color: #9ca3af; text-decoration: line-through; vertical-align: top;">
           $${item.regularPrice.toLocaleString()}
           ${item.recurring ? `<div style="font-size: 11px;">+$${item.recurring.regularPrice}/mo</div>` : ''}
         </td>
-        <td style="padding: 12px 8px; text-align: right; font-weight: 600;">
+        <td style="padding: 12px 8px; text-align: right; font-weight: 600; vertical-align: top;">
           $${item.drouinPrice.toLocaleString()}
           ${item.recurring ? `<div style="font-size: 11px; font-weight: 400;">+$${item.recurring.drouinPrice}/mo</div>` : ''}
         </td>
-        <td style="padding: 12px 8px; text-align: right; font-size: 14px;">${item.delivery}</td>
+        <td style="padding: 12px 8px; text-align: right; font-size: 14px; vertical-align: top;">${item.delivery}</td>
       </tr>
     `).join('');
 
@@ -752,7 +1013,7 @@ export default function DrouinCreationsPage() {
           </motion.div>
 
           <Badge className="mb-4 bg-orange-500 text-white hover:bg-orange-600">
-            25% Drouin Client Discount Applied
+            {t.discountBadge}
           </Badge>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -760,7 +1021,7 @@ export default function DrouinCreationsPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6"
           >
-            Services & Pricing for Drouin Creations Clients
+            {t.heroTitle}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -768,7 +1029,7 @@ export default function DrouinCreationsPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto"
           >
-            Select what you need. See your price. Print your quote. All prices in CAD.
+            {t.heroSubtitle}
           </motion.p>
 
           {/* Cart Trigger Button */}
@@ -776,13 +1037,13 @@ export default function DrouinCreationsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 flex justify-center gap-4"
+            className="mt-8 flex flex-col items-center gap-4"
           >
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
                 <Button className="bg-orange-500 hover:bg-orange-600 text-white relative">
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  View Quote
+                  {t.viewQuote}
                   {cart.length > 0 && (
                     <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center bg-green-500">
                       {cart.length}
@@ -792,9 +1053,9 @@ export default function DrouinCreationsPage() {
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
                 <SheetHeader className="px-2">
-                  <SheetTitle>Your Quote</SheetTitle>
+                  <SheetTitle>{t.yourQuote}</SheetTitle>
                   <SheetDescription>
-                    Review your selected services and pricing
+                    {t.reviewServices}
                   </SheetDescription>
                 </SheetHeader>
 
@@ -803,8 +1064,8 @@ export default function DrouinCreationsPage() {
                   {cart.length === 0 ? (
                     <div className="text-center py-12 text-neutral-500">
                       <ShoppingCart className="mx-auto h-12 w-12 mb-4 opacity-50" />
-                      <p>Your quote is empty.</p>
-                      <p className="text-sm mt-2">Click &quot;Add to Quote&quot; on any service to get started.</p>
+                      <p>{t.quoteEmpty}</p>
+                      <p className="text-sm mt-2">{t.quoteEmptyDesc}</p>
                     </div>
                   ) : (
                     <>
@@ -815,7 +1076,7 @@ export default function DrouinCreationsPage() {
                               <div>
                                 <CardTitle className="text-base">{item.name}</CardTitle>
                                 <CardDescription className="text-sm mt-1">
-                                  Delivery: {item.delivery}
+                                  {t.delivery}: {item.delivery}
                                 </CardDescription>
                               </div>
                               <Button
@@ -829,6 +1090,21 @@ export default function DrouinCreationsPage() {
                             </div>
                           </CardHeader>
                           <CardContent>
+                            {item.lineItems && item.lineItems.length > 0 && (
+                              <div className="mb-4 p-3 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800">
+                                <div className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mb-2">
+                                  {t.configDetails}
+                                </div>
+                                <div className="space-y-1">
+                                  {item.lineItems.map((lineItem, idx) => (
+                                    <div key={idx} className="flex justify-between items-center text-xs">
+                                      <span className="text-neutral-600 dark:text-neutral-400">{lineItem.label}</span>
+                                      <span className="font-medium text-neutral-900 dark:text-neutral-100">{lineItem.value}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                             <div className="space-y-1">
                               <div className="flex justify-between text-sm">
                                 <span className="text-neutral-500 line-through">
@@ -854,24 +1130,24 @@ export default function DrouinCreationsPage() {
                       {/* Totals */}
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm text-neutral-600">
-                          <span>Subtotal (Regular):</span>
+                          <span>{t.subtotalRegular}</span>
                           <span>${totals.regularTotal.toLocaleString()} CAD</span>
                         </div>
                         <div className="flex justify-between text-sm text-green-600 font-medium">
-                          <span>Drouin Discount (25%):</span>
+                          <span>{t.drouinDiscount}</span>
                           <span>-${totals.discount.toLocaleString()} CAD</span>
                         </div>
                         <Separator />
                         <div className="flex justify-between text-lg font-bold">
-                          <span>TOTAL:</span>
+                          <span>{t.total}</span>
                           <span className="text-orange-500">
                             ${totals.drouinTotal.toLocaleString()} CAD
                           </span>
                         </div>
                         <div className="text-sm text-neutral-600 text-center pt-2">
-                          Total Delivery Time: ~{totals.totalDelivery} weeks
+                          {t.totalDeliveryTime} ~{totals.totalDelivery} {t.weeksText}
                           <br />
-                          <span className="text-xs">(Some services run in parallel)</span>
+                          <span className="text-xs">{t.someServicesParallel}</span>
                         </div>
                       </div>
 
@@ -885,74 +1161,74 @@ export default function DrouinCreationsPage() {
                           className="w-full"
                         >
                           <Printer className="mr-2 h-4 w-4" />
-                          Print This Quote
+                          {t.printThisQuote}
                         </Button>
 
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button className="w-full bg-orange-500 hover:bg-orange-600">
                               <Mail className="mr-2 h-4 w-4" />
-                              Send Quote to Drouin
+                              {t.sendQuoteToDrouin}
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-md">
                             <DialogHeader>
-                              <DialogTitle>Send Your Quote</DialogTitle>
+                              <DialogTitle>{t.sendYourQuote}</DialogTitle>
                               <DialogDescription>
-                                Fill in your details and we&apos;ll send this quote to you and Drouin Creations.
+                                {t.fillDetails}
                               </DialogDescription>
                             </DialogHeader>
                             <div className="space-y-4 py-4">
                               <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">{t.name}</Label>
                                 <Input
                                   id="name"
                                   value={quoteForm.name}
                                   onChange={(e) => setQuoteForm({ ...quoteForm, name: e.target.value })}
-                                  placeholder="Your name"
+                                  placeholder={t.yourName}
                                 />
                               </div>
                               <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">{t.email}</Label>
                                 <Input
                                   id="email"
                                   type="email"
                                   value={quoteForm.email}
                                   onChange={(e) => setQuoteForm({ ...quoteForm, email: e.target.value })}
-                                  placeholder="your@email.com"
+                                  placeholder={t.yourEmail}
                                 />
                               </div>
                               <div className="space-y-2">
-                                <Label htmlFor="phone">Phone</Label>
+                                <Label htmlFor="phone">{t.phone}</Label>
                                 <Input
                                   id="phone"
                                   value={quoteForm.phone}
                                   onChange={(e) => setQuoteForm({ ...quoteForm, phone: e.target.value })}
-                                  placeholder="(123) 456-7890"
+                                  placeholder={t.phoneNumber}
                                 />
                               </div>
                               <div className="space-y-2">
-                                <Label htmlFor="company">Company</Label>
+                                <Label htmlFor="company">{t.company}</Label>
                                 <Input
                                   id="company"
                                   value={quoteForm.company}
                                   onChange={(e) => setQuoteForm({ ...quoteForm, company: e.target.value })}
-                                  placeholder="Your company name"
+                                  placeholder={t.companyName}
                                 />
                               </div>
                               <div className="space-y-2">
-                                <Label htmlFor="message">Message (optional)</Label>
+                                <Label htmlFor="message">{t.message}</Label>
                                 <Textarea
                                   id="message"
                                   value={quoteForm.message}
                                   onChange={(e) => setQuoteForm({ ...quoteForm, message: e.target.value })}
-                                  placeholder="Any additional details..."
+                                  placeholder={t.additionalDetails}
                                   rows={3}
                                 />
                               </div>
                             </div>
                             <Button onClick={handleSendQuote} className="w-full bg-orange-500 hover:bg-orange-600">
-                              Send Quote
+                              {t.sendQuote}
                             </Button>
                           </DialogContent>
                         </Dialog>
@@ -965,7 +1241,7 @@ export default function DrouinCreationsPage() {
                           className="w-full"
                         >
                           <Calendar className="mr-2 h-4 w-4" />
-                          Book a Call
+                          {t.bookACall}
                         </Button>
                       </div>
                     </>
@@ -973,6 +1249,9 @@ export default function DrouinCreationsPage() {
                 </div>
               </SheetContent>
             </Sheet>
+
+            {/* Language Toggle */}
+            <LanguageToggle language={language} setLanguage={setLanguage} />
           </motion.div>
         </div>
       </section>
@@ -982,22 +1261,22 @@ export default function DrouinCreationsPage() {
         {/* Website Pricing Calculator */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Website Pricing Calculator</h2>
-            <p className="mt-2 text-neutral-600 dark:text-neutral-400">Custom quote in 30 seconds.</p>
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">{t.calculatorTitle}</h2>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-400">{t.calculatorSubtitle}</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-0 items-stretch overflow-hidden border border-neutral-200 dark:border-neutral-700 rounded-3xl">
             {/* Left: Calculator Inputs */}
             <div className="bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 p-8 lg:p-12 shadow-[8px_0_24px_rgba(0,0,0,0.1)] dark:shadow-[8px_0_24px_rgba(0,0,0,0.3)] relative z-10 rounded-l-3xl">
               <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
-                Your Requirements
+                {t.yourRequirements}
               </h3>
 
               {/* Page Count Slider */}
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
                   <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                    Number of Pages
+                    {t.numberOfPages}
                   </Label>
                   <span className="text-2xl font-bold text-orange-500 dark:text-orange-400 tabular-nums">
                     {pageCount[0]}
@@ -1026,34 +1305,34 @@ export default function DrouinCreationsPage() {
 
               {/* Complexity */}
               <div className="mb-6">
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">Complexity Level</Label>
+                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.complexityLevel}</Label>
                 <RadioGroup value={complexity} onValueChange={setComplexity} className="space-y-0.5">
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="basic" id="basic" />
                     <Label htmlFor="basic" className="cursor-pointer text-sm flex-1">
-                      Basic
-                      <span className="block text-xs text-neutral-500">Landing page, simple layout</span>
+                      {t.basic}
+                      <span className="block text-xs text-neutral-500">{t.basicDesc}</span>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="standard" id="standard" />
                     <Label htmlFor="standard" className="cursor-pointer text-sm flex-1">
-                      Standard
-                      <span className="block text-xs text-neutral-500">Multi-page, forms, basic SEO</span>
+                      {t.standard}
+                      <span className="block text-xs text-neutral-500">{t.standardDesc}</span>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="advanced" id="advanced" />
                     <Label htmlFor="advanced" className="cursor-pointer text-sm flex-1">
-                      Advanced
-                      <span className="block text-xs text-neutral-500">Custom design, animations</span>
+                      {t.advanced}
+                      <span className="block text-xs text-neutral-500">{t.advancedDesc}</span>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="premium" id="premium" />
                     <Label htmlFor="premium" className="cursor-pointer text-sm flex-1">
-                      Premium
-                      <span className="block text-xs text-neutral-500">Bespoke UX, advanced interactions</span>
+                      {t.premium}
+                      <span className="block text-xs text-neutral-500">{t.premiumDesc}</span>
                     </Label>
                   </div>
                 </RadioGroup>
@@ -1061,30 +1340,30 @@ export default function DrouinCreationsPage() {
 
               {/* E-commerce */}
               <div className="mb-6">
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">E-commerce</Label>
+                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.ecommerce}</Label>
                 <RadioGroup value={ecommerce} onValueChange={setEcommerce} className="space-y-0.5">
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="none" id="ecom-none" />
                     <Label htmlFor="ecom-none" className="cursor-pointer text-sm">
-                      No e-commerce
+                      {t.noEcommerce}
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="basic" id="ecom-basic" />
                     <Label htmlFor="ecom-basic" className="cursor-pointer text-sm">
-                      Basic store +$1,500
+                      {t.basicStore} +$1,500
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="standard" id="ecom-standard" />
                     <Label htmlFor="ecom-standard" className="cursor-pointer text-sm">
-                      Standard store +$3,000
+                      {t.standardStore} +$3,000
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <RadioGroupItem value="advanced" id="ecom-advanced" />
                     <Label htmlFor="ecom-advanced" className="cursor-pointer text-sm">
-                      Advanced store +$5,000
+                      {t.advancedStore} +$5,000
                     </Label>
                   </div>
                 </RadioGroup>
@@ -1092,7 +1371,7 @@ export default function DrouinCreationsPage() {
 
               {/* Additional Features */}
               <div>
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">Additional Features</Label>
+                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.additionalFeatures}</Label>
                 <div className="grid grid-cols-1 gap-0.5">
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
                     <Checkbox
@@ -1103,7 +1382,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="bilingual" className="cursor-pointer text-sm">
-                      Bilingual (EN/FR) +30%
+                      {t.bilingual} +30%
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1115,7 +1394,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="cms" className="cursor-pointer text-sm">
-                      CMS Integration +$800
+                      {t.cmsIntegration} +$800
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1127,7 +1406,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="blog" className="cursor-pointer text-sm">
-                      Blog Setup +$600
+                      {t.blogSetup} +$600
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1139,7 +1418,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="seo" className="cursor-pointer text-sm">
-                      SEO Package +$1,200
+                      {t.seoPackage} +$1,200
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1151,7 +1430,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="analytics" className="cursor-pointer text-sm">
-                      Analytics Setup +$400
+                      {t.analyticsSetup} +$400
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1163,7 +1442,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="email" className="cursor-pointer text-sm">
-                      Email Integration +$500
+                      {t.emailIntegration} +$500
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1175,7 +1454,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="booking" className="cursor-pointer text-sm">
-                      Booking System +$800
+                      {t.bookingSystem} +$800
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
@@ -1187,7 +1466,7 @@ export default function DrouinCreationsPage() {
                       }
                     />
                     <Label htmlFor="forms" className="cursor-pointer text-sm">
-                      Custom Forms +$600
+                      {t.customForms} +$600
                     </Label>
                   </div>
                 </div>
@@ -1197,7 +1476,7 @@ export default function DrouinCreationsPage() {
             {/* Right: Calculator Result */}
             <div className="bg-gradient-to-br from-neutral-100 to-white dark:from-neutral-900 dark:to-neutral-800 p-8 lg:p-12 rounded-r-3xl flex flex-col">
               <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
-                Your Price
+                {t.yourPrice}
               </h3>
 
               {/* Price Breakdown */}
@@ -1205,7 +1484,7 @@ export default function DrouinCreationsPage() {
                 {/* Selected Items Breakdown */}
                 <div className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
                   <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-4">
-                    Selected Items
+                    {t.selectedItems}
                   </div>
                   <div className="space-y-2">
                     {websiteCalcResult.lineItems.map((item, index) => (
@@ -1219,7 +1498,7 @@ export default function DrouinCreationsPage() {
 
                 <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-900">
                   <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">
-                    Regular Price
+                    {t.regularPrice}
                   </div>
                   <div className="text-3xl font-bold text-neutral-400 dark:text-neutral-600 line-through">
                     ${websiteCalcResult.regularPrice.toLocaleString()}
@@ -1229,7 +1508,7 @@ export default function DrouinCreationsPage() {
 
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/20">
                   <div className="text-xs font-semibold uppercase tracking-wide text-green-600 dark:text-green-400 mb-2">
-                    Drouin Special (25% off)
+                    {t.drouinSpecial}
                   </div>
                   <div className="text-5xl font-bold text-green-600 dark:text-green-400">
                     ${websiteCalcResult.drouinPrice.toLocaleString()}
@@ -1239,12 +1518,12 @@ export default function DrouinCreationsPage() {
 
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-500/20">
                   <div className="text-xs font-semibold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">
-                    Estimated Delivery
+                    {t.estimatedDelivery}
                   </div>
                   <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
                     {websiteCalcResult.delivery}
                   </div>
-                  <p className="mt-1 text-xs text-orange-600/80 dark:text-orange-400/80">From project start</p>
+                  <p className="mt-1 text-xs text-orange-600/80 dark:text-orange-400/80">{t.fromProjectStart}</p>
                 </div>
               </div>
 
@@ -1254,13 +1533,13 @@ export default function DrouinCreationsPage() {
                 className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white h-12 text-base"
               >
                 <Plus className="mr-2 h-5 w-5" />
-                Add to Quote
+                {t.addToQuote}
               </Button>
 
               {/* Book a Call Section */}
               <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 text-center mb-3">
-                  Not sure where to start? Let&apos;s discuss your project together.
+                  {t.notSure}
                 </p>
                 <Button
                   data-cal-namespace={calOptions.namespace}
@@ -1270,7 +1549,7 @@ export default function DrouinCreationsPage() {
                   className="w-full h-12 text-base border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950"
                 >
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book a Call
+                  {t.bookACall}
                 </Button>
               </div>
             </div>
@@ -1279,13 +1558,13 @@ export default function DrouinCreationsPage() {
 
         {/* Package Deals */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">Package Deals</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">{t.packageDeals}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {PACKAGES.map((pkg) => (
               <Card key={pkg.id} className="relative hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle>{pkg.name}</CardTitle>
-                  <CardDescription>Delivery: {pkg.delivery}</CardDescription>
+                  <CardDescription>{t.delivery}: {pkg.delivery}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -1326,7 +1605,7 @@ export default function DrouinCreationsPage() {
                     className="w-full bg-orange-500 hover:bg-orange-600"
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    Add to Quote
+                    {t.addToQuote}
                   </Button>
                 </CardFooter>
               </Card>
@@ -1336,15 +1615,15 @@ export default function DrouinCreationsPage() {
 
         {/* Service Menu */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">À La Carte Services</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">{t.aLaCarte}</h2>
           <Tabs defaultValue="websites" className="w-full">
             <TabsList className="grid w-full grid-cols-2 md:grid-cols-6">
-              <TabsTrigger value="websites">Websites</TabsTrigger>
-              <TabsTrigger value="branding">Branding</TabsTrigger>
-              <TabsTrigger value="automation">Automation</TabsTrigger>
-              <TabsTrigger value="seo">SEO</TabsTrigger>
-              <TabsTrigger value="consulting">Consulting</TabsTrigger>
-              <TabsTrigger value="addons">Add-ons</TabsTrigger>
+              <TabsTrigger value="websites">{t.websites}</TabsTrigger>
+              <TabsTrigger value="branding">{t.branding}</TabsTrigger>
+              <TabsTrigger value="automation">{t.automation}</TabsTrigger>
+              <TabsTrigger value="seo">{t.seo}</TabsTrigger>
+              <TabsTrigger value="consulting">{t.consulting}</TabsTrigger>
+              <TabsTrigger value="addons">{t.addons}</TabsTrigger>
             </TabsList>
 
             {/* Websites Tab */}
@@ -1355,11 +1634,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                     <TableBody>
@@ -1389,7 +1668,7 @@ export default function DrouinCreationsPage() {
                               }
                               className="bg-orange-500 hover:bg-orange-600"
                             >
-                              Add
+                              {t.add}
                             </Button>
                           </TableCell>
                         </TableRow>
@@ -1409,11 +1688,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1442,7 +1721,7 @@ export default function DrouinCreationsPage() {
                                 }
                                 className="bg-orange-500 hover:bg-orange-600"
                               >
-                                Add
+                                {t.add}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -1462,11 +1741,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1508,7 +1787,7 @@ export default function DrouinCreationsPage() {
                                 }
                                 className="bg-orange-500 hover:bg-orange-600"
                               >
-                                Add
+                                {t.add}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -1528,11 +1807,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1563,7 +1842,7 @@ export default function DrouinCreationsPage() {
                                 }
                                 className="bg-orange-500 hover:bg-orange-600"
                               >
-                                Add
+                                {t.add}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -1583,11 +1862,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1618,7 +1897,7 @@ export default function DrouinCreationsPage() {
                                 }
                                 className="bg-orange-500 hover:bg-orange-600"
                               >
-                                Add
+                                {t.add}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -1638,11 +1917,11 @@ export default function DrouinCreationsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[200px]">Service</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">Regular</TableHead>
-                          <TableHead className="text-right min-w-[100px]">Drouin Special</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">Delivery</TableHead>
-                          <TableHead className="text-center min-w-[80px]">Action</TableHead>
+                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
+                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
+                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1698,9 +1977,9 @@ export default function DrouinCreationsPage() {
         <Card className="bg-gradient-to-br from-orange-50 to-yellow-50 dark:from-orange-950/20 dark:to-yellow-950/20">
           <CardContent className="pt-6">
             <div className="text-center space-y-6">
-              <h3 className="text-2xl font-bold">Ready to Get Started?</h3>
+              <h3 className="text-2xl font-bold">{t.readyToStart}</h3>
               <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                Add services to your quote and send it to Drouin Creations, or book a call to discuss your project.
+                {t.readyDesc}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -1709,7 +1988,7 @@ export default function DrouinCreationsPage() {
                   className="bg-orange-500 hover:bg-orange-600 text-white"
                 >
                   <ShoppingCart className="mr-2 h-5 w-5" />
-                  View Your Quote ({cart.length})
+                  {t.viewYourQuote} ({cart.length})
                 </Button>
                 <Button
                   data-cal-namespace={calOptions.namespace}
@@ -1719,7 +1998,7 @@ export default function DrouinCreationsPage() {
                   variant="outline"
                 >
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book a Call
+                  {t.bookACall}
                 </Button>
               </div>
             </div>
