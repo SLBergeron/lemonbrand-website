@@ -1,13 +1,13 @@
 import { Features } from "@/components/features";
 import { Hero } from "@/components/hero";
 import { Pricing } from "@/components/pricing";
-import { PricingDetails } from "@/components/PricingDetails";
 import { LogoCloudMarquee } from "@/components/LogoCloudMarquee";
 import { About } from "@/components/about";
 import { FrequentlyAskedQuestionsAccordion } from "@/components/FAQ";
 import { CTAWithDashedGridLines } from "@/components/CTAWithDashedGridlines";
 import { CaseStudy } from "@/components/CaseStudy";
 import { TestimonialsMasonryGrid } from "@/components/testimonals";
+import { GetMyWebsiteCallout } from "@/components/GetMyWebsiteCallout";
 
 export default function Home() {
   const structuredData = {
@@ -173,7 +173,7 @@ export default function Home() {
         <Hero />
         <LogoCloudMarquee />
         <Features />
-        <PricingDetails />
+        <GetMyWebsiteCallout />
         <Pricing />
         <CaseStudy />
         <TestimonialsMasonryGrid />

@@ -34,6 +34,10 @@ export const Navbar = () => {
       link: "/#pricing",
     },
     {
+      name: "Websites",
+      link: "https://getmywebsite.io",
+    },
+    {
       name: "Bio",
       link: "/#about",
     },
@@ -115,6 +119,10 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
             className="text-neutral-600 dark:text-neutral-300 relative px-4 py-2"
             key={`link=${idx}`}
             href={navItem.link}
+            {...(navItem.link.startsWith('http') && {
+              target: "_blank",
+              rel: "noopener noreferrer"
+            })}
           >
             {hovered === idx && (
               <motion.div
@@ -245,6 +253,10 @@ const MobileNav = ({ navItems, visible }: NavbarProps) => {
                   href={navItem.link}
                   onClick={() => setOpen(false)}
                   className="relative text-neutral-600 dark:text-neutral-300"
+                  {...(navItem.link.startsWith('http') && {
+                    target: "_blank",
+                    rel: "noopener noreferrer"
+                  })}
                 >
                   <motion.span className="block">{navItem.name} </motion.span>
                 </Link>

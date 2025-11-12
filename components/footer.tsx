@@ -25,6 +25,10 @@ export function Footer() {
       title: "About",
       href: "#about",
     },
+    {
+      title: "GetMyWebsite.io",
+      href: "https://getmywebsite.io",
+    },
   ];
 
   const socials = [
@@ -97,6 +101,10 @@ export function Footer() {
                   <Link
                     className="transition-colors hover:text-text-neutral-800 "
                     href={page.href}
+                    {...(page.href.startsWith('http') && {
+                      target: "_blank",
+                      rel: "noopener noreferrer"
+                    })}
                   >
                     {page.title}
                   </Link>

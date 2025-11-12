@@ -35,7 +35,7 @@ export function About() {
             </h2>
             <div className="space-y-4 text-neutral-600 dark:text-neutral-300">
               <p>
-                <strong className="text-neutral-800 dark:text-neutral-100">We&apos;re Simon and the team.</strong> We build AI systems that grow revenue. No agency overhead. No account managers. Just us designing, building, and deploying automation that works.
+                <strong className="text-neutral-800 dark:text-neutral-100">We&apos;re Simon and the team.</strong> We build systems that grow revenue for contractors. AI automation for revenue capture. Websites for contractors who don&apos;t have one yet. No agency overhead. No account managers. Just us designing, building, and deploying what works.
               </p>
               <p>
                 Design background. Developer skills. AI implementation experience across sales, marketing, and ops. We&apos;ve generated $1.7M+ in revenue from missed calls in the last 6 months for our contractor clients.
@@ -53,7 +53,16 @@ export function About() {
                 >
                   learn more here
                 </a>
-                .
+                . We also launched{" "}
+                <a
+                  href="https://getmywebsite.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-800 dark:text-neutral-100 underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                >
+                  GetMyWebsite.io
+                </a>
+                {" "}for contractors who need a website.
               </p>
             </div>
 
