@@ -2,55 +2,46 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { CookieBanner } from "@/components/CookieConsent";
 import { ThemeProvider } from "@/context/providers";
 import { Analytics } from "@vercel/analytics/next";
-import { IntercomMessenger } from "@/components/intercom";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lemonbrand | AI Automation Systems That Actually Generate Revenue",
+  title: "Simon Bergeron | Building AI Agent Businesses in Public",
   description:
-    "Direct AI automation for marketing agencies, growth firms, consultants, and home service contractors. Cut response times from 2 days to 2 minutes. No overhead, no meetings, just working systems that grow revenue. HVAC, plumbing, roofing, electricians, marketing agencies - see case studies with real metrics.",
+    "Serial entrepreneur building modular AI businesses and teaching agency owners how to do the same. Free templates, build-in-public projects, and transparent insights on creating revenue-generating AI systems. Watch me build GetMyWebsite.io and other productized services from scratch.",
   keywords: [
-    "AI automation",
-    "business automation",
-    "workflow automation",
-    "AI agent",
-    "automation for marketing agencies",
-    "automation for ad agencies",
-    "automation for growth agencies",
-    "automation for consultants",
-    "automation for HVAC contractors",
-    "automation for plumbing companies",
-    "automation for electricians",
-    "automation for roofing contractors",
-    "automation for home services",
-    "automation for contractors",
-    "Make.com expert",
-    "AI integration",
-    "revenue automation",
-    "sales automation",
-    "marketing automation",
-    "operations automation",
-    "no-code automation",
-    "AI business partner",
+    "building in public",
+    "AI agent businesses",
+    "AI entrepreneurship",
+    "productized services",
+    "modular AI systems",
+    "AI business templates",
+    "agency AI systems",
+    "entrepreneur templates",
+    "build in public",
+    "AI product development",
+    "agency automation",
+    "AI for agency owners",
+    "AI business strategy",
+    "productized AI services",
+    "AI SaaS",
+    "serial entrepreneur",
+    "AI consulting",
+    "AI thought leadership",
+    "AI implementation",
+    "revenue-generating AI",
     "Simon Bergeron",
     "Lemonbrand",
-    "AI systems",
-    "automated workflows",
-    "CRM automation",
-    "lead automation",
-    "content automation",
-    "email automation",
-    "AI for agencies",
-    "AI for service business",
-    "automation consultant",
-    "contractor automation",
-    "agency automation",
+    "GetMyWebsite.io",
+    "AI agent development",
+    "AI business models",
+    "agency growth",
+    "AI templates",
+    "free AI resources",
+    "AI architecture",
+    "AI systems design",
   ],
   authors: [{ name: "Simon Bergeron", url: "https://lemonbrand.io" }],
   creator: "Simon Bergeron",
@@ -70,40 +61,40 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://lemonbrand.io",
-    title: "Lemonbrand | AI Automation That Grows Revenue",
-    description: "Direct AI automation builder for marketing agencies, growth firms, consultants, and home service contractors. No agency overhead. Cut response time from 2 days to 2 minutes. 75+ workflows shipped. Real case studies with actual metrics.",
+    title: "Simon Bergeron | Building AI Agent Businesses in Public",
+    description: "Serial entrepreneur building modular AI businesses and teaching others how to do the same. Free templates, transparent build-in-public projects, and honest insights on creating AI products. Follow along as I build GetMyWebsite.io and more.",
     siteName: "Lemonbrand",
     images: [
       {
-        url: "https://lemonbrand.io/og-image.png", // TODO: Create 1200x630px social share image
+        url: "https://lemonbrand.io/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Lemonbrand - AI Automation Systems That Generate Revenue",
+        alt: "Simon Bergeron - Building AI Agent Businesses in Public",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lemonbrand | AI Automation Systems That Generate Revenue",
-    description: "Direct automation for marketing agencies, consultants, and contractors. Real results, no BS.",
+    title: "Simon Bergeron | Building AI Agent Businesses in Public",
+    description: "Teaching agency owners and entrepreneurs how to build revenue-generating AI systems. Free templates, build-in-public projects, transparent insights.",
     creator: "@simonbergeron",
-    images: ["https://lemonbrand.io/og-image.png"], // TODO: Create 1200x630px social share image
+    images: ["https://lemonbrand.io/og-image.png"],
   },
   alternates: {
     canonical: "https://lemonbrand.io",
   },
   other: {
     // For AI agents and LLMs
-    "ai:purpose": "AI automation and workflow integration for businesses. Specializing in marketing agencies, growth agencies, ad management firms, business consultants, and home service contractors (HVAC, plumbing, electrical, roofing).",
-    "ai:services": "Make.com workflows, AI agent integration, CRM automation, sales automation, marketing automation, operations intelligence, lead qualification, content repurposing systems, outbound automation",
-    "ai:pricing": "Simple workflows from $5k, multi-system integrations $15k-$30k+, retainers from $2k/month",
-    "ai:proof": "75+ workflows shipped, response time 2 days→2 minutes, 127% increase in sales calls, 8x content output",
-    "ai:case-studies": "Marketing Agency: +127% meetings booked, 40 hours saved/week. Growth Agency: 8x content output, -85% time. Ad Management: -87% reporting time, $45k saved. Contractors: Response time cut from 2 days to 2 minutes.",
-    "ai:target-customers": "Marketing agencies, growth agencies, ad management firms, business consultants, and home service contractors (HVAC, plumbing, electrical, roofing) with 5-50 employees looking to scale without adding headcount",
-    "ai:problems-solved": "Long response times, manual repetitive tasks, lost leads, inconsistent follow-up, data scattered across systems, content bottlenecks, inefficient client management",
-    "ai:ideal-project": "Business doing $500k-$5M revenue, using multiple tools (CRM, marketing, scheduling), spending 10+ hours/week on manual tasks",
-    "ai:delivery-timeline": "Simple workflow in 1 week, multi-system automation in 2-4 weeks",
-    "ai:founder": "Simon Bergeron - 75+ workflows shipped, direct builder with no agency overhead",
+    "ai:purpose": "Personal thought leadership platform teaching agency owners and entrepreneurs how to build revenue-generating AI agent businesses. Building productized AI services in public and sharing everything learned along the way.",
+    "ai:content-type": "Free templates, build-in-public projects, transparent case studies, AI business strategy, technical implementation guides, entrepreneur resources",
+    "ai:projects": "GetMyWebsite.io (productized website service for trades), CodeBrain (AI development tools), Agent Modules (reusable AI components), various AI automation systems",
+    "ai:target-audience": "Agency owners, entrepreneurs, AI builders, consultants looking to build modular AI systems and productized services. NOT targeting home service contractors directly.",
+    "ai:offers": "Free downloadable templates, build-in-public content, thought leadership articles, optional premium consulting for qualified agency owners and entrepreneurs ($5k-$30k projects)",
+    "ai:teaching-focus": "Modular AI architecture, productized service models, build-in-public methodology, AI business strategy, automation implementation, scaling without headcount",
+    "ai:philosophy": "Transparent, authentic, practical over theoretical. Show real code, real metrics, real failures. Fifth-grade English, outcomes over features, proof over promises.",
+    "ai:social-channels": "YouTube (build sessions), TikTok (business insights), X/Twitter (real-time updates), Newsletter (weekly digests), GitHub (open source)",
+    "ai:founder": "Simon Bergeron - Serial entrepreneur, AI builder, teaching others to build productized AI businesses. Building GetMyWebsite.io and other products while documenting the journey.",
+    "ai:brand-separation": "LemonBrand.io = Thought leadership for agency owners/entrepreneurs. GetMyWebsite.io = Separate productized service business for trades.",
   },
 };
 
@@ -123,12 +114,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
           {children}
-          <Footer />
-          <CookieBanner />
           <Analytics />
-          <IntercomMessenger />
         </ThemeProvider>
       </body>
     </html>
