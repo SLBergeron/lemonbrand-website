@@ -9,6 +9,22 @@ const siteUrl = process.env.SITE_URL || "http://localhost:3000";
 
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
+// Build trusted origins list dynamically
+const trustedOrigins = [
+  siteUrl,
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3001",
+  "https://lemonbrand.io",
+  "https://www.lemonbrand.io",
+];
+
+// Add Vercel preview URLs
+if (process.env.VERCEL_URL) {
+  trustedOrigins.push(`https://${process.env.VERCEL_URL}`);
+}
+
 export const createAuth = (
   ctx: GenericCtx<DataModel>,
   { optionsOnly } = { optionsOnly: false }
@@ -16,13 +32,7 @@ export const createAuth = (
   return betterAuth({
     logger: { disabled: optionsOnly },
     baseURL: siteUrl,
-    trustedOrigins: [
-      siteUrl,
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://127.0.0.1:3000",
-      "http://127.0.0.1:3001",
-    ],
+    trustedOrigins,
     database: authComponent.adapter(ctx),
     emailAndPassword: {
       enabled: true,
