@@ -96,7 +96,7 @@ export default function ProjectsPage() {
             custom={0}
             className="text-sm font-medium tracking-wider uppercase text-accent mb-6"
           >
-            Building in Public
+            Proof of Work
           </motion.p>
 
           <motion.h1
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
             custom={1}
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6"
           >
-            What I&apos;m Building
+            I Don&apos;t Just Teach AI — I Ship It
           </motion.h1>
 
           <motion.p
@@ -116,8 +116,8 @@ export default function ProjectsPage() {
             custom={2}
             className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            AI businesses designed to be automated, scalable, and sellable.
-            Each project solves a real problem for a specific audience.
+            These are real businesses I&apos;ve built using the same AI systems I teach.
+            Real customers, real revenue, real proof that these methods work.
           </motion.p>
         </div>
       </section>
@@ -285,29 +285,34 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
+      {/* Why This Matters Section */}
       <section className="py-20 px-4 border-t border-border/50 bg-muted/30">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-6">
-            The Build Philosophy
+            Why This Matters for You
           </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Anyone can teach AI theory. I teach from experience — building real products
+            with real customers. The systems I train your team on are the same ones
+            that power these businesses.
+          </p>
           <div className="grid sm:grid-cols-3 gap-6 text-left">
             <div>
-              <h3 className="font-display font-semibold mb-2">Automated</h3>
+              <h3 className="font-display font-semibold mb-2">Battle-Tested</h3>
               <p className="text-sm text-muted-foreground">
-                Every project minimizes manual work. Systems run without constant intervention.
+                These aren&apos;t theoretical frameworks. They work because I use them every day.
               </p>
             </div>
             <div>
-              <h3 className="font-display font-semibold mb-2">Scalable</h3>
+              <h3 className="font-display font-semibold mb-2">Real Results</h3>
               <p className="text-sm text-muted-foreground">
-                Built to handle 10x growth without 10x the effort. Productized, not custom.
+                Each project generates revenue and serves real customers. No vaporware.
               </p>
             </div>
             <div>
-              <h3 className="font-display font-semibold mb-2">Sellable</h3>
+              <h3 className="font-display font-semibold mb-2">Practical Focus</h3>
               <p className="text-sm text-muted-foreground">
-                Each business could be sold. Clean systems, documented processes, real revenue.
+                I focus on what works for business — not every shiny new AI announcement.
               </p>
             </div>
           </div>
@@ -318,19 +323,27 @@ export default function ProjectsPage() {
       <section className="py-24 px-4 border-t border-border/50">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-            Want the Templates Behind These?
+            Ready to Implement AI in Your Team?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            I share the frameworks, code, and processes I use to build these businesses.
-            Get them free.
+            I train marketing, sales, and operations teams to use AI effectively.
+            The same systems that power these businesses can transform your workflows.
           </p>
-          <Link
-            href="/templates"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-all duration-200"
-          >
-            Get Free Templates
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/work-with-me"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-sm font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] transition-all duration-200"
+            >
+              Book a Free Consultation
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/templates"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Get free AI playbooks
+            </Link>
+          </div>
         </div>
       </section>
     </main>

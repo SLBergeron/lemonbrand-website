@@ -17,20 +17,20 @@ type Category = "all" | "process" | "code" | "ai";
 
 const categoryConfig: Record<Category, { label: string; description: string }> = {
   all: {
-    label: "All Templates",
-    description: "Everything I've built and documented",
+    label: "All Playbooks",
+    description: "Step-by-step guides to transform how your team works with AI",
   },
   process: {
-    label: "Process",
-    description: "Workflows and systems for getting things done",
+    label: "Writing & Communication",
+    description: "Draft emails, proposals, and reports faster with AI assistance",
   },
   code: {
-    label: "Code",
-    description: "Working applications you can clone and customize",
+    label: "Data & Analysis",
+    description: "Analyze data and create reports without technical skills",
   },
   ai: {
-    label: "AI",
-    description: "Prompts, guides, and AI-powered workflows",
+    label: "Research & Strategy",
+    description: "AI-powered research, brainstorming, and decision-making",
   },
 };
 
@@ -77,7 +77,7 @@ function TemplatesContent() {
             custom={0}
             className="text-sm font-medium tracking-wider uppercase text-accent mb-4"
           >
-            Free Resources
+            Free AI Playbooks
           </motion.p>
           <motion.h1
             variants={fadeInUp}
@@ -86,7 +86,7 @@ function TemplatesContent() {
             custom={1}
             className="font-display text-4xl sm:text-5xl font-light tracking-tight mb-4"
           >
-            Templates & Tools
+            AI Implementation Guides
           </motion.h1>
           <motion.p
             variants={fadeInUp}
@@ -95,8 +95,8 @@ function TemplatesContent() {
             custom={2}
             className="text-lg text-muted-foreground max-w-2xl"
           >
-            Real systems I use to build AI businesses. Not theory — working code,
-            processes, and frameworks you can use today.
+            Step-by-step guides to save hours on routine work. No technical skills required —
+            just practical AI workflows you can use today.
           </motion.p>
         </div>
       </section>
@@ -158,13 +158,13 @@ function TemplatesContent() {
           ) : (
             <div className="text-center py-20">
               <p className="text-muted-foreground mb-4">
-                No templates in this category yet.
+                No playbooks in this category yet.
               </p>
               <button
                 onClick={() => setSelectedCategory("all")}
                 className="text-sm font-medium text-accent hover:underline"
               >
-                View all templates
+                View all playbooks
               </button>
             </div>
           )}
@@ -181,13 +181,13 @@ function TemplatesContent() {
             <div>
               <p className="font-medium mb-1">Instant Access</p>
               <p className="text-sm text-muted-foreground">
-                Get the GitHub link immediately. No waiting, no drip campaigns.
+                Get the full guide immediately. No waiting, no drip campaigns.
               </p>
             </div>
             <div>
-              <p className="font-medium mb-1">Weekly Updates</p>
+              <p className="font-medium mb-1">Weekly Tips</p>
               <p className="text-sm text-muted-foreground">
-                One email per week with new templates, code, and lessons learned.
+                One email per week with new playbooks and AI implementation tips.
               </p>
             </div>
             <div>
@@ -204,15 +204,15 @@ function TemplatesContent() {
       <section className="py-20 px-4 border-t border-border/50">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="font-display text-2xl font-semibold tracking-tight mb-4">
-            Get Notified When I Release New Templates
+            Get Notified When I Release New Playbooks
           </h2>
           <p className="text-muted-foreground mb-8">
-            I add new templates monthly. Subscribe once, access everything forever.
+            I add new playbooks monthly. Subscribe once, access everything forever.
           </p>
           <NewsletterForm
             source="templates"
             placeholder="your@email.com"
-            buttonText="Subscribe"
+            buttonText="Get weekly tips"
             className="justify-center"
           />
           <p className="text-xs text-muted-foreground mt-4">
@@ -225,16 +225,16 @@ function TemplatesContent() {
       <section className="py-16 px-4 border-t border-border/50 bg-muted/30">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-display text-xl font-semibold tracking-tight mb-3">
-            Want to see these templates in action?
+            Want hands-on help implementing AI?
           </h2>
           <p className="text-muted-foreground mb-6">
-            I build everything in public on YouTube. Watch me create, break, and fix things in real time.
+            I train marketing, sales, and operations teams to use AI effectively. No coding required.
           </p>
           <Link
-            href="/projects"
+            href="/work-with-me"
             className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
           >
-            See what I&apos;m building
+            Learn about AI training
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

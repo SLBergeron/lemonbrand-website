@@ -7,9 +7,9 @@ import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 
 const navItems = [
-  { name: "Templates", link: "/templates" },
+  { name: "AI Training", link: "/work-with-me" },
+  { name: "Playbooks", link: "/templates" },
   { name: "YouTube", link: "https://youtube.com/@slbergeron", external: true },
-  { name: "Work with Me", link: "/work-with-me" },
 ];
 
 // Premium nav link with underline-grow animation

@@ -102,7 +102,7 @@ export default function Home() {
       />
 
       <main className="pt-16">
-        {/* Hero Section - Conversion Focused */}
+        {/* Hero Section - Non-Technical Teams */}
         <section className="py-24 sm:py-32 lg:py-40 px-4">
           <div className="max-w-4xl mx-auto">
             {/* Eyebrow */}
@@ -113,7 +113,7 @@ export default function Home() {
               custom={0}
               className="text-sm font-medium tracking-wider uppercase text-accent mb-6"
             >
-              Building AI businesses in public since 2024
+              AI Implementation for Teams
             </motion.p>
 
             {/* Headline */}
@@ -124,7 +124,7 @@ export default function Home() {
               custom={1}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6"
             >
-              Steal My AI Business Templates
+              Stop Watching. Start Using AI.
             </motion.h1>
 
             {/* Subheadline */}
@@ -135,8 +135,9 @@ export default function Home() {
               custom={2}
               className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed"
             >
-              I build and document every AI system I create. Get the templates,
-              code, and frameworks for free.
+              I help marketing, sales, and operations teams implement AI tools
+              that actually work — no coding required. Save 5-10 hours per week
+              on routine tasks.
             </motion.p>
 
             {/* CTAs */}
@@ -145,102 +146,86 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               custom={3}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <Link
-                href="/templates"
+                href="/work-with-me"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-sm font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] transition-all duration-200"
               >
-                Get Free Templates
+                Book a Free Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/projects"
+                href="/templates"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                See what I&apos;m building
+                See free AI playbooks
               </Link>
             </motion.div>
-
-            {/* Social Proof */}
-            <motion.p
-              variants={fadeInUp}
-              initial="hidden"
-              animate="visible"
-              custom={4}
-              className="text-sm text-muted-foreground"
-            >
-              <span className="inline-flex items-center gap-2">
-                <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                127+ YouTube subscribers
-              </span>
-              <span className="mx-3 text-border">|</span>
-              <span>50+ newsletter readers</span>
-            </motion.p>
           </div>
         </section>
 
-        {/* Template Value Proposition */}
+        {/* AI Playbooks Value Proposition */}
         <section className="py-20 px-4 border-t border-border/50 bg-muted/30">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-                What You&apos;ll Get
+                Free AI Playbooks
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                Real systems I use to build AI businesses. Not theory — working code and frameworks.
+                Step-by-step guides to transform how your team works. No technical skills required.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Process Templates */}
+              {/* Writing & Communication */}
               <div className="bg-card border border-border/50 rounded-lg p-6 shadow-premium-sm hover:shadow-premium-md transition-all duration-300 hover:-translate-y-1">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-accent text-lg">📋</span>
+                  <span className="text-accent text-lg">✍️</span>
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-2">Process Templates</h3>
+                <h3 className="font-display font-semibold text-lg mb-2">Writing & Communication</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Launch frameworks I actually use. From 48-hour website systems to content pipelines.
+                  Draft emails 80% faster. Create proposals, reports, and meeting summaries in minutes.
                 </p>
                 <Link
                   href="/templates?category=process"
                   className="text-sm font-medium text-accent hover:underline"
                 >
-                  See process templates →
+                  See writing playbooks →
                 </Link>
               </div>
 
-              {/* Code Templates */}
+              {/* Data & Analysis */}
               <div className="bg-card border border-border/50 rounded-lg p-6 shadow-premium-sm hover:shadow-premium-md transition-all duration-300 hover:-translate-y-1">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-accent text-lg">💻</span>
+                  <span className="text-accent text-lg">📊</span>
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-2">Code Templates</h3>
+                <h3 className="font-display font-semibold text-lg mb-2">Data & Analysis</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Copy-paste components. Quote builders, calculators, and deployment guides.
+                  Ask questions in plain English. Analyze data without waiting for IT or analysts.
                 </p>
                 <Link
                   href="/templates?category=code"
                   className="text-sm font-medium text-accent hover:underline"
                 >
-                  See code templates →
+                  See analysis playbooks →
                 </Link>
               </div>
 
-              {/* AI Systems */}
+              {/* Research & Strategy */}
               <div className="bg-card border border-border/50 rounded-lg p-6 shadow-premium-sm hover:shadow-premium-md transition-all duration-300 hover:-translate-y-1">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-accent text-lg">🤖</span>
+                  <span className="text-accent text-lg">🔍</span>
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-2">AI Systems</h3>
+                <h3 className="font-display font-semibold text-lg mb-2">Research & Strategy</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Working AI implementations. Claude Code guides, agent architectures, automation workflows.
+                  Have an AI research assistant on demand. Competitive analysis, market research, brainstorming.
                 </p>
                 <Link
                   href="/templates?category=ai"
                   className="text-sm font-medium text-accent hover:underline"
                 >
-                  See AI templates →
+                  See research playbooks →
                 </Link>
               </div>
             </div>
@@ -250,7 +235,7 @@ export default function Home() {
                 href="/templates"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-all duration-200"
               >
-                Get All Templates Free
+                Get All Playbooks Free
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -263,10 +248,10 @@ export default function Home() {
             <div className="flex items-end justify-between mb-8">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-tight mb-2">
-                  Recent Builds
+                  See AI in Action
                 </h2>
                 <p className="text-muted-foreground text-sm">
-                  Raw, unedited sessions. Watch me build (and break) things.
+                  Watch how I use AI to build real systems and automate workflows.
                 </p>
               </div>
               <Link
@@ -281,28 +266,28 @@ export default function Home() {
             <MinimalVideoGrid maxVideos={3} />
             <div className="mt-8 text-center">
               <p className="text-muted-foreground text-sm mb-4">
-                Want the systems, not just the videos?
+                Want the step-by-step guides?
               </p>
               <Link
                 href="/templates"
                 className="text-sm font-medium text-accent hover:underline"
               >
-                Get the templates →
+                Get the playbooks →
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Templates Preview */}
+        {/* Playbooks Preview */}
         <section className="py-20 px-4 border-t border-border/50">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-end justify-between mb-8">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-tight mb-2">
-                  Templates
+                  AI Playbooks
                 </h2>
                 <p className="text-muted-foreground text-sm">
-                  Enter your email once, access everything forever. New templates added monthly.
+                  Enter your email once, access everything forever. New playbooks added monthly.
                 </p>
               </div>
               <Link
@@ -316,34 +301,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter - Fascinations Based */}
+        {/* Newsletter - Non-Technical Focus */}
         <section className="py-24 px-4 border-t border-border/50 bg-muted/30">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              Every Monday: What Actually Worked
+              Weekly AI Tips That Actually Work
             </h2>
             <ul className="text-muted-foreground text-left max-w-sm mx-auto mb-8 space-y-2">
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">→</span>
-                What I shipped this week
+                Practical AI workflows you can use today
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">→</span>
-                Revenue numbers (the real ones)
+                New playbooks and implementation guides
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">→</span>
-                New templates and code drops
+                What&apos;s working for teams right now
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-0.5">→</span>
-                Mistakes I made so you don&apos;t have to
+                Time-saving tips (no technical jargon)
               </li>
             </ul>
             <NewsletterForm
               source="homepage"
               placeholder="your@email.com"
-              buttonText="Join 50+ builders"
+              buttonText="Get weekly tips"
               className="justify-center"
             />
             <p className="text-xs text-muted-foreground mt-4">
@@ -356,32 +341,32 @@ export default function Home() {
         <section className="py-20 px-4 border-t border-border/50">
           <div className="max-w-2xl mx-auto">
             <p className="font-display text-xl sm:text-2xl leading-relaxed mb-8">
-              I&apos;m an AI entrepreneur from Canada building automation tools in public.
-              I share everything — the templates, the code, the wins and the failures.
+              I&apos;m Simon — I help teams implement AI tools that actually save time.
+              No hype, no jargon. Just practical systems that work.
             </p>
 
             {/* Conversion Bridge */}
             <div className="border-t border-border/50 pt-8 mt-8">
-              <p className="font-display text-lg font-semibold mb-6">Ready to build?</p>
+              <p className="font-display text-lg font-semibold mb-6">Ready to get started?</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Link
-                  href="/templates"
+                  href="/work-with-me"
                   className="block p-4 border border-border rounded-lg hover:border-accent hover:bg-accent/5 transition-all group"
                 >
                   <p className="font-medium mb-1 group-hover:text-accent transition-colors">
-                    Start with templates
+                    Train your team
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Free access to everything I use
+                    Hands-on AI implementation for teams
                   </p>
                 </Link>
                 <Link
-                  href="/work-with-me"
+                  href="/templates"
                   className="block p-4 border border-border rounded-lg hover:border-foreground hover:bg-muted/50 transition-all"
                 >
-                  <p className="font-medium mb-1">Work together</p>
+                  <p className="font-medium mb-1">Get free playbooks</p>
                   <p className="text-sm text-muted-foreground">
-                    Train your team on AI
+                    Step-by-step AI implementation guides
                   </p>
                 </Link>
               </div>
