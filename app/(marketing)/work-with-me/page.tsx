@@ -2,11 +2,10 @@
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { CONSTANTS } from "@/constants/links";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import FollowCTA from "@/components/FollowCTA";
-import { ArrowRight, Check, Users, Zap, BookOpen, TrendingUp } from "lucide-react";
+import { ArrowRight, Check, Users, Zap, Target, Lightbulb, Mail, BarChart3, FileText, MessageSquare } from "lucide-react";
 
 // Animation variants
 const fadeInUp = {
@@ -39,84 +38,84 @@ export default function WorkWithMePage() {
 
   const painPoints = [
     {
-      title: "Everyone's experimenting, nobody's shipping",
+      title: "Drowning in AI hype, paralyzed by choice",
       description:
-        "Your developers try random AI tools but nothing sticks. No consistent approach, no shared knowledge, no compound gains.",
+        "ChatGPT, Claude, Gemini, Copilot... everyone's talking about AI but nobody's telling you which tools actually matter for your job.",
     },
     {
-      title: "The best practices don't exist yet",
+      title: "Your competitors seem miles ahead",
       description:
-        "You can't hire for this. The people who are actually good at AI-assisted development aren't writing blog posts about it.",
+        "You keep seeing headlines about AI transforming industries. Meanwhile, you're still copy-pasting between apps and formatting spreadsheets manually.",
     },
     {
-      title: "You're falling behind every day",
+      title: "No roadmap, just random experiments",
       description:
-        "While you're debating which tool to try, your competitors are shipping 3x faster. The gap is widening.",
+        "You've tried a few AI tools but nothing stuck. Without a clear implementation path, it feels like throwing darts blindfolded.",
     },
   ];
 
   const trainingPrograms = [
     {
-      name: "Team Foundations",
-      format: "2-day intensive",
-      price: "Starting at $5,000",
-      ideal: "Teams of 5-15 new to AI development",
+      name: "AI Kickstart",
+      format: "Half-day workshop",
+      price: "Starting at $2,500",
+      ideal: "Teams wanting practical AI skills fast",
       features: [
-        "Claude Code fundamentals and setup",
-        "Effective prompting for developers",
-        "AI-assisted code review workflows",
-        "Hands-on exercises with real problems",
+        "Hands-on with the AI tools that matter",
+        "Prompt writing for your actual work",
+        "Quick wins you can use tomorrow",
+        "No coding or technical background needed",
       ],
     },
     {
-      name: "AI Transformation",
-      format: "8-week program",
-      price: "Starting at $15,000",
-      ideal: "Companies wanting systematic upskilling",
+      name: "AI Implementation Roadmap",
+      format: "4-week program",
+      price: "Starting at $8,000",
+      ideal: "Organizations ready for systematic change",
       popular: true,
       features: [
-        "Everything in Foundations",
-        "Advanced agent architectures",
-        "Custom tooling and MCP integration",
-        "1:1 coaching sessions",
-        "Private Slack channel for support",
+        "Custom workflow analysis for your team",
+        "Tool selection based on your needs",
+        "Hands-on training sessions",
+        "Implementation playbook you keep forever",
+        "30 days of follow-up support",
       ],
     },
     {
-      name: "Executive Advisory",
+      name: "Strategic AI Advisory",
       format: "Ongoing partnership",
-      price: "$2,500/month",
-      ideal: "Companies making AI a core competency",
+      price: "$2,000/month",
+      ideal: "Leaders wanting an AI implementation partner",
       features: [
-        "Quarterly AI roadmap planning",
         "Monthly strategy sessions",
-        "Team skill assessments",
-        "Hiring and team structure guidance",
-        "Priority access for consultations",
+        "Team training as new tools emerge",
+        "Workflow optimization reviews",
+        "Priority access for questions",
+        "Quarterly roadmap updates",
       ],
     },
   ];
 
   const curriculum = [
     {
-      icon: <Zap className="w-5 h-5" />,
-      title: "Claude Code Mastery",
-      items: ["Setup and configuration", "Effective prompting strategies", "Code review workflows", "Custom tool creation"],
+      icon: <MessageSquare className="w-5 h-5" />,
+      title: "AI Writing & Communication",
+      items: ["Email drafting and responses", "Proposal and report writing", "Meeting summaries and follow-ups", "Content creation workflows"],
     },
     {
-      icon: <BookOpen className="w-5 h-5" />,
-      title: "AI-First Development",
-      items: ["When to use AI vs. manual coding", "Prompt library development", "Quality assurance for AI output", "Documentation as code"],
+      icon: <BarChart3 className="w-5 h-5" />,
+      title: "Data Without Spreadsheet Pain",
+      items: ["Analyzing data in plain English", "Creating reports automatically", "Spotting trends and insights", "Visualizing information clearly"],
     },
     {
-      icon: <Users className="w-5 h-5" />,
-      title: "Building AI Systems",
-      items: ["Agent architectures", "Orchestration patterns", "Production deployment", "Monitoring and iteration"],
+      icon: <Target className="w-5 h-5" />,
+      title: "Sales & Marketing AI",
+      items: ["Lead research and qualification", "Personalized outreach at scale", "Campaign ideation and copy", "Competitive analysis"],
     },
     {
-      icon: <TrendingUp className="w-5 h-5" />,
-      title: "Team Transformation",
-      items: ["Workflow redesign", "Knowledge sharing systems", "Measurement and ROI tracking", "Scaling what works"],
+      icon: <Lightbulb className="w-5 h-5" />,
+      title: "Thinking Partner Skills",
+      items: ["Strategic brainstorming", "Decision frameworks", "Problem-solving conversations", "Research and synthesis"],
     },
   ];
 
@@ -126,75 +125,99 @@ export default function WorkWithMePage() {
       title: "Discovery Call",
       duration: "30 minutes",
       description:
-        "We assess your team's current capabilities, understand your goals, and identify the biggest opportunities for AI leverage.",
+        "We talk about your team's daily work, the friction points, and where AI could make the biggest impact. No jargon, just plain conversation.",
     },
     {
       step: "02",
-      title: "Custom Program Design",
+      title: "Workflow Analysis",
       duration: "1 week",
       description:
-        "Based on discovery, I design a training program tailored to your team's skill level, tech stack, and business objectives.",
+        "I map your team's actual workflows and identify the highest-impact opportunities for AI. You get a clear picture of what's possible.",
     },
     {
       step: "03",
-      title: "Delivery & Implementation",
-      duration: "2-8 weeks",
+      title: "Training & Implementation",
+      duration: "1-4 weeks",
       description:
-        "Interactive sessions with hands-on exercises using your actual codebase. Not theory — real application.",
+        "Hands-on sessions where your team learns by doing. We use your real work — your emails, your data, your problems.",
     },
     {
       step: "04",
-      title: "Ongoing Support",
-      duration: "Optional",
+      title: "Follow-Up & Support",
+      duration: "30 days included",
       description:
-        "Post-training support to ensure skills stick. Office hours, async support, and check-ins as your team grows.",
+        "Questions come up after training. I'm available to help your team troubleshoot and refine their new workflows.",
     },
   ];
 
   const qualifications = [
     {
-      title: "You Have a Technical Team",
+      title: "You're Not Technical (And That's Fine)",
       description:
-        "Developers, engineers, or technical product people who write code. This isn't for non-technical teams wanting to 'understand AI.'",
+        "This is designed for marketing, sales, operations, HR, finance — anyone who works with information. No coding. No IT background needed.",
     },
     {
-      title: "You're Ready to Invest in Skills",
+      title: "You Want Practical, Not Theoretical",
       description:
-        "You understand that training pays off through increased output, not just knowledge. You want ROI, not certificates.",
+        "You're not interested in AI philosophy or future predictions. You want to know what works today and how to use it for your job.",
     },
     {
-      title: "You Want Systematic Change",
+      title: "You're Ready to Change How You Work",
       description:
-        "You're not looking for a one-off workshop that everyone forgets. You want to fundamentally change how your team works.",
+        "AI isn't magic — it requires building new habits. You're willing to put in the effort to transform your workflows.",
     },
   ];
 
   const faqItems = [
     {
-      question: "Do you train non-technical teams?",
+      question: "Do I need any technical skills?",
       answer:
-        "No. This is specifically for developers, engineers, and technical product people who write code. If you want AI awareness training for executives or marketers, I'm not the right fit.",
+        "No. This training is specifically designed for non-technical professionals. If you can write an email and use a web browser, you have all the skills you need. I'll teach you the rest.",
     },
     {
-      question: "Can you train on tools other than Claude Code?",
+      question: "Which AI tools will we learn?",
       answer:
-        "I focus on Claude Code because it's what I use every day. If you're committed to other tools, we can discuss, but my deepest expertise is in the Anthropic ecosystem.",
+        "Primarily Claude and ChatGPT, plus specialized tools depending on your work. I focus on tools that are reliable, easy to use, and actually useful for business — not every shiny new thing.",
     },
     {
-      question: "What's the minimum team size?",
+      question: "How is this different from watching YouTube tutorials?",
       answer:
-        "Workshops work best with 5-15 people. Smaller teams can do 1:1 coaching. Larger organizations often do multiple cohorts.",
+        "Tutorials show generic examples. I work with your actual workflows, your real data, and your specific challenges. Plus you get live feedback, can ask questions, and leave with a playbook built for your team.",
     },
     {
-      question: "Do you do on-site training?",
+      question: "What if AI tools change after training?",
       answer:
-        "Yes. Workshops can be virtual or on-site. On-site has a travel fee but often works better for team bonding and focus.",
+        "The core skills I teach — prompt writing, workflow thinking, output evaluation — transfer across tools. When interfaces change, the fundamentals don't. Advisory clients get updates as tools evolve.",
     },
     {
-      question: "How is this different from YouTube tutorials?",
+      question: "Can you train our whole department?",
       answer:
-        "My YouTube shows how I work. Training teaches your team how to work. It's customized to your codebase, your problems, and includes hands-on practice with feedback.",
+        "Yes. I've trained teams from 3 to 30 people. Larger groups work best in cohorts of 8-12 for hands-on practice. We'll figure out the right structure for your team.",
     },
+    {
+      question: "What results can we expect?",
+      answer:
+        "Most people save 5-10 hours per week on routine tasks within the first month. That's emails, reports, research, and data work. The bigger win is usually better quality output, not just speed.",
+    },
+    {
+      question: "Is our data safe when using AI tools?",
+      answer:
+        "Good question. I teach data hygiene as part of every training — what to share, what not to share, and how to use AI tools responsibly. We'll also discuss your company's specific policies.",
+    },
+    {
+      question: "What's your refund policy?",
+      answer:
+        "If you're not satisfied after the first session, I'll refund the full amount. I'd rather have happy clients than unhappy payments. That said, this has never happened.",
+    },
+  ];
+
+  const useCases = [
+    { icon: <Mail className="w-5 h-5" />, label: "Email & communication" },
+    { icon: <FileText className="w-5 h-5" />, label: "Reports & proposals" },
+    { icon: <BarChart3 className="w-5 h-5" />, label: "Data analysis" },
+    { icon: <Target className="w-5 h-5" />, label: "Sales & outreach" },
+    { icon: <Users className="w-5 h-5" />, label: "Meeting prep & follow-up" },
+    { icon: <Lightbulb className="w-5 h-5" />, label: "Research & brainstorming" },
   ];
 
   return (
@@ -212,7 +235,7 @@ export default function WorkWithMePage() {
             custom={0}
             className="text-sm font-medium tracking-wider uppercase text-accent mb-6"
           >
-            AI Team Training
+            AI Implementation for Teams
           </motion.p>
 
           <motion.h1
@@ -222,7 +245,7 @@ export default function WorkWithMePage() {
             custom={1}
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6"
           >
-            Train Your Team to Build with AI
+            Finally, a Roadmap for AI That Makes Sense
           </motion.h1>
 
           <motion.p
@@ -232,8 +255,8 @@ export default function WorkWithMePage() {
             custom={2}
             className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Stop hiring more people. Start multiplying the ones you have.
-            I teach technical teams how to use Claude Code and AI tools to 10x their output.
+            You don&apos;t need to be technical to use AI effectively.
+            I help marketing, sales, and operations teams implement AI tools that actually work — no coding required.
           </motion.p>
 
           <motion.div
@@ -241,7 +264,7 @@ export default function WorkWithMePage() {
             initial="hidden"
             animate="visible"
             custom={3}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
             <button
               data-cal-namespace={calOptions.namespace}
@@ -249,10 +272,29 @@ export default function WorkWithMePage() {
               data-cal-config={`{"layout":"${calOptions.layout}"}`}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-sm font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] transition-all duration-200"
             >
-              Book a Strategy Call
+              Book a Free Consultation
               <ArrowRight className="w-4 h-4" />
             </button>
             <FollowCTA platform="youtube" variant="secondary" />
+          </motion.div>
+
+          {/* Use Cases Strip */}
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            custom={4}
+            className="flex flex-wrap justify-center gap-3"
+          >
+            {useCases.map((useCase, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-muted text-muted-foreground text-sm rounded-full"
+              >
+                {useCase.icon}
+                {useCase.label}
+              </span>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -262,7 +304,7 @@ export default function WorkWithMePage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              Your Team Is Drowning in AI Noise
+              Sound Familiar?
             </h2>
           </div>
 
@@ -306,11 +348,11 @@ export default function WorkWithMePage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Team experiments randomly with AI",
-                  "Each person figures things out alone",
-                  "Inconsistent quality from AI-assisted code",
-                  "Tribal knowledge, nothing documented",
-                  "Still need to hire for every new project",
+                  "Spending hours on emails and reports",
+                  "Manually formatting data in spreadsheets",
+                  "Googling the same questions repeatedly",
+                  "Watching competitors move faster",
+                  "Feeling behind on every AI announcement",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-muted-foreground">
                     <span className="text-destructive mt-0.5">✕</span>
@@ -327,11 +369,11 @@ export default function WorkWithMePage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Systematic AI workflows across the team",
-                  "Shared playbooks and prompt libraries",
-                  "Consistent, high-quality AI output",
-                  "Documented systems that scale",
-                  "One trained team handles 3x the work",
+                  "Draft quality emails in 2 minutes, not 20",
+                  "Analyze data by asking questions in plain English",
+                  "Have an AI research assistant on demand",
+                  "Clear playbook for what AI to use when",
+                  "Confident about which tools actually matter",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-4 h-4 text-accent mt-0.5 shrink-0" />
@@ -352,7 +394,7 @@ export default function WorkWithMePage() {
               Training Programs
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Choose the depth that matches your ambition
+              Pick the level that matches where you are
             </p>
           </div>
 
@@ -415,8 +457,11 @@ export default function WorkWithMePage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              What Your Team Will Learn
+              What You&apos;ll Learn
             </h2>
+            <p className="text-muted-foreground">
+              Practical skills you can use the same day
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -536,10 +581,10 @@ export default function WorkWithMePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             {[
-              "Teams shipping 2-3x faster after implementing AI workflows",
-              "Reduced dependency on new hires for scaling projects",
-              "Consistent code quality with AI-assisted review",
-              "Knowledge systems that compound over time",
+              "5-10 hours saved per person per week on routine tasks",
+              "Emails and reports drafted 80% faster",
+              "Data analysis without waiting for IT or analysts",
+              "Consistent quality across team communications",
             ].map((result, index) => (
               <div
                 key={index}
@@ -554,7 +599,7 @@ export default function WorkWithMePage() {
           </div>
 
           <p className="text-sm text-muted-foreground italic">
-            Results vary. I don&apos;t promise magic — I teach systems that work if you implement them.
+            Results vary based on role and current workflows. Most improvement happens in the first 30 days.
           </p>
         </div>
       </section>
@@ -595,11 +640,11 @@ export default function WorkWithMePage() {
       <section className="py-24 px-4 border-t border-border/50 bg-accent/10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-            Ready to Transform Your Team?
+            Ready to Get Started?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Book a 30-minute strategy call. We&apos;ll discuss your team, your goals,
-            and whether training makes sense. No pitch — just an honest conversation.
+            Book a free 30-minute consultation. We&apos;ll talk about your team,
+            your current workflows, and whether AI training makes sense for you. No pressure, no pitch.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -609,7 +654,7 @@ export default function WorkWithMePage() {
               data-cal-config={`{"layout":"${calOptions.layout}"}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-base font-medium rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] transition-all duration-200"
             >
-              Book Strategy Call
+              Book Free Consultation
               <ArrowRight className="w-4 h-4" />
             </button>
             <FollowCTA platform="youtube" variant="secondary" />
