@@ -273,6 +273,7 @@ export default defineSchema({
   templates: defineTable({
     slug: v.string(),
     title: v.string(),
+    tagline: v.optional(v.string()), // Short hook, e.g., "Stop undercharging for projects"
     description: v.string(),
     category: v.union(
       v.literal("process"),
@@ -282,7 +283,10 @@ export default defineSchema({
     isAvailable: v.boolean(),
     githubUrl: v.string(),
     guideUrl: v.optional(v.string()),
+    videoUrl: v.optional(v.string()), // Link to related YouTube video
     prerequisites: v.array(v.string()),
+    whatYoullGet: v.optional(v.array(v.string())), // Bullet points of deliverables
+    whoIsThisFor: v.optional(v.string()), // Target audience one-liner
     thumbnailUrl: v.optional(v.string()),
     accessCount: v.number(),
     createdAt: v.number(),
