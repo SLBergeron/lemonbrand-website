@@ -1,181 +1,76 @@
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { Logo } from "./logo";
+import { Youtube, Twitter, Mail, Github } from "lucide-react";
+import { TikTokIcon } from "@/components/icons/TikTokIcon";
+import { SOCIAL_LINKS } from "@/constants/links";
+
+const socials = [
+  { href: SOCIAL_LINKS.YOUTUBE, icon: Youtube, label: "YouTube" },
+  { href: SOCIAL_LINKS.TIKTOK, icon: TikTokIcon, label: "TikTok" },
+  { href: SOCIAL_LINKS.TWITTER, icon: Twitter, label: "Twitter" },
+  { href: SOCIAL_LINKS.NEWSLETTER, icon: Mail, label: "Newsletter" },
+  { href: SOCIAL_LINKS.GITHUB, icon: Github, label: "GitHub" },
+];
 
 export function Footer() {
-  const pages = [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "Features",
-      href: "#features",
-    },
-    {
-      title: "Process",
-      href: "#pricing",
-    },
-    {
-      title: "Case Studies",
-      href: "#case-studies",
-    },
-    {
-      title: "About",
-      href: "#about",
-    },
-    {
-      title: "GetMyWebsite.io",
-      href: "https://getmywebsite.io",
-    },
-  ];
-
-  const socials = [
-    {
-      title: "Twitter",
-      href: "https://x.com/SLBergeron",
-    },
-    {
-      title: "LinkedIn",
-      href: "https://www.linkedin.com/in/slbergeron/",
-    },
-    {
-      title: "GitHub",
-      href: "https://github.com/YourCodeBrain",
-    },
-    {
-      title: "TikTok",
-      href: "https://www.tiktok.com/@simoncodebrain",
-    },
-  ];
-  const legals = [
-    {
-      title: "Privacy Policy",
-      href: "/privacy",
-    },
-    {
-      title: "Terms of Service",
-      href: "/terms",
-    },
-    {
-      title: "Cookie Policy",
-      href: "/cookies",
-    },
-  ];
-
-  const signups = [
-    {
-      title: "Newsletter",
-      href: "/resources",
-    },
-    {
-      title: "Client Login",
-      href: "https://lemonbrand.clienthub.app",
-    },
-    {
-      title: "Book a Call",
-      href: "https://cal.com/simonbergeron/30min",
-    },
-  ];
   return (
-    <div className="border-t border-neutral-100 dark:border-white/[0.1] px-8 py-20 bg-white dark:bg-neutral-950 w-full relative overflow-hidden">
-      <div className="max-w-7xl mx-auto text-sm text-neutral-500 flex sm:flex-row flex-col justify-between items-start  md:px-8">
-        <div>
-          <div className="mr-0 md:mr-4  md:flex mb-4">
-            <Logo />
+    <footer className="border-t border-border/50 py-12 px-4 bg-muted/20">
+      <div className="max-w-5xl mx-auto">
+        {/* Main content */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
+          {/* Brand */}
+          <div className="text-center sm:text-left">
+            <p className="font-display text-lg font-semibold tracking-tight mb-1">
+              Simon Bergeron
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Building AI businesses in public
+            </p>
           </div>
 
-          <div className="mt-2 ml-2">
-            &copy; copyright Lemonbrand {new Date().getFullYear()}. All rights reserved.
+          {/* Social Icons */}
+          <div className="flex items-center gap-5">
+            {socials.map((social) => {
+              const Icon = social.icon;
+              return (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                  aria-label={social.label}
+                >
+                  <Icon className="w-5 h-5" />
+                </Link>
+              );
+            })}
           </div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 items-start mt-10 sm:mt-0 md:mt-0">
-          <div className="flex justify-center space-y-4 flex-col w-full">
-            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
-              Pages
-            </p>
-            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
-              {pages.map((page, idx) => (
-                <li key={"pages" + idx} className="list-none">
-                  <Link
-                    className="transition-colors hover:text-text-neutral-800 "
-                    href={page.href}
-                    {...(page.href.startsWith('http') && {
-                      target: "_blank",
-                      rel: "noopener noreferrer"
-                    })}
-                  >
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          <div className="flex justify-center space-y-4 flex-col">
-            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
-              Socials
-            </p>
-            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
-              {socials.map((social, idx) => (
-                <li key={"social" + idx} className="list-none">
-                  <Link
-                    className="transition-colors hover:text-text-neutral-800 "
-                    href={social.href}
-                  >
-                    {social.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Bottom bar */}
+        <div className="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Copyright */}
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Simon Bergeron. All rights reserved.
+          </p>
 
-          <div className="flex justify-center space-y-4 flex-col">
-            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
-              Legal
-            </p>
-            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
-              {legals.map((legal, idx) => (
-                <li key={"legal" + idx} className="list-none">
-                  <Link
-                    className="transition-colors hover:text-text-neutral-800 "
-                    href={legal.href}
-                  >
-                    {legal.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex justify-center space-y-4 flex-col">
-            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
-              Resources
-            </p>
-            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
-              {signups.map((auth, idx) => (
-                <li key={"auth" + idx} className="list-none">
-                  <Link
-                    className="transition-colors hover:text-text-neutral-800 "
-                    href={auth.href}
-                  >
-                    {auth.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Legal Links */}
+          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+            <Link
+              href="/privacy"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-20">
-        <Image
-          src="/assets/Lemonbrand_Wordmark.svg"
-          alt="Lemonbrand"
-          width={600}
-          height={200}
-          className="w-full max-w-4xl h-auto opacity-10 dark:opacity-5"
-        />
-      </div>
-    </div>
+    </footer>
   );
 }

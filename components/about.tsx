@@ -31,29 +31,14 @@ export function About() {
           {/* Bio Side */}
           <div className="flex flex-col justify-center">
             <h2 className="font-bold text-3xl md:text-4xl text-neutral-800 dark:text-neutral-100 mb-4">
-              Direct operators. Real systems.
+              Serial Entrepreneur. AI Builder. Teaching What I Learn.
             </h2>
             <div className="space-y-4 text-neutral-600 dark:text-neutral-300">
               <p>
-                <strong className="text-neutral-800 dark:text-neutral-100">We&apos;re Simon and the team.</strong> We build systems that grow revenue for contractors. AI automation for revenue capture. Websites for contractors who don&apos;t have one yet. No agency overhead. No account managers. Just us designing, building, and deploying what works.
+                <strong className="text-neutral-800 dark:text-neutral-100">I&apos;m Simon.</strong> I build AI businesses and share everything I learn. Designer turned developer turned AI entrepreneur. I escaped the consulting trap by building productized systems that generate revenue without burning out.
               </p>
               <p>
-                Design background. Developer skills. AI implementation experience across sales, marketing, and ops. We&apos;ve generated $1.7M+ in revenue from missed calls in the last 6 months for our contractor clients.
-              </p>
-              <p>
-                We work directly with contractors and operators who want bespoke systems installed fast. Done-with-you builds. Real integration work. Measurable results.
-              </p>
-              <p className="text-sm">
-                We&apos;re currently working on CodeBrain,{" "}
-                <a
-                  href="https://yourcodebrain.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-800 dark:text-neutral-100 underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
-                >
-                  learn more here
-                </a>
-                . We also launched{" "}
+                Currently building{" "}
                 <a
                   href="https://getmywebsite.io"
                   target="_blank"
@@ -62,7 +47,31 @@ export function About() {
                 >
                   GetMyWebsite.io
                 </a>
-                {" "}for contractors who need a website.
+                {" "}(productized websites for trades, launched in one week),{" "}
+                <a
+                  href="https://yourcodebrain.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-800 dark:text-neutral-100 underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                >
+                  CodeBrain
+                </a>
+                {" "}(AI coding assistant), and modular AI agent systems. All documented in real-time.
+              </p>
+              <p>
+                I teach agency owners and entrepreneurs how to build AI businesses that actually make money. No fluff. No theory. Just practical systems, implementation guides, and honest breakdowns of what works and what doesn&apos;t.
+              </p>
+              <p className="text-sm">
+                Looking for websites or AI automation? Check out{" "}
+                <a
+                  href="https://getmywebsite.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-800 dark:text-neutral-100 underline hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                >
+                  GetMyWebsite.io
+                </a>
+                {" "}instead. This site is for people who want to learn how to build these systems themselves.
               </p>
             </div>
 

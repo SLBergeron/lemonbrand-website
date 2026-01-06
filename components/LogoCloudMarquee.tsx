@@ -69,7 +69,7 @@ export function LogoCloudMarquee() {
   return (
     <div className="relative z-20 px-4 py-12 md:px-8 md:py-20 bg-white dark:bg-neutral-950">
       <p className="text-center font-sans text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-500 mb-8">
-        Built with industry-leading tools
+        Tools I use to build AI businesses
       </p>
 
       {/* First Row - Right Direction */}

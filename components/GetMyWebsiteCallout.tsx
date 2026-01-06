@@ -25,24 +25,32 @@ export function GetMyWebsiteCallout() {
             {/* Content Side */}
             <div className="p-8 md:p-12 md:pr-16">
               <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30 rounded-full">
-                NEW LAUNCH
+                BUILD-IN-PUBLIC CASE STUDY
               </div>
               <h2 className="text-2xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-4">
-                Need a website first?
+                Building a Productized Service in Public
               </h2>
               <p className="text-base text-neutral-600 dark:text-neutral-300 mb-6">
-                Professional contractor website. Template-based, mobile-optimized, live in 48 hours. No monthly fees. Just $249 one-time.
+                GetMyWebsite.io is my first productized business. Built in one week: $249 websites for trades, targeting $99/mo upsell for lead management. Watch me build, iterate, and scale it in real-time. Full tech stack, revenue numbers, and lessons learned—all documented.
               </p>
-              <Link
-                href="https://getmywebsite.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-black bg-white shadow-lg ring-1 ring-black/10 rounded-sm hover:bg-neutral-100 transition-colors dark:bg-white dark:text-black dark:ring-white/10 dark:hover:bg-neutral-200"
-              >
-                Get Your Website
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-neutral-900 dark:bg-white dark:text-neutral-900 shadow-lg rounded-sm hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+                >
+                  View Full Breakdown
+                </Link>
+                <Link
+                  href="https://getmywebsite.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-neutral-800 dark:text-neutral-100 bg-white dark:bg-neutral-800 shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700 rounded-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+                >
+                  See Live Product →
+                </Link>
+              </div>
               <p className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
-                Perfect for contractors who don&apos;t have a website yet.
+                Want to build something like this? Check out my templates and frameworks on the Templates page.
               </p>
             </div>
           </div>

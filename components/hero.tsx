@@ -9,6 +9,7 @@ import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
 import { VideoModal } from "./VideoModal";
 import { VideoThumbnail } from "./VideoThumbnail";
+import SocialLinks from "./SocialLinks";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ export function Hero() {
       <div className="text-balance relative z-20 mx-auto mb-4 mt-4 max-w-5xl text-center text-3xl font-semibold tracking-tight text-gray-700 dark:text-neutral-300 md:text-7xl">
         <Balancer>
           <motion.h2>
-            {"Capture Every After-Hours Call, Convert More Leads"
+            {"Building AI Agent Businesses in Public"
               .split(" ")
               .map((word, index) => (
                 <motion.span
@@ -108,7 +109,7 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.5 }}
         className="relative z-20 mx-auto mt-4 max-w-3xl px-4 text-center text-base/6 text-gray-600 dark:text-gray-200"
       >
-        20+ Qualified Booked Jobs in Month 1 or We Work Free
+        I build modular AI systems that generate revenue, and teach you how to do the same
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -116,33 +117,45 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.6 }}
         className="relative z-20 mx-auto mt-2 max-w-2xl px-4 text-center text-sm text-gray-500 dark:text-gray-400"
       >
-        3 automations. 72 hours to live. $1,500 USD setup + $499 USD/month.
+        Serial entrepreneur sharing everything I learn while building AI-powered businesses
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, delay: 0.7 }}
-        className="mb-10 mt-8 flex w-full flex-col items-center justify-center gap-4 px-8 sm:flex-row md:mb-20"
+        className="mb-4 mt-8 flex w-full flex-col items-center justify-center gap-4 px-8 sm:flex-row"
       >
         <Button
           as={Link}
-          href="/calculator"
-          variant="dark"
-          className="hidden md:block w-48 text-center"
+          href="/templates"
+          variant="primary"
+          className="w-56 text-center"
         >
-          Calculate Your ROI
+          Download Free Templates
         </Button>
 
         <Button
-          data-cal-namespace={calOptions.namespace}
-          data-cal-link={CONSTANTS.CALCOM_LINK}
-          data-cal-config={`{"layout":"${calOptions.layout}"}`}
-          as="button"
-          variant="primary"
-          className="hidden md:block w-48"
+          as={Link}
+          href="/projects"
+          variant="dark"
+          className="w-56 text-center"
         >
-          Book Your 72-Hour Deployment
+          See What I&apos;m Building
         </Button>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2, delay: 0.8 }}
+        className="mb-10 flex flex-col items-center justify-center gap-2 md:mb-20"
+      >
+        <p className="text-xs text-gray-500 dark:text-gray-500">
+          Follow along:
+        </p>
+        <SocialLinks
+          variant="icons-only"
+          channels={["youtube", "tiktok", "twitter", "newsletter"]}
+        />
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

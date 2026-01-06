@@ -4,6 +4,8 @@ const nextConfig = {
     remotePatterns: [
       { hostname: "assets.aceternity.com" },
       { hostname: "images.unsplash.com" },
+      { hostname: "img.youtube.com" },
+      { hostname: "i.ytimg.com" },
     ],
   },
   async redirects() {
@@ -11,7 +13,39 @@ const nextConfig = {
       {
         source: '/edison',
         destination: '/',
-        permanent: true, // 308 permanent redirect (use false for 307 temporary)
+        permanent: true,
+      },
+      // Client page redirects
+      {
+        source: '/st-albert-q4-2025',
+        destination: '/clients/st-albert-q4-2025',
+        permanent: true,
+      },
+      {
+        source: '/drouin-creations',
+        destination: '/clients/drouin-creations',
+        permanent: true,
+      },
+      {
+        source: '/airpro-case-study',
+        destination: '/clients/airpro',
+        permanent: true,
+      },
+      {
+        source: '/calculator',
+        destination: '/clients/calculator',
+        permanent: true,
+      },
+      {
+        source: '/prompts-st-albert',
+        destination: '/clients/prompts-st-albert',
+        permanent: true,
+      },
+      // Merge resources into templates
+      {
+        source: '/resources',
+        destination: '/templates',
+        permanent: true,
       },
     ];
   },

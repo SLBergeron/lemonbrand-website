@@ -1,21 +1,8 @@
 "use client";
 import React from "react";
-import { useCalEmbed } from "@/app/hooks/useCalEmbed";
-import { CONSTANTS } from "@/constants/links";
+import Link from "next/link";
 
 export function CTAWithDashedGridLines() {
-  const calOptions = useCalEmbed({
-    namespace: CONSTANTS.CALCOM_NAMESPACE,
-    styles: {
-      branding: {
-        brandColor: CONSTANTS.CALCOM_BRAND_COLOR,
-      },
-    },
-    hideEventTypeDetails: CONSTANTS.CALCOM_HIDE_EVENT_TYPE_DETAILS,
-    layout: CONSTANTS.CALCOM_LAYOUT,
-    theme: "auto",
-  });
-
   return (
     <div className="w-full bg-white dark:bg-neutral-950 py-20 px-4 md:px-8">
       <div className="max-w-5xl mx-auto">
@@ -27,21 +14,27 @@ export function CTAWithDashedGridLines() {
           {/* Content */}
           <div className="relative z-10 text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-100 mb-6">
-              Ready to install systems that grow revenue?
+              Want to Build AI Businesses That Actually Generate Revenue?
             </h2>
             <p className="text-base md:text-lg text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl mx-auto">
-              Book a 30-minute call. We&apos;ll map your automation opportunities and see if this is a fit. No pitch. Just a straight conversation about what&apos;s possible.
+              Join agency owners and entrepreneurs getting weekly insights, free templates, and behind-the-scenes breakdowns of what I&apos;m building. No theory. Just practical systems that work.
             </p>
-            <button
-              data-cal-namespace={calOptions.namespace}
-              data-cal-link={CONSTANTS.CALCOM_LINK}
-              data-cal-config={`{"layout":"${calOptions.layout}"}`}
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg hover:from-orange-600 hover:to-yellow-600 transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Book Your Call
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="/templates"
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg hover:from-orange-600 hover:to-yellow-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Get Free Templates
+              </Link>
+              <Link
+                href="/projects"
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100 bg-white dark:bg-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all duration-200 shadow-md hover:shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-700"
+              >
+                See What I&apos;m Building
+              </Link>
+            </div>
             <p className="mt-6 text-sm text-neutral-500 dark:text-neutral-400">
-              75+ workflows shipped. Bespoke systems. Real results.
+              New templates every month. Real builds documented in public.
             </p>
           </div>
         </div>

@@ -14,11 +14,11 @@ export function Features() {
     >
       <Header>
         <h2 className="font-sans text-bold text-xl text-center md:text-4xl w-fit mx-auto font-bold tracking-tight text-neutral-8000 dark:text-neutral-100 text-neutral-800">
-          Express Core: Three Automations That Book Jobs
+          Current Projects
         </h2>
       </Header>
       <p className="max-w-3xl text-base text-neutral-600 text-center mx-auto mt-4 dark:text-neutral-400">
-        Fast response. Persistent follow-up. Customer reactivation. Built for home service contractors who need revenue, not complexity.
+        Building modular AI businesses and sharing everything I learn along the way. Each project is designed to be automated, scalable, and sellable.
       </p>
       <div className="mt-20  grid cols-1 md:grid-cols-5 gap-4 md:auto-rows-[25rem] max-w-7xl mx-auto">
         <Card className="flex flex-col justify-between md:col-span-3">
@@ -26,18 +26,18 @@ export function Features() {
             <SkeletonOne />
           </CardSkeletonBody>
           <CardContent className="h-40">
-            <CardTitle>Instant Lead Response</CardTitle>
+            <CardTitle>GetMyWebsite.io</CardTitle>
             <CardDescription className="max-w-xl">
-              Automated response when someone calls or emails for help. Works 24/7—even at 2 AM, even on weekends. Confirms receipt and sets expectations instantly.
+              A $249 website business for trades and small businesses. Built in one week, designed to scale through automation. Template-based with lead management upsells.
             </CardDescription>
           </CardContent>
         </Card>
 
         <Card className="flex flex-col justify-between md:col-span-2">
           <CardContent className="h-40">
-            <CardTitle>Quote Follow-up</CardTitle>
+            <CardTitle>CodeBrain</CardTitle>
             <CardDescription className="max-w-xl">
-              Automated reminders for leads who said &quot;let me think about it.&quot; Sends follow-ups until they say yes or no. Converts quotes into jobs without manual chasing.
+              AI assistant that teaches people to use Claude Code effectively. Making AI development accessible to entrepreneurs and agency owners.
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>
@@ -55,9 +55,9 @@ export function Features() {
 
         <Card className="flex flex-col justify-between md:col-span-5">
           <CardContent className="h-40">
-            <CardTitle>Reactivation Sprint</CardTitle>
+            <CardTitle>Agent Modules</CardTitle>
             <CardDescription className="max-w-2xl">
-              Finds and re-engages old customers who stopped calling. Sends personalized messages to bring them back. Turns past clients into recurring revenue.
+              Modular AI agents built with Anthropic SDK. Each works standalone or together in orchestrated workflows. Deterministic, reliable, and sellable as individual products.
             </CardDescription>
           </CardContent>
           <CardSkeletonBody>

@@ -245,4 +245,58 @@ export default defineSchema({
   })
     .index("by_user", ["userId"])
     .index("by_user_page", ["userId", "pageId"]),
+
+  // ============================================
+  // Newsletter & Templates (Personal Brand)
+  // ============================================
+
+  // Newsletter subscribers
+  newsletterSubscribers: defineTable({
+    email: v.string(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("active"),
+      v.literal("unsubscribed")
+    ),
+    confirmationToken: v.optional(v.string()),
+    confirmedAt: v.optional(v.number()),
+    unsubscribedAt: v.optional(v.number()),
+    subscribedAt: v.number(),
+    source: v.string(), // "homepage", "templates", "youtube"
+    tags: v.array(v.string()),
+  })
+    .index("by_email", ["email"])
+    .index("by_status", ["status"])
+    .index("by_confirmation_token", ["confirmationToken"]),
+
+  // Templates catalog (GitHub repos with step-by-step guides)
+  templates: defineTable({
+    slug: v.string(),
+    title: v.string(),
+    description: v.string(),
+    category: v.union(
+      v.literal("process"),
+      v.literal("code"),
+      v.literal("ai")
+    ),
+    isAvailable: v.boolean(),
+    githubUrl: v.string(),
+    guideUrl: v.optional(v.string()),
+    prerequisites: v.array(v.string()),
+    thumbnailUrl: v.optional(v.string()),
+    accessCount: v.number(),
+    createdAt: v.number(),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_category", ["category"])
+    .index("by_available", ["isAvailable"]),
+
+  // Template access tracking
+  templateAccess: defineTable({
+    templateId: v.id("templates"),
+    email: v.string(),
+    accessedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_template", ["templateId"]),
 });

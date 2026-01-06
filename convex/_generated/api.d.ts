@@ -12,9 +12,11 @@ import type * as achievements from "../achievements.js";
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as modules from "../modules.js";
+import type * as newsletter from "../newsletter.js";
 import type * as pageProgress from "../pageProgress.js";
 import type * as progress from "../progress.js";
 import type * as quizzes from "../quizzes.js";
+import type * as templates from "../templates.js";
 import type * as users from "../users.js";
 
 import type {
@@ -28,9 +30,11 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   http: typeof http;
   modules: typeof modules;
+  newsletter: typeof newsletter;
   pageProgress: typeof pageProgress;
   progress: typeof progress;
   quizzes: typeof quizzes;
+  templates: typeof templates;
   users: typeof users;
 }>;
 

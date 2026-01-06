@@ -6,49 +6,44 @@ import { cn } from "@/lib/utils";
 
 const FAQs = [
   {
-    question: "Who owns the automations you build?",
+    question: "Who is this for?",
     answer:
-      "You do. Everything is built on your accounts. We don't hold anything hostage. You get full access, documentation, and control. If you want to take it in-house later, you can.",
+      "Agency owners, entrepreneurs, and AI builders who want to learn how to build productized AI businesses. This is NOT for contractors needing websites—if that's you, check out GetMyWebsite.io instead. This site is for people who want to build the systems themselves.",
   },
   {
-    question: "How do you access my systems?",
+    question: "What's in the free templates?",
     answer:
-      "You provide access during our kickoff call. We work directly in your tools—CRM, marketing platforms, workflow apps. Once we're done, you can revoke access anytime. Your data stays yours.",
+      "Implementation guides, code components, and frameworks I actually use to build my businesses. The 48-Hour Website Launch System, React component library, AI agent architectures. Real code and processes, not theoretical frameworks. Everything is immediately usable.",
   },
   {
-    question: "What's the typical timeline?",
+    question: "Do you offer consulting?",
     answer:
-      "Express Core goes live in 72 hours. That's discovery, build, and deployment for all 3 core automations. Custom integrations and multi-system builds take 2-6 weeks depending on complexity. We set clear milestones upfront. No surprises.",
+      "Yes, but it's limited and selective. I only take projects with agency owners and entrepreneurs building AI systems. Projects start at $5k, complex builds run $15-30k, retainers start at $2.5k/month. This is done-with-you guidance, not done-for-you execution. If you want pure execution, hire an agency.",
   },
   {
-    question: "Do you offer ongoing support?",
+    question: "Why build in public?",
     answer:
-      "Yes. Most clients stay on a monthly retainer for optimization, scaling, and new builds. Default SLA is 72 hours for fixes and updates, but we adapt this based on your needs. Some clients need same-day support—we handle that too.",
+      "Two reasons: accountability and better content. Building in public forces me to ship and document everything. You get real insights from actual builds, not theory. Plus, you can learn from my mistakes without making them yourself. It's more valuable than another course about AI possibilities.",
   },
   {
-    question: "What if the automation breaks?",
+    question: "What businesses are you building right now?",
     answer:
-      "We fix it. Part of the deal. Automations need maintenance—APIs change, platforms update. Retainer clients get priority support. One-off projects include 30 days of fixes post-launch.",
+      "GetMyWebsite.io (productized websites for trades, $249 + $99/mo), CodeBrain (AI coding assistant), and Agent Modules (reusable AI components). Check the Projects page for full breakdowns, tech stacks, and weekly progress updates. Everything is documented as I build.",
   },
   {
-    question: "How much does this cost?",
+    question: "Can you build my AI product for me?",
     answer:
-      "Express Core (our 3-automation booked-job engine) is $1,500 setup + $499/month. Goes live in 72 hours with a guarantee: 20+ qualified booked jobs in Month 1 or we work free. Custom integrations and enterprise systems run $15K-$30K+. Retainers start at $2K/month for ongoing optimization.",
+      "Maybe. I only take projects where I can add strategic value beyond just coding. If you need pure execution, hire an agency—they're built for that. If you want done-with-you guidance where you learn the systems and can maintain them, let's talk on the Work with Me page.",
   },
   {
-    question: "Do you work with our team or replace them?",
+    question: "What's your background?",
     answer:
-      "We work with your team. Done-with-you, not for-you. Your people learn the systems as we build. Training is included. Goal is to make your team more effective, not dependent on us.",
+      "Designer turned developer turned AI entrepreneur. Y Combinator alum, built and sold multiple businesses. Escaped the consulting trap by building productized systems. Now building AI businesses in public and teaching agency owners how to do the same.",
   },
   {
-    question: "What's the 20+ booked jobs guarantee?",
+    question: "How do I stay updated on what you're building?",
     answer:
-      "If Express Core doesn't generate at least 20 qualified booked jobs in Month 1, we work free until it does. That's 20+ real jobs on your calendar—not just leads or inquiries. Actual scheduled work. We track every booking in your Jobs Ledger so you can verify the count.",
-  },
-  {
-    question: "What platforms do you integrate with?",
-    answer:
-      "Home services CRMs (ServiceTitan, Jobber, Housecall Pro), plus standard tools: HubSpot, Salesforce, Make, Zapier, n8n, OpenAI, Claude, Google, Meta, ClickUp, Notion, Airtable. If it has an API, we can connect it.",
+      "Join the newsletter. I send weekly updates on what I'm building, lessons learned, new templates, and behind-the-scenes breakdowns. No fluff, just practical insights. You can also follow progress on the Projects page for real-time updates.",
   },
 ];
 export function FrequentlyAskedQuestionsAccordion() {
