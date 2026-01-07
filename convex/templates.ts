@@ -1,13 +1,31 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-// Get all available templates
+// Get all available templates, sorted by order
 export const list = query({
   handler: async (ctx) => {
-    return await ctx.db
+    const templates = await ctx.db
       .query("templates")
       .withIndex("by_available", (q) => q.eq("isAvailable", true))
       .collect();
+    // Sort by order (lower first), then by createdAt (newer first)
+    return templates.sort((a, b) => {
+      const orderA = a.order ?? 100;
+      const orderB = b.order ?? 100;
+      if (orderA !== orderB) return orderA - orderB;
+      return b.createdAt - a.createdAt;
+    });
+  },
+});
+
+// Get featured template (for homepage hero)
+export const getFeatured = query({
+  handler: async (ctx) => {
+    const templates = await ctx.db
+      .query("templates")
+      .withIndex("by_available", (q) => q.eq("isAvailable", true))
+      .collect();
+    return templates.find((t) => t.isFeatured) ?? null;
   },
 });
 
@@ -295,6 +313,39 @@ export const updateVideoUrl = mutation({
     }
 
     await ctx.db.patch(template._id, { videoUrl: args.videoUrl });
+    return { success: true, id: template._id };
+  },
+});
+
+// Set a template as featured (only one can be featured)
+export const setFeatured = mutation({
+  args: {
+    slug: v.string(),
+    order: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    // Clear existing featured
+    const allTemplates = await ctx.db.query("templates").collect();
+    for (const t of allTemplates) {
+      if (t.isFeatured) {
+        await ctx.db.patch(t._id, { isFeatured: false });
+      }
+    }
+
+    // Set new featured
+    const template = await ctx.db
+      .query("templates")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .first();
+
+    if (!template) {
+      return { success: false, message: "Template not found" };
+    }
+
+    await ctx.db.patch(template._id, {
+      isFeatured: true,
+      order: args.order ?? 1,
+    });
     return { success: true, id: template._id };
   },
 });

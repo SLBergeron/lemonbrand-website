@@ -281,6 +281,8 @@ export default defineSchema({
       v.literal("ai")
     ),
     isAvailable: v.boolean(),
+    isFeatured: v.optional(v.boolean()), // Show prominently at top
+    order: v.optional(v.number()), // Lower = first (default 100)
     githubUrl: v.string(),
     guideUrl: v.optional(v.string()),
     videoUrl: v.optional(v.string()), // Link to related YouTube video
@@ -293,7 +295,8 @@ export default defineSchema({
   })
     .index("by_slug", ["slug"])
     .index("by_category", ["category"])
-    .index("by_available", ["isAvailable"]),
+    .index("by_available", ["isAvailable"])
+    .index("by_order", ["order"]),
 
   // Template access tracking
   templateAccess: defineTable({

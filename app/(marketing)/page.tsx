@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import NewsletterForm from "@/components/NewsletterForm";
 import MinimalVideoGrid from "@/components/MinimalVideoGrid";
 import MinimalTemplateList from "@/components/MinimalTemplateList";
-import { ConvexProvider, ConvexReactClient } from "convex/react";
-import { ArrowRight } from "lucide-react";
+import TemplateAccessModal from "@/components/TemplateAccessModal";
+import { ConvexProvider, ConvexReactClient, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { ArrowRight, Check, Play, Star } from "lucide-react";
 import { SOCIAL_LINKS } from "@/constants/links";
+import { Template } from "@/components/TemplateCard";
+import Image from "next/image";
 
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -59,6 +63,131 @@ function SubscriptionStatus() {
   }
 
   return null;
+}
+
+// Featured Lead Magnet Component
+function FeaturedLeadMagnet() {
+  const featuredTemplate = useQuery(api.templates.getFeatured) as Template | null | undefined;
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!featuredTemplate) return null;
+
+  return (
+    <>
+      <section className="py-16 px-4 border-t border-border/50 bg-gradient-to-b from-accent/5 to-background">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 text-accent text-xs font-semibold rounded-full mb-4">
+              <Star className="w-3 h-3 fill-current" />
+              Most Popular Free Playbook
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">
+              Start Here
+            </h2>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-card border border-border/50 rounded-2xl overflow-hidden shadow-premium-md"
+          >
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Left: Thumbnail */}
+              <div className="relative aspect-video md:aspect-auto md:min-h-[350px] bg-muted/50">
+                {featuredTemplate.thumbnailUrl ? (
+                  <Image
+                    src={featuredTemplate.thumbnailUrl}
+                    alt={featuredTemplate.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/20 to-accent/5">
+                    <span className="text-6xl">📄</span>
+                  </div>
+                )}
+                {featuredTemplate.videoUrl && (
+                  <a
+                    href={featuredTemplate.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+                  >
+                    <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-accent fill-accent ml-1" />
+                    </div>
+                  </a>
+                )}
+              </div>
+
+              {/* Right: Content */}
+              <div className="p-6 md:p-8 flex flex-col">
+                <div className="mb-4">
+                  <h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight mb-2">
+                    {featuredTemplate.title}
+                  </h3>
+                  {featuredTemplate.tagline && (
+                    <p className="text-accent font-medium">
+                      {featuredTemplate.tagline}
+                    </p>
+                  )}
+                </div>
+
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  {featuredTemplate.description}
+                </p>
+
+                {/* What You Get - Condensed */}
+                {featuredTemplate.whatYoullGet && (
+                  <div className="mb-6 flex-1">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                      You&apos;ll get:
+                    </p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
+                      {featuredTemplate.whatYoullGet.slice(0, 4).map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <Check className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+                          <span className="line-clamp-1">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* CTA */}
+                <button
+                  onClick={() => {
+                    setSelectedTemplate(featuredTemplate);
+                    setIsModalOpen(true);
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-sm font-semibold rounded-sm shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] transition-all duration-200"
+                >
+                  Get This Playbook Free
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <p className="text-xs text-muted-foreground text-center mt-2">
+                  Just enter your email. Instant access.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <TemplateAccessModal
+        template={selectedTemplate}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedTemplate(null);
+        }}
+      />
+    </>
+  );
 }
 
 export default function Home() {
@@ -164,6 +293,9 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+
+        {/* Featured Lead Magnet - Clear Value Proposition */}
+        <FeaturedLeadMagnet />
 
         {/* AI Playbooks Value Proposition */}
         <section className="py-20 px-4 border-t border-border/50 bg-muted/30">

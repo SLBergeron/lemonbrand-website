@@ -6,6 +6,7 @@ const nextConfig = {
       { hostname: "images.unsplash.com" },
       { hostname: "img.youtube.com" },
       { hostname: "i.ytimg.com" },
+      { hostname: "raw.githubusercontent.com" },
     ],
   },
   async redirects() {

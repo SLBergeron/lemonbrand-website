@@ -6,6 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { motion } from "framer-motion";
 import TemplateCard, { Template } from "@/components/TemplateCard";
+import FeaturedTemplateCard from "@/components/FeaturedTemplateCard";
 import TemplateAccessModal from "@/components/TemplateAccessModal";
 import NewsletterForm from "@/components/NewsletterForm";
 import { ArrowRight } from "lucide-react";
@@ -55,10 +56,14 @@ function TemplatesContent() {
 
   const categories: Category[] = ["all", "process", "code", "ai"];
 
+  // Separate featured template from the rest
+  const featuredTemplate = templates?.find((t) => t.isFeatured);
+  const nonFeaturedTemplates = templates?.filter((t) => !t.isFeatured);
+
   const filteredTemplates =
     selectedCategory === "all"
-      ? templates
-      : templates?.filter((t) => t.category === selectedCategory);
+      ? nonFeaturedTemplates
+      : nonFeaturedTemplates?.filter((t) => t.category === selectedCategory);
 
   const handleSelectTemplate = (template: Template) => {
     setSelectedTemplate(template);
@@ -100,6 +105,18 @@ function TemplatesContent() {
           </motion.p>
         </div>
       </section>
+
+      {/* Featured Template */}
+      {featuredTemplate && selectedCategory === "all" && (
+        <section className="px-4 pb-8">
+          <div className="max-w-5xl mx-auto">
+            <FeaturedTemplateCard
+              template={featuredTemplate}
+              onSelect={handleSelectTemplate}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Category Filter */}
       <section className="sticky top-14 z-40 bg-background/95 backdrop-blur-sm border-b border-border/50">

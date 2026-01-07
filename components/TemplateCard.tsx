@@ -12,6 +12,8 @@ export interface Template {
   description: string;
   category: "process" | "code" | "ai";
   isAvailable: boolean;
+  isFeatured?: boolean;
+  order?: number;
   githubUrl: string;
   guideUrl?: string;
   videoUrl?: string;
