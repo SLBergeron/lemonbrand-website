@@ -277,3 +277,44 @@ export const clearTemplates = mutation({
     return { success: true, deleted: templates.length };
   },
 });
+
+// Add the proposal generator template
+export const addProposalTemplate = mutation({
+  handler: async (ctx) => {
+    // Check if already exists
+    const existing = await ctx.db
+      .query("templates")
+      .withIndex("by_slug", (q) => q.eq("slug", "proposal-generator"))
+      .first();
+
+    if (existing) {
+      return { success: false, message: "Proposal template already exists", id: existing._id };
+    }
+
+    const id = await ctx.db.insert("templates", {
+      slug: "proposal-generator",
+      title: "The $4,500 Proposal Template",
+      tagline: "Close deals in 5 minutes, not 2 hours",
+      description:
+        "The exact proposal template that closed a $4,500 deal. Print-optimized, professional, and dead simple to customize with AI. Stop spending hours on proposals.",
+      category: "process" as const,
+      isAvailable: true,
+      githubUrl: "https://github.com/SLBergeron/proposal-template",
+      videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+      thumbnailUrl: "https://raw.githubusercontent.com/SLBergeron/proposal-template/main/PROPOSAL_GENERATOR.png",
+      prerequisites: ["Node.js installed", "Claude or any AI assistant", "5 minutes"],
+      whatYoullGet: [
+        "7-page print-optimized proposal template",
+        "React + Vite project (easy to run)",
+        "Professional PDF export",
+        "Pricing table with anchoring built in",
+        "Full customization guide",
+      ],
+      whoIsThisFor: "Freelancers, agencies, and consultants who send proposals",
+      accessCount: 0,
+      createdAt: Date.now(),
+    });
+
+    return { success: true, id };
+  },
+});
