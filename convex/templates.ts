@@ -317,6 +317,27 @@ export const updateVideoUrl = mutation({
   },
 });
 
+// Update a template's thumbnail URL
+export const updateThumbnailUrl = mutation({
+  args: {
+    slug: v.string(),
+    thumbnailUrl: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const template = await ctx.db
+      .query("templates")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .first();
+
+    if (!template) {
+      return { success: false, message: "Template not found" };
+    }
+
+    await ctx.db.patch(template._id, { thumbnailUrl: args.thumbnailUrl });
+    return { success: true, id: template._id };
+  },
+});
+
 // Set a template as featured (only one can be featured)
 export const setFeatured = mutation({
   args: {
