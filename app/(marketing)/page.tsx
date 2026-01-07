@@ -115,11 +115,10 @@ function FeaturedLeadMagnet() {
                     href={featuredTemplate.videoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+                    className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-2 bg-black/80 hover:bg-black text-white text-sm font-medium rounded-lg shadow-lg transition-all hover:scale-105"
                   >
-                    <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                      <Play className="w-6 h-6 text-accent fill-accent ml-1" />
-                    </div>
+                    <Play className="w-4 h-4 fill-current" />
+                    Watch Video
                   </a>
                 )}
               </div>

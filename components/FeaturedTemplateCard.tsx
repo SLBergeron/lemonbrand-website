@@ -40,7 +40,7 @@ export default function FeaturedTemplateCard({ template, onSelect }: FeaturedTem
 
       <div className="grid md:grid-cols-2 gap-0">
         {/* Left: Thumbnail & Video */}
-        <div className="relative aspect-video md:aspect-auto md:min-h-[400px] bg-muted/50">
+        <div className="relative aspect-video md:aspect-auto md:min-h-[400px] bg-muted/50 group">
           {template.thumbnailUrl ? (
             <Image
               src={template.thumbnailUrl}
@@ -54,17 +54,16 @@ export default function FeaturedTemplateCard({ template, onSelect }: FeaturedTem
               <span className="text-6xl">📄</span>
             </div>
           )}
-          {/* Video Play Overlay */}
+          {/* Video Play Badge */}
           {template.videoUrl && (
             <a
               href={template.videoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+              className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-2 bg-black/80 hover:bg-black text-white text-sm font-medium rounded-lg shadow-lg transition-all hover:scale-105"
             >
-              <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                <Play className="w-7 h-7 text-accent fill-accent ml-1" />
-              </div>
+              <Play className="w-4 h-4 fill-current" />
+              Watch Video
             </a>
           )}
         </div>
