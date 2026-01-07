@@ -278,6 +278,27 @@ export const clearTemplates = mutation({
   },
 });
 
+// Update a template's video URL
+export const updateVideoUrl = mutation({
+  args: {
+    slug: v.string(),
+    videoUrl: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const template = await ctx.db
+      .query("templates")
+      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .first();
+
+    if (!template) {
+      return { success: false, message: "Template not found" };
+    }
+
+    await ctx.db.patch(template._id, { videoUrl: args.videoUrl });
+    return { success: true, id: template._id };
+  },
+});
+
 // Add the proposal generator template
 export const addProposalTemplate = mutation({
   handler: async (ctx) => {
@@ -300,7 +321,7 @@ export const addProposalTemplate = mutation({
       category: "process" as const,
       isAvailable: true,
       githubUrl: "https://github.com/SLBergeron/proposal-template",
-      videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+      videoUrl: "https://youtu.be/V4gbpooTLYs",
       thumbnailUrl: "https://raw.githubusercontent.com/SLBergeron/proposal-template/main/PROPOSAL_GENERATOR.png",
       prerequisites: ["Node.js installed", "Claude or any AI assistant", "5 minutes"],
       whatYoullGet: [
