@@ -16,6 +16,10 @@ import type * as newsletter from "../newsletter.js";
 import type * as pageProgress from "../pageProgress.js";
 import type * as progress from "../progress.js";
 import type * as quizzes from "../quizzes.js";
+import type * as sprintCohorts from "../sprintCohorts.js";
+import type * as sprintContent from "../sprintContent.js";
+import type * as sprintDayProgress from "../sprintDayProgress.js";
+import type * as sprintEnrollments from "../sprintEnrollments.js";
 import type * as templates from "../templates.js";
 import type * as users from "../users.js";
 
@@ -34,6 +38,10 @@ declare const fullApi: ApiFromModules<{
   pageProgress: typeof pageProgress;
   progress: typeof progress;
   quizzes: typeof quizzes;
+  sprintCohorts: typeof sprintCohorts;
+  sprintContent: typeof sprintContent;
+  sprintDayProgress: typeof sprintDayProgress;
+  sprintEnrollments: typeof sprintEnrollments;
   templates: typeof templates;
   users: typeof users;
 }>;

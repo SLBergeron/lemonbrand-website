@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Newsreader, IBM_Plex_Sans } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/context/providers";
+import { ConvexClientProvider } from "@/context/convex-provider";
 import { Analytics } from "@vercel/analytics/next";
 
-// Premium typography: Newsreader (display) + IBM Plex Sans (body)
-const newsreader = Newsreader({
+// Builder's Workshop typography: Inter (display/body) + JetBrains Mono (code)
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-newsreader",
+  variable: "--font-inter",
   display: "swap",
-  weight: ["200", "300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-ibm-plex-sans",
+  variable: "--font-jetbrains-mono",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -117,17 +118,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(newsreader.variable, ibmPlexSans.variable)}>
-      <body className="antialiased bg-background text-foreground">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Analytics />
-        </ThemeProvider>
+    <html lang="en" className={cn(inter.variable, jetbrainsMono.variable)}>
+      <body className="antialiased bg-background text-foreground overflow-x-hidden">
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Analytics />
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );

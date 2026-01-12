@@ -15,6 +15,7 @@ export default defineSchema({
     ),
     notificationsEnabled: v.boolean(),
     totalXP: v.number(),
+    stripeCustomerId: v.optional(v.string()),
   })
     .index("by_betterAuthId", ["betterAuthId"])
     .index("by_email", ["email"]),
@@ -306,4 +307,95 @@ export default defineSchema({
   })
     .index("by_email", ["email"])
     .index("by_template", ["templateId"]),
+
+  // ============================================
+  // Sprint Program (7-Day AI Building)
+  // ============================================
+
+  // Sprint cohorts (admin-managed)
+  sprintCohorts: defineTable({
+    cohortId: v.string(), // e.g., "feb-2025"
+    name: v.string(), // "February 2025"
+    startDate: v.string(), // "2025-02-03" (Day 0)
+    endDate: v.string(), // "2025-02-10" (Day 7)
+    maxSpots: v.number(), // 10
+    spotsRemaining: v.number(),
+    status: v.union(
+      v.literal("upcoming"),
+      v.literal("active"),
+      v.literal("completed")
+    ),
+    discordInviteUrl: v.optional(v.string()),
+    stripePriceId: v.string(),
+  })
+    .index("by_cohortId", ["cohortId"])
+    .index("by_status", ["status"]),
+
+  // Sprint enrollments (purchases)
+  sprintEnrollments: defineTable({
+    userId: v.id("users"),
+    cohortId: v.string(),
+    stripeCustomerId: v.optional(v.string()),
+    stripeCheckoutSessionId: v.optional(v.string()),
+    stripePaymentIntentId: v.optional(v.string()),
+    status: v.union(
+      v.literal("pending"), // Account created, payment pending
+      v.literal("active"), // Payment confirmed, enrolled
+      v.literal("completed"), // Finished all 7 days
+      v.literal("credit_applied"), // $297 credit used toward 8-Week
+      v.literal("expired") // Didn't complete, credit expired
+    ),
+    amountPaid: v.number(), // In cents (29700 = $297)
+    currency: v.string(), // "usd"
+    enrolledAt: v.optional(v.number()), // When payment confirmed
+    completedAt: v.optional(v.number()), // When Day 7 completed
+    creditExpiresAt: v.optional(v.number()), // 12 months from completion
+    creditAppliedAt: v.optional(v.number()), // When used toward 8-Week
+    projectIdea: v.optional(v.string()), // Captured during signup
+  })
+    .index("by_user", ["userId"])
+    .index("by_cohort", ["cohortId"])
+    .index("by_status", ["status"])
+    .index("by_stripe_checkout", ["stripeCheckoutSessionId"]),
+
+  // Sprint day progress (Days 0-7)
+  sprintDayProgress: defineTable({
+    userId: v.id("users"),
+    enrollmentId: v.id("sprintEnrollments"),
+    day: v.number(), // 0-7
+    status: v.union(
+      v.literal("locked"),
+      v.literal("available"),
+      v.literal("in_progress"),
+      v.literal("completed")
+    ),
+    trainingWatched: v.boolean(),
+    worksheetCompleted: v.boolean(),
+    progressPosted: v.boolean(), // Posted in Discord
+    completedAt: v.optional(v.number()),
+    notes: v.optional(v.string()), // User's personal notes
+  })
+    .index("by_user", ["userId"])
+    .index("by_enrollment", ["enrollmentId"])
+    .index("by_user_day", ["userId", "day"]),
+
+  // Sprint content (admin-managed day content)
+  sprintContent: defineTable({
+    day: v.number(), // 0-7
+    title: v.string(), // "Setup + Project Selection"
+    subtitle: v.optional(v.string()),
+    trainingVideoUrl: v.string(), // YouTube/Vimeo embed URL
+    trainingDurationMinutes: v.number(), // 15
+    worksheetUrl: v.optional(v.string()), // PDF download URL
+    markdownContent: v.optional(v.string()), // Additional content
+    objectives: v.array(v.string()), // Learning objectives
+    deliverables: v.array(v.string()), // What to complete
+    checklistItems: v.array(
+      v.object({
+        id: v.string(),
+        label: v.string(),
+        description: v.optional(v.string()),
+      })
+    ),
+  }).index("by_day", ["day"]),
 });

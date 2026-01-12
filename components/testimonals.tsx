@@ -11,7 +11,7 @@ export function TestimonialsMasonryGrid() {
     <div className="py-20 bg-white dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="mb-16 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             Client Success
           </p>
           <h2
@@ -58,7 +58,7 @@ export function TestimonialsMasonryGrid() {
                     href={testimonial.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs font-medium text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 transition-colors whitespace-nowrap"
+                    className="flex items-center gap-1 text-xs font-medium text-accent hover:text-accent/80 transition-colors whitespace-nowrap"
                   >
                     View website
                     <ArrowUpRight className="h-3 w-3" />

@@ -5,11 +5,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
+import { Button } from "@/components/ui/button";
+import { Logo } from "./logo";
 
 const navItems = [
-  { name: "AI Training", link: "/work-with-me" },
-  { name: "Playbooks", link: "/templates" },
-  { name: "YouTube", link: "https://youtube.com/@slbergeron", external: true },
+  { name: "Sprint", link: "/sprint" },
+  { name: "8-Week", link: "/8-week" },
+  { name: "Club", link: "/club" },
+  { name: "About", link: "/about" },
 ];
 
 // Premium nav link with underline-grow animation
@@ -58,15 +61,10 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border/50 transition-all duration-300">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo - Display font */}
-          <Link
-            href="/"
-            className="font-display text-xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
-          >
-            Simon Bergeron
-          </Link>
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 md:px-6">
+        <div className="flex items-center justify-between h-14 sm:h-16">
+          {/* Logo */}
+          <Logo />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -74,20 +72,22 @@ export const Navbar = () => {
               <NavLink
                 key={item.name}
                 href={item.link}
-                external={item.external}
               >
                 {item.name}
               </NavLink>
             ))}
             <ModeToggle />
+            <Button variant="accent" size="sm" asChild>
+              <Link href="/free/claudemd">Get Free Template</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-2 sm:gap-4 md:hidden shrink-0">
             <ModeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 -mr-2 hover:bg-muted rounded-md transition-colors"
+              className="p-2 hover:bg-muted rounded-md transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -110,18 +110,22 @@ export const Navbar = () => {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl"
           >
-            <div className="px-4 py-6 space-y-5">
+            <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-5">
               {navItems.map((item) => (
                 <NavLink
                   key={item.name}
                   href={item.link}
-                  external={item.external}
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-1"
                 >
                   {item.name}
                 </NavLink>
               ))}
+              <Button variant="accent" size="sm" className="w-full mt-4" asChild>
+                <Link href="/free/claudemd" onClick={() => setMobileMenuOpen(false)}>
+                  Get Free Template
+                </Link>
+              </Button>
             </div>
           </motion.div>
         )}
