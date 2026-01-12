@@ -417,7 +417,7 @@ export default function SprintPage() {
                     {/* CTA */}
                     <div className="pt-4">
                       <Button variant="accent" size="lg" asChild className="text-base px-8 py-6 h-auto">
-                        <Link href="#join">
+                        <Link href="/join/sprint">
                           Join the Sprint
                           <ArrowRight className="w-5 h-5 ml-2" />
                         </Link>
