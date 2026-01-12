@@ -51,8 +51,13 @@ export default function MinimalVideoGrid({
     return null;
   }
 
+  // Use single column for 1 video, otherwise responsive grid
+  const gridClass = videos.length === 1
+    ? ""
+    : "grid grid-cols-1 md:grid-cols-3 gap-4";
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className={gridClass}>
       {videos.map((video) => (
         <a
           key={video.id}
@@ -61,19 +66,19 @@ export default function MinimalVideoGrid({
           rel="noopener noreferrer"
           className="group block"
         >
-          <div className="relative aspect-video overflow-hidden bg-muted">
+          <div className="relative aspect-video overflow-hidden bg-muted rounded-lg">
             <Image
               src={video.thumbnail}
               alt={video.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 33vw"
+              sizes={videos.length === 1 ? "100vw" : "(max-width: 768px) 100vw, 33vw"}
             />
-            {/* Play button overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-              <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+            {/* Clean play button - no dark overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200">
                 <svg
-                  className="w-5 h-5 text-black ml-0.5"
+                  className="w-6 h-6 text-black ml-1"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -83,8 +88,8 @@ export default function MinimalVideoGrid({
             </div>
           </div>
           {showTitle && (
-            <div className="mt-2">
-              <p className="text-sm font-medium line-clamp-2 group-hover:underline">
+            <div className="mt-3">
+              <p className="text-sm font-medium line-clamp-2 group-hover:text-accent transition-colors">
                 {video.title}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
