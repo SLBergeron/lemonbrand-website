@@ -52,7 +52,7 @@ export async function GET(request: Request) {
     const convex = getConvexClient();
     await convex.mutation(api.newsletter.unsubscribe, { email });
 
-    return NextResponse.redirect(`${SITE_URL}?unsubscribed=true`);
+    return NextResponse.redirect(`${SITE_URL}/unsubscribe`);
   } catch (error) {
     console.error("Newsletter unsubscribe error:", error);
     return NextResponse.redirect(`${SITE_URL}?error=unsubscribe_failed`);
