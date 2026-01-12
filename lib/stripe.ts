@@ -11,7 +11,7 @@ export const stripe = new Proxy({} as Stripe, {
       }
       stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
     }
-    return (stripeInstance as Record<string, unknown>)[prop as string];
+    return (stripeInstance as unknown as Record<string, unknown>)[prop as string];
   },
 });
 
