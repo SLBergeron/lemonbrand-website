@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "@/lib/auth-client";
@@ -11,7 +11,7 @@ import { SpotsBadge } from "@/components/spots-counter";
 import { Check, Lock, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function CheckoutSprintPage() {
+function CheckoutSprintContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { data: session, isPending } = useSession();
@@ -300,5 +300,19 @@ export default function CheckoutSprintPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function CheckoutSprintPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-accent" />
+        </div>
+      }
+    >
+      <CheckoutSprintContent />
+    </Suspense>
   );
 }
