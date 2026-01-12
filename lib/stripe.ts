@@ -1,10 +1,19 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is not set");
-}
+// Lazy initialization to avoid build-time errors
+let stripeInstance: Stripe | null = null;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+export const stripe = new Proxy({} as Stripe, {
+  get(_, prop) {
+    if (!stripeInstance) {
+      if (!process.env.STRIPE_SECRET_KEY) {
+        throw new Error("STRIPE_SECRET_KEY is not set");
+      }
+      stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
+    }
+    return (stripeInstance as Record<string, unknown>)[prop as string];
+  },
+});
 
 export const getStripeCustomer = async (
   email: string,
