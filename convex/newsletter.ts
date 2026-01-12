@@ -86,9 +86,11 @@ export const confirm = mutation({
       status: "active",
       confirmedAt: Date.now(),
       confirmationToken: undefined,
+      onboardingStep: 0,
+      lastOnboardingEmailAt: Date.now(),
     });
 
-    return { success: true };
+    return { success: true, email: subscriber.email };
   },
 });
 
@@ -140,5 +142,66 @@ export const getActiveCount = query({
       .withIndex("by_status", (q) => q.eq("status", "active"))
       .collect();
     return subscribers.length;
+  },
+});
+
+// Get subscribers who need onboarding emails
+// Returns subscribers where enough time has passed since their last email
+export const getSubscribersForOnboarding = query({
+  handler: async (ctx) => {
+    const now = Date.now();
+    const oneDayMs = 24 * 60 * 60 * 1000;
+
+    // Get all active subscribers with an onboarding step
+    const subscribers = await ctx.db
+      .query("newsletterSubscribers")
+      .withIndex("by_status", (q) => q.eq("status", "active"))
+      .collect();
+
+    // Filter to those who need the next email
+    // Onboarding sequence: 0 (welcome) -> 2 (day 2) -> 3 (day 3) -> 4 (day 4) -> 5 (day 5) -> 7 (day 7) -> null (complete)
+    const nextStepMap: Record<number, { nextStep: number | null; daysToWait: number }> = {
+      0: { nextStep: 2, daysToWait: 2 },  // Day 0 -> Day 2 (wait 2 days)
+      2: { nextStep: 3, daysToWait: 1 },  // Day 2 -> Day 3 (wait 1 day)
+      3: { nextStep: 4, daysToWait: 1 },  // Day 3 -> Day 4 (wait 1 day)
+      4: { nextStep: 5, daysToWait: 1 },  // Day 4 -> Day 5 (wait 1 day)
+      5: { nextStep: 7, daysToWait: 2 },  // Day 5 -> Day 7 (wait 2 days)
+      7: { nextStep: null, daysToWait: 0 }, // Day 7 -> complete
+    };
+
+    return subscribers
+      .filter((s) => {
+        if (s.onboardingStep === undefined || s.onboardingStep === null) return false;
+        if (!s.lastOnboardingEmailAt) return false;
+
+        const stepConfig = nextStepMap[s.onboardingStep];
+        if (!stepConfig || stepConfig.nextStep === null) return false;
+
+        const timeSinceLastEmail = now - s.lastOnboardingEmailAt;
+        const waitTime = stepConfig.daysToWait * oneDayMs;
+
+        return timeSinceLastEmail >= waitTime;
+      })
+      .map((s) => ({
+        _id: s._id,
+        email: s.email,
+        currentStep: s.onboardingStep!,
+        nextStep: nextStepMap[s.onboardingStep!]?.nextStep,
+      }));
+  },
+});
+
+// Update onboarding step after sending email
+export const updateOnboardingStep = mutation({
+  args: {
+    subscriberId: v.id("newsletterSubscribers"),
+    newStep: v.union(v.number(), v.null()),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.subscriberId, {
+      onboardingStep: args.newStep ?? undefined,
+      lastOnboardingEmailAt: Date.now(),
+    });
+    return { success: true };
   },
 });

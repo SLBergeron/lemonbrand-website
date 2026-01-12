@@ -275,10 +275,13 @@ export default function PromptsStAlbertPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="https://cdn.prod.website-files.com/67f2c3d3da332df3a9d5d98a/67f2c9fbe3dd7a3962ddff9a_St%20Albert%20Logo.svg"
                 alt="St Albert Logo"
+                width={120}
+                height={48}
                 className="h-12 w-auto"
+                unoptimized
               />
               <div>
                 <div className="text-sm font-semibold text-neutral-600 dark:text-neutral-400">

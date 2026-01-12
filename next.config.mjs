@@ -7,6 +7,8 @@ const nextConfig = {
       { hostname: "img.youtube.com" },
       { hostname: "i.ytimg.com" },
       { hostname: "raw.githubusercontent.com" },
+      { hostname: "www.drouincreations.com" },
+      { hostname: "cdn.prod.website-files.com" },
     ],
   },
   async redirects() {

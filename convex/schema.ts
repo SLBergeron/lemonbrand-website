@@ -265,10 +265,14 @@ export default defineSchema({
     subscribedAt: v.number(),
     source: v.string(), // "homepage", "templates", "youtube"
     tags: v.array(v.string()),
+    // Onboarding sequence tracking
+    onboardingStep: v.optional(v.number()), // 0=welcome, 2=day2, 3=day3, 4=day4, 5=day5, 7=day7, null=complete
+    lastOnboardingEmailAt: v.optional(v.number()),
   })
     .index("by_email", ["email"])
     .index("by_status", ["status"])
-    .index("by_confirmation_token", ["confirmationToken"]),
+    .index("by_confirmation_token", ["confirmationToken"])
+    .index("by_onboarding", ["status", "onboardingStep"]),
 
   // Templates catalog (GitHub repos with step-by-step guides)
   templates: defineTable({

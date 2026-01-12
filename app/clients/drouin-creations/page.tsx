@@ -987,10 +987,13 @@ export default function DrouinCreationsPage() {
             className="flex items-center justify-center gap-4 mb-8"
           >
             <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-neutral-800 shadow-lg border border-neutral-200 dark:border-neutral-700">
-              <img
+              <Image
                 src="https://www.drouincreations.com/we/we.dll/Pic?UN=246965&F=C&T=801&Age=1387088034"
                 alt="Drouin Creations"
+                width={100}
+                height={40}
                 className="h-10 w-auto object-contain"
+                unoptimized
               />
               <span className="text-2xl font-bold text-neutral-400 dark:text-neutral-600">×</span>
               <div className="flex items-center gap-2">

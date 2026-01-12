@@ -134,6 +134,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -731,10 +732,13 @@ function PasswordScreen({
         {/* Preview Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-10 pt-8">
-            <img
+            <Image
               src="https://cdn.prod.website-files.com/67f2c3d3da332df3a9d5d98a/67f2c9fbe3dd7a3962ddff9a_St%20Albert%20Logo.svg"
               alt="St Albert Cheese"
+              width={200}
+              height={80}
               className="h-20 w-auto"
+              unoptimized
             />
           </div>
 
@@ -811,10 +815,13 @@ function PrioritiesContent({ language, setLanguage }: { language: Language; setL
         {/* Header with improved spacing */}
         <div className="text-center mb-16">
           <div className="mb-12 pt-8">
-            <img
+            <Image
               src="https://cdn.prod.website-files.com/67f2c3d3da332df3a9d5d98a/67f2c9fbe3dd7a3962ddff9a_St%20Albert%20Logo.svg"
               alt="St Albert Cheese"
+              width={240}
+              height={96}
               className="h-24 w-auto mx-auto"
+              unoptimized
             />
           </div>
 
