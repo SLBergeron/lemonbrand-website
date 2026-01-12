@@ -218,7 +218,7 @@ export default function DayPage() {
           )}
 
           {/* Worksheet Link */}
-          {content.worksheetUrl && (
+          {'worksheetUrl' in content && content.worksheetUrl && (
             <div className="p-6 rounded-xl bg-card border border-border">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
