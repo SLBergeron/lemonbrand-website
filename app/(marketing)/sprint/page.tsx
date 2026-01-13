@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DotGridBackground } from "@/components/dot-grid-background";
@@ -348,6 +349,24 @@ export default function SprintPage() {
               variants={staggerContainer}
               className="space-y-8"
             >
+              {/* Hero Icon */}
+              <motion.div variants={fadeInUp} className="flex justify-center">
+                <motion.div
+                  className="w-24 h-24 sm:w-28 sm:h-28 relative"
+                  initial={{ rotate: -5, scale: 1 }}
+                  whileHover={{ rotate: 5, scale: 1.1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <Image
+                    src="/assets/3dicons/3dicons-flash-dynamic-color.png"
+                    alt="Sprint"
+                    fill
+                    className="object-contain drop-shadow-xl"
+                    unoptimized
+                  />
+                </motion.div>
+              </motion.div>
+
               {/* Badge */}
               <motion.div variants={fadeInUp} className="flex justify-center">
                 <Badge

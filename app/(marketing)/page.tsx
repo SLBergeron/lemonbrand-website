@@ -615,16 +615,18 @@ export default function Home() {
 
               {/* Reframe Statement */}
               <div className="bg-muted/50 rounded-lg p-8 text-center space-y-4 max-w-3xl mx-auto">
-                <p className="text-lg font-medium">Same skill. Different applications.</p>
+                <p className="text-lg font-medium">Every one of these started as an idea I couldn&apos;t find an app for.</p>
                 <p className="text-muted-foreground">
-                  The difference between my first failed attempt and now? I learned how to communicate with AI.
+                  Before: hire a developer, wait 3 months, spend $15K.
                 </p>
-                <p className="text-muted-foreground">Not coding. Communication.</p>
                 <p className="text-muted-foreground">
-                  How to think through what I actually want. How to express it in a way that gets results. How to iterate when the first version isn&apos;t right. How to ask the right questions when I&apos;m stuck.
+                  Now: build it myself in a weekend. Own it forever. Change it whenever I want.
+                </p>
+                <p className="text-muted-foreground">
+                  That spreadsheet you&apos;ve been maintaining by hand? The process you wish was automated? The tool that almost exists but not quite?
                 </p>
                 <p className="font-medium pt-2 text-foreground">
-                  That&apos;s a learnable skill. And it transfers to everything—personal tools, work automation, business products.
+                  You can build exactly what you need. Without writing code. Without hiring anyone.
                 </p>
               </div>
             </div>
@@ -859,32 +861,34 @@ export default function Home() {
 
                  <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {/* Sprint */}
-                    <FeatureCard step="1" className="h-full group/card">
-                         <div className="p-4 space-y-4">
-                            <div className="w-full h-32 flex items-center justify-center mb-4 relative">
-                              <motion.div
-                                className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
-                                initial={{ rotate: -5, scale: 1 }}
-                                whileHover={{ rotate: 5, scale: 1.1 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                              >
-                                <Image
-                                  src="/assets/3dicons/3dicons-flash-dynamic-color.png"
-                                  alt="Sprint"
-                                  fill
-                                  className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-300"
-                                  unoptimized
-                                />
-                              </motion.div>
-                            </div>
-                            <h3 className="font-semibold text-xl">SPRINT</h3>
-                            <p className="text-muted-foreground">You ship one tool. You prove you can do this.</p>
-                            <div className="pt-4 mt-auto">
-                                <p className="text-sm text-accent font-medium">$297</p>
-                                <p className="text-xs text-muted-foreground">(becomes credit if you complete)</p>
-                            </div>
-                         </div>
-                    </FeatureCard>
+                    <Link href="/sprint" className="block h-full">
+                      <FeatureCard step="1" className="h-full group/card cursor-pointer hover:border-accent/50 transition-colors">
+                           <div className="p-4 space-y-4">
+                              <div className="w-full h-32 flex items-center justify-center mb-4 relative">
+                                <motion.div
+                                  className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
+                                  initial={{ rotate: -5, scale: 1 }}
+                                  whileHover={{ rotate: 5, scale: 1.1 }}
+                                  transition={{ duration: 0.3, ease: "easeOut" }}
+                                >
+                                  <Image
+                                    src="/assets/3dicons/3dicons-flash-dynamic-color.png"
+                                    alt="Sprint"
+                                    fill
+                                    className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-300"
+                                    unoptimized
+                                  />
+                                </motion.div>
+                              </div>
+                              <h3 className="font-semibold text-xl">SPRINT</h3>
+                              <p className="text-muted-foreground">You ship one tool. You prove you can do this.</p>
+                              <div className="pt-4 mt-auto">
+                                  <p className="text-sm text-accent font-medium">$297</p>
+                                  <p className="text-xs text-muted-foreground">(becomes credit if you complete)</p>
+                              </div>
+                           </div>
+                      </FeatureCard>
+                    </Link>
 
                     {/* Arrow Down Mobile */}
                     <div className="flex justify-center md:hidden">
@@ -892,32 +896,34 @@ export default function Home() {
                     </div>
 
                     {/* 8-Week */}
-                    <FeatureCard step="2" className="h-full border-primary/20 group/card">
-                         <div className="p-4 space-y-4">
-                            <div className="w-full h-32 flex items-center justify-center mb-4 relative">
-                              <motion.div
-                                className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
-                                initial={{ rotate: 3, scale: 1 }}
-                                whileHover={{ rotate: -5, scale: 1.1 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                              >
-                                <Image
-                                  src="/assets/3dicons/3dicons-calender-dynamic-color.png"
-                                  alt="8-Week Program"
-                                  fill
-                                  className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:-rotate-3 transition-transform duration-300"
-                                  unoptimized
-                                />
-                              </motion.div>
-                            </div>
-                            <h3 className="font-semibold text-xl">8-WEEK</h3>
-                            <p className="text-muted-foreground">You build the skill permanently. More projects. Deeper patterns. Databases, authentication, deployment.</p>
-                            <div className="pt-4 mt-auto">
-                                <p className="text-sm text-primary font-medium">$997 - $4,997</p>
-                                <p className="text-xs text-muted-foreground">depending on support level</p>
-                            </div>
-                         </div>
-                    </FeatureCard>
+                    <Link href="/8-week" className="block h-full">
+                      <FeatureCard step="2" className="h-full border-primary/20 group/card cursor-pointer hover:border-primary/50 transition-colors">
+                           <div className="p-4 space-y-4">
+                              <div className="w-full h-32 flex items-center justify-center mb-4 relative">
+                                <motion.div
+                                  className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
+                                  initial={{ rotate: 3, scale: 1 }}
+                                  whileHover={{ rotate: -5, scale: 1.1 }}
+                                  transition={{ duration: 0.3, ease: "easeOut" }}
+                                >
+                                  <Image
+                                    src="/assets/3dicons/3dicons-calender-dynamic-color.png"
+                                    alt="8-Week Program"
+                                    fill
+                                    className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:-rotate-3 transition-transform duration-300"
+                                    unoptimized
+                                  />
+                                </motion.div>
+                              </div>
+                              <h3 className="font-semibold text-xl">8-WEEK</h3>
+                              <p className="text-muted-foreground">You build the skill permanently. More projects. Deeper patterns. Databases, authentication, deployment.</p>
+                              <div className="pt-4 mt-auto">
+                                  <p className="text-sm text-primary font-medium">$997 - $4,997</p>
+                                  <p className="text-xs text-muted-foreground">depending on support level</p>
+                              </div>
+                           </div>
+                      </FeatureCard>
+                    </Link>
 
                     {/* Arrow Down Mobile */}
                     <div className="flex justify-center md:hidden">
@@ -925,32 +931,34 @@ export default function Home() {
                     </div>
 
                     {/* Club */}
-                    <FeatureCard step="3" className="h-full border-success/20 group/card">
-                         <div className="p-4 space-y-4">
-                            <div className="w-full h-32 flex items-center justify-center mb-4 relative">
-                              <motion.div
-                                className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
-                                initial={{ rotate: 5, scale: 1 }}
-                                whileHover={{ rotate: -3, scale: 1.1 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                              >
-                                <Image
-                                  src="/assets/3dicons/3dicons-trophy-dynamic-color.png"
-                                  alt="Club"
-                                  fill
-                                  className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:rotate-3 transition-transform duration-300"
-                                  unoptimized
-                                />
-                              </motion.div>
-                            </div>
-                            <h3 className="font-semibold text-xl">CLUB</h3>
-                            <p className="text-muted-foreground">You keep building with a community. Monthly challenges. New patterns. Office hours.</p>
-                            <div className="pt-4 mt-auto">
-                                <p className="text-sm text-success font-medium">$97/month</p>
-                                <p className="text-xs text-muted-foreground">cancel anytime</p>
-                            </div>
-                         </div>
-                    </FeatureCard>
+                    <Link href="/club" className="block h-full">
+                      <FeatureCard step="3" className="h-full border-success/20 group/card cursor-pointer hover:border-success/50 transition-colors">
+                           <div className="p-4 space-y-4">
+                              <div className="w-full h-32 flex items-center justify-center mb-4 relative">
+                                <motion.div
+                                  className="w-24 h-24 sm:w-28 sm:h-28 relative z-20"
+                                  initial={{ rotate: 5, scale: 1 }}
+                                  whileHover={{ rotate: -3, scale: 1.1 }}
+                                  transition={{ duration: 0.3, ease: "easeOut" }}
+                                >
+                                  <Image
+                                    src="/assets/3dicons/3dicons-trophy-dynamic-color.png"
+                                    alt="Club"
+                                    fill
+                                    className="object-contain drop-shadow-xl group-hover/card:scale-110 group-hover/card:rotate-3 transition-transform duration-300"
+                                    unoptimized
+                                  />
+                                </motion.div>
+                              </div>
+                              <h3 className="font-semibold text-xl">CLUB</h3>
+                              <p className="text-muted-foreground">You keep building with a community. Monthly challenges. New patterns. Office hours.</p>
+                              <div className="pt-4 mt-auto">
+                                  <p className="text-sm text-success font-medium">$97/month</p>
+                                  <p className="text-xs text-muted-foreground">cancel anytime</p>
+                              </div>
+                           </div>
+                      </FeatureCard>
+                    </Link>
                  </div>
               </div>
 

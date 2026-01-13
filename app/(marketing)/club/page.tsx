@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/shared/Section";
@@ -220,6 +221,24 @@ export default function ClubPage() {
             variants={fadeInUp}
             className="space-y-6"
           >
+            {/* Hero Icon */}
+            <div className="flex justify-center">
+              <motion.div
+                className="w-24 h-24 sm:w-28 sm:h-28 relative"
+                initial={{ rotate: 5, scale: 1 }}
+                whileHover={{ rotate: -3, scale: 1.1 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <Image
+                  src="/assets/3dicons/3dicons-trophy-dynamic-color.png"
+                  alt="AI Builders Club"
+                  fill
+                  className="object-contain drop-shadow-xl"
+                  unoptimized
+                />
+              </motion.div>
+            </div>
+
             <blockquote className="text-xl italic text-muted-foreground leading-relaxed">
               &quot;I opened Claude Code and it felt... unfamiliar.
               <br />
