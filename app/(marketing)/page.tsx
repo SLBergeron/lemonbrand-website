@@ -190,17 +190,17 @@ const projectCategories: ProjectCategory[] = [
     projects: [
       {
         title: "Recipe Tracker",
-        description: "Every app had features I didn't want. I wanted to tag by cuisine, scale portions, and see what I could make with what's in my fridge. So I built exactly that.",
+        description: "I love Japanese food. Every recipe app was either too simple or cluttered with features I'd never use. I built a clean way to organize my recipes exactly how I think about them.",
         time: "One afternoon",
       },
       {
         title: "Workout Logger",
-        description: "I don't need social features or AI coaching. I need to track sets, reps, and weight. That's it.",
+        description: "I just wanted to track reps and sets. That's it. No social features, no AI coaching, no gamification. Simple.",
         time: "~3 hours",
       },
       {
-        title: "Goal-Setting System",
-        description: "I tried Notion, I tried apps. None of them worked the way I think. So I made one that does.",
+        title: "Day Tracker",
+        description: "A place to track my days and express my thoughts. Simple journaling that fits how I actually think, not how some app designer thinks I should.",
         time: "One weekend",
       },
     ],
@@ -212,12 +212,12 @@ const projectCategories: ProjectCategory[] = [
     projects: [
       {
         title: "Renovation Planner",
-        description: "We were renovating our house. I needed to track tasks, compare contractor quotes, and manage a timeline. No app did all three.",
+        description: "Take pictures of a room, use Nanobanana to visualize changes, then generate a list and bill of materials. See the renovation before you start it.",
         time: "~6 hours over two days",
       },
       {
         title: "New Year's Letter System",
-        description: "Every year I write personalized letters to family. I built a tool that helps me draft, organize, and print them in the format I want.",
+        description: "Every year I send friends and family a personalized website instead of a card. Videos, photos, updates—a real web experience. The system lets me create a new one each year.",
         time: "One evening",
       },
     ],
@@ -229,12 +229,12 @@ const projectCategories: ProjectCategory[] = [
     projects: [
       {
         title: "Document-to-Spreadsheet Scripts",
-        description: "I get reports in weird formats. I built a tool that extracts the data I need and puts it in a spreadsheet.",
+        description: "I had stacks of handwritten reports I needed in a spreadsheet. Built a tool to extract the data and put it straight into Excel.",
         time: "~2 hours",
       },
       {
         title: "Custom Dashboards",
-        description: "The analytics tools at work don't show what I care about. So I built my own dashboards that pull the specific numbers I need.",
+        description: "A client needed to analyze a lot of HR data. I built her a custom dashboard so she could evaluate everything in one place and run her own analysis.",
         time: "2-4 hours each",
       },
     ],
@@ -415,11 +415,11 @@ export default function Home() {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
-                    { title: "Recipe Tracker", subtitle: "finally", emoji: "🍳" },
+                    { title: "Recipe Tracker", subtitle: "Japanese food", emoji: "🍳" },
                     { title: "Workout Logger", subtitle: "3 hours", emoji: "💪" },
-                    { title: "Renovation Planner", subtitle: "weekend", emoji: "🏠" },
-                    { title: "Custom Dashboards", subtitle: "for work", emoji: "📊" },
-                    { title: "Document Scripts", subtitle: "2 hrs each", emoji: "📄" },
+                    { title: "Day Tracker", subtitle: "journaling", emoji: "🎯" },
+                    { title: "Renovation Planner", subtitle: "Nanobanana", emoji: "🏠" },
+                    { title: "Custom Dashboards", subtitle: "for a client", emoji: "📊" },
                   ].map((item, i) => (
                     <motion.div
                       key={item.title}

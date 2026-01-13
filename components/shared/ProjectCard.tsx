@@ -15,7 +15,7 @@ const projectImages: Record<string, { image: string; rotation: number }> = {
     image: "/assets/3dicons/3dicons-gym-dynamic-color.png",
     rotation: -2,
   },
-  "Goal-Setting System": {
+  "Day Tracker": {
     image: "/assets/3dicons/3dicons-target-dynamic-color.png",
     rotation: 4,
   },

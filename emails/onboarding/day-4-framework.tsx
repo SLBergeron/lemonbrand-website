@@ -51,7 +51,7 @@ export default function Day4FrameworkEmail({
           <Text style={text}>
             If you can't explain the core feature in one sentence, it's too big.
             Recipe Tracker (one afternoon). Workout Logger (~3 hours).
-            Goal-Setting System (one weekend). Renovation Planner (~6 hours).
+            Day Tracker (one weekend). Renovation Planner (~6 hours).
           </Text>
 
           <Text style={subheading}>The MVP guillotine</Text>

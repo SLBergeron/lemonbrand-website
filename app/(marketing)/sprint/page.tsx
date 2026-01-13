@@ -368,7 +368,7 @@ export default function SprintPage() {
 
                 <div className="text-xl sm:text-2xl text-muted-foreground leading-relaxed space-y-3 max-w-2xl mx-auto">
                   <p>
-                    A recipe tracker. Nothing fancy.
+                    A Japanese recipe tracker. Nothing fancy.
                     <br />
                     But it worked. I made it. Me.
                   </p>
