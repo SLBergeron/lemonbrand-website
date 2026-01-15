@@ -41,9 +41,13 @@ export function Footer() {
                   height={32}
                   className="w-8 h-8"
                 />
-                <span className="font-display text-xl font-semibold tracking-tight group-hover:text-accent transition-colors">
-                  LemonBrand
-                </span>
+                <Image
+                  src="/assets/Lemonbrand_Wordmark.svg"
+                  alt="LemonBrand"
+                  width={140}
+                  height={18}
+                  className="h-5 w-auto"
+                />
               </Link>
               <p className="text-muted-foreground max-w-sm leading-relaxed">
                 Building AI businesses in public. Helping operations teams ship production systems in days, not months.

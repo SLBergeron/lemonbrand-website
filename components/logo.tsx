@@ -15,9 +15,13 @@ export const Logo = () => {
         height={28}
         className="w-7 h-7"
       />
-      <span className="font-display text-lg font-semibold tracking-tight group-hover:text-accent transition-colors hidden sm:block">
-        LemonBrand
-      </span>
+      <Image
+        src="/assets/Lemonbrand_Wordmark.svg"
+        alt="LemonBrand"
+        width={120}
+        height={16}
+        className="h-4 w-auto hidden sm:block"
+      />
     </Link>
   );
 };
