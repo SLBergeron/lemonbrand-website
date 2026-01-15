@@ -1,14 +1,21 @@
+/* Edison Proposal - Dark theme for web */
 .edison-proposal {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.6;
-  color: #1a1a1a;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
-  background: #ffffff;
+  background: #000000;
 }
 
 .edison-proposal .noise::before {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .edison-proposal .page {
@@ -19,7 +26,6 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  background: #ffffff;
 }
 
 @media (min-width: 480px) {
@@ -34,20 +40,40 @@
   .edison-proposal .page { padding: 4rem 6rem; }
 }
 
-.edison-proposal .page-dark,
-.edison-proposal .page-dark-alt,
-.edison-proposal .page-blue,
-.edison-proposal .page-cover {
-  background: #ffffff;
+.edison-proposal .page-dark {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(4, 32, 105, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(4, 32, 105, 0.1) 0%, transparent 40%),
+    #000000;
 }
 
-.edison-proposal .glow-brand,
+.edison-proposal .page-dark-alt {
+  background: radial-gradient(ellipse 100% 60% at 50% 120%, rgba(4, 32, 105, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 0% 50%, rgba(4, 32, 105, 0.08) 0%, transparent 40%),
+    #000000;
+}
+
+.edison-proposal .page-blue {
+  background: radial-gradient(ellipse 80% 60% at 20% 0%, rgba(4, 32, 105, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 100% 80%, rgba(4, 32, 105, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #050d1a 0%, #0a1628 100%);
+}
+
+.edison-proposal .page-cover {
+  background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(4, 32, 105, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(4, 32, 105, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #000000 0%, #050810 100%);
+}
+
+.edison-proposal .glow-brand {
+  box-shadow: 0 0 40px rgba(4, 32, 105, 0.4), 0 0 80px rgba(4, 32, 105, 0.2);
+}
+
 .edison-proposal .glow-brand-sm {
-  box-shadow: 0 2px 8px rgba(4, 32, 105, 0.15);
+  box-shadow: 0 0 20px rgba(4, 32, 105, 0.3), 0 0 40px rgba(4, 32, 105, 0.15);
 }
 
 .edison-proposal .glow-text {
-  text-shadow: none;
+  text-shadow: 0 0 40px rgba(4, 32, 105, 0.5);
 }
 
 .edison-proposal .accent-line {
@@ -55,18 +81,36 @@
 }
 
 .edison-proposal .card-glow {
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
+  background: linear-gradient(180deg, rgba(4, 32, 105, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border: 1px solid rgba(4, 32, 105, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .edison-proposal .glass {
-  background: #f5f7fa;
-  border: 1px solid #e0e0e0;
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.edison-proposal .grid-pattern::after,
+.edison-proposal .grid-pattern::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(4, 32, 105, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(4, 32, 105, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .edison-proposal .dot-pattern::after {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(4, 32, 105, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .edison-proposal .content-layer {
@@ -74,157 +118,205 @@
   z-index: 2;
 }
 
-/* Text color overrides for white background */
-.edison-proposal .text-white {
-  color: #1a1a1a !important;
-}
-
-.edison-proposal .text-\[\#999\],
-.edison-proposal .text-\[\#888\],
-.edison-proposal .text-\[\#666\] {
-  color: #555 !important;
-}
-
-.edison-proposal .text-\[\#4a7fff\] {
-  color: #042069 !important;
-}
-
-/* Border overrides */
-.edison-proposal .border-\[\#222\],
-.edison-proposal .border-\[\#333\] {
-  border-color: #e0e0e0 !important;
-}
-
-.edison-proposal .border-t {
-  border-color: #e0e0e0 !important;
-}
-
-/* Background overrides for mockups */
-.edison-proposal .bg-black {
-  background-color: #f0f0f0 !important;
-}
-
-.edison-proposal .bg-\[\#111\],
-.edison-proposal .bg-\[\#0a0a0a\] {
-  background-color: #e8e8e8 !important;
-}
-
-.edison-proposal .bg-\[\#1a1a1a\] {
-  background-color: #f0f0f0 !important;
-}
-
-/* Keep brand color elements */
-.edison-proposal .bg-\[\#042069\] {
-  background-color: #042069 !important;
-}
-
-.edison-proposal .bg-\[\#042069\]\/10 {
-  background-color: rgba(4, 32, 105, 0.1) !important;
-}
-
-.edison-proposal .border-\[\#042069\] {
-  border-color: #042069 !important;
-}
-
-/* Ensure text on brand backgrounds stays white */
-.edison-proposal .bg-\[\#042069\] .text-white,
-.edison-proposal .bg-\[\#042069\] span,
-.edison-proposal .bg-\[\#042069\] p {
-  color: #ffffff !important;
-}
-
-/* Step number circles */
-.edison-proposal .rounded-full.bg-\[\#042069\] {
-  color: #ffffff !important;
-}
-
-/* Phase labels */
-.edison-proposal .bg-\[\#042069\].rounded {
-  color: #ffffff !important;
-}
-
-.edison-proposal .bg-\[\#333\].rounded {
-  background-color: #666 !important;
-  color: #ffffff !important;
-}
-
-/* iPhone mockup frame */
-.edison-proposal .rounded-\[3rem\] {
-  background-color: #333 !important;
-}
-
-.edison-proposal .rounded-\[2\.2rem\] {
-  background-color: #1a1a1a !important;
-}
-
-.edison-proposal .rounded-\[2\.2rem\] .text-white {
-  color: #ffffff !important;
-}
-
-.edison-proposal .rounded-\[2\.2rem\] .bg-\[\#042069\] span {
-  color: #ffffff !important;
-}
-
-/* iPhone mockup inner card borders */
-.edison-proposal .rounded-\[2\.2rem\] .border-\[\#333\] {
-  border-color: #444 !important;
-}
-
-.edison-proposal .rounded-\[2\.2rem\] .border-\[\#222\] {
-  border-color: #333 !important;
-}
-
-/* Keep dark backgrounds in phone mockup */
-.edison-proposal .rounded-\[2\.2rem\] .bg-\[\#0a0a0a\] {
-  background-color: #0a0a0a !important;
-}
-
-/* Print button */
-.edison-proposal button.no-print {
-  background-color: #042069;
-  color: white;
-}
-
-/* Flow diagram arrows */
-.edison-proposal .text-\[\#042069\].text-2xl {
-  color: #042069 !important;
-}
-
-/* Pricing table */
-.edison-proposal .bg-\[\#042069\]\/20 {
-  background-color: rgba(4, 32, 105, 0.1) !important;
-}
-
-/* Print styles */
+/* ===========================================
+   PRINT STYLES - White theme for printing
+   =========================================== */
 @media print {
-  .edison-proposal * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
   .edison-proposal {
     font-size: 10pt;
+    color: #1a1a1a;
+    background: #ffffff;
   }
 
   .edison-proposal .page {
     min-height: auto;
-    height: 100vh;
-    padding: 0.5in 0.6in;
+    height: auto;
+    max-height: 100vh;
+    padding: 0.4in 0.5in;
     page-break-after: always;
+    page-break-inside: avoid;
+    background: #ffffff !important;
+    overflow: hidden;
+  }
+
+  .edison-proposal .page:last-child {
+    page-break-after: auto;
+  }
+
+  /* Hide decorative elements */
+  .edison-proposal .no-print,
+  .edison-proposal button,
+  .edison-proposal .noise::before,
+  .edison-proposal .grid-pattern::after,
+  .edison-proposal .dot-pattern::after,
+  .edison-proposal .accent-line {
+    display: none !important;
+  }
+
+  /* Remove glows and shadows */
+  .edison-proposal .glow-brand,
+  .edison-proposal .glow-brand-sm {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .edison-proposal .glow-text {
+    text-shadow: none !important;
+  }
+
+  /* White backgrounds */
+  .edison-proposal .page-dark,
+  .edison-proposal .page-dark-alt,
+  .edison-proposal .page-blue,
+  .edison-proposal .page-cover {
     background: #ffffff !important;
   }
 
-  .edison-proposal .no-print,
-  .edison-proposal button {
+  /* Text colors for print */
+  .edison-proposal .text-white,
+  .edison-proposal h1,
+  .edison-proposal h2,
+  .edison-proposal h3,
+  .edison-proposal p,
+  .edison-proposal span,
+  .edison-proposal li {
+    color: #1a1a1a !important;
+  }
+
+  .edison-proposal .text-\[\#999\],
+  .edison-proposal .text-\[\#888\],
+  .edison-proposal .text-\[\#666\] {
+    color: #555 !important;
+  }
+
+  .edison-proposal .text-\[\#4a7fff\] {
+    color: #042069 !important;
+  }
+
+  /* Card backgrounds for print */
+  .edison-proposal .card-glow {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    backdrop-filter: none !important;
+  }
+
+  .edison-proposal .glass {
+    background: #f8f8f8 !important;
+    border: 1px solid #e0e0e0 !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Borders */
+  .edison-proposal .border-\[\#222\],
+  .edison-proposal .border-\[\#333\],
+  .edison-proposal .border-t,
+  .edison-proposal .border-b {
+    border-color: #ddd !important;
+  }
+
+  /* Mockup backgrounds */
+  .edison-proposal .bg-black {
+    background-color: #f0f0f0 !important;
+  }
+
+  .edison-proposal .bg-\[\#111\],
+  .edison-proposal .bg-\[\#0a0a0a\],
+  .edison-proposal .bg-\[\#1a1a1a\] {
+    background-color: #e8e8e8 !important;
+  }
+
+  /* Keep brand blue elements */
+  .edison-proposal .bg-\[\#042069\] {
+    background-color: #042069 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .edison-proposal .bg-\[\#042069\] *,
+  .edison-proposal .bg-\[\#042069\]\/10 .text-white {
+    color: #ffffff !important;
+  }
+
+  .edison-proposal .rounded-full.bg-\[\#042069\] {
+    color: #ffffff !important;
+  }
+
+  /* Phase labels */
+  .edison-proposal .bg-\[\#333\] {
+    background-color: #666 !important;
+  }
+
+  .edison-proposal .bg-\[\#333\] * {
+    color: #ffffff !important;
+  }
+
+  /* Hide phone mockup on print - too complex */
+  .edison-proposal .hidden.md\:block {
     display: none !important;
   }
 
-  .edison-proposal .hidden.md\:block {
-    display: block !important;
-  }
-
+  /* Hide mockup images */
   .edison-proposal .mockup-img {
     display: none !important;
+  }
+
+  /* Compact spacing for print */
+  .edison-proposal .space-y-6 > * + * {
+    margin-top: 0.75rem !important;
+  }
+
+  .edison-proposal .space-y-4 > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  .edison-proposal .gap-6 {
+    gap: 0.75rem !important;
+  }
+
+  .edison-proposal .gap-8 {
+    gap: 1rem !important;
+  }
+
+  .edison-proposal .mb-8 {
+    margin-bottom: 1rem !important;
+  }
+
+  .edison-proposal .mb-6 {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .edison-proposal .mb-auto {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .edison-proposal .mt-8 {
+    margin-top: 1rem !important;
+  }
+
+  .edison-proposal .pt-6,
+  .edison-proposal .pt-8 {
+    padding-top: 0.75rem !important;
+  }
+
+  /* Smaller text for print */
+  .edison-proposal .text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  .edison-proposal .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  .edison-proposal .text-xl {
+    font-size: 1.1rem !important;
+  }
+
+  .edison-proposal .text-lg {
+    font-size: 1rem !important;
+  }
+
+  /* Fix flex-1 items taking too much space */
+  .edison-proposal .flex-1 {
+    flex: 0 1 auto !important;
   }
 }
 
