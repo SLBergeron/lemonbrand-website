@@ -67,35 +67,43 @@ export default function SubstackContent() {
                 </p>
               </motion.div>
 
-              {/* What you get - FREE */}
-              <motion.div variants={fadeInUp} className="max-w-xl mx-auto">
-                <div className="bg-card/80 backdrop-blur-sm border border-accent/20 rounded-xl p-6 space-y-4">
-                  <p className="text-xs font-semibold text-accent uppercase tracking-wider text-center">
-                    Free Starter Kit Includes
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <span className="text-accent font-bold">1.</span>
-                      <div>
-                        <span className="font-medium">CLAUDE.md Template</span>
-                        <span className="text-muted-foreground"> — The blank context file I use for every project</span>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-accent font-bold">2.</span>
-                      <div>
-                        <span className="font-medium">Filled Example</span>
-                        <span className="text-muted-foreground"> — A complete example based on what you&apos;re building (ROI Calculator, Client Tracker, or Cohort Validation)</span>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-accent font-bold">3.</span>
-                      <div>
-                        <span className="font-medium">5-Email Build Stack Course</span>
-                        <span className="text-muted-foreground"> — The method behind shipping tools fast</span>
-                      </div>
-                    </li>
-                  </ul>
+              {/* What you'll build */}
+              <motion.div variants={fadeInUp} className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
+                  <div className="w-10 h-10 relative flex-shrink-0">
+                    <Image
+                      src="/assets/3dicons/3dicons-tools-dynamic-color.png"
+                      alt="Internal tools"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <span className="text-sm font-medium">Internal tools</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
+                  <div className="w-10 h-10 relative flex-shrink-0">
+                    <Image
+                      src="/assets/3dicons/3dicons-calculator-dynamic-color.png"
+                      alt="Lead-gen utilities"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <span className="text-sm font-medium">Lead-gen utilities</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
+                  <div className="w-10 h-10 relative flex-shrink-0">
+                    <Image
+                      src="/assets/3dicons/3dicons-target-dynamic-color.png"
+                      alt="Offer prototypes"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <span className="text-sm font-medium">Offer prototypes</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -108,6 +116,16 @@ export default function SubstackContent() {
         <div className="bg-card border border-border/50 rounded-xl p-6 sm:p-8 shadow-lg">
           <SubstackActivationForm />
         </div>
+
+        {/* What you get */}
+        <div className="mt-8 text-center text-sm text-muted-foreground space-y-2">
+          <p className="font-medium text-foreground">What you&apos;ll get (free):</p>
+          <p>
+            <span className="text-accent">1.</span> CLAUDE.md blank template —
+            <span className="text-accent">2.</span> Filled example for your use case —
+            <span className="text-accent">3.</span> 5-email Build Stack course
+          </p>
+        </div>
       </Section>
 
       {/* About Simon */}
@@ -116,16 +134,22 @@ export default function SubstackContent() {
           <div className="space-y-4 text-center">
             <p className="text-sm text-muted-foreground uppercase tracking-wide">About</p>
             <p className="text-muted-foreground">
-              I run two ventures. <strong>VerifiedNode</strong> is verification infrastructure
-              for an agentic internet — 58,000+ contractor records.{" "}
-              <strong>LemonBrand</strong> teaches non-developers to build with Claude Code.
+              I run two ventures.{" "}
+              <Link href="https://verifiednode.com" className="text-accent underline font-semibold">
+                VerifiedNode
+              </Link>{" "}
+              is verification infrastructure for an agentic internet — 58,000+ contractor records.{" "}
+              <Link href="https://lemonbrand.io" className="text-accent underline font-semibold">
+                LemonBrand
+              </Link>{" "}
+              teaches non-developers to build with Claude Code.
             </p>
             <p className="text-muted-foreground">
               When I say &quot;agents,&quot; I don&apos;t mean bots running in the cloud.
               I mean <strong>you</strong> empowered by AI — and the tools you build that work for you.
             </p>
             <p className="text-sm text-muted-foreground pt-4">
-              <Link href="https://substack.com/@slbergeron" className="text-accent hover:underline">
+              <Link href="https://substack.com/@slbergeron" className="text-accent underline">
                 Read the newsletter on Substack →
               </Link>
             </p>
