@@ -17,47 +17,47 @@ interface Day4CaseStudyEmailProps {
 
 const caseStudies: Record<string, { title: string; story: string; receipt: string }> = {
   "internal-tool": {
-    title: "Sarah's Proposal Generator",
-    story: `Sarah spent 3 hours on every client proposal.
+    title: "Marcus's Client Tracker",
+    story: `Marcus had 12 consulting clients scattered across spreadsheets, Notion, and his inbox.
 
-"I'd open a Google Doc and stare at it. Then I'd copy-paste from the last proposal. But every client is different, so I'd rewrite half of it anyway."
+"Every Monday I'd spend an hour just figuring out who needed what. Then I'd forget to follow up with someone and they'd go cold."
 
-She thought she needed to hire an assistant.
+He thought he needed a CRM. Salesforce quoted him $300/month.
 
-Day 1: She scoped a proposal generator using the Build Stack.
-Day 5: Working prototype.
-Day 7: Used it on a real client.
+Day 1: He scoped a simple client tracker using the Build Stack.
+Day 4: Working dashboard with status badges and notes.
+Day 6: Added "last contacted" alerts.
 
-"I paste in their brief. The tool generates a draft. I edit for 20 minutes instead of 3 hours."`,
-    receipt: "Time: 7 days | Cost: $12 in API credits | Output: Proposal generator | Metric: 3 hours → 20 minutes per proposal",
+"Now I open one page and know exactly who needs attention. The red badges tell me who's going cold."`,
+    receipt: "Time: 6 days | Cost: $0 (Convex free tier) | Output: Client command center | Metric: Monday prep from 1 hour → 5 minutes",
   },
   "lead-gen": {
-    title: "Mike's Quote Calculator",
-    story: `Mike runs a painting company. Every estimate meant driving to the job, measuring, calculating, driving back.
+    title: "Elena's ROI Calculator",
+    story: `Elena runs an operations consulting practice. Her discovery calls were 50% tire-kickers.
 
-"I was spending half my week on quotes. Most of them didn't close."
+"I'd spend 30 minutes on a call only to find out they had no budget or weren't serious."
 
-Day 1: He scoped a quote calculator — square footage, paint type, number of rooms.
-Day 3: Working form that outputs an estimate.
-Day 6: Added email capture and PDF export.
+Day 1: She scoped an ROI calculator — hours saved, error reduction, cost comparison.
+Day 3: Working calculator that shows potential savings.
+Day 5: Added email capture before showing results.
 
-"Now I send the calculator link. They get an instant estimate. I only visit the serious ones."`,
-    receipt: "Time: 6 days | Cost: $8 in API credits | Output: Quote calculator with PDF | Metric: 50% fewer site visits, same close rate",
+"Now I send the calculator first. If they complete it and book a call, they've already seen the value. Close rate went from 20% to 45%."`,
+    receipt: "Time: 5 days | Cost: $4 in API credits | Output: ROI calculator with lead capture | Metric: Discovery call close rate 20% → 45%",
   },
   "offer-prototype": {
-    title: "James's Fake-Door Test",
-    story: `James had an idea for a course. But he didn't want to build it before knowing if anyone would buy.
+    title: "David's Cohort Validation",
+    story: `David wanted to run a cohort teaching freelancers to productize their services. But he'd burned out building courses nobody bought before.
 
-"I'd wasted months building things nobody wanted."
+"I wasn't going to spend 40 hours on curriculum again just to hear crickets."
 
-Day 1: He built a landing page describing the course.
-Day 2: Added Stripe checkout for pre-orders.
-Day 3: Ran $50 in ads.
+Day 1: He built a landing page with the cohort promise and curriculum outline.
+Day 2: Added Stripe for $200 refundable deposits.
+Day 3: Emailed his list of 400 people.
 
-Result: 4 pre-orders in 48 hours.
+Result: 11 deposits in 72 hours.
 
-"I made $400 before writing a single lesson. Now I know exactly what to build."`,
-    receipt: "Time: 3 days | Cost: $50 in ads + $6 API | Output: Validated offer | Metric: 4 pre-orders, $400 revenue",
+"I validated the offer before writing a single lesson. Now I'm building the curriculum knowing 11 people are waiting for it."`,
+    receipt: "Time: 3 days | Cost: $0 (no ads) | Output: Validated cohort | Metric: 11 deposits, $2,200 committed before building",
   },
 };
 

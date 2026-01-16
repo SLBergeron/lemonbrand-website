@@ -32,12 +32,12 @@ export default function Day2BuildStackEmail({
           </Text>
 
           <Text style={codeBlock}>
-            "Build me a proposal generator"
+            "Build me a client tracker"
           </Text>
 
           <Text style={text}>
             Claude will build something. But it won't be what you wanted.
-            It doesn't know your business, your clients, or your format.
+            It doesn't know your workflow, your clients, or what "tracker" means to you.
           </Text>
 
           <Text style={text}>
@@ -46,27 +46,27 @@ export default function Day2BuildStackEmail({
 
           <Text style={subheading}>Context</Text>
           <Text style={codeBlock}>
-            "I'm a marketing consultant. I write proposals for B2B clients.
-            Each proposal has: executive summary, scope, timeline, pricing, terms.
-            I want to paste in a client brief and get a draft."
+            "I'm a consultant tracking 8 active clients in a messy spreadsheet.
+            I need to see: project status, last contact date, upcoming deliverables.
+            Just for me — no team access needed."
           </Text>
 
           <Text style={subheading}>Direction</Text>
           <Text style={codeBlock}>
-            "Build a simple web form. Input: client brief (textarea).
-            Output: proposal draft in my format. Use my tone: direct, no fluff."
+            "Build a simple dashboard. List all clients with status badges.
+            Click a client to see details and add notes. Mobile-friendly."
           </Text>
 
           <Text style={subheading}>Iteration</Text>
           <Text style={text}>
-            After the first output: "The pricing section needs a table format.
-            Add a 'rush fee' option."
+            After the first output: "Add a 'last contacted' field.
+            Color-code clients I haven't talked to in 7+ days."
           </Text>
 
           <Text style={subheading}>Verification</Text>
           <Text style={text}>
-            Test it with a real brief. Does the output save you time?
-            Does it sound like you?
+            Add your real clients. Does it feel faster than the spreadsheet?
+            Can you update it between meetings on your phone?
           </Text>
 
           <Text style={divider}>---</Text>
