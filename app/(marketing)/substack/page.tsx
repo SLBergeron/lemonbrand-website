@@ -87,7 +87,7 @@ export default function SubstackActivationPage() {
       </SubtleGradientBackground>
 
       {/* Form Section */}
-      <Section width="narrow">
+      <Section width="default">
         <div className="bg-card border border-border/50 rounded-xl p-6 sm:p-8 shadow-lg">
           <SubstackActivationForm />
         </div>
@@ -95,7 +95,7 @@ export default function SubstackActivationPage() {
 
       {/* About Simon */}
       <section className="py-16 px-4 bg-muted/30 border-t border-border/50">
-        <Section width="narrow" className="py-0 px-0">
+        <Section width="default" className="py-0 px-0">
           <div className="space-y-4 text-center">
             <p className="text-sm text-muted-foreground uppercase tracking-wide">About</p>
             <p className="text-muted-foreground">
