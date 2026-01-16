@@ -140,4 +140,3 @@ const CLAUDE_MD_TEMPLATE = `# CLAUDE.md - Build Stack Context File
 3. **Iteration** - Refine through conversation
 4. **Verification** - Does it work? Test the output, not the code.
 `;
-// Build trigger: 1768572754
