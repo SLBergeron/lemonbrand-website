@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/cron/send-onboarding-emails",
-      "schedule": "0 14 * * *"
+      "schedule": "0 15 * * *"
     },
     {
       "path": "/api/cron/send-substack-emails",
-      "schedule": "0 14 * * *"
+      "schedule": "0 15 * * *"
     }
   ]
 }
