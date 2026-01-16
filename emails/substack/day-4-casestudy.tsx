@@ -15,49 +15,72 @@ interface Day4CaseStudyEmailProps {
   segment: string;
 }
 
-const caseStudies: Record<string, { title: string; story: string; receipt: string }> = {
+const segmentPatterns: Record<string, { title: string; content: string; buildTime: string }> = {
   "internal-tool": {
-    title: "Marcus's Client Tracker",
-    story: `Marcus had 12 consulting clients scattered across spreadsheets, Notion, and his inbox.
+    title: "The Client Tracker Pattern",
+    content: `Here's the pattern for replacing a messy spreadsheet:
 
-"Every Monday I'd spend an hour just figuring out who needed what. Then I'd forget to follow up with someone and they'd go cold."
+STEP 1: List what you actually track
+Not what you should track. What you do track — even if it's scattered across apps.
 
-He thought he needed a CRM. Salesforce quoted him $300/month.
+STEP 2: Identify the one view you need
+For a client tracker, it's usually: "Who needs attention right now?"
+Status badges. Last contact date. Next deliverable.
 
-Day 1: He scoped a simple client tracker using the Build Stack.
-Day 4: Working dashboard with status badges and notes.
-Day 6: Added "last contacted" alerts.
+STEP 3: Build the minimum
+Dashboard + detail view + add/edit. That's it.
+No reports. No integrations. No team features (unless you need them today).
 
-"Now I open one page and know exactly who needs attention. The red badges tell me who's going cold."`,
-    receipt: "Time: 6 days | Cost: $0 (Convex free tier) | Output: Client command center | Metric: Monday prep from 1 hour → 5 minutes",
+STEP 4: Use it for a week before adding anything
+You'll discover what's actually missing vs. what you thought you'd need.
+
+The goal isn't to build a CRM. It's to build YOUR command center.`,
+    buildTime: "Typical build: 4-7 days for v1",
   },
   "lead-gen": {
-    title: "Elena's ROI Calculator",
-    story: `Elena runs an operations consulting practice. Her discovery calls were 50% tire-kickers.
+    title: "The ROI Calculator Pattern",
+    content: `Here's the pattern for a lead-qualifying calculator:
 
-"I'd spend 30 minutes on a call only to find out they had no budget or weren't serious."
+STEP 1: Identify the "aha" moment
+What makes prospects realize they need you?
+For most services, it's seeing the cost of NOT hiring you.
 
-Day 1: She scoped an ROI calculator — hours saved, error reduction, cost comparison.
-Day 3: Working calculator that shows potential savings.
-Day 5: Added email capture before showing results.
+STEP 2: Keep inputs simple
+3-5 fields max. Hours spent, hourly rate, frequency.
+Every extra field loses people.
 
-"Now I send the calculator first. If they complete it and book a call, they've already seen the value. Close rate went from 20% to 45%."`,
-    receipt: "Time: 5 days | Cost: $4 in API credits | Output: ROI calculator with lead capture | Metric: Discovery call close rate 20% → 45%",
+STEP 3: Show the math
+Don't hide the calculation. Transparency builds trust.
+"You spend X hours × $Y = $Z/month. We typically reduce that by 40%."
+
+STEP 4: Gate the results (lightly)
+Show a preview, then ask for email to see full breakdown.
+Or show everything and ask for email to get a PDF.
+
+The goal isn't to trick people. It's to filter for serious prospects who've already seen the value.`,
+    buildTime: "Typical build: 3-5 days for v1",
   },
   "offer-prototype": {
-    title: "David's Cohort Validation",
-    story: `David wanted to run a cohort teaching freelancers to productize their services. But he'd burned out building courses nobody bought before.
+    title: "The Validation Page Pattern",
+    content: `Here's the pattern for testing demand before building:
 
-"I wasn't going to spend 40 hours on curriculum again just to hear crickets."
+STEP 1: Write the landing page first
+If you can't sell it in 500 words, you don't understand the offer yet.
+Headline, 3 bullets, price, CTA.
 
-Day 1: He built a landing page with the cohort promise and curriculum outline.
-Day 2: Added Stripe for $200 refundable deposits.
-Day 3: Emailed his list of 400 people.
+STEP 2: Make it feel real
+Real price. Real checkout (refundable deposits work well).
+"Launching if we hit 10 signups" is honest and creates urgency.
 
-Result: 11 deposits in 72 hours.
+STEP 3: Set a deadline
+"Doors close Friday" or "Limited to 10 spots" — but only if true.
+Fake scarcity destroys trust.
 
-"I validated the offer before writing a single lesson. Now I'm building the curriculum knowing 11 people are waiting for it."`,
-    receipt: "Time: 3 days | Cost: $0 (no ads) | Output: Validated cohort | Metric: 11 deposits, $2,200 committed before building",
+STEP 4: Drive traffic you already have
+Email list, Twitter, LinkedIn. If your existing audience won't buy, strangers won't either.
+
+The goal isn't to fake a product. It's to validate demand with real money before you invest time building.`,
+    buildTime: "Typical build: 2-3 days for v1",
   },
 };
 
@@ -66,32 +89,28 @@ export default function Day4CaseStudyEmail({
   segment,
 }: Day4CaseStudyEmailProps) {
   const unsubscribeUrl = `https://lemonbrand.io/api/newsletter/unsubscribe?email=${encodeURIComponent(email)}`;
-  const study = caseStudies[segment] || caseStudies["internal-tool"];
+  const pattern = segmentPatterns[segment] || segmentPatterns["internal-tool"];
 
   return (
     <Html>
       <Head />
-      <Preview>Real case study: {study.title}</Preview>
+      <Preview>{pattern.title} - a step-by-step framework</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={heading}>{study.title}</Heading>
+          <Heading style={heading}>{pattern.title}</Heading>
 
-          <Text style={storyText}>{study.story}</Text>
+          <Text style={patternText}>{pattern.content}</Text>
 
-          <Text style={receiptBox}>{study.receipt}</Text>
+          <Text style={buildTimeBox}>{pattern.buildTime}</Text>
 
           <Text style={divider}>---</Text>
 
           <Text style={text}>
-            This is what operators are shipping.
+            This is what operators ship. Not complex apps. Simple tools that solve real problems.
           </Text>
 
           <Text style={text}>
-            Not complex apps. Not startups. Simple tools that solve real problems.
-          </Text>
-
-          <Text style={text}>
-            The Build Stack is the same whether you're building a proposal generator
+            The Build Stack works the same way whether you're building a client tracker
             or a multi-tenant SaaS. Context → Direction → Iteration → Verification.
           </Text>
 
@@ -139,23 +158,23 @@ const text = {
   marginBottom: "16px",
 };
 
-const storyText = {
-  fontSize: "16px",
+const patternText = {
+  fontSize: "15px",
   lineHeight: "1.7",
   color: "#333333",
   marginBottom: "24px",
   whiteSpace: "pre-line" as const,
 };
 
-const receiptBox = {
+const buildTimeBox = {
   fontSize: "14px",
   lineHeight: "1.5",
-  color: "#333333",
-  backgroundColor: "#f0f9f0",
-  border: "1px solid #c3e6c3",
+  color: "#666666",
+  backgroundColor: "#f5f5f5",
   padding: "12px 16px",
   borderRadius: "4px",
   marginBottom: "16px",
+  fontStyle: "italic" as const,
 };
 
 const divider = {
