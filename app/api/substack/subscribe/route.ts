@@ -59,22 +59,29 @@ export async function POST(request: Request) {
     }
 
     // Send welcome email immediately
-    const emailHtml = await render(
-      SubstackWelcomeEmail({ email, segment })
-    );
+    try {
+      const emailHtml = await render(
+        SubstackWelcomeEmail({ email, segment })
+      );
 
-    await resend.emails.send({
-      from: EMAIL_FROM,
-      to: email,
-      subject: "Welcome to Simon's Agents - Your Build Stack Starter Kit",
-      html: emailHtml,
-      attachments: [
-        {
-          filename: "CLAUDE.md",
-          content: Buffer.from(CLAUDE_MD_TEMPLATE).toString("base64"),
-        },
-      ],
-    });
+      const emailResult = await resend.emails.send({
+        from: EMAIL_FROM,
+        to: email,
+        subject: "Welcome to Simon's Agents - Your Build Stack Starter Kit",
+        html: emailHtml,
+        attachments: [
+          {
+            filename: "CLAUDE.md",
+            content: Buffer.from(CLAUDE_MD_TEMPLATE),
+          },
+        ],
+      });
+
+      console.log("Email sent successfully:", emailResult);
+    } catch (emailError) {
+      // Log email error but don't fail the subscription
+      console.error("Failed to send welcome email:", emailError);
+    }
 
     return NextResponse.json({
       success: true,

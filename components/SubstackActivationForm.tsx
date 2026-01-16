@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,6 +21,7 @@ const PAIN_POINT_OPTIONS = [
 export function SubstackActivationForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const formRef = useRef<HTMLDivElement>(null);
 
   // Form fields
   const [email, setEmail] = useState("");
@@ -29,6 +30,13 @@ export function SubstackActivationForm() {
   const [painPoint, setPainPoint] = useState("");
   const [painPointOther, setPainPointOther] = useState("");
   const [triedBefore, setTriedBefore] = useState("");
+
+  // Scroll to top of form on success
+  useEffect(() => {
+    if (status === "success" && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +80,7 @@ export function SubstackActivationForm() {
 
   if (status === "success") {
     return (
-      <div className="text-center py-8 px-4">
+      <div ref={formRef} className="text-center py-8 px-4">
         <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
           <Check className="w-8 h-8 text-accent" />
         </div>
