@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -74,6 +76,13 @@ export function SubstackActivationForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-2 mb-6">
+        <h3 className="font-display text-2xl font-semibold">Get the Template</h3>
+        <p className="text-muted-foreground text-sm">
+          Tell me what you&apos;re building so I can send you the right context file examples.
+        </p>
+      </div>
+
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email *</Label>
@@ -84,7 +93,9 @@ export function SubstackActivationForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="email"
           disabled={status === "loading"}
+          className="bg-background/50"
         />
       </div>
 
@@ -97,10 +108,25 @@ export function SubstackActivationForm() {
           className="space-y-3"
           disabled={status === "loading"}
         >
-          <div className="flex items-start space-x-3 p-3 rounded-lg border border-border/50 hover:border-accent/50 transition-colors cursor-pointer">
-            <RadioGroupItem value="internal-tool" id="internal-tool" className="mt-0.5" />
+          <div
+            className={cn(
+              "flex items-start gap-3 p-3 rounded-lg border transition-all cursor-pointer hover:border-accent/50 bg-card",
+              segment === "internal-tool" ? "border-accent bg-accent/5 shadow-sm" : "border-border/50"
+            )}
+            onClick={() => setSegment("internal-tool")}
+          >
+            <RadioGroupItem value="internal-tool" id="internal-tool" className="mt-1" />
+            <div className="relative w-8 h-8 flex-shrink-0 hidden xs:block">
+              <Image 
+                src="/assets/3dicons/3dicons-tools-dynamic-color.png" 
+                alt="" 
+                fill 
+                className="object-contain" 
+                unoptimized 
+              />
+            </div>
             <div className="flex-1">
-              <Label htmlFor="internal-tool" className="cursor-pointer font-medium">
+              <Label htmlFor="internal-tool" className="cursor-pointer font-medium block">
                 Internal tool
               </Label>
               <p className="text-sm text-muted-foreground">
@@ -108,10 +134,25 @@ export function SubstackActivationForm() {
               </p>
             </div>
           </div>
-          <div className="flex items-start space-x-3 p-3 rounded-lg border border-border/50 hover:border-accent/50 transition-colors cursor-pointer">
-            <RadioGroupItem value="lead-gen" id="lead-gen" className="mt-0.5" />
+          <div
+            className={cn(
+              "flex items-start gap-3 p-3 rounded-lg border transition-all cursor-pointer hover:border-accent/50 bg-card",
+              segment === "lead-gen" ? "border-accent bg-accent/5 shadow-sm" : "border-border/50"
+            )}
+            onClick={() => setSegment("lead-gen")}
+          >
+            <RadioGroupItem value="lead-gen" id="lead-gen" className="mt-1" />
+            <div className="relative w-8 h-8 flex-shrink-0 hidden xs:block">
+              <Image 
+                src="/assets/3dicons/3dicons-calculator-dynamic-color.png" 
+                alt="" 
+                fill 
+                className="object-contain" 
+                unoptimized 
+              />
+            </div>
             <div className="flex-1">
-              <Label htmlFor="lead-gen" className="cursor-pointer font-medium">
+              <Label htmlFor="lead-gen" className="cursor-pointer font-medium block">
                 Lead-gen utility
               </Label>
               <p className="text-sm text-muted-foreground">
@@ -119,10 +160,25 @@ export function SubstackActivationForm() {
               </p>
             </div>
           </div>
-          <div className="flex items-start space-x-3 p-3 rounded-lg border border-border/50 hover:border-accent/50 transition-colors cursor-pointer">
-            <RadioGroupItem value="offer-prototype" id="offer-prototype" className="mt-0.5" />
+          <div
+            className={cn(
+              "flex items-start gap-3 p-3 rounded-lg border transition-all cursor-pointer hover:border-accent/50 bg-card",
+              segment === "offer-prototype" ? "border-accent bg-accent/5 shadow-sm" : "border-border/50"
+            )}
+            onClick={() => setSegment("offer-prototype")}
+          >
+            <RadioGroupItem value="offer-prototype" id="offer-prototype" className="mt-1" />
+            <div className="relative w-8 h-8 flex-shrink-0 hidden xs:block">
+              <Image 
+                src="/assets/3dicons/3dicons-target-dynamic-color.png" 
+                alt="" 
+                fill 
+                className="object-contain" 
+                unoptimized 
+              />
+            </div>
             <div className="flex-1">
-              <Label htmlFor="offer-prototype" className="cursor-pointer font-medium">
+              <Label htmlFor="offer-prototype" className="cursor-pointer font-medium block">
                 Offer prototype
               </Label>
               <p className="text-sm text-muted-foreground">
@@ -133,50 +189,60 @@ export function SubstackActivationForm() {
         </RadioGroup>
       </div>
 
-      {/* Role - Optional */}
-      <div className="space-y-2">
-        <Label htmlFor="role">What&apos;s your role? (optional)</Label>
-        <Input
-          id="role"
-          type="text"
-          placeholder="e.g., Marketing consultant, Founder, Product manager"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          disabled={status === "loading"}
-        />
-      </div>
+      {/* Optional Fields Group */}
+      <div className="space-y-4 pt-4 border-t border-border/50">
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          Optional (Helps me create better content)
+        </p>
+        
+        {/* Role - Optional */}
+        <div className="space-y-2">
+          <Label htmlFor="role">What&apos;s your role?</Label>
+          <Input
+            id="role"
+            type="text"
+            placeholder="e.g., Marketing consultant, Founder, Product manager"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            disabled={status === "loading"}
+            autoComplete="organization-title"
+            className="bg-background/50"
+          />
+        </div>
 
-      {/* Pain Point - Optional */}
-      <div className="space-y-2">
-        <Label htmlFor="painPoint">Biggest recurring workflow pain? (optional)</Label>
-        <Input
-          id="painPoint"
-          type="text"
-          placeholder="e.g., Spending hours on proposals, manual data entry"
-          value={painPoint}
-          onChange={(e) => setPainPoint(e.target.value)}
-          disabled={status === "loading"}
-        />
-      </div>
+        {/* Pain Point - Optional */}
+        <div className="space-y-2">
+          <Label htmlFor="painPoint">Biggest recurring workflow pain?</Label>
+          <Input
+            id="painPoint"
+            type="text"
+            placeholder="e.g., Spending hours on proposals, manual data entry"
+            value={painPoint}
+            onChange={(e) => setPainPoint(e.target.value)}
+            disabled={status === "loading"}
+            className="bg-background/50"
+          />
+        </div>
 
-      {/* Tried Before - Optional */}
-      <div className="space-y-3">
-        <Label>Have you tried building with AI before? (optional)</Label>
-        <RadioGroup
-          value={triedBefore}
-          onValueChange={setTriedBefore}
-          className="flex gap-4"
-          disabled={status === "loading"}
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="yes" id="tried-yes" />
-            <Label htmlFor="tried-yes" className="cursor-pointer">Yes</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="no" id="tried-no" />
-            <Label htmlFor="tried-no" className="cursor-pointer">No</Label>
-          </div>
-        </RadioGroup>
+        {/* Tried Before - Optional */}
+        <div className="space-y-3">
+          <Label>Have you tried building with AI before?</Label>
+          <RadioGroup
+            value={triedBefore}
+            onValueChange={setTriedBefore}
+            className="flex gap-4"
+            disabled={status === "loading"}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="yes" id="tried-yes" />
+              <Label htmlFor="tried-yes" className="cursor-pointer font-normal">Yes</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="no" id="tried-no" />
+              <Label htmlFor="tried-no" className="cursor-pointer font-normal">No</Label>
+            </div>
+          </RadioGroup>
+        </div>
       </div>
 
       {/* Error message */}
@@ -189,7 +255,7 @@ export function SubstackActivationForm() {
         type="submit"
         variant="accent"
         size="lg"
-        className="w-full"
+        className="w-full text-base py-6"
         disabled={status === "loading"}
       >
         {status === "loading" ? (
@@ -200,7 +266,7 @@ export function SubstackActivationForm() {
         ) : (
           <>
             Get the Build Stack Starter Kit
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowRight className="w-5 h-5 ml-2" />
           </>
         )}
       </Button>

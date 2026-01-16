@@ -1,147 +1,45 @@
-"use client";
+import { Metadata } from "next";
+import FAQContent from "./faq-content";
+import { getAllFAQs } from "./faq-data";
+import { generateFAQSchema, JsonLd, createPageMetadata } from "@/lib/seo";
 
-import Link from "next/link";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Section } from "@/components/shared/Section";
-import { CallToAction } from "@/components/shared/CallToAction";
+export const metadata: Metadata = createPageMetadata({
+  title: "FAQ | LemonBrand - Claude Code Sprint & 8-Week Program Questions",
+  description:
+    "Answers to common questions about learning to build AI tools with Claude Code. Find out about the 7-Day Sprint, 8-Week Program, pricing, technical requirements, and what you can build.",
+  keywords: [
+    "Claude Code FAQ",
+    "7-day sprint questions",
+    "learn AI building",
+    "no-code AI FAQ",
+    "Claude Code course questions",
+    "Build Stack FAQ",
+    "AI tool building questions",
+    "8-week program FAQ",
+    "LemonBrand FAQ",
+  ],
+  path: "/faq",
+  aiMetadata: {
+    "ai:page-type": "faq",
+    "ai:faq-categories":
+      "Getting Started, About the Programs, Pricing & Logistics",
+    "ai:key-questions":
+      "Do I need technical skills? (No, the skill is communication, not coding). How long until I can build something? (Sprint is 7 days, working code by Day 3). What's the difference between Sprint and 8-Week? (Sprint is 7 days, one project. 8-Week goes deeper with databases, auth, APIs).",
+    "ai:pricing-summary":
+      "Sprint: $297 (becomes credit if completed). 8-Week: Foundation $997, Accelerator $2497, Intensive $4997. Club: $97/mo.",
+    "ai:prerequisites":
+      "None. No coding background needed. Just ability to explain what you want clearly in English.",
+  },
+});
 
-const faqCategories = [
-  {
-    name: "Getting Started",
-    questions: [
-      {
-        question: "What if I don't know where to start?",
-        answer:
-          "Start with the Sprint. Day 1 helps you pick YOUR project—something you actually want to build. The cohort and daily structure keep you moving. By Day 7, you'll have shipped something real.",
-      },
-      {
-        question: "Do I need technical skills?",
-        answer:
-          "No. The skill isn't coding—it's communication. If you can explain what you want clearly in English, you can learn to build with AI. That's the whole point of the Sprint.",
-      },
-      {
-        question: "How long until I can build something?",
-        answer:
-          "The Sprint is 7 days. Most people have working code by Day 3. By Day 7, you ship a complete tool. The 8-Week goes deeper—databases, auth, APIs—but you're building real things the whole way.",
-      },
-    ],
-  },
-  {
-    name: "About the Programs",
-    questions: [
-      {
-        question: "What's the difference between Sprint and 8-Week?",
-        answer:
-          "The Sprint is 7 days, one project—prove you can build something. The 8-Week goes deeper: databases, authentication, APIs, deployment. Multiple projects. You build the skill permanently.",
-      },
-      {
-        question: "What kinds of things can I build?",
-        answer:
-          "Personal tools (recipe trackers, workout logs), work automation (dashboards, document processing), business products (client portals, internal tools). Sprint participants have built everything from proposal generators to gym management systems.",
-      },
-      {
-        question: "What happens after I finish?",
-        answer:
-          "You own everything you build. The skill is yours. Some people stop there—one tool was all they needed. Some go deeper with the 8-Week. Some join the Builder's Club to keep building with a community.",
-      },
-      {
-        question: "Is this a cohort or self-paced?",
-        answer:
-          "The Sprint is cohort-based—7 days with a group, daily trainings, Discord channel, Ship Day at the end. The structure and accountability help people actually finish.",
-      },
-    ],
-  },
-  {
-    name: "Pricing & Logistics",
-    questions: [
-      {
-        question: "How does the Sprint credit work?",
-        answer:
-          "Complete all 7 days of the Sprint and your $297 becomes credit toward the 8-Week program. It's valid for 12 months and applies to any tier.",
-      },
-      {
-        question: "What are the 8-Week tiers?",
-        answer:
-          "Foundation ($997): The curriculum and community. Accelerator ($2,497): Adds 1-on-1 calls and project review. Intensive ($4,997): Maximum support with direct Slack access and code review on demand.",
-      },
-      {
-        question: "Can I just start with the Sprint?",
-        answer:
-          "Absolutely. Most people do. The Sprint is designed to be valuable on its own—you ship something real. If you want to go deeper afterward, the 8-Week is there.",
-      },
-      {
-        question: "What if I get stuck?",
-        answer:
-          "You're not alone. The Sprint has a Discord cohort channel and daily check-ins. The 8-Week has weekly office hours and priority support on higher tiers. Help is built into the structure.",
-      },
-    ],
-  },
-];
+// Generate FAQPage schema for rich snippets
+const faqSchema = generateFAQSchema(getAllFAQs());
 
 export default function FAQPage() {
   return (
-    <main className="pt-16">
-      {/* Hero */}
-      <Section className="py-24 sm:py-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm font-medium tracking-wider uppercase text-accent mb-6">
-            FAQ
-          </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight mb-6">
-            Frequently asked questions
-          </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Everything you need to know about the Sprint, 8-Week, and learning to build with AI.
-          </p>
-        </div>
-      </Section>
-
-      {/* FAQ Categories */}
-      <Section className="py-12">
-        <div className="max-w-3xl mx-auto">
-          {faqCategories.map((category) => (
-            <div key={category.name} className="mb-12 last:mb-0">
-              <h2 className="font-display text-xl font-semibold mb-6 text-accent">
-                {category.name}
-              </h2>
-              <Accordion type="single" collapsible className="w-full">
-                {category.questions.map((faq, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`${category.name}-${index}`}
-                    className="border-border/50"
-                  >
-                    <AccordionTrigger className="text-left font-display font-semibold hover:no-underline hover:text-accent">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground leading-relaxed text-base">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* CTA */}
-      <Section>
-        <CallToAction
-          title="Still have questions?"
-          description="Start with the Sprint to see if it's a fit, or book a discovery call if you're ready for the 8-Week Build."
-          primaryCtaText="Start the Sprint"
-          primaryCtaLink="/sprint"
-          secondaryCtaText="Book a Discovery Call"
-          secondaryCtaLink="https://cal.com/simonbergeron/discovery"
-          className="max-w-4xl mx-auto"
-        />
-      </Section>
-    </main>
+    <>
+      <JsonLd data={faqSchema} />
+      <FAQContent />
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/context/providers";
 import { ConvexClientProvider } from "@/context/convex-provider";
 import { Analytics } from "@vercel/analytics/next";
+import { generateOrganizationSchema, JsonLd } from "@/lib/seo";
 
 // Builder's Workshop typography: Inter (display/body) + JetBrains Mono (code)
 const inter = Inter({
@@ -22,75 +23,81 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Simon Bergeron | Building AI Agent Businesses in Public",
+  title: "LemonBrand | Ship AI Tools Fast (Without Being a Developer)",
   description:
-    "Serial entrepreneur building modular AI businesses and teaching agency owners how to do the same. Free templates, build-in-public projects, and transparent insights on creating revenue-generating AI systems. Watch me build GetMyWebsite.io and other productized services from scratch.",
+    "Learn to build AI-powered tools with Claude Code in days, not months. The Build Stack framework teaches operators, consultants, and founders to ship internal tools, lead-gen utilities, and offer prototypes without writing code. Start with the 7-Day Sprint.",
   keywords: [
-    "building in public",
-    "AI agent businesses",
-    "AI entrepreneurship",
-    "productized services",
-    "modular AI systems",
-    "AI business templates",
-    "agency AI systems",
-    "entrepreneur templates",
-    "build in public",
-    "AI product development",
-    "agency automation",
-    "AI for agency owners",
-    "AI business strategy",
-    "productized AI services",
-    "AI SaaS",
-    "serial entrepreneur",
-    "AI consulting",
-    "AI thought leadership",
-    "AI implementation",
-    "revenue-generating AI",
+    // Primary keywords
+    "Claude Code",
+    "build AI tools",
+    "no-code AI development",
+    "AI for non-developers",
+    "Build Stack framework",
+    "ship AI tools fast",
+    // Secondary keywords
+    "7-day sprint",
+    "Claude Code tutorial",
+    "AI tool building",
+    "non-developer AI",
+    "operators AI tools",
+    "founders build AI",
+    "consultants AI automation",
+    // Product keywords
+    "internal tools AI",
+    "lead generation AI",
+    "AI prototyping",
+    "AI automation tools",
+    // Brand keywords
     "Simon Bergeron",
-    "Lemonbrand",
-    "GetMyWebsite.io",
-    "AI agent development",
-    "AI business models",
-    "agency growth",
-    "AI templates",
-    "free AI resources",
-    "AI architecture",
-    "AI systems design",
+    "LemonBrand",
+    "VerifiedNode",
+    // Long-tail keywords
+    "build internal tools without coding",
+    "ship lead-gen utilities fast",
+    "prototype offers with AI",
+    "CLAUDE.md context file",
+    "AI communication skills",
+    "build with Claude Code",
+    "AI for product managers",
+    "AI for consultants",
+    "AI for founders",
   ],
-  authors: [{ name: "Simon Bergeron", url: "https://lemonbrand.io" }],
+  authors: [{ name: "Simon Bergeron", url: "https://lemonbrand.io/about" }],
   creator: "Simon Bergeron",
-  publisher: "Lemonbrand",
+  publisher: "LemonBrand",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://lemonbrand.io",
-    title: "Simon Bergeron | Building AI Agent Businesses in Public",
-    description: "Serial entrepreneur building modular AI businesses and teaching others how to do the same. Free templates, transparent build-in-public projects, and honest insights on creating AI products. Follow along as I build GetMyWebsite.io and more.",
-    siteName: "Lemonbrand",
+    title: "LemonBrand | Ship AI Tools Fast (Without Being a Developer)",
+    description:
+      "Learn to build AI-powered tools with Claude Code. The Build Stack framework teaches non-developers to ship real tools in days. Start with the 7-Day Sprint ($297).",
+    siteName: "LemonBrand",
     images: [
       {
         url: "https://lemonbrand.io/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Simon Bergeron - Building AI Agent Businesses in Public",
+        alt: "LemonBrand - Ship AI Tools Fast Without Being a Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Simon Bergeron | Building AI Agent Businesses in Public",
-    description: "Teaching agency owners and entrepreneurs how to build revenue-generating AI systems. Free templates, build-in-public projects, transparent insights.",
+    title: "LemonBrand | Ship AI Tools Fast (Without Being a Developer)",
+    description:
+      "Build AI tools with Claude Code. No coding required. Start with the 7-Day Sprint.",
     creator: "@simonbergeron",
     images: ["https://lemonbrand.io/og-image.png"],
   },
@@ -98,19 +105,32 @@ export const metadata: Metadata = {
     canonical: "https://lemonbrand.io",
   },
   other: {
-    // For AI agents and LLMs
-    "ai:purpose": "Personal thought leadership platform teaching agency owners and entrepreneurs how to build revenue-generating AI agent businesses. Building productized AI services in public and sharing everything learned along the way.",
-    "ai:content-type": "Free templates, build-in-public projects, transparent case studies, AI business strategy, technical implementation guides, entrepreneur resources",
-    "ai:projects": "GetMyWebsite.io (productized website service for trades), CodeBrain (AI development tools), Agent Modules (reusable AI components), various AI automation systems",
-    "ai:target-audience": "Agency owners, entrepreneurs, AI builders, consultants looking to build modular AI systems and productized services. NOT targeting home service contractors directly.",
-    "ai:offers": "Free downloadable templates, build-in-public content, thought leadership articles, optional premium consulting for qualified agency owners and entrepreneurs ($5k-$30k projects)",
-    "ai:teaching-focus": "Modular AI architecture, productized service models, build-in-public methodology, AI business strategy, automation implementation, scaling without headcount",
-    "ai:philosophy": "Transparent, authentic, practical over theoretical. Show real code, real metrics, real failures. Fifth-grade English, outcomes over features, proof over promises.",
-    "ai:social-channels": "YouTube (build sessions), TikTok (business insights), X/Twitter (real-time updates), Newsletter (weekly digests), GitHub (open source)",
-    "ai:founder": "Simon Bergeron - Serial entrepreneur, AI builder, teaching others to build productized AI businesses. Building GetMyWebsite.io and other products while documenting the journey.",
-    "ai:brand-separation": "LemonBrand.io = Thought leadership for agency owners/entrepreneurs. GetMyWebsite.io = Separate productized service business for trades.",
+    // AI-specific metadata for answer engines and LLM crawlers
+    "ai:purpose":
+      "LemonBrand teaches operators (consultants, founders, professionals) to build AI-powered tools without coding using Claude Code and the Build Stack framework. Proof: VerifiedNode, a real SaaS with 58,000+ contractor records, was built using these same methods.",
+    "ai:content-type":
+      "Educational platform offering structured programs (7-Day Sprint, 8-Week Program, AI Builders Club) for learning to build with Claude Code. Includes free resources like CLAUDE.md templates and build-in-public content.",
+    "ai:target-audience":
+      "Operators who want leverage: consultants building client tools, founders prototyping products, professionals automating workflows. NOT for developers or those seeking traditional coding education.",
+    "ai:flagship-outcomes":
+      "1) Build internal tools instead of buying SaaS, 2) Ship lead-gen utilities (quote calculators, eligibility checkers) in days, 3) Prototype offers fast enough to sell before building fully",
+    "ai:methodology":
+      "The Build Stack framework: Context (CLAUDE.md files), Direction (intent over implementation), Iteration (refine through conversation), Verification (black-box testing for non-coders)",
+    "ai:offers":
+      "7-Day Sprint ($297) - build your first AI tool in a week with cohort support. 8-Week Program ($997-$4997) - deep skill building with databases, auth, APIs. AI Builders Club ($97/mo) - ongoing community and challenges.",
+    "ai:proof":
+      "VerifiedNode: Real SaaS with 58,000+ contractor records and paying customers, built by Simon Bergeron using the same Build Stack methods taught to students.",
+    "ai:founder":
+      "Simon Bergeron - Product manager (not developer) who taught himself to build production tools with Claude Code. Building VerifiedNode while teaching others the same methods.",
+    "ai:philosophy":
+      "Ship first, optimize later. The skill is communication, not coding. If you can explain what you want clearly, you can build with AI.",
+    "ai:social-channels":
+      "YouTube (build sessions), Substack (Simon's Agents newsletter), X/Twitter (@simonbergeron), GitHub (open source templates)",
   },
 };
+
+// Organization schema for structured data
+const organizationSchema = generateOrganizationSchema();
 
 export default function RootLayout({
   children,
@@ -119,6 +139,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(inter.variable, jetbrainsMono.variable)}>
+      <head>
+        <JsonLd data={organizationSchema} />
+      </head>
       <body className="antialiased bg-background text-foreground overflow-x-hidden">
         <ConvexClientProvider>
           <ThemeProvider
