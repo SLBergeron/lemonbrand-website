@@ -15,18 +15,18 @@ interface SubstackWelcomeEmailProps {
   segment: string;
 }
 
-const segmentContent: Record<string, { pattern: string; link: string }> = {
+const segmentContent: Record<string, { pattern: string; exampleFile: string }> = {
   "internal-tool": {
-    pattern: "Proposal Generator",
-    link: "https://lemonbrand.io/blog/proposal-generator", // Update when post exists
+    pattern: "Client Tracker",
+    exampleFile: "EXAMPLE-client-tracker.md",
   },
   "lead-gen": {
-    pattern: "Quote Calculator",
-    link: "https://lemonbrand.io/blog/quote-calculator", // Update when post exists
+    pattern: "ROI Calculator",
+    exampleFile: "EXAMPLE-roi-calculator.md",
   },
   "offer-prototype": {
-    pattern: "Fake-Door Landing",
-    link: "https://lemonbrand.io/blog/fake-door-landing", // Update when post exists
+    pattern: "Cohort Validation Page",
+    exampleFile: "EXAMPLE-cohort-validation.md",
   },
 };
 
@@ -63,29 +63,27 @@ export default function SubstackWelcomeEmail({
           <Text style={subheading}>Your Build Stack Starter Kit</Text>
 
           <Text style={text}>
-            Attached to this email is the CLAUDE.md template I use for every project.
-            This is the foundation of the Build Stack:
+            Attached to this email are two files:
           </Text>
 
-          <Text style={listItem}>1. <strong>Context</strong> — What does the AI need to know?</Text>
-          <Text style={listItem}>2. <strong>Direction</strong> — What do you want, not how to code it</Text>
-          <Text style={listItem}>3. <strong>Iteration</strong> — Refine through conversation</Text>
+          <Text style={listItem}>1. <strong>CLAUDE.md</strong> — The blank template. Fill this out for your project.</Text>
+          <Text style={listItem}>2. <strong>{content.exampleFile}</strong> — A filled example based on what you're building.</Text>
+
+          <Text style={text}>
+            The example shows exactly how I'd fill out the template for a {content.pattern}.
+            Use it as a reference when filling out your own.
+          </Text>
+
+          <Text style={subheading}>The Build Stack (how to use this)</Text>
+
+          <Text style={listItem}>1. <strong>Context</strong> — Fill out CLAUDE.md (15 min). This is what Claude needs to know.</Text>
+          <Text style={listItem}>2. <strong>Direction</strong> — Tell Claude what you want, not how to code it.</Text>
+          <Text style={listItem}>3. <strong>Iteration</strong> — Refine through conversation.</Text>
           <Text style={listItem}>4. <strong>Verification</strong> — Does it work? (not: is the code right?)</Text>
 
           <Text style={text}>
-            Fill out the template (15 minutes). Use it in every conversation with Claude.
-          </Text>
-
-          <Text style={subheading}>Based on what you're building...</Text>
-
-          <Text style={text}>
-            You said you want to build {segment === "internal-tool" ? "internal tools" : segment === "lead-gen" ? "lead-gen utilities" : "offer prototypes"}.
-            Start with the <strong>{content.pattern}</strong> pattern.
-          </Text>
-
-          <Text style={text}>
-            Tomorrow I'll show you the Build Stack in action — same request,
-            completely different results when you add proper context.
+            Start with the example, then create your own CLAUDE.md.
+            The more context you provide, the better Claude's output.
           </Text>
 
           <Text style={signature}>— Simon</Text>
