@@ -6,12 +6,8 @@ import SubstackWelcomeEmail from "@/emails/substack/welcome";
 import { render } from "@react-email/components";
 
 export async function POST(request: Request) {
-  console.log("Substack subscribe API called");
-  console.log("CONVEX_URL:", process.env.NEXT_PUBLIC_CONVEX_URL);
-
   try {
     const { email, segment, role, painPoint, triedBefore } = await request.json();
-    console.log("Request data:", { email, segment });
 
     // Validate required fields
     if (!email || typeof email !== "string") {
