@@ -67,43 +67,35 @@ export default function SubstackContent() {
                 </p>
               </motion.div>
 
-              {/* What you'll build */}
-              <motion.div variants={fadeInUp} className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
-                  <div className="w-10 h-10 relative flex-shrink-0">
-                    <Image
-                      src="/assets/3dicons/3dicons-tools-dynamic-color.png"
-                      alt="Internal tools"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <span className="text-sm font-medium">Internal tools</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
-                  <div className="w-10 h-10 relative flex-shrink-0">
-                    <Image
-                      src="/assets/3dicons/3dicons-calculator-dynamic-color.png"
-                      alt="Lead-gen utilities"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <span className="text-sm font-medium">Lead-gen utilities</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/50">
-                  <div className="w-10 h-10 relative flex-shrink-0">
-                    <Image
-                      src="/assets/3dicons/3dicons-target-dynamic-color.png"
-                      alt="Offer prototypes"
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                  <span className="text-sm font-medium">Offer prototypes</span>
+              {/* What you get - FREE */}
+              <motion.div variants={fadeInUp} className="max-w-xl mx-auto">
+                <div className="bg-card/80 backdrop-blur-sm border border-accent/20 rounded-xl p-6 space-y-4">
+                  <p className="text-xs font-semibold text-accent uppercase tracking-wider text-center">
+                    Free Starter Kit Includes
+                  </p>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <span className="text-accent font-bold">1.</span>
+                      <div>
+                        <span className="font-medium">CLAUDE.md Template</span>
+                        <span className="text-muted-foreground"> — The blank context file I use for every project</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-accent font-bold">2.</span>
+                      <div>
+                        <span className="font-medium">Filled Example</span>
+                        <span className="text-muted-foreground"> — A complete example based on what you&apos;re building (ROI Calculator, Client Tracker, or Cohort Validation)</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-accent font-bold">3.</span>
+                      <div>
+                        <span className="font-medium">5-Email Build Stack Course</span>
+                        <span className="text-muted-foreground"> — The method behind shipping tools fast</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </motion.div>
             </motion.div>
