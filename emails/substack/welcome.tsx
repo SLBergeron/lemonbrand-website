@@ -15,18 +15,21 @@ interface SubstackWelcomeEmailProps {
   segment: string;
 }
 
-const segmentContent: Record<string, { pattern: string; exampleFile: string }> = {
+const segmentContent: Record<string, { pattern: string; exampleFile: string; description: string }> = {
   "internal-tool": {
     pattern: "Client Tracker",
     exampleFile: "EXAMPLE-client-tracker.md",
+    description: "a simple dashboard to replace your messy client spreadsheet",
   },
   "lead-gen": {
     pattern: "ROI Calculator",
     exampleFile: "EXAMPLE-roi-calculator.md",
+    description: "a tool that pre-qualifies leads by showing them the value before they book a call",
   },
   "offer-prototype": {
     pattern: "Cohort Validation Page",
     exampleFile: "EXAMPLE-cohort-validation.md",
+    description: "a landing page to test demand for a new offer before you build the curriculum",
   },
 };
 
@@ -67,11 +70,11 @@ export default function SubstackWelcomeEmail({
           </Text>
 
           <Text style={listItem}>1. <strong>CLAUDE.md</strong> — The blank template. Fill this out for your project.</Text>
-          <Text style={listItem}>2. <strong>{content.exampleFile}</strong> — A filled example based on what you're building.</Text>
+          <Text style={listItem}>2. <strong>{content.exampleFile}</strong> — A filled example showing how to build {content.description}.</Text>
 
           <Text style={text}>
-            The example shows exactly how I'd fill out the template for a {content.pattern}.
-            Use it as a reference when filling out your own.
+            The example shows exactly how I'd structure a {content.pattern} project.
+            Use it as a reference when filling out your own CLAUDE.md.
           </Text>
 
           <Text style={subheading}>The Build Stack (how to use this)</Text>
