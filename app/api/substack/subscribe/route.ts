@@ -50,42 +50,53 @@ export async function POST(request: Request) {
       );
     }
 
-    // If already subscribed to substack sequence, no need to send welcome
-    if (result.alreadySubscribed) {
-      return NextResponse.json({
-        success: true,
-        message: "Already subscribed to Simon's Agents",
-      });
-    }
+    const isAlreadySubscribed = result.alreadySubscribed;
 
-    // Send welcome email immediately
+    // Send email - full welcome for new subscribers, just the doc for existing
     try {
-      const emailHtml = await render(
-        SubstackWelcomeEmail({ email, segment })
-      );
+      if (isAlreadySubscribed) {
+        // Just resend the document
+        await resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: "Your Build Stack Starter Kit (Resent)",
+          html: `<p>Here's the CLAUDE.md template you requested.</p><p>— Simon</p>`,
+          attachments: [
+            {
+              filename: "CLAUDE.md",
+              content: Buffer.from(CLAUDE_MD_TEMPLATE),
+            },
+          ],
+        });
+      } else {
+        // Full welcome email for new subscribers
+        const emailHtml = await render(
+          SubstackWelcomeEmail({ email, segment })
+        );
 
-      const emailResult = await resend.emails.send({
-        from: EMAIL_FROM,
-        to: email,
-        subject: "Welcome to Simon's Agents - Your Build Stack Starter Kit",
-        html: emailHtml,
-        attachments: [
-          {
-            filename: "CLAUDE.md",
-            content: Buffer.from(CLAUDE_MD_TEMPLATE),
-          },
-        ],
-      });
-
-      console.log("Email sent successfully:", emailResult);
+        await resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: "Welcome to Simon's Agents - Your Build Stack Starter Kit",
+          html: emailHtml,
+          attachments: [
+            {
+              filename: "CLAUDE.md",
+              content: Buffer.from(CLAUDE_MD_TEMPLATE),
+            },
+          ],
+        });
+      }
     } catch (emailError) {
-      // Log email error but don't fail the subscription
-      console.error("Failed to send welcome email:", emailError);
+      console.error("Failed to send email:", emailError);
     }
 
     return NextResponse.json({
       success: true,
-      message: "Welcome! Check your email for the Build Stack Starter Kit.",
+      alreadySubscribed: isAlreadySubscribed,
+      message: isAlreadySubscribed
+        ? "You're already subscribed! We've resent the template to your inbox."
+        : "Welcome! Check your email for the Build Stack Starter Kit.",
     });
   } catch (error) {
     console.error("Substack subscribe error:", error);

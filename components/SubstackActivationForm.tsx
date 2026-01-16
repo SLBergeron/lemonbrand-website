@@ -21,6 +21,7 @@ const PAIN_POINT_OPTIONS = [
 export function SubstackActivationForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   // Form fields
@@ -71,6 +72,7 @@ export function SubstackActivationForm() {
         throw new Error(data.error || "Failed to subscribe");
       }
 
+      setAlreadySubscribed(data.alreadySubscribed || false);
       setStatus("success");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong");
@@ -84,9 +86,13 @@ export function SubstackActivationForm() {
         <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
           <Check className="w-8 h-8 text-accent" />
         </div>
-        <h3 className="text-2xl font-semibold mb-3">Check your email!</h3>
+        <h3 className="text-2xl font-semibold mb-3">
+          {alreadySubscribed ? "You're already subscribed!" : "Check your email!"}
+        </h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Your Build Stack Starter Kit is on the way. Look for an email from Simon Bergeron.
+          {alreadySubscribed
+            ? "We've resent the Build Stack Starter Kit to your inbox."
+            : "Your Build Stack Starter Kit is on the way. Look for an email from Simon Bergeron."}
         </p>
       </div>
     );
