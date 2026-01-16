@@ -263,16 +263,25 @@ export default defineSchema({
     confirmedAt: v.optional(v.number()),
     unsubscribedAt: v.optional(v.number()),
     subscribedAt: v.number(),
-    source: v.string(), // "homepage", "templates", "youtube"
+    source: v.string(), // "homepage", "templates", "youtube", "substack"
     tags: v.array(v.string()),
     // Onboarding sequence tracking
     onboardingStep: v.optional(v.number()), // 0=welcome, 2=day2, 3=day3, 4=day4, 5=day5, 7=day7, null=complete
     lastOnboardingEmailAt: v.optional(v.number()),
+    // Substack welcome sequence tracking
+    substackStep: v.optional(v.number()), // 1=welcome, 2=buildstack, 3=casestudy, 4=failure, 5=cta, null=complete
+    lastSubstackEmailAt: v.optional(v.number()),
+    // Substack-specific fields
+    segment: v.optional(v.string()), // "internal-tool", "lead-gen", "offer-prototype"
+    role: v.optional(v.string()),
+    painPoint: v.optional(v.string()),
+    triedBefore: v.optional(v.boolean()),
   })
     .index("by_email", ["email"])
     .index("by_status", ["status"])
     .index("by_confirmation_token", ["confirmationToken"])
-    .index("by_onboarding", ["status", "onboardingStep"]),
+    .index("by_onboarding", ["status", "onboardingStep"])
+    .index("by_substack", ["status", "substackStep"]),
 
   // Templates catalog (GitHub repos with step-by-step guides)
   templates: defineTable({

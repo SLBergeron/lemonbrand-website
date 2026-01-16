@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DotGridBackground } from "@/components/dot-grid-background";
-import { SpotsBadge } from "@/components/spots-counter";
 import { SprintTimeline } from "@/components/timeline-progress";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
@@ -274,12 +273,13 @@ That's your project.`,
   },
   {
     question: "Can I get a refund?",
-    answer: `First 48 hours: Full refund, no questions.
-After 48 hours: No refund.
+    answer: `Two guarantees:
 
-But if you complete all 7 days, your $297 becomes credit toward the 8-Week.
+1. 48-hour money-back guarantee. Not what you expected? Full refund, no questions asked.
 
-The credit structure IS the refund.`,
+2. Completion credit. Finish all 7 days and your $297 becomes credit toward the 8-Week program (valid 12 months).
+
+The first is a safety net. The second rewards follow-through.`,
   },
 ];
 
@@ -404,10 +404,18 @@ export default function SprintPage() {
               >
                 <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-8 sm:p-10 shadow-lg max-w-2xl mx-auto">
                   <div className="space-y-6 text-center">
-                    <div>
-                      <p className="text-2xl sm:text-3xl font-display font-semibold mb-2">
+                    <div className="space-y-4">
+                      <p className="text-2xl sm:text-3xl font-display font-semibold">
                         Ship your first AI-built tool in 7 days.
                       </p>
+                      <div className="text-sm text-muted-foreground space-y-1">
+                        <p className="font-medium text-foreground/80">Build something real:</p>
+                        <ul className="space-y-1">
+                          <li>• Replace a SaaS you&apos;re overpaying for</li>
+                          <li>• Ship a lead-gen calculator or qualifier</li>
+                          <li>• Prototype an offer and sell before building fully</li>
+                        </ul>
+                      </div>
                     </div>
 
                     {/* Price */}
@@ -450,7 +458,10 @@ export default function SprintPage() {
                         Next cohort: {nextCohort}
                       </span>
                       <span className="hidden sm:inline">·</span>
-                      <SpotsBadge remaining={10} />
+                      <span className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        Small cohort (max 10)
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -609,7 +620,7 @@ export default function SprintPage() {
                     <div className="flex items-start gap-4 p-4 relative z-10">
                       <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
                         <span className="font-mono text-sm font-semibold text-accent">
-                          {day.days.split(" ")[0]}
+                          {day.days.split(" ")[1]}
                         </span>
                       </div>
                       <div className="flex-1">
@@ -622,7 +633,7 @@ export default function SprintPage() {
                         <div className="bg-accent/5 border border-accent/20 rounded-md px-4 py-2 inline-block">
                           <p className="text-sm">
                             <span className="font-medium text-accent">
-                              By end of {day.days.split(" ")[0]}:
+                              By end of Day {day.days.split(" ")[1]}:
                             </span>{" "}
                             {day.outcome}
                           </p>
@@ -644,20 +655,29 @@ export default function SprintPage() {
             The Risk Reversal
           </h2>
 
-          <div className="bg-card border border-border/50 rounded-lg p-8">
-            <div className="space-y-4 text-muted-foreground">
-              <p className="text-xl font-semibold text-foreground">
-                $297 is the price.
+          <div className="space-y-6">
+            {/* Guarantee 1: Money-back */}
+            <div className="bg-card border border-border/50 rounded-lg p-6">
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <Check className="w-5 h-5 text-accent" />
+                48-Hour Money-Back Guarantee
+              </h3>
+              <p className="text-muted-foreground">
+                Not what you expected? Full refund within 48 hours, no questions asked.
               </p>
-              <p>
-                Complete all 7 days?
-                <br />
-                <span className="text-foreground font-medium">
-                  That $297 becomes credit toward the 8-Week program.
-                </span>
+            </div>
+
+            {/* Guarantee 2: Completion credit */}
+            <div className="bg-card border border-accent/30 rounded-lg p-6">
+              <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-accent" />
+                Completion Credit
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Complete all 7 days? Your $297 becomes credit toward the 8-Week program.
               </p>
-              <p>Here&apos;s what &quot;complete&quot; means:</p>
-              <ul className="space-y-2 pl-4">
+              <p className="text-sm text-muted-foreground mb-3">Here&apos;s what &quot;complete&quot; means:</p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-accent" />
                   Finish each daily training and exercise
@@ -670,23 +690,9 @@ export default function SprintPage() {
                   <Check className="w-4 h-4 text-accent" />
                   Submit your project on Ship Day
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-accent" />
-                  Attend the Ship Day call (or submit async)
-                </li>
               </ul>
-              <p>That&apos;s it.</p>
-              <p className="text-sm">
-                The credit is valid for 12 months.
-                <br />
-                It applies to any 8-Week tier.
-              </p>
-              <p className="text-foreground font-medium pt-4 italic">
-                You&apos;re not spending money.
-                <br />
-                You&apos;re putting down a deposit on a skill.
-                <br />
-                Earn it back when you follow through.
+              <p className="text-sm text-muted-foreground mt-4">
+                Credit valid for 12 months. Applies to any 8-Week tier.
               </p>
             </div>
           </div>
@@ -830,7 +836,7 @@ export default function SprintPage() {
                   Next cohort: <span className="font-medium">{nextCohort}</span>
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Spots: <span className="font-medium">10</span> (small so everyone ships)
+                  Small cohort <span className="font-medium">(max 10)</span> so everyone ships
                 </p>
               </div>
 
