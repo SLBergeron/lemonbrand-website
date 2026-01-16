@@ -104,7 +104,7 @@ export function SubstackActivationForm() {
                 Internal tool
               </Label>
               <p className="text-sm text-muted-foreground">
-                Replace a SaaS you're overpaying for, automate reporting, build a dashboard
+                Replace a SaaS you&apos;re overpaying for, automate reporting, build a dashboard
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@ export function SubstackActivationForm() {
 
       {/* Role - Optional */}
       <div className="space-y-2">
-        <Label htmlFor="role">What's your role? (optional)</Label>
+        <Label htmlFor="role">What&apos;s your role? (optional)</Label>
         <Input
           id="role"
           type="text"
@@ -206,7 +206,7 @@ export function SubstackActivationForm() {
       </Button>
 
       <p className="text-xs text-center text-muted-foreground">
-        You'll get the CLAUDE.md template + a 5-email welcome sequence.
+        You&apos;ll get the CLAUDE.md template + a 5-email welcome sequence.
         <br />
         Unsubscribe anytime.
       </p>

@@ -48,7 +48,7 @@ export default function SubstackActivationPage() {
                   className="px-4 py-1.5 text-sm font-medium gap-2"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  Simon's Agents
+                  Simon&apos;s Agents
                 </Badge>
               </motion.div>
 
@@ -104,7 +104,7 @@ export default function SubstackActivationPage() {
               <strong>LemonBrand</strong> teaches non-developers to build with Claude Code.
             </p>
             <p className="text-muted-foreground">
-              When I say "agents," I don't mean bots running in the cloud.
+              When I say &quot;agents,&quot; I don&apos;t mean bots running in the cloud.
               I mean <strong>you</strong> empowered by AI — and the tools you build that work for you.
             </p>
             <p className="text-sm text-muted-foreground pt-4">
