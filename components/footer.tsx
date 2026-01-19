@@ -132,6 +132,19 @@ export function Footer() {
                   Ontario employment law compliance
                 </p>
               </li>
+              <li>
+                <Link
+                  href="https://www.verifiednode.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                >
+                  Verifiednode
+                </Link>
+                <p className="text-xs text-muted-foreground/70 mt-1">
+                  Trust layer for the agentic web
+                </p>
+              </li>
             </ul>
           </div>
         </div>
