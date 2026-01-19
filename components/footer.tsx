@@ -29,7 +29,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-10 sm:mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-12 mb-10 sm:mb-12 md:mb-16">
           {/* Brand Column */}
           <div className="md:col-span-2 space-y-6">
             <div>
@@ -111,6 +111,26 @@ export function Footer() {
                 >
                   Free Templates
                 </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Products Column */}
+          <div>
+            <h3 className="font-semibold mb-4 text-foreground">Products</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="https://ats.lemonbrand.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                >
+                  Lemonbrand ATS
+                </Link>
+                <p className="text-xs text-muted-foreground/70 mt-1">
+                  Ontario employment law compliance
+                </p>
               </li>
             </ul>
           </div>
