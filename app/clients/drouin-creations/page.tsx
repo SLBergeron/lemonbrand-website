@@ -1577,8 +1577,8 @@ export default function DrouinCreationsPage() {
 
       {/* Quote Sheet Modal */}
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-          <SheetHeader className="space-y-1 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+        <SheetContent className="w-full sm:max-w-lg overflow-y-auto p-6">
+          <SheetHeader className="space-y-1 pb-4 mb-2 border-b border-neutral-200 dark:border-neutral-800">
             <SheetTitle className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-xl bg-orange-500 flex items-center justify-center">
                 <ShoppingCart className="h-5 w-5 text-white" />
@@ -1642,7 +1642,7 @@ export default function DrouinCreationsPage() {
             </div>
           ) : (
             /* Cart & Form Content */
-            <div className="py-6 space-y-6">
+            <div className="pt-4 space-y-6">
               {/* Cart Items */}
               {cart.length === 0 ? (
                 <div className="text-center py-12">
