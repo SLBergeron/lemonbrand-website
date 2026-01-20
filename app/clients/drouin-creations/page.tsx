@@ -624,17 +624,17 @@ export default function DrouinCreationsPage() {
     printWindow.document.write(quoteHtml);
     printWindow.document.close();
 
-    // Wait for content to load, then trigger print
-    printWindow.onload = () => {
-      setTimeout(() => {
-        printWindow.print();
-      }, 250);
-    };
+    // Trigger print after a short delay to allow styles/images to load
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+    }, 1000);
   };
 
   // Generate printable quote HTML
   const generatePrintableQuote = () => {
     const date = new Date().toLocaleDateString();
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
     const servicesRows = cart.map(item => `
       <tr style="border-bottom: 1px solid #e5e7eb;">
@@ -670,6 +670,7 @@ export default function DrouinCreationsPage() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="${origin}/">
   <title>Quote - Lemon Brand × Drouin Creations</title>
   <style>
     * {
@@ -977,285 +978,62 @@ export default function DrouinCreationsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-950 dark:to-neutral-900">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-500/5 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-green-500/5 blur-[120px] rounded-full"></div>
+        </div>
+
         <div className="max-w-7xl mx-auto text-center">
           {/* Partnership Logo */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-4 mb-8"
+            className="inline-flex items-center gap-6 p-2 pr-6 mb-10 rounded-full bg-white dark:bg-neutral-800 shadow-sm border border-neutral-200 dark:border-neutral-700"
           >
-            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-neutral-800 shadow-lg border border-neutral-200 dark:border-neutral-700">
+            <div className="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold italic">LB</div>
+            <div className="flex items-center gap-4">
               <Image
                 src="https://www.drouincreations.com/we/we.dll/Pic?UN=246965&F=C&T=801&Age=1387088034"
                 alt="Drouin Creations"
-                width={100}
-                height={40}
-                className="h-10 w-auto object-contain"
+                width={80}
+                height={32}
+                className="h-6 w-auto object-contain grayscale opacity-70"
                 unoptimized
               />
-              <span className="text-2xl font-bold text-neutral-400 dark:text-neutral-600">×</span>
-              <div className="flex items-center gap-2">
-                <Image
-                  src="/assets/logo_lemonbrand_256x256.svg"
-                  alt="Lemon Brand"
-                  width={32}
-                  height={32}
-                  className="w-8 h-8"
-                />
-                <Image
-                  src="/assets/Lemonbrand_Wordmark.svg"
-                  alt="Lemon Brand"
-                  width={72}
-                  height={20}
-                  className="h-5 w-auto"
-                />
-              </div>
+              <span className="text-neutral-300 dark:text-neutral-600">|</span>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Official Partner</div>
             </div>
           </motion.div>
 
-          <Badge className="mb-4 bg-orange-500 text-white hover:bg-orange-600">
-            {t.discountBadge}
-          </Badge>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6"
-          >
-            {t.heroTitle}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto"
-          >
-            {t.heroSubtitle}
-          </motion.p>
+          <div className="space-y-6 max-w-4xl mx-auto">
+            <Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+              {t.discountBadge}
+            </Badge>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-neutral-900 dark:text-white leading-[1.1]"
+            >
+              Transform your business with <span className="text-orange-500 italic">Simon</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto font-medium"
+            >
+              {t.heroSubtitle}
+            </motion.p>
+          </div>
 
-          {/* Cart Trigger Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 flex flex-col items-center gap-4"
-          >
-            <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-              <SheetTrigger asChild>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white relative">
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  {t.viewQuote}
-                  {cart.length > 0 && (
-                    <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center bg-green-500">
-                      {cart.length}
-                    </Badge>
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-                <SheetHeader className="px-2">
-                  <SheetTitle>{t.yourQuote}</SheetTitle>
-                  <SheetDescription>
-                    {t.reviewServices}
-                  </SheetDescription>
-                </SheetHeader>
-
-                {/* Cart Items */}
-                <div className="mt-8 px-4 space-y-4">
-                  {cart.length === 0 ? (
-                    <div className="text-center py-12 text-neutral-500">
-                      <ShoppingCart className="mx-auto h-12 w-12 mb-4 opacity-50" />
-                      <p>{t.quoteEmpty}</p>
-                      <p className="text-sm mt-2">{t.quoteEmptyDesc}</p>
-                    </div>
-                  ) : (
-                    <>
-                      {cart.map((item) => (
-                        <Card key={item.id} className="relative">
-                          <CardHeader className="pb-3">
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <CardTitle className="text-base">{item.name}</CardTitle>
-                                <CardDescription className="text-sm mt-1">
-                                  {t.delivery}: {item.delivery}
-                                </CardDescription>
-                              </div>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => removeFromCart(item.id)}
-                                className="h-8 w-8 p-0"
-                              >
-                                <X className="h-4 w-4" />
-                              </Button>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            {item.lineItems && item.lineItems.length > 0 && (
-                              <div className="mb-4 p-3 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800">
-                                <div className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mb-2">
-                                  {t.configDetails}
-                                </div>
-                                <div className="space-y-1">
-                                  {item.lineItems.map((lineItem, idx) => (
-                                    <div key={idx} className="flex justify-between items-center text-xs">
-                                      <span className="text-neutral-600 dark:text-neutral-400">{lineItem.label}</span>
-                                      <span className="font-medium text-neutral-900 dark:text-neutral-100">{lineItem.value}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                            <div className="space-y-1">
-                              <div className="flex justify-between text-sm">
-                                <span className="text-neutral-500 line-through">
-                                  ${item.regularPrice.toLocaleString()} CAD
-                                </span>
-                              </div>
-                              <div className="flex justify-between font-semibold text-green-600">
-                                <span>Drouin Special:</span>
-                                <span>${item.drouinPrice.toLocaleString()} CAD</span>
-                              </div>
-                              {item.recurring && (
-                                <div className="text-sm text-neutral-600 mt-2">
-                                  + ${item.recurring.drouinPrice}/mo ongoing
-                                </div>
-                              )}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-
-                      <Separator className="my-6" />
-
-                      {/* Totals */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm text-neutral-600">
-                          <span>{t.subtotalRegular}</span>
-                          <span>${totals.regularTotal.toLocaleString()} CAD</span>
-                        </div>
-                        <div className="flex justify-between text-sm text-green-600 font-medium">
-                          <span>{t.drouinDiscount}</span>
-                          <span>-${totals.discount.toLocaleString()} CAD</span>
-                        </div>
-                        <Separator />
-                        <div className="flex justify-between text-lg font-bold">
-                          <span>{t.total}</span>
-                          <span className="text-orange-500">
-                            ${totals.drouinTotal.toLocaleString()} CAD
-                          </span>
-                        </div>
-                        <div className="text-sm text-neutral-600 text-center pt-2">
-                          {t.totalDeliveryTime} ~{totals.totalDelivery} {t.weeksText}
-                          <br />
-                          <span className="text-xs">{t.someServicesParallel}</span>
-                        </div>
-                      </div>
-
-                      <Separator className="my-6" />
-
-                      {/* Actions */}
-                      <div className="space-y-3">
-                        <Button
-                          onClick={handlePrint}
-                          variant="outline"
-                          className="w-full"
-                        >
-                          <Printer className="mr-2 h-4 w-4" />
-                          {t.printThisQuote}
-                        </Button>
-
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button className="w-full bg-orange-500 hover:bg-orange-600">
-                              <Mail className="mr-2 h-4 w-4" />
-                              {t.sendQuoteToDrouin}
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
-                            <DialogHeader>
-                              <DialogTitle>{t.sendYourQuote}</DialogTitle>
-                              <DialogDescription>
-                                {t.fillDetails}
-                              </DialogDescription>
-                            </DialogHeader>
-                            <div className="space-y-4 py-4">
-                              <div className="space-y-2">
-                                <Label htmlFor="name">{t.name}</Label>
-                                <Input
-                                  id="name"
-                                  value={quoteForm.name}
-                                  onChange={(e) => setQuoteForm({ ...quoteForm, name: e.target.value })}
-                                  placeholder={t.yourName}
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="email">{t.email}</Label>
-                                <Input
-                                  id="email"
-                                  type="email"
-                                  value={quoteForm.email}
-                                  onChange={(e) => setQuoteForm({ ...quoteForm, email: e.target.value })}
-                                  placeholder={t.yourEmail}
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="phone">{t.phone}</Label>
-                                <Input
-                                  id="phone"
-                                  value={quoteForm.phone}
-                                  onChange={(e) => setQuoteForm({ ...quoteForm, phone: e.target.value })}
-                                  placeholder={t.phoneNumber}
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="company">{t.company}</Label>
-                                <Input
-                                  id="company"
-                                  value={quoteForm.company}
-                                  onChange={(e) => setQuoteForm({ ...quoteForm, company: e.target.value })}
-                                  placeholder={t.companyName}
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="message">{t.message}</Label>
-                                <Textarea
-                                  id="message"
-                                  value={quoteForm.message}
-                                  onChange={(e) => setQuoteForm({ ...quoteForm, message: e.target.value })}
-                                  placeholder={t.additionalDetails}
-                                  rows={3}
-                                />
-                              </div>
-                            </div>
-                            <Button onClick={handleSendQuote} className="w-full bg-orange-500 hover:bg-orange-600">
-                              {t.sendQuote}
-                            </Button>
-                          </DialogContent>
-                        </Dialog>
-
-                        <Button
-                          data-cal-namespace={calOptions.namespace}
-                          data-cal-link={CONSTANTS.CALCOM_LINK}
-                          data-cal-config={`{"layout":"${calOptions.layout}"}`}
-                          variant="outline"
-                          className="w-full"
-                        >
-                          <Calendar className="mr-2 h-4 w-4" />
-                          {t.bookACall}
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </SheetContent>
-            </Sheet>
-
-            {/* Language Toggle */}
+          {/* Language Toggle */}
+          <div className="mt-10 flex justify-center">
             <LanguageToggle language={language} setLanguage={setLanguage} />
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -1307,235 +1085,160 @@ export default function DrouinCreationsPage() {
               </div>
 
               {/* Complexity */}
-              <div className="mb-6">
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.complexityLevel}</Label>
-                <RadioGroup value={complexity} onValueChange={setComplexity} className="space-y-0.5">
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="basic" id="basic" />
-                    <Label htmlFor="basic" className="cursor-pointer text-sm flex-1">
-                      {t.basic}
-                      <span className="block text-xs text-neutral-500">{t.basicDesc}</span>
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="standard" id="standard" />
-                    <Label htmlFor="standard" className="cursor-pointer text-sm flex-1">
-                      {t.standard}
-                      <span className="block text-xs text-neutral-500">{t.standardDesc}</span>
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="advanced" id="advanced" />
-                    <Label htmlFor="advanced" className="cursor-pointer text-sm flex-1">
-                      {t.advanced}
-                      <span className="block text-xs text-neutral-500">{t.advancedDesc}</span>
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="premium" id="premium" />
-                    <Label htmlFor="premium" className="cursor-pointer text-sm flex-1">
-                      {t.premium}
-                      <span className="block text-xs text-neutral-500">{t.premiumDesc}</span>
-                    </Label>
-                  </div>
+              <div className="mb-8">
+                <Label className="text-sm font-bold text-neutral-900 dark:text-white block mb-4 uppercase tracking-wider">
+                  {t.complexityLevel}
+                </Label>
+                <RadioGroup value={complexity} onValueChange={setComplexity} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    { id: "basic", label: t.basic, desc: t.basicDesc },
+                    { id: "standard", label: t.standard, desc: t.standardDesc },
+                    { id: "advanced", label: t.advanced, desc: t.advancedDesc },
+                    { id: "premium", label: t.premium, desc: t.premiumDesc },
+                  ].map((tier) => (
+                    <div key={tier.id}>
+                      <RadioGroupItem value={tier.id} id={tier.id} className="peer sr-only" />
+                      <Label
+                        htmlFor={tier.id}
+                        className="flex flex-col h-full p-4 bg-white dark:bg-neutral-800 border-2 border-neutral-100 dark:border-neutral-700 rounded-xl cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700/50 peer-data-[state=checked]:border-orange-500 peer-data-[state=checked]:bg-orange-50/50 dark:peer-data-[state=checked]:bg-orange-900/10 transition-all"
+                      >
+                        <span className="font-bold text-sm text-neutral-900 dark:text-white">{tier.label}</span>
+                        <span className="text-xs text-neutral-500 mt-1">{tier.desc}</span>
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
 
               {/* E-commerce */}
-              <div className="mb-6">
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.ecommerce}</Label>
-                <RadioGroup value={ecommerce} onValueChange={setEcommerce} className="space-y-0.5">
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="none" id="ecom-none" />
-                    <Label htmlFor="ecom-none" className="cursor-pointer text-sm">
-                      {t.noEcommerce}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="basic" id="ecom-basic" />
-                    <Label htmlFor="ecom-basic" className="cursor-pointer text-sm">
-                      {t.basicStore} +$1,500
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="standard" id="ecom-standard" />
-                    <Label htmlFor="ecom-standard" className="cursor-pointer text-sm">
-                      {t.standardStore} +$3,000
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <RadioGroupItem value="advanced" id="ecom-advanced" />
-                    <Label htmlFor="ecom-advanced" className="cursor-pointer text-sm">
-                      {t.advancedStore} +$5,000
-                    </Label>
-                  </div>
+              <div className="mb-8">
+                <Label className="text-sm font-bold text-neutral-900 dark:text-white block mb-4 uppercase tracking-wider">
+                  {t.ecommerce}
+                </Label>
+                <RadioGroup value={ecommerce} onValueChange={setEcommerce} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    { id: "none", label: t.noEcommerce, price: null },
+                    { id: "basic", label: t.basicStore, price: "+$1,500" },
+                    { id: "standard", label: t.standardStore, price: "+$3,000" },
+                    { id: "advanced", label: t.advancedStore, price: "+$5,000" },
+                  ].map((opt) => (
+                    <div key={opt.id}>
+                      <RadioGroupItem value={opt.id} id={`ecom-${opt.id}`} className="peer sr-only" />
+                      <Label
+                        htmlFor={`ecom-${opt.id}`}
+                        className="flex flex-col h-full p-4 bg-white dark:bg-neutral-800 border-2 border-neutral-100 dark:border-neutral-700 rounded-xl cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700/50 peer-data-[state=checked]:border-orange-500 peer-data-[state=checked]:bg-orange-50/50 dark:peer-data-[state=checked]:bg-orange-900/10 transition-all"
+                      >
+                        <span className="font-bold text-sm text-neutral-900 dark:text-white">{opt.label}</span>
+                        {opt.price && <span className="text-xs font-medium text-orange-600 dark:text-orange-400 mt-1">{opt.price}</span>}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
 
               {/* Additional Features */}
               <div>
-                <Label className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 block mb-2">{t.additionalFeatures}</Label>
-                <div className="grid grid-cols-1 gap-0.5">
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="bilingual"
-                      checked={features.bilingual}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, bilingual: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="bilingual" className="cursor-pointer text-sm">
-                      {t.bilingual} +30%
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="cms"
-                      checked={features.cms}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, cms: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="cms" className="cursor-pointer text-sm">
-                      {t.cmsIntegration} +$800
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="blog"
-                      checked={features.blog}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, blog: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="blog" className="cursor-pointer text-sm">
-                      {t.blogSetup} +$600
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="seo"
-                      checked={features.seo}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, seo: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="seo" className="cursor-pointer text-sm">
-                      {t.seoPackage} +$1,200
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="analytics"
-                      checked={features.analytics}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, analytics: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="analytics" className="cursor-pointer text-sm">
-                      {t.analyticsSetup} +$400
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="email"
-                      checked={features.email}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, email: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="email" className="cursor-pointer text-sm">
-                      {t.emailIntegration} +$500
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="booking"
-                      checked={features.booking}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, booking: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="booking" className="cursor-pointer text-sm">
-                      {t.bookingSystem} +$800
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                    <Checkbox
-                      id="forms"
-                      checked={features.forms}
-                      onCheckedChange={(checked) =>
-                        setFeatures({ ...features, forms: checked as boolean })
-                      }
-                    />
-                    <Label htmlFor="forms" className="cursor-pointer text-sm">
-                      {t.customForms} +$600
-                    </Label>
-                  </div>
+                <Label className="text-sm font-bold text-neutral-900 dark:text-white block mb-4 uppercase tracking-wider">
+                  {t.additionalFeatures}
+                </Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {[
+                    { id: "bilingual", label: t.bilingual, price: "+30%" },
+                    { id: "cms", label: t.cmsIntegration, price: "+$800" },
+                    { id: "blog", label: t.blogSetup, price: "+$600" },
+                    { id: "seo", label: t.seoPackage, price: "+$1,200" },
+                    { id: "analytics", label: t.analyticsSetup, price: "+$400" },
+                    { id: "email", label: t.emailIntegration, price: "+$500" },
+                    { id: "booking", label: t.bookingSystem, price: "+$800" },
+                    { id: "forms", label: t.customForms, price: "+$600" },
+                  ].map((feat) => (
+                    <div
+                      key={feat.id}
+                      className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 rounded-xl hover:border-orange-200 dark:hover:border-orange-900/30 transition-colors"
+                    >
+                      <Checkbox
+                        id={feat.id}
+                        checked={(features as any)[feat.id]}
+                        onCheckedChange={(checked) =>
+                          setFeatures({ ...features, [feat.id]: checked as boolean })
+                        }
+                        className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500"
+                      />
+                      <Label htmlFor={feat.id} className="cursor-pointer text-sm flex-1 flex justify-between items-center">
+                        <span className="text-neutral-700 dark:text-neutral-300">{feat.label}</span>
+                        <span className="text-[10px] font-bold text-orange-600/70 dark:text-orange-400/70">{feat.price}</span>
+                      </Label>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
             {/* Right: Calculator Result */}
-            <div className="bg-gradient-to-br from-neutral-100 to-white dark:from-neutral-900 dark:to-neutral-800 p-8 lg:p-12 rounded-r-3xl flex flex-col">
-              <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
+            <div className="bg-neutral-50 dark:bg-neutral-900 p-8 lg:p-12 rounded-r-3xl flex flex-col border-l border-neutral-200 dark:border-neutral-700">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-8 flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-green-500"></span>
                 {t.yourPrice}
               </h3>
 
               {/* Price Breakdown */}
-              <div className="flex-1 space-y-6">
+              <div className="flex-1 space-y-4">
                 {/* Selected Items Breakdown */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-4">
+                <div className="p-5 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-4">
                     {t.selectedItems}
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {websiteCalcResult.lineItems.map((item, index) => (
-                      <div key={index} className="flex justify-between items-center text-sm">
-                        <span className="text-neutral-700 dark:text-neutral-300">{item.label}</span>
-                        <span className="font-semibold text-neutral-900 dark:text-neutral-100">{item.value}</span>
+                      <div key={index} className="flex justify-between items-start text-sm">
+                        <span className="text-neutral-600 dark:text-neutral-400 leading-tight pr-4">{item.label}</span>
+                        <span className="font-semibold text-neutral-900 dark:text-white whitespace-nowrap">{item.value}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-900">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">
-                    {t.regularPrice}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-5 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+                      {t.regularPrice}
+                    </div>
+                    <div className="text-xl font-bold text-neutral-400 line-through">
+                      ${websiteCalcResult.regularPrice.toLocaleString()}
+                    </div>
                   </div>
-                  <div className="text-3xl font-bold text-neutral-400 dark:text-neutral-600 line-through">
-                    ${websiteCalcResult.regularPrice.toLocaleString()}
+
+                  <div className="p-5 rounded-2xl bg-orange-500 text-white shadow-lg shadow-orange-500/20">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-orange-100 mb-1">
+                      {t.estimatedDelivery}
+                    </div>
+                    <div className="text-xl font-bold">
+                      {websiteCalcResult.delivery}
+                    </div>
                   </div>
-                  <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">CAD</p>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/20">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-green-600 dark:text-green-400 mb-2">
+                <div className="p-8 rounded-2xl bg-white dark:bg-neutral-800 border-2 border-green-500/20 dark:border-green-500/10 shadow-sm relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-3">
+                    <div className="bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-wider">
+                      Special Offer
+                    </div>
+                  </div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-green-600 dark:text-green-400 mb-2">
                     {t.drouinSpecial}
                   </div>
-                  <div className="text-5xl font-bold text-green-600 dark:text-green-400">
-                    ${websiteCalcResult.drouinPrice.toLocaleString()}
+                  <div className="text-5xl font-black text-neutral-900 dark:text-white tracking-tight">
+                    ${websiteCalcResult.drouinPrice.toLocaleString()}<span className="text-lg font-normal text-neutral-400 ml-1 italic">CAD</span>
                   </div>
-                  <p className="mt-1 text-xs text-green-600/80 dark:text-green-400/80">CAD</p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-500/20">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">
-                    {t.estimatedDelivery}
-                  </div>
-                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                    {websiteCalcResult.delivery}
-                  </div>
-                  <p className="mt-1 text-xs text-orange-600/80 dark:text-orange-400/80">{t.fromProjectStart}</p>
                 </div>
               </div>
 
               {/* Add to Quote Button */}
               <Button
                 onClick={addCustomWebsite}
-                className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white h-12 text-base"
+                className="w-full mt-8 bg-orange-500 hover:bg-orange-600 text-white h-14 text-lg font-bold rounded-2xl shadow-lg shadow-orange-500/20 transition-all hover:scale-[1.02] active:scale-95"
               >
-                <Plus className="mr-2 h-5 w-5" />
+                <Plus className="mr-2 h-6 w-6" />
                 {t.addToQuote}
               </Button>
 
@@ -1560,40 +1263,59 @@ export default function DrouinCreationsPage() {
         </div>
 
         {/* Package Deals */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">{t.packageDeals}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">{t.packageDeals}</h2>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-400 text-lg">All-in-one solutions for maximum impact and savings.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {PACKAGES.map((pkg) => (
-              <Card key={pkg.id} className="relative hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle>{pkg.name}</CardTitle>
-                  <CardDescription>{t.delivery}: {pkg.delivery}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    {pkg.includes.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{item}</span>
+              <div 
+                key={pkg.id} 
+                className={`relative flex flex-col p-8 rounded-[2rem] border-2 transition-all hover:scale-[1.02] duration-300 ${
+                  pkg.id === 'growth' 
+                    ? 'border-orange-500 bg-white dark:bg-neutral-900 shadow-xl shadow-orange-500/10' 
+                    : 'border-neutral-100 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50'
+                }`}
+              >
+                {pkg.id === 'growth' && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                    Most Popular
+                  </div>
+                )}
+                
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{pkg.name}</h3>
+                  <div className="flex items-center gap-2 text-sm text-neutral-500 font-medium">
+                    <Calendar className="h-4 w-4" />
+                    {t.delivery}: {pkg.delivery}
+                  </div>
+                </div>
+
+                <div className="flex-1 space-y-4 mb-8">
+                  {pkg.includes.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <div className="h-5 w-5 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check className="h-3 w-3 text-green-600" />
                       </div>
-                    ))}
-                  </div>
-                  <Separator />
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-neutral-500 line-through">
-                        Regular: ${pkg.regular.toLocaleString()} CAD
-                      </span>
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">{item}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold">Drouin Special:</span>
-                      <span className="text-2xl font-bold text-green-600">
-                        ${pkg.drouin.toLocaleString()} CAD
-                      </span>
+                  ))}
+                </div>
+
+                <div className="pt-8 border-t border-neutral-100 dark:border-neutral-800 space-y-4">
+                  <div className="flex justify-between items-end">
+                    <div className="space-y-1">
+                      <div className="text-xs font-bold text-neutral-400 line-through">
+                        REGULAR: ${pkg.regular.toLocaleString()}
+                      </div>
+                      <div className="text-3xl font-black text-neutral-900 dark:text-white">
+                        ${pkg.drouin.toLocaleString()}
+                        <span className="text-sm font-normal text-neutral-400 ml-1">CAD</span>
+                      </div>
                     </div>
                   </div>
-                </CardContent>
-                <CardFooter>
+
                   <Button
                     onClick={() =>
                       addToCart({
@@ -1605,374 +1327,137 @@ export default function DrouinCreationsPage() {
                         deliveryDays: pkg.days,
                       })
                     }
-                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    className={`w-full h-12 rounded-2xl font-bold transition-all ${
+                      pkg.id === 'growth'
+                        ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20'
+                        : 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:opacity-90'
+                    }`}
                   >
-                    <Plus className="mr-2 h-4 w-4" />
+                    <Plus className="mr-2 h-5 w-5" />
                     {t.addToQuote}
                   </Button>
-                </CardFooter>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Service Menu */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">{t.aLaCarte}</h2>
+        <div className="mb-20">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">{t.aLaCarte}</h2>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-400">Mix and match specific services for your project.</p>
+          </div>
+          
           <Tabs defaultValue="websites" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6">
-              <TabsTrigger value="websites">{t.websites}</TabsTrigger>
-              <TabsTrigger value="branding">{t.branding}</TabsTrigger>
-              <TabsTrigger value="automation">{t.automation}</TabsTrigger>
-              <TabsTrigger value="seo">{t.seo}</TabsTrigger>
-              <TabsTrigger value="consulting">{t.consulting}</TabsTrigger>
-              <TabsTrigger value="addons">{t.addons}</TabsTrigger>
-            </TabsList>
+            <div className="flex justify-center mb-8">
+              <TabsList className="inline-flex h-auto p-1 bg-neutral-100 dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-x-auto max-w-full no-scrollbar">
+                {[
+                  { value: "websites", label: t.websites },
+                  { value: "branding", label: t.branding },
+                  { value: "automation", label: t.automation },
+                  { value: "seo", label: t.seo },
+                  { value: "consulting", label: t.consulting },
+                  { value: "addons", label: t.addons },
+                ].map((tab) => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className="px-6 py-3 rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-700 data-[state=active]:shadow-sm transition-all text-sm font-semibold whitespace-nowrap"
+                  >
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
-            {/* Websites Tab */}
-            <TabsContent value="websites">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
+            {[
+              { id: "websites", data: WEBSITES_SERVICES },
+              { id: "branding", data: BRANDING_SERVICES },
+              { id: "automation", data: AUTOMATION_SERVICES },
+              { id: "seo", data: SEO_SERVICES },
+              { id: "consulting", data: CONSULTING_SERVICES },
+              { id: "addons", data: ADDONS_SERVICES },
+            ].map((tab) => (
+              <TabsContent key={tab.id} value={tab.id} className="mt-0 focus-visible:outline-none focus-visible:ring-0">
+                <div className="bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
                     <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                    <TableBody>
-                      {WEBSITES_SERVICES.map((service) => (
-                        <TableRow key={service.id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                            ${service.regular.toLocaleString()}
-                          </TableCell>
-                          <TableCell className="text-right font-semibold text-green-600">
-                            ${service.drouin.toLocaleString()}
-                            {service.recurring && <span className="text-xs">/mo</span>}
-                          </TableCell>
-                          <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                          <TableCell className="text-center">
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                addToCart({
-                                  id: service.id,
-                                  name: service.name,
-                                  regularPrice: service.regular,
-                                  drouinPrice: service.drouin,
-                                  delivery: service.delivery,
-                                  deliveryDays: service.days,
-                                })
-                              }
-                              className="bg-orange-500 hover:bg-orange-600"
-                            >
-                              {t.add}
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Branding Tab */}
-            <TabsContent value="branding">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
+                      <TableHeader className="bg-neutral-50 dark:bg-neutral-800/50">
+                        <TableRow className="border-b border-neutral-200 dark:border-neutral-800">
+                          <TableHead className="py-5 px-6 text-xs font-bold uppercase tracking-wider text-neutral-500">{t.service}</TableHead>
+                          <TableHead className="py-5 px-6 text-right text-xs font-bold uppercase tracking-wider text-neutral-500 hidden sm:table-cell">{t.regular}</TableHead>
+                          <TableHead className="py-5 px-6 text-right text-xs font-bold uppercase tracking-wider text-neutral-500">{t.drouinSpecial}</TableHead>
+                          <TableHead className="py-5 px-6 text-center text-xs font-bold uppercase tracking-wider text-neutral-500 hidden md:table-cell">{t.delivery}</TableHead>
+                          <TableHead className="py-5 px-6 text-center text-xs font-bold uppercase tracking-wider text-neutral-500">{t.action}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {BRANDING_SERVICES.map((service) => (
-                          <TableRow key={service.id}>
-                            <TableCell className="font-medium">{service.name}</TableCell>
-                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                              ${service.regular.toLocaleString()}
-                            </TableCell>
-                            <TableCell className="text-right font-semibold text-green-600">
-                              ${service.drouin.toLocaleString()}
-                            </TableCell>
-                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                            <TableCell className="text-center">
-                              <Button
-                                size="sm"
-                                onClick={() =>
-                                  addToCart({
-                                    id: service.id,
-                                    name: service.name,
-                                    regularPrice: service.regular,
-                                    drouinPrice: service.drouin,
-                                    delivery: service.delivery,
-                                    deliveryDays: service.days,
-                                  })
-                                }
-                                className="bg-orange-500 hover:bg-orange-600"
-                              >
-                                {t.add}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                        {tab.data.map((service: any) => {
+                          const isAlreadyInCart = cart.some(item => item.id === service.id);
+                          return (
+                            <TableRow key={service.id} className="group hover:bg-neutral-50/50 dark:hover:bg-neutral-800/30 transition-colors border-b border-neutral-100 dark:border-neutral-800/50 last:border-0">
+                              <TableCell className="py-5 px-6">
+                                <div className="font-bold text-neutral-900 dark:text-white">{service.name}</div>
+                                {service.note && <div className="text-xs text-neutral-500 mt-1">{service.note}</div>}
+                              </TableCell>
+                              <TableCell className="py-5 px-6 text-right text-neutral-400 line-through hidden sm:table-cell">
+                                {service.regular > 0 ? `$${service.regular.toLocaleString()}` : (service.note || "—")}
+                                {service.recurring && <span className="text-[10px] ml-1">/mo</span>}
+                              </TableCell>
+                              <TableCell className="py-5 px-6 text-right">
+                                <div className="font-bold text-green-600 dark:text-green-400">
+                                  {service.drouin > 0 ? `$${service.drouin.toLocaleString()}` : (service.note || "—")}
+                                  {service.recurring && <span className="text-[10px] ml-1">/mo</span>}
+                                </div>
+                                {service.recurring && (
+                                  <div className="text-[10px] text-neutral-400 font-medium">Monthly recurring</div>
+                                )}
+                              </TableCell>
+                              <TableCell className="py-5 px-6 text-center text-sm text-neutral-500 hidden md:table-cell">{service.delivery}</TableCell>
+                              <TableCell className="py-5 px-6 text-center">
+                                {service.regular > 0 || service.drouin > 0 ? (
+                                  <Button
+                                    size="sm"
+                                    disabled={isAlreadyInCart}
+                                    onClick={() =>
+                                      addToCart({
+                                        id: service.id,
+                                        name: service.name,
+                                        regularPrice: service.regular,
+                                        drouinPrice: service.drouin,
+                                        delivery: service.delivery,
+                                        deliveryDays: service.days,
+                                        ...(service.recurring && {
+                                          recurring: {
+                                            regularPrice: service.recurringRegular || service.regular,
+                                            drouinPrice: service.recurringDrouin || service.drouin,
+                                            period: "monthly",
+                                          },
+                                        }),
+                                      })
+                                    }
+                                    className={`rounded-xl px-5 h-9 font-bold transition-all ${
+                                      isAlreadyInCart 
+                                        ? "bg-green-100 text-green-700 hover:bg-green-100 cursor-default" 
+                                        : "bg-orange-500 hover:bg-orange-600 text-white shadow-sm hover:shadow-orange-500/20"
+                                    }`}
+                                  >
+                                    {isAlreadyInCart ? <Check className="h-4 w-4" /> : t.add}
+                                  </Button>
+                                ) : (
+                                  <span className="text-xs text-neutral-400 font-medium italic">Included in quote</span>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                       </TableBody>
                     </Table>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Automation Tab */}
-            <TabsContent value="automation">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {AUTOMATION_SERVICES.map((service: any) => (
-                          <TableRow key={service.id}>
-                            <TableCell className="font-medium">{service.name}</TableCell>
-                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                              ${service.regular.toLocaleString()}
-                              {service.recurring && (
-                                <div className="text-xs">+ ${service.recurringRegular}/mo</div>
-                              )}
-                            </TableCell>
-                            <TableCell className="text-right font-semibold text-green-600">
-                              ${service.drouin.toLocaleString()}
-                              {service.recurring && (
-                                <div className="text-xs">+ ${service.recurringDrouin}/mo</div>
-                              )}
-                            </TableCell>
-                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                            <TableCell className="text-center">
-                              <Button
-                                size="sm"
-                                onClick={() =>
-                                  addToCart({
-                                    id: service.id,
-                                    name: service.name,
-                                    regularPrice: service.regular,
-                                    drouinPrice: service.drouin,
-                                    delivery: service.delivery,
-                                    deliveryDays: service.days,
-                                    ...(service.recurring && {
-                                      recurring: {
-                                        regularPrice: service.recurringRegular,
-                                        drouinPrice: service.recurringDrouin,
-                                        period: "monthly",
-                                      },
-                                    }),
-                                  })
-                                }
-                                className="bg-orange-500 hover:bg-orange-600"
-                              >
-                                {t.add}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* SEO Tab */}
-            <TabsContent value="seo">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {SEO_SERVICES.map((service) => (
-                          <TableRow key={service.id}>
-                            <TableCell className="font-medium">{service.name}</TableCell>
-                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                              ${service.regular.toLocaleString()}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-right font-semibold text-green-600">
-                              ${service.drouin.toLocaleString()}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                            <TableCell className="text-center">
-                              <Button
-                                size="sm"
-                                onClick={() =>
-                                  addToCart({
-                                    id: service.id,
-                                    name: service.name,
-                                    regularPrice: service.regular,
-                                    drouinPrice: service.drouin,
-                                    delivery: service.delivery,
-                                    deliveryDays: service.days,
-                                  })
-                                }
-                                className="bg-orange-500 hover:bg-orange-600"
-                              >
-                                {t.add}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Consulting Tab */}
-            <TabsContent value="consulting">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {CONSULTING_SERVICES.map((service) => (
-                          <TableRow key={service.id}>
-                            <TableCell className="font-medium">{service.name}</TableCell>
-                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                              ${service.regular.toLocaleString()}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-right font-semibold text-green-600">
-                              ${service.drouin.toLocaleString()}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                            <TableCell className="text-center">
-                              <Button
-                                size="sm"
-                                onClick={() =>
-                                  addToCart({
-                                    id: service.id,
-                                    name: service.name,
-                                    regularPrice: service.regular,
-                                    drouinPrice: service.drouin,
-                                    delivery: service.delivery,
-                                    deliveryDays: service.days,
-                                  })
-                                }
-                                className="bg-orange-500 hover:bg-orange-600"
-                              >
-                                {t.add}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Add-ons Tab */}
-            <TabsContent value="addons">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">{t.service}</TableHead>
-                          <TableHead className="text-right hidden sm:table-cell">{t.regular}</TableHead>
-                          <TableHead className="text-right min-w-[100px]">{t.drouinSpecial}</TableHead>
-                          <TableHead className="text-center hidden md:table-cell">{t.delivery}</TableHead>
-                          <TableHead className="text-center min-w-[80px]">{t.action}</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {ADDONS_SERVICES.map((service: any) => (
-                          <TableRow key={service.id}>
-                            <TableCell className="font-medium">
-                              {service.name}
-                              {service.note && (
-                                <div className="text-xs text-neutral-500">{service.note}</div>
-                              )}
-                            </TableCell>
-                            <TableCell className="text-right text-neutral-500 line-through hidden sm:table-cell">
-                              {service.regular > 0 ? `$${service.regular.toLocaleString()}` : service.note}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-right font-semibold text-green-600">
-                              {service.drouin > 0 ? `$${service.drouin.toLocaleString()}` : service.note}
-                              {service.recurring && <span className="text-xs">/mo</span>}
-                            </TableCell>
-                            <TableCell className="text-center text-sm hidden md:table-cell">{service.delivery}</TableCell>
-                            <TableCell className="text-center">
-                              {service.regular > 0 && (
-                                <Button
-                                  size="sm"
-                                  onClick={() =>
-                                    addToCart({
-                                      id: service.id,
-                                      name: service.name,
-                                      regularPrice: service.regular,
-                                      drouinPrice: service.drouin,
-                                      delivery: service.delivery,
-                                      deliveryDays: service.days,
-                                    })
-                                  }
-                                  className="bg-orange-500 hover:bg-orange-600"
-                                >
-                                  Add
-                                </Button>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+                </div>
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
 
@@ -2005,10 +1490,45 @@ export default function DrouinCreationsPage() {
                 </Button>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      </section>
-
-    </div>
-  );
-}
+                    </CardContent>
+                  </Card>
+                </section>
+          
+                {/* Sticky Quote Bar */}
+                {cart.length > 0 && (
+                  <motion.div
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl"
+                  >
+                    <div className="bg-neutral-900 dark:bg-neutral-800 text-white p-4 rounded-3xl shadow-2xl border border-white/10 flex items-center justify-between gap-4 backdrop-blur-xl">
+                      <div className="flex items-center gap-4 pl-2">
+                        <div className="h-10 w-10 rounded-2xl bg-orange-500 flex items-center justify-center">
+                          <ShoppingCart className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Your Quote</div>
+                          <div className="text-lg font-black tracking-tight">
+                            ${totals.drouinTotal.toLocaleString()}<span className="text-[10px] font-normal text-neutral-400 ml-1">CAD</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <div className="hidden sm:block text-right pr-2 border-r border-white/10">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-green-500">25% Discount</div>
+                          <div className="text-xs font-medium text-neutral-300">Applied for Drouin Clients</div>
+                        </div>
+                        <Button
+                          onClick={() => setIsCartOpen(true)}
+                          className="bg-white text-neutral-900 hover:bg-neutral-100 font-bold rounded-2xl px-6 h-12 transition-all active:scale-95"
+                        >
+                          {t.viewQuote} ({cart.length})
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            );
+          }
