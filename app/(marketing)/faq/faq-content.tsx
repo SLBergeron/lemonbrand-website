@@ -65,7 +65,7 @@ export default function FAQContent() {
           primaryCtaText="Start the Sprint"
           primaryCtaLink="/sprint"
           secondaryCtaText="Book a Discovery Call"
-          secondaryCtaLink="/work-with-me"
+          secondaryCtaLink="/custom"
           className="max-w-4xl mx-auto"
         />
       </Section>

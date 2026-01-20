@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ExternalLink, Shield, Server, Calendar, Code } from "lucide-react";
+import { ArrowRight, Check, ExternalLink, Shield, Server, Calendar, Code, Users, Calculator, ClipboardCheck, FileText } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { CallToAction } from "@/components/shared/CallToAction";
+import { WaitlistSignup } from "@/components/shared/WaitlistSignup";
 
 const products = [
   {
@@ -49,18 +50,48 @@ const products = [
 const comingSoon = [
   {
     name: "Client Portal",
+    slug: "portal",
     description: "White-labeled client access for agencies. Share files, updates, and invoices.",
-    icon: Server,
+    icon: Users,
+    subdomain: "portal.lemonbrand.io",
+  },
+  {
+    name: "Desk Booking",
+    slug: "deskbook",
+    description: "Simple workspace reservation for hybrid offices. No per-seat fees.",
+    icon: Calendar,
+    subdomain: "deskbook.lemonbrand.io",
   },
   {
     name: "Proposal System",
+    slug: "proposals",
     description: "Create, send, and track proposals. E-signatures included.",
     icon: Code,
+    subdomain: "proposals.lemonbrand.io",
+  },
+];
+
+const freeTools = [
+  {
+    name: "Custom Tool Quote Generator",
+    description: "Get an instant estimate for your custom business tool. Answer a few questions, see your price range.",
+    icon: FileText,
+    href: "/tools/proposal-generator",
+    highlight: true,
   },
   {
-    name: "Booking Tool",
-    description: "Scheduling that connects to your calendar. No middleman.",
-    icon: Calendar,
+    name: "SaaS vs Own Calculator",
+    description: "See what you're really paying for that subscription over 3 years. Compare to owning outright.",
+    icon: Calculator,
+    href: "/tools/calculator",
+    highlight: false,
+  },
+  {
+    name: "O. Reg. 476/24 Compliance Checker",
+    description: "Check if your hiring process meets Ontario's new ESA requirements (effective Jan 1, 2026).",
+    icon: ClipboardCheck,
+    href: "/tools/compliance-checker",
+    highlight: false,
   },
 ];
 
@@ -235,37 +266,90 @@ export default function ToolsContent() {
         </div>
       </Section>
 
-      {/* Coming Soon */}
+      {/* Free Tools */}
       <section className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
+            <p className="text-sm font-medium tracking-wider uppercase text-accent mb-4">
+              Free Resources
+            </p>
             <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              More subscription killers coming
+              Make smarter decisions
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We&apos;re building alternatives to expensive subscriptions. Same model: one-time purchase, you own it.
+              No signup required. Just useful tools to help you evaluate your options.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-6">
-            {comingSoon.map((item) => {
-              const Icon = item.icon;
+            {freeTools.map((tool) => {
+              const Icon = tool.icon;
               return (
-                <div
-                  key={item.name}
-                  className="bg-card/50 rounded-lg border border-border/50 p-6 text-center"
+                <Link
+                  key={tool.name}
+                  href={tool.href}
+                  className={`bg-card rounded-lg border p-6 transition-colors hover:border-accent/50 group ${
+                    tool.highlight ? "border-accent/30" : "border-border"
+                  }`}
                 >
-                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-6 h-6 text-muted-foreground" />
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${
+                      tool.highlight ? "bg-accent/10" : "bg-muted"
+                    }`}>
+                      <Icon className={`w-6 h-6 ${tool.highlight ? "text-accent" : "text-muted-foreground"}`} />
+                    </div>
                   </div>
-                  <h3 className="font-display font-semibold mb-2">{item.name}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </div>
+                  <h3 className="font-display font-semibold mb-2 group-hover:text-accent transition-colors">
+                    {tool.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
+                  <span className="text-sm text-accent font-medium inline-flex items-center gap-1">
+                    Try it free
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
               );
             })}
           </div>
         </div>
       </section>
+
+      {/* Coming Soon */}
+      <Section width="wide">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            More subscription killers coming
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            We&apos;re building alternatives to expensive subscriptions. Same model: one-time purchase, you own it.
+            Get notified when they launch.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-3 gap-6">
+          {comingSoon.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.name}
+                className="bg-card rounded-lg border border-border p-6"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center shrink-0">
+                    <Icon className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-semibold">{item.name}</h3>
+                    <p className="text-xs text-muted-foreground">{item.subdomain}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+                <WaitlistSignup productName={item.name} productSlug={item.slug} />
+              </div>
+            );
+          })}
+        </div>
+      </Section>
 
       {/* Custom Build CTA */}
       <Section>

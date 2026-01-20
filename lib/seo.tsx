@@ -148,24 +148,38 @@ export function generateOrganizationSchema(): OrganizationSchema {
     url: "https://lemonbrand.io",
     logo: "https://lemonbrand.io/logo.png",
     description:
-      "LemonBrand teaches non-developers to ship AI tools fast using Claude Code and the Build Stack framework. Founded by Simon Bergeron, who built VerifiedNode (58,000+ contractor records) using the same methods he teaches.",
+      "LemonBrand builds custom business tools you own forever. No subscriptions, no vendor lock-in. One-time purchase starting at $4,500. Also teaching operators to build their own with Claude Code. Founded by Simon Bergeron, creator of VerifiedNode (58,000+ contractor records) and Lemonbrand ATS.",
     founder: {
       "@type": "Person",
       name: "Simon Bergeron",
       url: "https://lemonbrand.io/about",
     },
     sameAs: [
-      "https://youtube.com/@simonbergeron",
-      "https://twitter.com/simonbergeron",
+      "https://youtube.com/@slbergeron",
+      "https://x.com/SLBergeron",
       "https://github.com/SLBergeron",
       "https://substack.com/@slbergeron",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      url: "https://cal.com/simonbergeron/discovery",
+      url: "https://cal.com/lemonbrand/30min",
     },
     offers: [
+      {
+        "@type": "Offer",
+        name: "Custom Tool Development",
+        price: "5000",
+        priceCurrency: "USD",
+        url: "https://lemonbrand.io/custom",
+      },
+      {
+        "@type": "Offer",
+        name: "Lemonbrand ATS",
+        price: "4500",
+        priceCurrency: "CAD",
+        url: "https://lemonbrand.io/tools/ats",
+      },
       {
         "@type": "Offer",
         name: "7-Day Sprint",
@@ -201,7 +215,7 @@ export function generatePersonSchema(): PersonSchema {
     name: "Simon Bergeron",
     url: "https://lemonbrand.io/about",
     description:
-      "Product manager turned AI builder. Teaches non-developers to ship AI tools fast using Claude Code. Built VerifiedNode (58,000+ contractor records) while teaching others the same methods.",
+      "Founder of LemonBrand. Builds custom business tools companies own forever. Creator of VerifiedNode (58,000+ contractor records) and Lemonbrand ATS (Ontario-compliant hiring). Also teaches operators to build their own tools with Claude Code.",
     jobTitle: "Founder",
     worksFor: {
       "@type": "Organization",
@@ -209,17 +223,19 @@ export function generatePersonSchema(): PersonSchema {
       url: "https://lemonbrand.io",
     },
     sameAs: [
-      "https://youtube.com/@simonbergeron",
-      "https://twitter.com/simonbergeron",
+      "https://youtube.com/@slbergeron",
+      "https://x.com/SLBergeron",
       "https://github.com/SLBergeron",
       "https://substack.com/@slbergeron",
     ],
     knowsAbout: [
+      "Custom software development",
+      "Business tool development",
       "Claude Code",
-      "AI tool development",
+      "AI-assisted development",
       "Build Stack framework",
+      "Ontario employment law compliance",
       "No-code AI development",
-      "Product management",
     ],
   };
 }

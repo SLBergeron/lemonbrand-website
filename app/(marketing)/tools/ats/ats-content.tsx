@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
+import { useCalEmbed } from "@/app/hooks/useCalEmbed";
+import { CONSTANTS } from "@/constants/links";
 
 const complianceRequirements = [
   {
@@ -117,6 +119,19 @@ const trustSignals = [
 ];
 
 export default function ATSContent() {
+  // Cal.com embed for inline booking
+  const calOptions = useCalEmbed({
+    namespace: CONSTANTS.CALCOM_NAMESPACE,
+    styles: {
+      branding: {
+        brandColor: CONSTANTS.CALCOM_BRAND_COLOR,
+      },
+    },
+    hideEventTypeDetails: CONSTANTS.CALCOM_HIDE_EVENT_TYPE_DETAILS,
+    layout: CONSTANTS.CALCOM_LAYOUT,
+    theme: CONSTANTS.CALCOM_THEME as "auto" | "light" | "dark",
+  });
+
   return (
     <main className="pt-16">
       {/* Hero */}
@@ -145,10 +160,15 @@ export default function ATSContent() {
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/work-with-me">
-                Book a Demo
-              </Link>
+            <Button
+              variant="outline"
+              size="lg"
+              data-cal-namespace={calOptions.namespace}
+              data-cal-link={CONSTANTS.CALCOM_LINK}
+              data-cal-config={`{"layout":"${calOptions.layout}"}`}
+            >
+              <Calendar className="w-4 h-4 mr-2" />
+              Book a Demo
             </Button>
           </div>
         </div>
@@ -358,12 +378,12 @@ export default function ATSContent() {
               variant="outline"
               size="lg"
               className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-              asChild
+              data-cal-namespace={calOptions.namespace}
+              data-cal-link={CONSTANTS.CALCOM_LINK}
+              data-cal-config={`{"layout":"${calOptions.layout}"}`}
             >
-              <Link href="/work-with-me">
-                Book a Demo
-                <Calendar className="w-4 h-4 ml-2" />
-              </Link>
+              <Calendar className="w-4 h-4 mr-2" />
+              Book a Demo
             </Button>
           </div>
         </div>

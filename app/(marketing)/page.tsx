@@ -1,24 +1,36 @@
 import { Metadata } from "next";
 import HomeContent from "./home-content";
-import { createPageMetadata, JsonLd, generateWebPageSchema } from "@/lib/seo";
+import {
+  createPageMetadata,
+  JsonLd,
+  generateWebPageSchema,
+  generateOrganizationSchema,
+} from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "LemonBrand | Ship AI Tools Fast (Without Being a Developer)",
+  title: "LemonBrand | Custom Business Tools You Own Forever",
   description:
-    "Learn to build AI-powered tools with Claude Code in days, not months. The Build Stack framework teaches operators, consultants, and founders to ship internal tools, lead-gen utilities, and offer prototypes without writing code. Start with the 7-Day Sprint ($297).",
+    "Stop paying $500/month for software that almost works. We build custom tools businesses own forever—one-time purchase, no subscriptions, no vendor lock-in. Also teaching operators to build their own with Claude Code.",
   keywords: [
+    // Tools-first positioning
+    "custom business software",
+    "no subscription software",
+    "own your software",
+    "saas alternative",
+    "one-time purchase business tools",
+    "custom tool development",
+    "business tools no monthly fee",
+    // Product-specific
+    "Ontario ATS",
+    "applicant tracking system Ontario",
+    "O Reg 476/24 compliance",
+    // Education (secondary)
     "Claude Code",
     "build AI tools",
     "no-code AI development",
     "AI for non-developers",
     "Build Stack framework",
-    "ship AI tools fast",
-    "7-day sprint",
-    "Claude Code tutorial",
-    "AI tool building",
-    "internal tools AI",
-    "lead generation AI",
-    "AI prototyping",
+    // Brand
     "Simon Bergeron",
     "LemonBrand",
     "VerifiedNode",
@@ -27,30 +39,36 @@ export const metadata: Metadata = createPageMetadata({
   aiMetadata: {
     "ai:page-type": "homepage",
     "ai:value-proposition":
-      "Ship AI tools fast (without being a developer). Learn to build with Claude Code using the Build Stack framework.",
+      "Custom business tools you own forever. One-time purchase, no subscriptions, no vendor lock-in. We build them for you, or teach you to build your own.",
+    "ai:primary-offer":
+      "Custom tool development: $5,000-$30,000 one-time. Pre-built tools: Lemonbrand ATS starting at $4,500 CAD.",
+    "ai:secondary-offer":
+      "Learn to build your own: 7-Day Sprint ($297), 8-Week Program ($997+), Builders Club ($97/mo).",
     "ai:target-audience":
-      "Operators who want leverage: consultants, founders, professionals. People with ideas who thought they couldn't build them because they 'don't code'.",
+      "Businesses tired of SaaS subscriptions. Operators who want custom tools without vendor lock-in. Founders and consultants who want to build their own.",
     "ai:proof":
-      "VerifiedNode: Real SaaS with 58,000+ contractor records built by Simon Bergeron using the same Build Stack methods taught here.",
+      "VerifiedNode: Real SaaS with 58,000+ contractor records. Lemonbrand ATS: Ontario-compliant hiring tool. Both built with the same methods we use for client work.",
     "ai:entry-point":
-      "7-Day Sprint ($297) - build your first AI tool in a week. Free alternative: CLAUDE.md template download at /free/claudemd",
-    "ai:methodology":
-      "The Build Stack: Context (CLAUDE.md files), Direction (intent over implementation), Iteration (refine through conversation), Verification (black-box testing)",
+      "See our tools at /tools, get a custom quote at /custom, or learn to build your own starting with the 7-Day Sprint at /sprint.",
   },
 });
 
 // WebPage schema for the homepage
 const webPageSchema = generateWebPageSchema({
-  name: "LemonBrand - Ship AI Tools Fast Without Being a Developer",
+  name: "LemonBrand - Custom Business Tools You Own Forever",
   description:
-    "Learn to build AI-powered tools with Claude Code. The Build Stack framework teaches non-developers to ship real tools in days.",
+    "We build custom tools businesses own forever. One-time purchase, no subscriptions, no vendor lock-in. Also teaching operators to build their own with Claude Code.",
   url: "https://lemonbrand.io",
 });
+
+// Organization schema for rich snippets
+const organizationSchema = generateOrganizationSchema();
 
 export default function HomePage() {
   return (
     <>
       <JsonLd data={webPageSchema} />
+      <JsonLd data={organizationSchema} />
       <HomeContent />
     </>
   );

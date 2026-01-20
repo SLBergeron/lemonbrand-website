@@ -50,6 +50,12 @@ const nextConfig = {
         destination: '/templates',
         permanent: true,
       },
+      // Consolidate work-with-me into custom (Cal.com now embedded on /custom)
+      {
+        source: '/work-with-me',
+        destination: '/custom',
+        permanent: true,
+      },
     ];
   },
 };

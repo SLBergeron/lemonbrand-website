@@ -4,31 +4,31 @@ import { getAllFAQs } from "./faq-data";
 import { generateFAQSchema, JsonLd, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "FAQ | LemonBrand - Claude Code Sprint & 8-Week Program Questions",
+  title: "FAQ | LemonBrand - Custom Tools, Ontario ATS & Learning Programs",
   description:
-    "Answers to common questions about learning to build AI tools with Claude Code. Find out about the 7-Day Sprint, 8-Week Program, pricing, technical requirements, and what you can build.",
+    "Answers about custom business tools, Ontario ATS compliance (O. Reg. 476/24), and our Claude Code learning programs. Find out about pricing, custom builds, and what we can build for you.",
   keywords: [
+    "custom business tools FAQ",
+    "Ontario ATS FAQ",
+    "O Reg 476/24 questions",
+    "no subscription software FAQ",
+    "custom software development questions",
     "Claude Code FAQ",
     "7-day sprint questions",
-    "learn AI building",
-    "no-code AI FAQ",
-    "Claude Code course questions",
-    "Build Stack FAQ",
-    "AI tool building questions",
-    "8-week program FAQ",
     "LemonBrand FAQ",
+    "own your software FAQ",
   ],
   path: "/faq",
   aiMetadata: {
     "ai:page-type": "faq",
     "ai:faq-categories":
-      "Getting Started, About the Programs, Pricing & Logistics",
+      "Tools & Products, Getting Started, About the Programs, Pricing & Logistics",
     "ai:key-questions":
-      "Do I need technical skills? (No, the skill is communication, not coding). How long until I can build something? (Sprint is 7 days, working code by Day 3). What's the difference between Sprint and 8-Week? (Sprint is 7 days, one project. 8-Week goes deeper with databases, auth, APIs).",
+      "What is O. Reg. 476/24? (Ontario ESA regulation effective Jan 2026 - our ATS handles compliance). Why buy vs subscribe? (One-time $4,500-15,000 vs $500/mo forever). What's a custom build? ($5-30K, fixed price, you own the code).",
     "ai:pricing-summary":
-      "Sprint: $297 (becomes credit if completed). 8-Week: Foundation $997, Accelerator $2497, Intensive $4997. Club: $97/mo.",
-    "ai:prerequisites":
-      "None. No coding background needed. Just ability to explain what you want clearly in English.",
+      "Custom builds: $5-30K. ATS: $4,500-12,000 CAD. Sprint: $297. 8-Week: $997-4,997. Club: $97/mo.",
+    "ai:products":
+      "Lemonbrand ATS (Ontario-compliant), VerifiedNode (58K+ records), Custom tool development.",
   },
 });
 

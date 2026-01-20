@@ -12,6 +12,31 @@ export interface FAQCategory {
 
 export const faqCategories: FAQCategory[] = [
   {
+    name: "Tools & Products",
+    questions: [
+      {
+        question: "What is O. Reg. 476/24 and do I need an Ontario-compliant ATS?",
+        answer:
+          "O. Reg. 476/24 is Ontario's new Employment Standards Act regulation effective January 1, 2026. If you hire in Ontario, you need to: notify applicants within 45 days, disclose salary ranges (max $50,000 spread), declare AI usage in bilingual notices, avoid Canadian experience requirements, and retain records for 3 years. Non-compliance risks ESA penalties. Our ATS handles all of this automatically.",
+      },
+      {
+        question: "Why buy tools instead of subscribing to SaaS?",
+        answer:
+          "After 3 years of $500/month SaaS, you've paid $18,000 and own nothing. Cancel and you lose everything. Our tools are one-time purchase ($4,500-$15,000)—you own the code forever. Deploy to your own infrastructure. No vendor lock-in. No price increases. No feature gates.",
+      },
+      {
+        question: "What's included in a custom build?",
+        answer:
+          "Fixed price quote within 48 hours. Working prototype in 1-2 weeks. Deployed to your infrastructure. You own every line of code. 30 days of included support. No surprises—we don't disappear after delivery. Custom builds typically run $5,000-$30,000 depending on complexity.",
+      },
+      {
+        question: "Can I see what you've built?",
+        answer:
+          "Yes. VerifiedNode (58,000+ contractor records) and Lemonbrand ATS (Ontario-compliant hiring) are both products we built and operate ourselves. We use the same methods for client work. Check /tools to see our available products.",
+      },
+    ],
+  },
+  {
     name: "Getting Started",
     questions: [
       {

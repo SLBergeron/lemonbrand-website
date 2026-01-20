@@ -22,8 +22,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // ==========================================================================
-    // Priority 0.9 - Secondary offers & pricing
+    // Priority 0.9 - Products & custom builds (tools-first positioning)
     // ==========================================================================
+    {
+      url: `${baseUrl}/tools`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/custom`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/8-week`,
       lastModified: currentDate,
@@ -44,8 +56,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // ==========================================================================
-    // Priority 0.8 - Lead magnets & trust builders
+    // Priority 0.8 - Product pages, lead magnets & trust builders
     // ==========================================================================
+    {
+      url: `${baseUrl}/tools/ats`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/calculator`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/compliance-checker`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/proposal-generator`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/free/claudemd`,
       lastModified: currentDate,
@@ -79,16 +115,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.7,
-    },
-
-    // ==========================================================================
-    // Priority 0.5 - Tools & calculators
-    // ==========================================================================
-    {
-      url: `${baseUrl}/calculator`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
     },
 
     // ==========================================================================

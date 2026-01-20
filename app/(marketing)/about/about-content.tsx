@@ -241,7 +241,7 @@ export default function AboutContent() {
           title="Ready to own your tools?"
           description="Book a 30-minute discovery call. We'll talk about what you need, I'll tell you if I can help, and you'll get a fixed quote within 48 hours."
           primaryCtaText="Book Discovery Call"
-          primaryCtaLink="/work-with-me"
+          primaryCtaLink="/custom"
           secondaryCtaText="See what I've built"
           secondaryCtaLink="/tools"
           className="max-w-4xl mx-auto"

@@ -22,9 +22,12 @@ export const metadata: Metadata = createPageMetadata({
     "ai:page-type": "product-catalog",
     "ai:value-prop":
       "Tools businesses own forever. One-time purchase, no subscriptions, no vendor lock-in.",
-    "ai:products": "Lemonbrand ATS - Ontario ESA-compliant hiring software",
+    "ai:products":
+      "Lemonbrand ATS (Ontario ESA-compliant, $4,500-12,000 CAD), Custom tool development ($5,000-30,000 USD)",
     "ai:pricing-model":
-      "One-time purchase ($4,500-$12,000 CAD) vs typical $500/month SaaS subscriptions",
+      "One-time purchase vs typical $500/month SaaS subscriptions. 3-year savings: $7,200-$28,800 vs $4,500-$15,000 ownership.",
+    "ai:custom-builds":
+      "Bespoke tools built to your spec. Fixed pricing, no surprises. 2-4 week delivery. You own all source code.",
   },
 });
 

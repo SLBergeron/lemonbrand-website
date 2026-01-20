@@ -13,10 +13,12 @@ import {
   DollarSign,
   FileCode,
   Shield,
+  Calendar,
 } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
-import { CallToAction } from "@/components/shared/CallToAction";
+import { useCalEmbed } from "@/app/hooks/useCalEmbed";
+import { CONSTANTS } from "@/constants/links";
 
 const process = [
   {
@@ -134,6 +136,19 @@ const badFits = [
 ];
 
 export default function CustomContent() {
+  // Cal.com embed for inline booking
+  const calOptions = useCalEmbed({
+    namespace: CONSTANTS.CALCOM_NAMESPACE,
+    styles: {
+      branding: {
+        brandColor: CONSTANTS.CALCOM_BRAND_COLOR,
+      },
+    },
+    hideEventTypeDetails: CONSTANTS.CALCOM_HIDE_EVENT_TYPE_DETAILS,
+    layout: CONSTANTS.CALCOM_LAYOUT,
+    theme: CONSTANTS.CALCOM_THEME as "auto" | "light" | "dark",
+  });
+
   return (
     <main className="pt-16">
       {/* Hero */}
@@ -152,11 +167,15 @@ export default function CustomContent() {
             No subscriptions, no vendor lock-in. Most projects delivered in 2-4 weeks.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="accent" size="lg" asChild>
-              <Link href="/work-with-me">
-                Book Discovery Call
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
+            <Button
+              variant="accent"
+              size="lg"
+              data-cal-namespace={calOptions.namespace}
+              data-cal-link={CONSTANTS.CALCOM_LINK}
+              data-cal-config={`{"layout":"${calOptions.layout}"}`}
+            >
+              <Calendar className="w-4 h-4 mr-2" />
+              Book Discovery Call
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="#pricing">
@@ -309,16 +328,43 @@ export default function CustomContent() {
 
       {/* CTA */}
       <Section>
-        <CallToAction
-          title="Let's talk about what you need"
-          description="30-minute discovery call. No pitch, just a conversation about your problem. If we can help, we'll tell you how. If we can't, we'll tell you that too."
-          primaryCtaText="Book Discovery Call"
-          primaryCtaLink="/work-with-me"
-          secondaryCtaText="See our tools"
-          secondaryCtaLink="/tools"
-          benefits={["Free 30-minute call", "Fixed quote within 48 hours", "No obligation"]}
-          className="max-w-4xl mx-auto"
-        />
+        <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border p-8 sm:p-12">
+          <div className="text-center">
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+              Let&apos;s talk about what you need
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              30-minute discovery call. No pitch, just a conversation about your problem.
+              If we can help, we&apos;ll tell you how. If we can&apos;t, we&apos;ll tell you that too.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {["Free 30-minute call", "Fixed quote within 48 hours", "No obligation"].map((benefit) => (
+                <div key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Check className="w-4 h-4 text-success" />
+                  <span>{benefit}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                variant="accent"
+                size="lg"
+                data-cal-namespace={calOptions.namespace}
+                data-cal-link={CONSTANTS.CALCOM_LINK}
+                data-cal-config={`{"layout":"${calOptions.layout}"}`}
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Book Discovery Call
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/tools">
+                  See our tools
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
       </Section>
 
       {/* DIY Option */}
