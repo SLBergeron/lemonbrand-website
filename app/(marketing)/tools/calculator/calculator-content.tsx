@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 
-// Real SaaS product data with hidden costs
+// Compare against real alternatives: enterprise SaaS and custom development
 const productCategories = [
   {
     id: "ats",
@@ -29,36 +29,29 @@ const productCategories = [
     description: "Hiring and recruitment software",
     examples: [
       {
-        name: "Greenhouse",
-        monthlyBase: 500,
-        setupFee: 5000,
+        name: "Custom Development",
+        monthlyBase: 0,
+        setupFee: 35000,
+        perUserFee: 0,
+        annualIncrease: 0,
+        hiddenCosts: ["3-6 month timeline", "Ongoing maintenance costs", "Still need hosting setup"],
+        isCustomDev: true,
+      },
+      {
+        name: "Enterprise ATS (Greenhouse/Lever)",
+        monthlyBase: 1500,
+        setupFee: 8000,
         perUserFee: 0,
         annualIncrease: 12,
-        hiddenCosts: ["$3K-10K implementation", "Job board posting fees", "Background check integrations"],
+        hiddenCosts: ["$8K-15K implementation", "Job board posting fees", "Compliance add-ons extra"],
       },
       {
-        name: "Lever",
-        monthlyBase: 600,
-        setupFee: 5000,
-        perUserFee: 0,
-        annualIncrease: 10,
-        hiddenCosts: ["Mandatory onboarding package", "ATS + CRM bundled pricing", "Nurture campaign add-on"],
-      },
-      {
-        name: "Workable",
-        monthlyBase: 149,
-        setupFee: 0,
-        perUserFee: 50,
+        name: "Mid-Market SaaS (Workable Pro)",
+        monthlyBase: 299,
+        setupFee: 2000,
+        perUserFee: 75,
         annualIncrease: 15,
-        hiddenCosts: ["AI features locked to higher tier", "Video interview add-on", "Assessments extra"],
-      },
-      {
-        name: "BambooHR",
-        monthlyBase: 200,
-        setupFee: 0,
-        perUserFee: 8,
-        annualIncrease: 10,
-        hiddenCosts: ["ATS is separate from core HR", "Performance management extra", "Time tracking add-on"],
+        hiddenCosts: ["AI features locked to higher tier", "Video interview add-on", "Per-job pricing on some plans"],
       },
     ],
     ourSolution: {
@@ -66,16 +59,16 @@ const productCategories = [
       oneTimeCost: 4500,
       monthlyHosting: 25,
       features: [
-        "O. Reg. 476/24 compliant",
-        "45-day notification tracking",
-        "Salary validation built-in",
-        "M365 integration",
+        "Single fixed price—no surprises",
+        "O. Reg. 476/24 compliant out of box",
+        "Runs on your M365/infrastructure",
         "Unlimited users forever",
+        "Code is yours if we disappear",
       ],
       link: "/tools/ats",
     },
-    defaultUsers: 3,
-    defaultSaasIndex: 2, // Workable
+    defaultUsers: 5,
+    defaultSaasIndex: 1, // Enterprise ATS
   },
   {
     id: "portal",
@@ -84,36 +77,29 @@ const productCategories = [
     description: "Client communication and file sharing",
     examples: [
       {
-        name: "Copilot",
-        monthlyBase: 39,
-        setupFee: 0,
-        perUserFee: 39,
-        annualIncrease: 10,
-        hiddenCosts: ["Per-client pricing on higher tiers", "White-label costs extra", "Custom domain extra"],
-      },
-      {
-        name: "SuiteDash",
-        monthlyBase: 99,
-        setupFee: 0,
+        name: "Custom Development",
+        monthlyBase: 0,
+        setupFee: 32000,
         perUserFee: 0,
-        annualIncrease: 8,
-        hiddenCosts: ["Learning curve (complex)", "Limited customization on base", "Storage limits"],
+        annualIncrease: 0,
+        hiddenCosts: ["3-6 month timeline", "Ongoing dev costs for changes", "Hosting & maintenance separate"],
+        isCustomDev: true,
       },
       {
-        name: "Monday.com",
-        monthlyBase: 36,
-        setupFee: 0,
-        perUserFee: 36,
+        name: "Enterprise Portal (Salesforce/HubSpot)",
+        monthlyBase: 800,
+        setupFee: 5000,
+        perUserFee: 25,
         annualIncrease: 12,
-        hiddenCosts: ["3-seat minimum", "Automations limited", "Integrations on higher tiers"],
+        hiddenCosts: ["Extensive customization required", "Consultant fees for setup", "Feature gating by tier"],
       },
       {
-        name: "Clinked",
-        monthlyBase: 95,
+        name: "Agency-Focused SaaS (Copilot/Moxo)",
+        monthlyBase: 199,
         setupFee: 500,
-        perUserFee: 5,
+        perUserFee: 49,
         annualIncrease: 10,
-        hiddenCosts: ["White-label is premium tier", "API access extra", "Custom branding limited"],
+        hiddenCosts: ["Per-client pricing on higher tiers", "White-label costs extra", "Storage limits apply"],
       },
     ],
     ourSolution: {
@@ -121,16 +107,16 @@ const productCategories = [
       oneTimeCost: 8000,
       monthlyHosting: 50,
       features: [
-        "Your brand, your domain",
-        "Unlimited clients",
-        "File sharing + messaging",
-        "Invoice integration",
-        "Built to your workflow",
+        "Single fixed price—no surprises",
+        "Built for your exact workflow",
+        "Unlimited clients forever",
+        "Your infrastructure, your data",
+        "Seamless M365/Google integration",
       ],
       link: "/custom",
     },
     defaultUsers: 5,
-    defaultSaasIndex: 0, // Copilot
+    defaultSaasIndex: 0, // Custom Development
   },
   {
     id: "helpdesk",
@@ -139,36 +125,29 @@ const productCategories = [
     description: "Customer support and ticketing",
     examples: [
       {
-        name: "Zendesk",
+        name: "Custom Development",
         monthlyBase: 0,
-        setupFee: 2500,
-        perUserFee: 89,
+        setupFee: 45000,
+        perUserFee: 0,
+        annualIncrease: 0,
+        hiddenCosts: ["4-6 month timeline", "Ongoing maintenance costs", "Integration work separate"],
+        isCustomDev: true,
+      },
+      {
+        name: "Enterprise Suite (Zendesk/Intercom)",
+        monthlyBase: 0,
+        setupFee: 5000,
+        perUserFee: 150,
         annualIncrease: 15,
-        hiddenCosts: ["Suite pricing jumps significantly", "AI add-on ($50/agent)", "Advanced analytics extra"],
+        hiddenCosts: ["AI features extra ($50-99/agent)", "Advanced analytics locked", "Per-resolution AI pricing"],
       },
       {
-        name: "Intercom",
-        monthlyBase: 74,
-        setupFee: 0,
-        perUserFee: 74,
-        annualIncrease: 18,
-        hiddenCosts: ["Resolution-based AI pricing ($0.99/each)", "Product Tours extra", "Proactive support extra"],
-      },
-      {
-        name: "Freshdesk",
+        name: "Mid-Market SaaS (Freshdesk/HelpScout)",
         monthlyBase: 0,
         setupFee: 0,
-        perUserFee: 49,
+        perUserFee: 79,
         annualIncrease: 12,
-        hiddenCosts: ["Field service extra", "Freddy AI limited", "Canned responses limited on base"],
-      },
-      {
-        name: "Help Scout",
-        monthlyBase: 0,
-        setupFee: 0,
-        perUserFee: 40,
-        annualIncrease: 10,
-        hiddenCosts: ["AI features on Plus tier only", "Docs sites limited", "Light users count against seats"],
+        hiddenCosts: ["AI features on Plus tier only", "Field service costs extra", "Automation limits on base"],
       },
     ],
     ourSolution: {
@@ -176,16 +155,16 @@ const productCategories = [
       oneTimeCost: 12000,
       monthlyHosting: 75,
       features: [
-        "Unlimited agents",
-        "Email + chat + forms",
-        "Knowledge base included",
-        "SLA tracking",
-        "Your integrations",
+        "Single fixed price—no surprises",
+        "Unlimited agents forever",
+        "Built for your support workflow",
+        "Runs on your infrastructure",
+        "Integrates with your existing tools",
       ],
       link: "/custom",
     },
-    defaultUsers: 4,
-    defaultSaasIndex: 3, // Help Scout
+    defaultUsers: 5,
+    defaultSaasIndex: 1, // Enterprise Suite
   },
 ];
 
@@ -254,11 +233,11 @@ export default function CalculatorContent() {
             Free Tool
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-6">
-            SaaS vs Own Calculator
+            What You&apos;d Actually Pay
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Compare real subscription costs (including hidden fees) against owning your software.
-            Select your tool category to see an honest breakdown.
+            Compare custom development quotes ($25-40K) and enterprise SaaS against our one-time solutions.
+            One price. No surprises. You own it.
           </p>
         </div>
       </Section>
@@ -305,17 +284,17 @@ export default function CalculatorContent() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Inputs */}
             <div className="space-y-6">
-              {/* SaaS Selection */}
+              {/* Comparison Selection */}
               <div className="bg-card rounded-lg border border-border p-6">
                 <h2 className="font-display text-xl font-semibold mb-4">Compare Against</h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Select a popular {selectedCategory.name.toLowerCase()} solution to compare:
+                  What would you actually pay for a {selectedCategory.name.toLowerCase()} solution?
                 </p>
 
                 <div className="space-y-2">
-                  {selectedCategory.examples.map((saas, index) => (
+                  {selectedCategory.examples.map((option, index) => (
                     <button
-                      key={saas.name}
+                      key={option.name}
                       onClick={() => setSelectedSaasIndex(index)}
                       className={`w-full p-3 rounded-lg border text-left transition-all ${
                         selectedSaasIndex === index
@@ -324,31 +303,32 @@ export default function CalculatorContent() {
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-medium">{saas.name}</span>
+                        <span className="font-medium">{option.name}</span>
                         <span className="text-sm text-muted-foreground">
-                          {saas.monthlyBase > 0 && `$${saas.monthlyBase}/mo`}
-                          {saas.monthlyBase > 0 && saas.perUserFee > 0 && " + "}
-                          {saas.perUserFee > 0 && `$${saas.perUserFee}/user`}
+                          {option.setupFee > 0 && option.monthlyBase === 0 && option.perUserFee === 0 && `$${(option.setupFee / 1000).toFixed(0)}K one-time`}
+                          {option.monthlyBase > 0 && `$${option.monthlyBase}/mo`}
+                          {option.monthlyBase > 0 && option.perUserFee > 0 && " + "}
+                          {option.perUserFee > 0 && `$${option.perUserFee}/user`}
                         </span>
                       </div>
                     </button>
                   ))}
                 </div>
 
-                {/* Hidden costs warning */}
+                {/* Considerations warning */}
                 <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-                        Hidden costs for {selectedSaas.name}:
+                        {(selectedSaas as typeof selectedSaas & { isCustomDev?: boolean }).isCustomDev ? "Additional considerations:" : "Hidden costs:"}
                       </p>
                       <ul className="mt-1 space-y-1">
                         {selectedSaas.hiddenCosts.map((cost) => (
                           <li key={cost} className="text-xs text-amber-700 dark:text-amber-300">• {cost}</li>
                         ))}
                       </ul>
-                      {selectedSaas.setupFee > 0 && (
+                      {selectedSaas.setupFee > 0 && !(selectedSaas as typeof selectedSaas & { isCustomDev?: boolean }).isCustomDev && (
                         <p className="text-xs text-amber-700 dark:text-amber-300 mt-2 font-medium">
                           + ${selectedSaas.setupFee.toLocaleString()} setup/implementation fee
                         </p>
@@ -508,45 +488,45 @@ export default function CalculatorContent() {
         </div>
       </section>
 
-      {/* The Real Cost Section */}
+      {/* Why Own Section */}
       <Section>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              The hidden costs they don&apos;t show you
+              Why ownership beats renting
             </h2>
             <p className="text-muted-foreground">
-              That &quot;$49/month&quot; tool rarely stays $49/month.
+              Custom development quotes start at $25-40K. Enterprise SaaS locks you in. There&apos;s a better way.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "Setup Fees",
-                description: "Many enterprise tools charge $2K-10K for \"implementation\" and \"onboarding.\"",
-                examples: "Greenhouse, Zendesk, Clinked",
+                title: "Single Fixed Price",
+                description: "No per-seat fees. No annual increases. No surprise charges. Know exactly what you're paying.",
+                benefit: "Budget with confidence",
               },
               {
-                title: "Per-Seat Scaling",
-                description: "Costs multiply as you grow. 10 users at $50/seat = $500/month.",
-                examples: "Zendesk, Intercom, Monday.com",
+                title: "Your Infrastructure",
+                description: "Runs on your M365, your servers, or your cloud. Your data stays yours.",
+                benefit: "Full control",
               },
               {
-                title: "Feature Gating",
-                description: "The feature you need is always on the next tier up. Then the next.",
-                examples: "Most SaaS products",
+                title: "Seamless Integration",
+                description: "Built for your existing tools. Works with your workflow, not the other way around.",
+                benefit: "No workarounds",
               },
               {
-                title: "Annual Increases",
-                description: "8-20% price increases yearly. Your $99/mo becomes $145/mo in 3 years.",
-                examples: "Industry standard",
+                title: "True Ownership",
+                description: "Code is yours. Works even if we disappear. No vendor dependency, ever.",
+                benefit: "Future-proof",
               },
             ].map((item) => (
-              <div key={item.title} className="bg-card rounded-lg border border-border p-5">
+              <div key={item.title} className="bg-card rounded-lg border border-accent/20 p-5">
                 <h3 className="font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground mb-3">{item.description}</p>
-                <p className="text-xs text-muted-foreground/70">Common in: {item.examples}</p>
+                <p className="text-xs text-accent font-medium">{item.benefit}</p>
               </div>
             ))}
           </div>

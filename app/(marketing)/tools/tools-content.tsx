@@ -99,39 +99,70 @@ const freeTools = [
 export default function ToolsContent() {
   return (
     <main className="pt-16">
-      {/* Hero */}
-      <Section className="py-24 sm:py-32">
+      {/* Hero - Shorter */}
+      <Section className="py-16 sm:py-20">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm font-medium tracking-wider uppercase text-accent mb-6">
+          <p className="text-sm font-medium tracking-wider uppercase text-accent mb-4">
             Tools You Own
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-6">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4">
             No subscriptions.
-            <br />
-            <span className="text-muted-foreground">No vendor lock-in.</span>
+            <span className="text-muted-foreground"> No vendor lock-in.</span>
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-            Tired of paying $500/month for software that almost does what you need?
-            We build tools businesses own forever. One-time purchase. You own the code.
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            One-time purchase. Your infrastructure. You own the code.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="accent" size="lg" asChild>
-              <Link href="/tools/ats">
-                See the ATS
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/custom">
-                Need something custom?
-              </Link>
-            </Button>
-          </div>
         </div>
       </Section>
 
+      {/* Free Tools - Prominent Section */}
+      <section id="free" className="py-12 sm:py-16 px-3 sm:px-4 bg-accent/5 border-y border-accent/20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-3">
+              Try Our Free Tools
+            </h2>
+            <p className="text-muted-foreground">
+              No signup required. Make smarter decisions about your software.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {freeTools.map((tool) => {
+              return (
+                <Link
+                  key={tool.name}
+                  href={tool.href}
+                  className="bg-card rounded-xl border-2 border-border p-8 transition-all hover:border-accent hover:shadow-lg group"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-20 h-20 relative mb-5">
+                      <Image
+                        src={tool.icon3d}
+                        alt={tool.name}
+                        fill
+                        className="object-contain group-hover:scale-110 transition-transform duration-300"
+                        unoptimized
+                      />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold mb-2 group-hover:text-accent transition-colors">
+                      {tool.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-5">{tool.description}</p>
+                    <span className="inline-flex items-center gap-2 text-accent font-medium text-sm px-4 py-2 bg-accent/10 rounded-full group-hover:bg-accent group-hover:text-white transition-all">
+                      Try Free
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* The Problem */}
-      <section className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
+      <section className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-b border-border/50">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -266,57 +297,6 @@ export default function ToolsContent() {
           ))}
         </div>
       </Section>
-
-      {/* Free Tools */}
-      <section id="free" className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium tracking-wider uppercase text-accent mb-4">
-              Free Resources
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              Make smarter decisions
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              No signup required. Just useful tools to help you evaluate your options.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-3 gap-6">
-            {freeTools.map((tool) => {
-              return (
-                <Link
-                  key={tool.name}
-                  href={tool.href}
-                  className={`bg-card rounded-lg border p-6 transition-colors hover:border-accent/50 group ${
-                    tool.highlight ? "border-accent/30" : "border-border"
-                  }`}
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-14 h-14 relative shrink-0">
-                      <Image
-                        src={tool.icon3d}
-                        alt={tool.name}
-                        fill
-                        className="object-contain group-hover:scale-110 transition-transform duration-300"
-                        unoptimized
-                      />
-                    </div>
-                  </div>
-                  <h3 className="font-display font-semibold mb-2 group-hover:text-accent transition-colors">
-                    {tool.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
-                  <span className="text-sm text-accent font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Try it free
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* Coming Soon */}
       <Section width="wide">
