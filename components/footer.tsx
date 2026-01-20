@@ -4,14 +4,25 @@ import { Youtube, Twitter, Mail, Github } from "lucide-react";
 import { TikTokIcon } from "@/components/icons/TikTokIcon";
 import { SOCIAL_LINKS } from "@/constants/links";
 
-const pageLinks = [
+const productLinks = [
+  { name: "Lemonbrand ATS", href: "/tools/ats", description: "Ontario employment law compliance" },
+  { name: "VerifiedNode", href: "https://www.verifiednode.com", external: true, description: "Trust layer for the agentic web" },
+  { name: "Custom Builds", href: "/custom", description: "We build tools you own" },
+  { name: "All Tools", href: "/tools" },
+];
+
+const learnLinks = [
+  { name: "7-Day Sprint", href: "/sprint" },
+  { name: "8-Week Program", href: "/8-week" },
+  { name: "Builders Club", href: "/club" },
+  { name: "Free Templates", href: "/free/claudemd" },
+];
+
+const companyLinks = [
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
   { name: "Videos", href: "/videos" },
   { name: "FAQ", href: "/faq" },
-  { name: "Sprint", href: "/sprint" },
-  { name: "8-Week", href: "/8-week" },
-  { name: "Club", href: "/club" },
 ];
 
 const socials = [
@@ -50,7 +61,7 @@ export function Footer() {
                 />
               </Link>
               <p className="text-muted-foreground max-w-sm leading-relaxed">
-                Building AI businesses in public. Helping operations teams ship production systems in days, not months.
+                Tools businesses own forever. No subscriptions. Custom builds + education for those who want to learn.
               </p>
             </div>
             
@@ -73,78 +84,63 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Column */}
-          <div>
-            <h3 className="font-semibold mb-4 text-foreground">Explore</h3>
-            <ul className="space-y-3">
-              {pageLinks.slice(0, 4).map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Programs Column */}
-          <div>
-            <h3 className="font-semibold mb-4 text-foreground">Programs</h3>
-            <ul className="space-y-3">
-              {pageLinks.slice(4).map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/free/claudemd"
-                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
-                >
-                  Free Templates
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Products Column */}
+          {/* Products Column - Primary */}
           <div>
             <h3 className="font-semibold mb-4 text-foreground">Products</h3>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="https://ats.lemonbrand.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
-                >
-                  Lemonbrand ATS
-                </Link>
-                <p className="text-xs text-muted-foreground/70 mt-1">
-                  Ontario employment law compliance
-                </p>
-              </li>
-              <li>
-                <Link
-                  href="https://www.verifiednode.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent transition-colors duration-200"
-                >
-                  Verifiednode
-                </Link>
-                <p className="text-xs text-muted-foreground/70 mt-1">
-                  Trust layer for the agentic web
-                </p>
-              </li>
+              {productLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    {...(link.external && {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    })}
+                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                  {link.description && (
+                    <p className="text-xs text-muted-foreground/70 mt-1">
+                      {link.description}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Learn Column */}
+          <div>
+            <h3 className="font-semibold mb-4 text-foreground">Learn</h3>
+            <ul className="space-y-3">
+              {learnLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div>
+            <h3 className="font-semibold mb-4 text-foreground">Company</h3>
+            <ul className="space-y-3">
+              {companyLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

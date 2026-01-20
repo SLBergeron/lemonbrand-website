@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 
 const navItems = [
-  { name: "Sprint", link: "/sprint" },
-  { name: "8-Week", link: "/8-week" },
-  { name: "Club", link: "/club" },
+  { name: "Tools", link: "/tools" },
+  { name: "Custom Builds", link: "/custom" },
+  { name: "Learn", link: "/sprint" },
   { name: "About", link: "/about" },
 ];
 
@@ -78,7 +78,7 @@ export const Navbar = () => {
             ))}
             <ModeToggle />
             <Button variant="accent" size="sm" asChild>
-              <Link href="/free/claudemd">Get Free Template</Link>
+              <Link href="/custom">Get a Quote</Link>
             </Button>
           </div>
 
@@ -122,8 +122,8 @@ export const Navbar = () => {
                 </NavLink>
               ))}
               <Button variant="accent" size="sm" className="w-full mt-4" asChild>
-                <Link href="/free/claudemd" onClick={() => setMobileMenuOpen(false)}>
-                  Get Free Template
+                <Link href="/custom" onClick={() => setMobileMenuOpen(false)}>
+                  Get a Quote
                 </Link>
               </Button>
             </div>

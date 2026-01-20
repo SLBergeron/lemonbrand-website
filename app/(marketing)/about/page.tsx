@@ -3,34 +3,34 @@ import AboutContent from "./about-content";
 import { generatePersonSchema, JsonLd, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About Simon Bergeron | Teaching Non-Developers to Build with AI",
+  title: "About Simon Bergeron | Custom Tools You Own Forever",
   description:
-    "Simon Bergeron is a product manager (not a developer) who taught himself to build production tools with Claude Code. Now he teaches that skill to operators, consultants, and founders through LemonBrand. Built VerifiedNode (58,000+ contractor records) using the same methods he teaches.",
+    "Simon Bergeron builds custom software businesses own forever. No subscriptions, no vendor lock-in. One-time purchase, you own the code. Built VerifiedNode (58,000+ records) and the Lemonbrand ATS using AI-assisted development.",
   keywords: [
     "Simon Bergeron",
-    "LemonBrand founder",
-    "teach AI building",
-    "non-developer AI",
-    "Claude Code teacher",
-    "Build Stack creator",
+    "Lemonbrand founder",
+    "custom software development",
+    "no subscription software",
+    "AI-built tools",
     "VerifiedNode founder",
-    "AI for operators",
-    "build in public",
-    "product manager AI",
+    "Ontario ATS",
+    "fixed price development",
+    "own your software",
+    "custom business tools",
   ],
   path: "/about",
   aiMetadata: {
     "ai:page-type": "about",
     "ai:person":
-      "Simon Bergeron - Product manager, not developer. 13 years in startup ecosystem. Self-taught everything. Built VerifiedNode (real SaaS, 58,000+ contractor records) with Claude Code.",
+      "Simon Bergeron - 13 years in startup ecosystem. Builds custom tools businesses own forever. No subscriptions, fixed pricing, clients own all code.",
     "ai:philosophy":
-      "Ship first, optimize later. Production or nothing. Show the work. Fifth-grade English (no jargon).",
-    "ai:teaching-focus":
-      "The skill isn't coding—it's communication. If you can explain what you want clearly, you can build with AI.",
+      "You own everything. Fixed pricing, no surprises. Ship fast, iterate live. Plain language.",
+    "ai:services":
+      "Custom tool development ($5-30K), pre-built products (ATS), education for DIYers",
     "ai:proof":
-      "VerifiedNode is a real production SaaS with paying customers, built using the same Build Stack methods taught to students.",
-    "ai:building-in-public":
-      "Real code, real decisions, real mistakes shared on YouTube. Transparent about what works and what doesn't.",
+      "VerifiedNode (58,000+ contractor records, paying customers), Lemonbrand ATS (Ontario ESA-compliant), custom client tools",
+    "ai:value-prop":
+      "Stop renting software. One-time purchase, you own the code, no vendor lock-in.",
   },
 });
 

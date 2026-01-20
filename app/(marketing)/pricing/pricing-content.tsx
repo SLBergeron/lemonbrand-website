@@ -214,7 +214,7 @@ export default function PricingContent() {
             title="Ready for the 8-Week Build?"
             description="Let's discuss your specific needs and see if the 8-Week Build is right for you. We'll map out your workflows and design a custom AI system."
             primaryCtaText="Book a Discovery Call"
-            primaryCtaLink="https://cal.com/simonbergeron/discovery"
+            primaryCtaLink="/work-with-me"
             benefits={["30-minute call", "Custom scope", "No commitment"]}
             className="max-w-4xl mx-auto"
           />

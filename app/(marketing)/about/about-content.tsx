@@ -1,64 +1,61 @@
 "use client";
 
-import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code, ExternalLink, Youtube, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Youtube, Github, Linkedin } from "lucide-react";
 import { SOCIAL_LINKS } from "@/constants/links";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { CallToAction } from "@/components/shared/CallToAction";
 
-// Since this is a client component we can't export metadata directly
-// But for now we keep the structure simple. The metadata would usually go in a layout or page.tsx (server component).
-// Since this is a simple refactor of an existing file which was already "use client", we keep it as is.
-// Note: Next.js App Router ignores metadata exports in client components.
-// To fix this properly, this content should be split, but I will stick to the visual refactor as requested.
-
-const projects = [
+const products = [
   {
-    name: "GetMyWebsite.io",
+    name: "Lemonbrand ATS",
     description:
-      "Productized website service for trades. AI-powered quote generation, automated client communication, built entirely with Claude Code.",
-    status: "Building in Public",
-    link: "https://getmywebsite.io",
+      "Ontario ESA-compliant applicant tracking system. Built for O. Reg. 476/24. One-time purchase, clients own the code.",
+    status: "Live",
+    link: "/tools/ats",
+    external: false,
   },
   {
-    name: "CodeBrain",
+    name: "VerifiedNode",
     description:
-      "AI development tools for building better prompts and workflows. Modular components that plug into any stack.",
-    status: "Active Development",
-    link: null,
+      "Trust layer for the agentic web. 58,000+ contractor records, paying customers. Built with the same methods I use for client work.",
+    status: "Live",
+    link: "https://www.verifiednode.com",
+    external: true,
   },
   {
-    name: "Agent Modules",
+    name: "Custom Client Tools",
     description:
-      "Reusable AI components for common workflows: content generation, data processing, document analysis.",
-    status: "Open Source",
-    link: SOCIAL_LINKS.GITHUB,
+      "Dashboards, automation systems, internal tools. Built to spec, delivered in weeks. Clients own everything.",
+    status: "Ongoing",
+    link: "/custom",
+    external: false,
   },
 ];
 
 const values = [
   {
-    title: "Ship First, Optimize Later",
+    title: "You Own Everything",
     description:
-      "A working system today beats a perfect system next quarter. We iterate on live, not in theory.",
+      "No subscriptions, no vendor lock-in. The code runs on your infrastructure. Even if I disappeared, your tools keep working.",
   },
   {
-    title: "Production or Nothing",
+    title: "Fixed Pricing, No Surprises",
     description:
-      "POCs and demos don't count. If it's not running in production, making real decisions, it's not done.",
+      "The quote is the price. I scope projects carefully so there are no surprise invoices or scope creep.",
   },
   {
-    title: "Show the Work",
+    title: "Ship Fast, Iterate Live",
     description:
-      "Real code, real metrics, real failures. Transparent about what works and what doesn't.",
+      "Working prototype in 1-2 weeks. We iterate on real software, not wireframes and mockups.",
   },
   {
-    title: "Fifth-Grade English",
+    title: "Plain Language",
     description:
-      "No jargon. No buzzwords. If you can't explain it simply, you don't understand it well enough.",
+      "No jargon. No buzzwords. I explain what I'm building and why. You understand what you're paying for.",
   },
 ];
 
@@ -68,58 +65,62 @@ export default function AboutContent() {
       {/* Hero */}
       <Section className="py-24 sm:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-           {/* Left Column */}
-           <div className="max-w-2xl">
-              <p className="text-sm font-medium tracking-wider uppercase text-accent mb-6">
-                About Me
-              </p>
-              <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight mb-6">
-                I teach non-developers to build with AI
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                I&apos;m Simon Bergeron. I&apos;m not a developer—I&apos;m a project manager
-                who taught himself to build production tools with Claude Code.
-                Now I teach that skill to others.
-              </p>
-              <div className="flex gap-4">
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
-                    <Youtube className="w-4 h-4 mr-2" />
-                    YouTube
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
-                    <Github className="w-4 h-4 mr-2" />
-                    GitHub
-                  </Link>
-                </Button>
-              </div>
-           </div>
-           
-           {/* Right Column - Video */}
-           <div className="hidden lg:flex justify-center">
-              <div className="relative w-full max-w-lg">
-                 {/* Drop shadow */}
-                 <div
-                    className="absolute inset-0 rounded-sm bg-black/50 dark:bg-black/70"
-                    style={{
-                       transform: 'translate(8px, 8px)',
-                       filter: 'blur(16px)',
-                    }}
-                 />
-                 {/* Video */}
-                 <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="relative w-full h-auto block rounded-sm"
-                 >
-                    <source src="/assets/Build-with-cursor.mp4" type="video/mp4" />
-                 </video>
-              </div>
-           </div>
+          {/* Left Column */}
+          <div className="max-w-2xl">
+            <p className="text-sm font-medium tracking-wider uppercase text-accent mb-6">
+              About
+            </p>
+            <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight mb-6">
+              I build tools businesses own forever
+            </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+              I&apos;m Simon Bergeron. I build custom software for businesses who are tired
+              of paying $500/month for tools that almost work.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              One-time purchase. You own the code. No subscriptions.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button variant="accent" size="sm" asChild>
+                <Link href="/custom">
+                  Work With Me
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" asChild>
+                <Link href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
+                  <Youtube className="w-4 h-4 mr-2" />
+                  YouTube
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" asChild>
+                <Link href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4 mr-2" />
+                  GitHub
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column - Profile Photo */}
+          <div className="hidden lg:flex justify-center">
+            <div className="relative w-full max-w-sm">
+              <div
+                className="absolute inset-0 rounded-lg bg-accent/20"
+                style={{
+                  transform: "translate(8px, 8px)",
+                }}
+              />
+              <Image
+                src="/assets/Profile_updated_tall.webp"
+                alt="Simon Bergeron"
+                width={400}
+                height={500}
+                className="relative w-full h-auto rounded-lg object-cover"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -132,72 +133,82 @@ export default function AboutContent() {
             </h2>
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                I&apos;m not a developer. I&apos;ve been in the startup ecosystem for 13 years—
-                project management, automation, sales, building websites. Self-taught everything.
+                I&apos;ve been in the startup ecosystem for 13 years—project management,
+                automation, sales, building websites. Self-taught everything.
               </p>
               <p>
-                When Claude Code came out, I was frustrated like everyone else. Asked it to
-                build something, got code I didn&apos;t understand, couldn&apos;t make it work.
-                Closed the laptop thinking &quot;this isn&apos;t for people like me.&quot;
+                When AI coding tools matured, I realized something: businesses don&apos;t need
+                to rent software anymore. The tools they need can be built fast and owned forever.
               </p>
               <p>
-                Then I figured out the actual skill: it&apos;s not coding. It&apos;s communication.
-                Knowing what you want. Expressing it clearly. Iterating when the first version isn&apos;t right.
+                I started building tools for myself. Then for clients. Now I run a practice
+                that delivers custom software in weeks instead of months, at a fraction of
+                traditional development costs.
               </p>
               <p>
-                Now I teach that skill. Because if I can build production tools without a
-                CS degree, so can you.
+                The model is simple: you tell me what you need, I build it, you own it.
+                No recurring fees. No vendor lock-in. Just tools that work exactly how you work.
+              </p>
+              <p className="text-foreground font-medium">
+                I also teach people to build their own tools—same methods I use. But most
+                clients just want it done. That&apos;s fine too.
               </p>
             </div>
           </div>
         </Section>
       </section>
 
-      {/* Projects */}
+      {/* Products */}
       <Section width="wide">
-          <div className="max-w-3xl mb-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              What I&apos;m building
-            </h2>
-            <p className="text-muted-foreground">
-              I build in public. Everything I ship, you can watch me build on YouTube.
-              Real code, real decisions, real mistakes.
-            </p>
-          </div>
+        <div className="max-w-3xl mb-12">
+          <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            What I&apos;ve built
+          </h2>
+          <p className="text-muted-foreground">
+            Real products with real users. Not demos or proofs of concept.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <FeatureCard key={project.name} className="bg-card">
-                <div className="p-4 flex flex-col h-full">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
-                      <Code className="w-5 h-5 text-accent" />
-                    </div>
-                    <span className="text-xs font-medium text-muted-foreground px-2 py-1 bg-muted rounded">
-                      {project.status}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-semibold text-lg mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed flex-1">
-                    {project.description}
-                  </p>
-                  {project.link && (
-                    <Link
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-sm font-medium text-accent hover:underline mt-auto"
-                    >
-                      View project
-                      <ExternalLink className="w-3 h-3 ml-1" />
-                    </Link>
-                  )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <FeatureCard key={product.name} className="bg-card">
+              <div className="p-5 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-4">
+                  <span
+                    className={`text-xs font-medium px-2 py-1 rounded ${
+                      product.status === "Live"
+                        ? "text-success bg-success/10"
+                        : "text-muted-foreground bg-muted"
+                    }`}
+                  >
+                    {product.status}
+                  </span>
                 </div>
-              </FeatureCard>
-            ))}
-          </div>
+                <h3 className="font-display font-semibold text-lg mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed flex-1">
+                  {product.description}
+                </p>
+                <Link
+                  href={product.link}
+                  {...(product.external && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
+                  className="inline-flex items-center text-sm font-medium text-accent hover:underline mt-auto"
+                >
+                  {product.external ? "Visit site" : "Learn more"}
+                  {product.external ? (
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  ) : (
+                    <ArrowRight className="w-3 h-3 ml-1" />
+                  )}
+                </Link>
+              </div>
+            </FeatureCard>
+          ))}
+        </div>
       </Section>
 
       {/* Values */}
@@ -227,12 +238,12 @@ export default function AboutContent() {
       {/* CTA */}
       <Section>
         <CallToAction
-          title="Ready to build something?"
-          description="The 7-Day Sprint teaches you to build your first tool with Claude Code. No coding background needed—just the ability to explain what you want."
-          primaryCtaText="Learn about the Sprint"
-          primaryCtaLink="/sprint"
-          secondaryCtaText="Watch me build"
-          secondaryCtaLink="/videos"
+          title="Ready to own your tools?"
+          description="Book a 30-minute discovery call. We'll talk about what you need, I'll tell you if I can help, and you'll get a fixed quote within 48 hours."
+          primaryCtaText="Book Discovery Call"
+          primaryCtaLink="/work-with-me"
+          secondaryCtaText="See what I've built"
+          secondaryCtaLink="/tools"
           className="max-w-4xl mx-auto"
         />
       </Section>
