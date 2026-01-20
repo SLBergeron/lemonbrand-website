@@ -19,6 +19,7 @@ import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
+import { useCurrency } from "@/hooks/useCurrency";
 
 const complianceRequirements = [
   {
@@ -119,6 +120,8 @@ const trustSignals = [
 ];
 
 export default function ATSContent() {
+  const { currency } = useCurrency();
+
   // Cal.com embed for inline booking
   const calOptions = useCalEmbed({
     namespace: CONSTANTS.CALCOM_NAMESPACE,
@@ -151,7 +154,7 @@ export default function ATSContent() {
             Keeps running even if we disappear.
           </p>
           <p className="text-sm text-muted-foreground mb-8">
-            Starting at $4,500 CAD
+            Starting at $4,500 {currency}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="accent" size="lg" asChild>
@@ -308,7 +311,7 @@ export default function ATSContent() {
                 <p className="text-sm text-muted-foreground mt-1 mb-4">{tier.description}</p>
                 <div className="mb-6">
                   <span className="font-display text-4xl font-bold">{tier.price}</span>
-                  <span className="text-muted-foreground"> CAD</span>
+                  <span className="text-muted-foreground"> {currency}</span>
                 </div>
                 <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((feature) => (
@@ -333,7 +336,7 @@ export default function ATSContent() {
           </div>
 
           <div className="mt-8 text-center text-sm text-muted-foreground">
-            All prices in CAD. Infrastructure costs (Vercel, Convex, Clerk) typically $20-50/month depending on usage.
+            All prices in {currency}. Infrastructure costs (Vercel, Convex, Clerk) typically $20-50/month depending on usage.
           </div>
         </div>
       </section>

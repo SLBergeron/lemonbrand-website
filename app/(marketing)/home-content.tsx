@@ -12,6 +12,7 @@ import { FeatureCard } from "@/components/shared/FeatureCard";
 import { CallToAction } from "@/components/shared/CallToAction";
 import { getNextCohortDate } from "@/lib/utils";
 import { VerifiednodeShowcase } from "@/components/verifiednode/verifiednode-showcase";
+import { useCurrency } from "@/hooks/useCurrency";
 
 function SubscriptionStatus() {
   const searchParams = useSearchParams();
@@ -71,6 +72,7 @@ const processSteps = [
 
 export default function HomeContent() {
   const nextCohort = getNextCohortDate();
+  const { currency } = useCurrency();
 
   return (
     <>
@@ -332,7 +334,7 @@ export default function HomeContent() {
                 </p>
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                   <div>
-                    <p className="font-semibold text-foreground">Starting at $4,500 CAD</p>
+                    <p className="font-semibold text-foreground">Starting at $4,500 {currency}</p>
                     <p className="text-xs text-muted-foreground">vs $500/month competitors</p>
                   </div>
                   <Button variant="accent" size="sm" asChild>

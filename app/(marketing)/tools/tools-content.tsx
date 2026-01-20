@@ -8,6 +8,7 @@ import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { CallToAction } from "@/components/shared/CallToAction";
 import { WaitlistSignup } from "@/components/shared/WaitlistSignup";
+import { useCurrency } from "@/hooks/useCurrency";
 
 const products = [
   {
@@ -97,6 +98,8 @@ const freeTools = [
 ];
 
 export default function ToolsContent() {
+  const { currency } = useCurrency();
+
   return (
     <main className="pt-16">
       {/* Hero - Shorter */}
@@ -260,7 +263,7 @@ export default function ToolsContent() {
                 <div className="pt-4 border-t border-border">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <p className="font-semibold text-foreground">{product.pricing}</p>
+                      <p className="font-semibold text-foreground">{product.pricing.replace("CAD", currency)}</p>
                       {product.comparisonPrice && (
                         <p className="text-xs text-muted-foreground">{product.comparisonPrice}</p>
                       )}
