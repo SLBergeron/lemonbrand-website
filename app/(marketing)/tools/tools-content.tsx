@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ExternalLink, Shield, Server, Calendar, Code, Users, Calculator, ClipboardCheck, FileText } from "lucide-react";
 import { Section } from "@/components/shared/Section";
@@ -75,21 +76,21 @@ const freeTools = [
   {
     name: "Custom Tool Quote Generator",
     description: "Get an instant estimate for your custom business tool. Answer a few questions, see your price range.",
-    icon: FileText,
+    icon3d: "/assets/3dicons/3dicons-chart-dynamic-color.png",
     href: "/tools/proposal-generator",
     highlight: true,
   },
   {
     name: "SaaS vs Own Calculator",
     description: "See what you're really paying for that subscription over 3 years. Compare to owning outright.",
-    icon: Calculator,
+    icon3d: "/assets/3dicons/3dicons-calculator-dynamic-color.png",
     href: "/tools/calculator",
     highlight: false,
   },
   {
     name: "O. Reg. 476/24 Compliance Checker",
     description: "Check if your hiring process meets Ontario's new ESA requirements (effective Jan 1, 2026).",
-    icon: ClipboardCheck,
+    icon3d: "/assets/3dicons/3dicons-shield-dynamic-color.png",
     href: "/tools/compliance-checker",
     highlight: false,
   },
@@ -267,7 +268,7 @@ export default function ToolsContent() {
       </Section>
 
       {/* Free Tools */}
-      <section className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
+      <section id="free" className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-sm font-medium tracking-wider uppercase text-accent mb-4">
@@ -283,7 +284,6 @@ export default function ToolsContent() {
 
           <div className="grid sm:grid-cols-3 gap-6">
             {freeTools.map((tool) => {
-              const Icon = tool.icon;
               return (
                 <Link
                   key={tool.name}
@@ -293,17 +293,21 @@ export default function ToolsContent() {
                   }`}
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${
-                      tool.highlight ? "bg-accent/10" : "bg-muted"
-                    }`}>
-                      <Icon className={`w-6 h-6 ${tool.highlight ? "text-accent" : "text-muted-foreground"}`} />
+                    <div className="w-14 h-14 relative shrink-0">
+                      <Image
+                        src={tool.icon3d}
+                        alt={tool.name}
+                        fill
+                        className="object-contain group-hover:scale-110 transition-transform duration-300"
+                        unoptimized
+                      />
                     </div>
                   </div>
                   <h3 className="font-display font-semibold mb-2 group-hover:text-accent transition-colors">
                     {tool.name}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
-                  <span className="text-sm text-accent font-medium inline-flex items-center gap-1">
+                  <span className="text-sm text-accent font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                     Try it free
                     <ArrowRight className="w-4 h-4" />
                   </span>

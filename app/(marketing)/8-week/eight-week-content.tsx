@@ -306,6 +306,19 @@ export default function EightWeekContent() {
 
   return (
     <main className="pt-16">
+      {/* Back to Learn Hub */}
+      <div className="px-4 py-3 bg-muted/30 border-b border-border/50">
+        <div className="max-w-4xl mx-auto">
+          <Link
+            href="/learn"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+          >
+            <ArrowRight className="w-4 h-4 rotate-180" />
+            <span>Compare all programs</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Hero */}
       <Section className="py-24 sm:py-32">
         <div className="text-center">

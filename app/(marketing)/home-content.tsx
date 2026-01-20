@@ -183,6 +183,122 @@ export default function HomeContent() {
           </div>
         </section>
 
+        {/* Choose Your Path */}
+        <Section width="wide">
+          <div className="text-center mb-12">
+            <p className="text-sm font-medium tracking-wider uppercase text-accent mb-4">
+              Where do you want to start?
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+              Choose your path
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Three ways to work with us. Pick what fits.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Buy Path */}
+            <Link href="/tools" className="block group">
+              <FeatureCard className="bg-card h-full hover:border-accent/50 transition-colors">
+                <div className="p-6 flex flex-col h-full text-center">
+                  <div className="w-20 h-20 mx-auto mb-4 relative">
+                    <Image
+                      src="/assets/3dicons/3dicons-tools-dynamic-color.png"
+                      alt="Build it for me"
+                      fill
+                      className="object-contain group-hover:scale-110 transition-transform duration-300"
+                      unoptimized
+                    />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold mb-2">
+                    Build it for me
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 flex-1">
+                    Custom tools built to your spec. One-time purchase, you own it forever.
+                  </p>
+                  <div className="pt-4 border-t border-border">
+                    <p className="font-semibold text-foreground">$4.5K - $30K</p>
+                    <p className="text-xs text-muted-foreground">one-time</p>
+                  </div>
+                  <div className="mt-4">
+                    <span className="text-sm text-accent font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      See Our Tools
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </FeatureCard>
+            </Link>
+
+            {/* Learn Path */}
+            <Link href="/learn" className="block group">
+              <FeatureCard className="bg-card h-full border-accent/30 hover:border-accent/50 transition-colors">
+                <div className="p-6 flex flex-col h-full text-center">
+                  <div className="w-20 h-20 mx-auto mb-4 relative">
+                    <Image
+                      src="/assets/3dicons/3dicons-flash-dynamic-color.png"
+                      alt="Teach me to build"
+                      fill
+                      className="object-contain group-hover:scale-110 transition-transform duration-300"
+                      unoptimized
+                    />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold mb-2">
+                    Teach me to build
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 flex-1">
+                    Learn to build your own tools with AI. From first tool to production apps.
+                  </p>
+                  <div className="pt-4 border-t border-border">
+                    <p className="font-semibold text-foreground">From $297</p>
+                    <p className="text-xs text-muted-foreground">start with the Sprint</p>
+                  </div>
+                  <div className="mt-4">
+                    <span className="text-sm text-accent font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Compare Programs
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </FeatureCard>
+            </Link>
+
+            {/* Explore Path */}
+            <Link href="/tools#free" className="block group">
+              <FeatureCard className="bg-card h-full hover:border-accent/50 transition-colors">
+                <div className="p-6 flex flex-col h-full text-center">
+                  <div className="w-20 h-20 mx-auto mb-4 relative">
+                    <Image
+                      src="/assets/3dicons/3dicons-explorer-dynamic-color.png"
+                      alt="Let me explore"
+                      fill
+                      className="object-contain group-hover:scale-110 transition-transform duration-300"
+                      unoptimized
+                    />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold mb-2">
+                    Let me explore first
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 flex-1">
+                    Try our free calculators and tools. See if we&apos;re a good fit.
+                  </p>
+                  <div className="pt-4 border-t border-border">
+                    <p className="font-semibold text-success">Free</p>
+                    <p className="text-xs text-muted-foreground">no signup required</p>
+                  </div>
+                  <div className="mt-4">
+                    <span className="text-sm text-accent font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Try Free Tools
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </FeatureCard>
+            </Link>
+          </div>
+        </Section>
+
         {/* Products Showcase */}
         <Section width="wide">
           <div className="text-center mb-12">

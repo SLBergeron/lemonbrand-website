@@ -8,10 +8,11 @@ const productLinks = [
   { name: "Lemonbrand ATS", href: "/tools/ats", description: "Ontario employment law compliance" },
   { name: "VerifiedNode", href: "https://www.verifiednode.com", external: true, description: "Trust layer for the agentic web" },
   { name: "Custom Builds", href: "/custom", description: "We build tools you own" },
-  { name: "All Tools", href: "/tools" },
+  { name: "Free Tools", href: "/tools#free", description: "Calculators and checkers" },
 ];
 
 const learnLinks = [
+  { name: "Compare Programs", href: "/learn", highlight: true },
   { name: "7-Day Sprint", href: "/sprint" },
   { name: "8-Week Program", href: "/8-week" },
   { name: "Builders Club", href: "/club" },
@@ -118,9 +119,14 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-muted-foreground hover:text-accent transition-colors duration-200"
+                    className={`transition-colors duration-200 ${
+                      "highlight" in link && link.highlight
+                        ? "text-accent hover:text-accent/80 font-medium"
+                        : "text-muted-foreground hover:text-accent"
+                    }`}
                   >
                     {link.name}
+                    {"highlight" in link && link.highlight && " →"}
                   </Link>
                 </li>
               ))}
