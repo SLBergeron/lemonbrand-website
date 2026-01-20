@@ -18,7 +18,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ShoppingCart, Printer, Mail, Calendar, X, Plus, Check, Globe } from "lucide-react";
+import { ShoppingCart, Printer, Mail, Calendar, X, Plus, Check, Globe, Loader2, CheckCircle, AlertCircle, Trash2 } from "lucide-react";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
 
@@ -449,6 +449,39 @@ export default function DrouinCreationsPage() {
     company: "",
     message: "",
   });
+  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // localStorage key for cart persistence
+  const CART_STORAGE_KEY = 'drouin-quote-cart';
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (savedCart) {
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setCart(parsed);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load cart from localStorage:', error);
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      if (cart.length > 0) {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      } else {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      }
+    } catch (error) {
+      console.error('Failed to save cart to localStorage:', error);
+    }
+  }, [cart]);
 
   // Get max pages and tier info based on complexity
   const getTierInfo = (complexityLevel: string) => {
@@ -947,9 +980,12 @@ export default function DrouinCreationsPage() {
   // Send quote
   const handleSendQuote = async () => {
     if (!quoteForm.name || !quoteForm.email) {
-      alert("Please fill in your name and email.");
+      setSubmitStatus('error');
       return;
     }
+
+    setIsSending(true);
+    setSubmitStatus('idle');
 
     try {
       const response = await fetch("/api/send-quote", {
@@ -965,14 +1001,23 @@ export default function DrouinCreationsPage() {
       });
 
       if (response.ok) {
-        alert("Quote sent successfully! We'll be in touch soon.");
+        setSubmitStatus('success');
+        // Keep success state visible, don't auto-close
       } else {
-        alert("Failed to send quote. Please try again or contact us directly.");
+        setSubmitStatus('error');
       }
     } catch (error) {
       console.error("Error sending quote:", error);
-      alert("Failed to send quote. Please try again or contact us directly.");
+      setSubmitStatus('error');
+    } finally {
+      setIsSending(false);
     }
+  };
+
+  // Reset submit status when cart opens
+  const handleOpenCart = () => {
+    setSubmitStatus('idle');
+    setIsCartOpen(true);
   };
 
   return (
@@ -1472,7 +1517,7 @@ export default function DrouinCreationsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  onClick={() => setIsCartOpen(true)}
+                  onClick={handleOpenCart}
                   className="bg-orange-500 hover:bg-orange-600 text-white"
                 >
                   <ShoppingCart className="mr-2 h-5 w-5" />
@@ -1520,7 +1565,7 @@ export default function DrouinCreationsPage() {
                           <div className="text-xs font-medium text-neutral-300">Applied for Drouin Clients</div>
                         </div>
                         <Button
-                          onClick={() => setIsCartOpen(true)}
+                          onClick={handleOpenCart}
                           className="bg-white text-neutral-900 hover:bg-neutral-100 font-bold rounded-2xl px-6 h-12 transition-all active:scale-95"
                         >
                           {t.viewQuote} ({cart.length})
@@ -1529,6 +1574,288 @@ export default function DrouinCreationsPage() {
                     </div>
                   </motion.div>
                 )}
+
+      {/* Quote Sheet Modal */}
+      <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+        <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+          <SheetHeader className="space-y-1 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+            <SheetTitle className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-orange-500 flex items-center justify-center">
+                <ShoppingCart className="h-5 w-5 text-white" />
               </div>
-            );
-          }
+              <div>
+                <span className="text-xl font-bold">{t.yourQuote}</span>
+                <Badge className="ml-2 bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
+                  25% off
+                </Badge>
+              </div>
+            </SheetTitle>
+            <SheetDescription>
+              {t.reviewServices}
+            </SheetDescription>
+          </SheetHeader>
+
+          {submitStatus === 'success' ? (
+            /* Success State */
+            <div className="flex flex-col items-center justify-center py-16 text-center space-y-6">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", duration: 0.5 }}
+                className="h-20 w-20 rounded-full bg-green-500/10 flex items-center justify-center"
+              >
+                <CheckCircle className="h-10 w-10 text-green-500" />
+              </motion.div>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                  {language === 'en' ? 'Quote Sent!' : 'Soumission envoyée!'}
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 max-w-sm">
+                  {language === 'en'
+                    ? "We've sent your quote to your email and our team. We'll be in touch within 24 hours."
+                    : "Nous avons envoyé votre soumission à votre courriel et à notre équipe. Nous vous contacterons dans les 24 heures."
+                  }
+                </p>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setSubmitStatus('idle');
+                    setCart([]);
+                    setQuoteForm({ name: '', email: '', phone: '', company: '', message: '' });
+                    setIsCartOpen(false);
+                  }}
+                >
+                  {language === 'en' ? 'Start New Quote' : 'Nouvelle soumission'}
+                </Button>
+                <Button
+                  data-cal-namespace={calOptions.namespace}
+                  data-cal-link={CONSTANTS.CALCOM_LINK}
+                  data-cal-config={`{"layout":"${calOptions.layout}"}`}
+                  className="bg-orange-500 hover:bg-orange-600 text-white"
+                >
+                  <Calendar className="mr-2 h-4 w-4" />
+                  {t.bookACall}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            /* Cart & Form Content */
+            <div className="py-6 space-y-6">
+              {/* Cart Items */}
+              {cart.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                    <ShoppingCart className="h-8 w-8 text-neutral-400" />
+                  </div>
+                  <p className="font-medium text-neutral-900 dark:text-white">{t.quoteEmpty}</p>
+                  <p className="text-sm text-neutral-500 mt-1">{t.quoteEmptyDesc}</p>
+                </div>
+              ) : (
+                <>
+                  {/* Items List */}
+                  <div className="space-y-3">
+                    {cart.map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700"
+                      >
+                        <div className="flex justify-between items-start gap-3">
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-neutral-900 dark:text-white text-sm">
+                              {item.name}
+                            </h4>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-xs text-neutral-400 line-through">
+                                ${item.regularPrice.toLocaleString()}
+                              </span>
+                              <span className="text-sm font-bold text-green-600 dark:text-green-400">
+                                ${item.drouinPrice.toLocaleString()}
+                              </span>
+                              {item.recurring && (
+                                <span className="text-xs text-neutral-500">
+                                  + ${item.recurring.drouinPrice}/mo
+                                </span>
+                              )}
+                            </div>
+                            {item.lineItems && item.lineItems.length > 0 && (
+                              <div className="mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700 space-y-1">
+                                <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                                  {t.configDetails}
+                                </p>
+                                {item.lineItems.map((lineItem, idx) => (
+                                  <div key={idx} className="flex justify-between text-xs text-neutral-500">
+                                    <span>{lineItem.label}</span>
+                                    <span className="font-medium">{lineItem.value}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            <p className="text-xs text-neutral-400 mt-2">{item.delivery}</p>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeFromCart(item.id)}
+                            className="h-8 w-8 p-0 text-neutral-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Price Summary */}
+                  <div className="p-4 rounded-xl bg-neutral-900 dark:bg-neutral-800 text-white space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-neutral-400">{t.subtotalRegular}</span>
+                      <span className="text-neutral-400 line-through">${totals.regularTotal.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-green-400">
+                      <span>{t.drouinDiscount}</span>
+                      <span>-${totals.discount.toLocaleString()}</span>
+                    </div>
+                    <Separator className="bg-neutral-700" />
+                    <div className="flex justify-between items-baseline">
+                      <span className="text-lg font-bold">{t.total}</span>
+                      <span className="text-2xl font-black">${totals.drouinTotal.toLocaleString()} <span className="text-sm font-normal text-neutral-400">CAD</span></span>
+                    </div>
+                    <p className="text-xs text-neutral-400">
+                      {t.totalDeliveryTime} ~{totals.totalDelivery} {t.weeksText}
+                    </p>
+                  </div>
+
+                  {/* Quote Form */}
+                  <div className="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                    <div>
+                      <h3 className="font-bold text-neutral-900 dark:text-white">{t.sendYourQuote}</h3>
+                      <p className="text-sm text-neutral-500 mt-1">{t.fillDetails}</p>
+                    </div>
+
+                    <div className="grid gap-4">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="name" className="text-xs font-semibold">
+                            {t.name} <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="name"
+                            placeholder={t.yourName}
+                            value={quoteForm.name}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, name: e.target.value })}
+                            className={submitStatus === 'error' && !quoteForm.name ? 'border-red-500' : ''}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email" className="text-xs font-semibold">
+                            {t.email} <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder={t.yourEmail}
+                            value={quoteForm.email}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, email: e.target.value })}
+                            className={submitStatus === 'error' && !quoteForm.email ? 'border-red-500' : ''}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="phone" className="text-xs font-semibold">{t.phone}</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            placeholder={t.phoneNumber}
+                            value={quoteForm.phone}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, phone: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="company" className="text-xs font-semibold">{t.company}</Label>
+                          <Input
+                            id="company"
+                            placeholder={t.companyName}
+                            value={quoteForm.company}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, company: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message" className="text-xs font-semibold">{t.message}</Label>
+                        <Textarea
+                          id="message"
+                          placeholder={t.additionalDetails}
+                          value={quoteForm.message}
+                          onChange={(e) => setQuoteForm({ ...quoteForm, message: e.target.value })}
+                          className="min-h-[80px] resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    {submitStatus === 'error' && (!quoteForm.name || !quoteForm.email) && (
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 text-sm">
+                        <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                        <span>
+                          {language === 'en'
+                            ? 'Please fill in your name and email to send the quote.'
+                            : 'Veuillez remplir votre nom et courriel pour envoyer la soumission.'
+                          }
+                        </span>
+                      </div>
+                    )}
+
+                    {submitStatus === 'error' && quoteForm.name && quoteForm.email && (
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 text-sm">
+                        <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                        <span>
+                          {language === 'en'
+                            ? 'Failed to send quote. Please try again or contact us directly.'
+                            : "Échec de l'envoi. Veuillez réessayer ou nous contacter directement."
+                          }
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-3 pt-2">
+                    <Button
+                      variant="outline"
+                      onClick={handlePrint}
+                      className="flex-1"
+                    >
+                      <Printer className="mr-2 h-4 w-4" />
+                      {t.printThisQuote}
+                    </Button>
+                    <Button
+                      onClick={handleSendQuote}
+                      disabled={isSending || cart.length === 0}
+                      className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
+                    >
+                      {isSending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          {language === 'en' ? 'Sending...' : 'Envoi...'}
+                        </>
+                      ) : (
+                        <>
+                          <Mail className="mr-2 h-4 w-4" />
+                          {t.sendQuote}
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+}

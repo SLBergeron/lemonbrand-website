@@ -3,6 +3,11 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Email configuration
+const EMAIL_FROM = "Simon Bergeron <hello@lemonbrand.io>";
+const ADMIN_EMAIL = "simon@lemonbrand.io";
+const PARTNER_EMAIL = "christiane@drouincreations.com";
+
 export async function POST(request: Request) {
   try {
     const { cart, quoteForm, totals } = await request.json();
@@ -15,9 +20,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Generate HTML email content
-    const htmlContent = generateQuoteEmail(cart, quoteForm, totals);
-
     // Check if Resend API key is configured
     if (!process.env.RESEND_API_KEY) {
       console.warn("RESEND_API_KEY not configured. Email not sent.");
@@ -27,42 +29,71 @@ export async function POST(request: Request) {
         totals,
       });
 
+      // Generate preview HTML for development
+      const previewHtml = generateQuoteEmail(cart, quoteForm, totals, true);
+
       return NextResponse.json(
         {
           message: "Quote received (email sending not configured)",
-          preview: htmlContent
+          preview: previewHtml
         },
         { status: 200 }
       );
     }
 
-    // Send email using Resend
+    // Generate customer-specific email (with personalized greeting)
+    const customerEmailContent = generateQuoteEmail(cart, quoteForm, totals, true);
+    // Generate admin email (with lead info prominent)
+    const adminEmailContent = generateQuoteEmail(cart, quoteForm, totals, false);
+
+    // Send emails using Resend
     try {
-      const { data, error } = await resend.emails.send({
-        from: "Lemon Brand Quotes <onboarding@resend.dev>",
-        to: ["hello@lemonbrand.io", "christiane@drouincreations.com", quoteForm.email],
-        replyTo: quoteForm.email,
-        subject: `New Quote Request from ${quoteForm.name}${quoteForm.company ? ` (${quoteForm.company})` : ""}`,
-        html: htmlContent,
+      // Send to customer
+      const customerEmail = await resend.emails.send({
+        from: EMAIL_FROM,
+        to: [quoteForm.email],
+        replyTo: ADMIN_EMAIL,
+        subject: `Your Quote from Lemon Brand - $${totals.drouinTotal.toLocaleString()} CAD`,
+        html: customerEmailContent,
       });
 
-      if (error) {
-        console.error("Resend error:", error);
+      if (customerEmail.error) {
+        console.error("Failed to send customer email:", customerEmail.error);
+      }
+
+      // Send to admin and partner
+      const adminEmail = await resend.emails.send({
+        from: EMAIL_FROM,
+        to: [ADMIN_EMAIL, PARTNER_EMAIL],
+        replyTo: quoteForm.email,
+        subject: `New Quote Request from ${quoteForm.name}${quoteForm.company ? ` (${quoteForm.company})` : ""} - $${totals.drouinTotal.toLocaleString()} CAD`,
+        html: adminEmailContent,
+      });
+
+      if (adminEmail.error) {
+        console.error("Failed to send admin email:", adminEmail.error);
+        // Still return success if customer email was sent
+        if (!customerEmail.error) {
+          return NextResponse.json(
+            { message: "Quote sent to customer (admin notification failed)", emailId: customerEmail.data?.id },
+            { status: 200 }
+          );
+        }
         return NextResponse.json(
-          { error: "Failed to send email", details: error },
+          { error: "Failed to send emails", details: adminEmail.error },
           { status: 500 }
         );
       }
 
-      console.log("Email sent successfully:", data);
+      console.log("Emails sent successfully:", { customer: customerEmail.data?.id, admin: adminEmail.data?.id });
       return NextResponse.json(
-        { message: "Quote sent successfully", emailId: data?.id },
+        { message: "Quote sent successfully", emailIds: { customer: customerEmail.data?.id, admin: adminEmail.data?.id } },
         { status: 200 }
       );
     } catch (emailError) {
-      console.error("Error sending email:", emailError);
+      console.error("Error sending emails:", emailError);
       return NextResponse.json(
-        { error: "Failed to send email", details: emailError },
+        { error: "Failed to send emails", details: emailError },
         { status: 500 }
       );
     }
@@ -75,21 +106,35 @@ export async function POST(request: Request) {
   }
 }
 
-function generateQuoteEmail(cart: any[], quoteForm: any, totals: any): string {
+function generateQuoteEmail(cart: any[], quoteForm: any, totals: any, isCustomerEmail: boolean = false): string {
   const date = new Date().toLocaleDateString();
+  const expiryDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString();
 
   const servicesRows = cart.map(item => `
     <tr style="border-bottom: 1px solid #e5e7eb;">
-      <td style="padding: 12px 8px; font-weight: 500;">${item.name}</td>
-      <td style="padding: 12px 8px; text-align: right; color: #9ca3af; text-decoration: line-through;">
+      <td style="padding: 12px 8px; font-weight: 500;">
+        ${item.name}
+        ${item.lineItems && item.lineItems.length > 0 ? `
+          <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #f3f4f6;">
+            <div style="font-size: 10px; font-weight: 600; color: #6b7280; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Configuration Details:</div>
+            ${item.lineItems.map((lineItem: any) => `
+              <div style="font-size: 12px; color: #6b7280; display: flex; justify-content: space-between; padding: 2px 0;">
+                <span>${lineItem.label}</span>
+                <span style="font-weight: 500;">${lineItem.value}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </td>
+      <td style="padding: 12px 8px; text-align: right; color: #9ca3af; text-decoration: line-through; vertical-align: top;">
         $${item.regularPrice.toLocaleString()}
         ${item.recurring ? `<div style="font-size: 11px;">+$${item.recurring.regularPrice}/mo</div>` : ''}
       </td>
-      <td style="padding: 12px 8px; text-align: right; font-weight: 600;">
+      <td style="padding: 12px 8px; text-align: right; font-weight: 600; vertical-align: top;">
         $${item.drouinPrice.toLocaleString()}
         ${item.recurring ? `<div style="font-size: 11px; font-weight: 400;">+$${item.recurring.drouinPrice}/mo</div>` : ''}
       </td>
-      <td style="padding: 12px 8px; text-align: right; font-size: 14px;">${item.delivery}</td>
+      <td style="padding: 12px 8px; text-align: right; font-size: 14px; vertical-align: top;">${item.delivery}</td>
     </tr>
   `).join('');
 
@@ -275,7 +320,19 @@ function generateQuoteEmail(cart: any[], quoteForm: any, totals: any): string {
     </div>
   </div>
 
-  ${quoteForm.name ? `
+  ${isCustomerEmail ? `
+  <!-- Personalized Greeting for Customer -->
+  <div style="margin-bottom: 24px; padding: 20px; background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); border-radius: 8px; border-left: 4px solid #f97316;">
+    <p style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 8px;">Hi ${quoteForm.name.split(' ')[0]}!</p>
+    <p style="color: #4b5563; line-height: 1.6;">Thank you for building your quote with us. Below you'll find all the details of your selected services. As a Drouin Creations partner client, you're receiving an exclusive <strong style="color: #16a34a;">25% discount</strong> on all services.</p>
+    <p style="color: #4b5563; margin-top: 12px;">This quote has been sent to our team and we'll be in touch within 24 hours to discuss next steps.</p>
+  </div>
+  ` : `
+  <!-- Admin Alert Banner -->
+  <div style="margin-bottom: 24px; padding: 16px 20px; background: #fef3c7; border-radius: 8px; border: 1px solid #fbbf24;">
+    <p style="font-size: 14px; font-weight: 600; color: #92400e; margin: 0;">🔔 New Quote Request - Follow up within 24 hours</p>
+  </div>
+
   <!-- Client Information -->
   <div class="card">
     <div class="card-header">
@@ -284,12 +341,12 @@ function generateQuoteEmail(cart: any[], quoteForm: any, totals: any): string {
     <div class="card-content">
       <div class="info-row"><span>Name:</span> ${quoteForm.name}</div>
       ${quoteForm.company ? `<div class="info-row"><span>Company:</span> ${quoteForm.company}</div>` : ''}
-      ${quoteForm.email ? `<div class="info-row"><span>Email:</span> ${quoteForm.email}</div>` : ''}
-      ${quoteForm.phone ? `<div class="info-row"><span>Phone:</span> ${quoteForm.phone}</div>` : ''}
-      ${quoteForm.message ? `<div class="info-row" style="margin-top: 12px;"><span>Message:</span><br><div style="margin-top: 4px; color: #4b5563;">${quoteForm.message}</div></div>` : ''}
+      <div class="info-row"><span>Email:</span> <a href="mailto:${quoteForm.email}" style="color: #f97316;">${quoteForm.email}</a></div>
+      ${quoteForm.phone ? `<div class="info-row"><span>Phone:</span> <a href="tel:${quoteForm.phone}" style="color: #f97316;">${quoteForm.phone}</a></div>` : ''}
+      ${quoteForm.message ? `<div class="info-row" style="margin-top: 12px;"><span>Message:</span><br><div style="margin-top: 4px; color: #4b5563; background: #f9fafb; padding: 12px; border-radius: 4px;">${quoteForm.message}</div></div>` : ''}
     </div>
   </div>
-  ` : ''}
+  `}
 
   <!-- Selected Services -->
   <div class="card">
@@ -360,7 +417,13 @@ function generateQuoteEmail(cart: any[], quoteForm: any, totals: any): string {
   <div class="footer">
     <p>LEMON BRAND × DROUIN CREATIONS</p>
     <p>simon@lemonbrand.io • lemonbrand.io</p>
-    <p>Quote valid for 30 days from date of issue</p>
+    <p>Quote valid until ${expiryDate}</p>
+    ${isCustomerEmail ? `
+    <p style="margin-top: 16px; font-size: 11px; color: #9ca3af;">
+      You received this email because you requested a quote from Lemon Brand via the Drouin Creations partner portal.
+      If you didn't request this quote, please ignore this email.
+    </p>
+    ` : ''}
   </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,10 @@ import {
   DollarSign,
   Clock,
   Shield,
+  Mail,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 
@@ -173,13 +177,89 @@ function calculateProposal(input: ProposalInput): ProposalCalculations {
   };
 }
 
+const STORAGE_KEY = 'lemonbrand-proposal-draft';
+
 export default function ProposalGeneratorContent() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [formData, setFormData] = useState<ProposalInput>(defaultInput);
+  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const currentStep = FORM_STEPS[currentStepIndex];
 
   const calculations = useMemo(() => calculateProposal(formData), [formData]);
+
+  // Load saved draft from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setFormData(prev => ({ ...prev, ...parsed }));
+      }
+    } catch (error) {
+      console.error('Failed to load draft:', error);
+    }
+  }, []);
+
+  // Save draft to localStorage whenever form changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    } catch (error) {
+      console.error('Failed to save draft:', error);
+    }
+  }, [formData]);
+
+  // Send proposal email
+  const handleSendProposal = async () => {
+    if (!formData.email || !formData.companyName) {
+      setSubmitStatus('error');
+      setErrorMessage('Please fill in your company name and email.');
+      return;
+    }
+
+    setIsSending(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/send-proposal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          proposalData: formData,
+          calculations,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Clear the saved draft after successful submission
+        localStorage.removeItem(STORAGE_KEY);
+      } else {
+        const data = await response.json();
+        setSubmitStatus('error');
+        setErrorMessage(data.error || 'Failed to send proposal. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error sending proposal:', error);
+      setSubmitStatus('error');
+      setErrorMessage('Failed to send proposal. Please try again or contact us directly.');
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  // Reset form
+  const handleReset = () => {
+    setFormData(defaultInput);
+    setCurrentStepIndex(0);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+    localStorage.removeItem(STORAGE_KEY);
+  };
 
   const updateField = useCallback(<K extends keyof ProposalInput>(field: K, value: ProposalInput[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -451,91 +531,161 @@ export default function ProposalGeneratorContent() {
               {/* Results Step */}
               {currentStep.id === "results" && (
                 <div className="space-y-6">
-                  {/* Quote Card */}
-                  <div className="bg-accent/5 border border-accent/20 rounded-xl p-6 text-center">
-                    <p className="text-sm text-muted-foreground mb-2">Estimated Investment</p>
-                    <p className="font-display text-4xl sm:text-5xl font-bold text-accent mb-2">
-                      ${calculations.priceRangeLow.toLocaleString()} - ${calculations.priceRangeHigh.toLocaleString()}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      One-time purchase. You own it forever.
-                    </p>
-                  </div>
-
-                  {/* Breakdown */}
-                  <div className="grid sm:grid-cols-3 gap-4">
-                    <div className="bg-card border border-border rounded-lg p-4 text-center">
-                      <Clock className="w-6 h-6 text-accent mx-auto mb-2" />
-                      <p className="text-2xl font-bold">{calculations.estimatedWeeks}</p>
-                      <p className="text-sm text-muted-foreground">weeks to deliver</p>
-                    </div>
-                    <div className="bg-card border border-border rounded-lg p-4 text-center">
-                      <DollarSign className="w-6 h-6 text-accent mx-auto mb-2" />
-                      <p className="text-2xl font-bold">${calculations.monthlyMaintenance}</p>
-                      <p className="text-sm text-muted-foreground">optional hosting/mo</p>
-                    </div>
-                    <div className="bg-card border border-border rounded-lg p-4 text-center">
-                      <Shield className="w-6 h-6 text-success mx-auto mb-2" />
-                      <p className="text-2xl font-bold text-success">$0</p>
-                      <p className="text-sm text-muted-foreground">subscription fees</p>
-                    </div>
-                  </div>
-
-                  {/* What's Included */}
-                  <div className="bg-card border border-border rounded-lg p-6">
-                    <h3 className="font-display font-semibold mb-4">What&apos;s Included</h3>
-                    <ul className="space-y-2">
-                      {[
-                        "Full source code ownership",
-                        "Deployment to your infrastructure",
-                        "30 days of post-launch support",
-                        "Documentation & training",
-                        "No vendor lock-in",
-                      ].map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Check className="w-4 h-4 text-success shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Contact Form */}
-                  <div className="bg-card border border-border rounded-lg p-6">
-                    <h3 className="font-display font-semibold mb-4">Get Your Full Proposal</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Enter your details to receive a detailed scope document and discuss your project.
-                    </p>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="companyName">Company Name</Label>
-                        <Input
-                          id="companyName"
-                          value={formData.companyName}
-                          onChange={(e) => updateField("companyName", e.target.value)}
-                          placeholder="Your company"
-                          className="mt-1"
-                        />
+                  {submitStatus === 'success' ? (
+                    /* Success State */
+                    <div className="flex flex-col items-center justify-center py-12 text-center space-y-6">
+                      <div className="h-20 w-20 rounded-full bg-success/10 flex items-center justify-center">
+                        <CheckCircle className="h-10 w-10 text-success" />
                       </div>
-                      <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => updateField("email", e.target.value)}
-                          placeholder="you@company.com"
-                          className="mt-1"
-                        />
+                      <div className="space-y-2">
+                        <h3 className="text-2xl font-bold">Proposal Sent!</h3>
+                        <p className="text-muted-foreground max-w-sm">
+                          We&apos;ve sent your proposal to {formData.email}. Check your inbox and we&apos;ll be in touch within 24 hours.
+                        </p>
                       </div>
-                      <Button variant="accent" className="w-full" asChild>
-                        <Link href="/custom">
-                          <Calendar className="w-4 h-4 mr-2" />
-                          Book Discovery Call
-                        </Link>
-                      </Button>
+                      <div className="flex gap-3 pt-4">
+                        <Button variant="outline" onClick={handleReset}>
+                          Start New Quote
+                        </Button>
+                        <Button variant="accent" asChild>
+                          <Link href="/custom">
+                            <Calendar className="w-4 h-4 mr-2" />
+                            Book Discovery Call
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      {/* Quote Card */}
+                      <div className="bg-accent/5 border border-accent/20 rounded-xl p-6 text-center">
+                        <p className="text-sm text-muted-foreground mb-2">Estimated Investment</p>
+                        <p className="font-display text-4xl sm:text-5xl font-bold text-accent mb-2">
+                          ${calculations.priceRangeLow.toLocaleString()} - ${calculations.priceRangeHigh.toLocaleString()}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          One-time purchase. You own it forever.
+                        </p>
+                      </div>
+
+                      {/* Breakdown */}
+                      <div className="grid sm:grid-cols-3 gap-4">
+                        <div className="bg-card border border-border rounded-lg p-4 text-center">
+                          <Clock className="w-6 h-6 text-accent mx-auto mb-2" />
+                          <p className="text-2xl font-bold">{calculations.estimatedWeeks}</p>
+                          <p className="text-sm text-muted-foreground">weeks to deliver</p>
+                        </div>
+                        <div className="bg-card border border-border rounded-lg p-4 text-center">
+                          <DollarSign className="w-6 h-6 text-accent mx-auto mb-2" />
+                          <p className="text-2xl font-bold">${calculations.monthlyMaintenance}</p>
+                          <p className="text-sm text-muted-foreground">optional hosting/mo</p>
+                        </div>
+                        <div className="bg-card border border-border rounded-lg p-4 text-center">
+                          <Shield className="w-6 h-6 text-success mx-auto mb-2" />
+                          <p className="text-2xl font-bold text-success">$0</p>
+                          <p className="text-sm text-muted-foreground">subscription fees</p>
+                        </div>
+                      </div>
+
+                      {/* What's Included */}
+                      <div className="bg-card border border-border rounded-lg p-6">
+                        <h3 className="font-display font-semibold mb-4">What&apos;s Included</h3>
+                        <ul className="space-y-2">
+                          {[
+                            "Full source code ownership",
+                            "Deployment to your infrastructure",
+                            "30 days of post-launch support",
+                            "Documentation & training",
+                            "No vendor lock-in",
+                          ].map((item) => (
+                            <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Check className="w-4 h-4 text-success shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Contact Form */}
+                      <div className="bg-card border border-accent/30 rounded-lg p-6">
+                        <h3 className="font-display font-semibold mb-2">Email Me This Quote</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          Get a copy of this proposal sent to your inbox, and we&apos;ll follow up within 24 hours.
+                        </p>
+                        <div className="space-y-4">
+                          <div>
+                            <Label htmlFor="companyName">
+                              Company Name <span className="text-destructive">*</span>
+                            </Label>
+                            <Input
+                              id="companyName"
+                              value={formData.companyName}
+                              onChange={(e) => updateField("companyName", e.target.value)}
+                              placeholder="Your company"
+                              className={`mt-1 ${submitStatus === 'error' && !formData.companyName ? 'border-destructive' : ''}`}
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="email">
+                              Email <span className="text-destructive">*</span>
+                            </Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              value={formData.email}
+                              onChange={(e) => updateField("email", e.target.value)}
+                              placeholder="you@company.com"
+                              className={`mt-1 ${submitStatus === 'error' && !formData.email ? 'border-destructive' : ''}`}
+                            />
+                          </div>
+
+                          {submitStatus === 'error' && errorMessage && (
+                            <div className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
+                              <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                              <span>{errorMessage}</span>
+                            </div>
+                          )}
+
+                          <div className="flex gap-3">
+                            <Button
+                              variant="accent"
+                              className="flex-1"
+                              onClick={handleSendProposal}
+                              disabled={isSending}
+                            >
+                              {isSending ? (
+                                <>
+                                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                  Sending...
+                                </>
+                              ) : (
+                                <>
+                                  <Mail className="w-4 h-4 mr-2" />
+                                  Send Quote to My Email
+                                </>
+                              )}
+                            </Button>
+                          </div>
+
+                          <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                              <span className="w-full border-t border-border" />
+                            </div>
+                            <div className="relative flex justify-center text-xs uppercase">
+                              <span className="bg-card px-2 text-muted-foreground">or</span>
+                            </div>
+                          </div>
+
+                          <Button variant="outline" className="w-full" asChild>
+                            <Link href="/custom">
+                              <Calendar className="w-4 h-4 mr-2" />
+                              Skip to Discovery Call
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
 
