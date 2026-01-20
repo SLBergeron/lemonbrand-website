@@ -15,7 +15,8 @@ import {
   Globe,
   FileText,
   Ban,
-  Calendar
+  Calendar,
+  ExternalLink
 } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 
@@ -228,9 +229,9 @@ export default function ComplianceCheckerContent() {
                     No manual tracking, no missed deadlines.
                   </p>
                   <Button variant="accent" className="w-full" asChild>
-                    <Link href="/tools/ats">
+                    <Link href="https://ats.lemonbrand.io" target="_blank" rel="noopener noreferrer">
                       See the ATS
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ExternalLink className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>
                 </div>
@@ -298,9 +299,9 @@ export default function ComplianceCheckerContent() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="accent" size="lg" asChild>
-              <Link href="/tools/ats">
+              <Link href="https://ats.lemonbrand.io" target="_blank" rel="noopener noreferrer">
                 See the ATS
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ExternalLink className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>

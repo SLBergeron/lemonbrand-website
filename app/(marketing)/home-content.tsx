@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ChevronDown, MessageSquare, Code, Rocket, Clock } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, MessageSquare, Code, Rocket, Clock, ExternalLink } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { CallToAction } from "@/components/shared/CallToAction";
@@ -336,9 +336,9 @@ export default function HomeContent() {
                     <p className="text-xs text-muted-foreground">vs $500/month competitors</p>
                   </div>
                   <Button variant="accent" size="sm" asChild>
-                    <Link href="/tools/ats">
+                    <Link href="https://ats.lemonbrand.io" target="_blank" rel="noopener noreferrer">
                       Learn More
-                      <ArrowRight className="w-4 h-4 ml-1" />
+                      <ExternalLink className="w-4 h-4 ml-1" />
                     </Link>
                   </Button>
                 </div>

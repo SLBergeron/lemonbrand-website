@@ -25,8 +25,8 @@ const products = [
     ],
     pricing: "Starting at $4,500 CAD",
     comparisonPrice: "vs $500/month competitors",
-    href: "/tools/ats",
-    external: false,
+    href: "https://ats.lemonbrand.io",
+    external: true,
     highlight: true,
   },
   {

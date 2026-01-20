@@ -59,12 +59,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Priority 0.8 - Product pages, lead magnets & trust builders
     // ==========================================================================
     {
-      url: `${baseUrl}/tools/ats`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/tools/calculator`,
       lastModified: currentDate,
       changeFrequency: "monthly",

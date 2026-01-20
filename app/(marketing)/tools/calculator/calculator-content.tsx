@@ -65,7 +65,7 @@ const productCategories = [
         "Unlimited users forever",
         "Code is yours if we disappear",
       ],
-      link: "/tools/ats",
+      link: "https://ats.lemonbrand.io",
     },
     defaultUsers: 5,
     defaultSaasIndex: 1, // Enterprise ATS

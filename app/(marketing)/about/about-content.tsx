@@ -15,8 +15,8 @@ const products = [
     description:
       "Ontario ESA-compliant applicant tracking system. Built for O. Reg. 476/24. One-time purchase, clients own the code.",
     status: "Live",
-    link: "/tools/ats",
-    external: false,
+    link: "https://ats.lemonbrand.io",
+    external: true,
   },
   {
     name: "VerifiedNode",
