@@ -6,6 +6,7 @@ import { SOCIAL_LINKS } from "@/constants/links";
 
 const productLinks = [
   { name: "Lemonbrand ATS", href: "https://ats.lemonbrand.io", external: true, description: "Ontario employment law compliance" },
+  { name: "Book-A-Desk", href: "https://desk.lemonbrand.io", external: true, description: "Desk booking you own" },
   { name: "VerifiedNode", href: "https://www.verifiednode.com", external: true, description: "Trust layer for the agentic web" },
   { name: "Custom Builds", href: "/custom", description: "We build tools you own" },
   { name: "Free Tools", href: "/tools#free", description: "Calculators and checkers" },

@@ -11,6 +11,7 @@ import { Logo } from "./logo";
 // Dropdown menu structure
 const productsDropdown = [
   { name: "Lemonbrand ATS", href: "https://ats.lemonbrand.io", external: true, description: "Ontario-compliant hiring" },
+  { name: "Book-A-Desk", href: "https://desk.lemonbrand.io", external: true, description: "Desk booking you own" },
   { name: "Custom Builds", href: "/custom", description: "Tools built to your spec" },
   { name: "VerifiedNode", href: "https://www.verifiednode.com", external: true, description: "Contractor verification" },
 ];
