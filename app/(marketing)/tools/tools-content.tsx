@@ -45,10 +45,11 @@ const products = [
       "Team availability at a glance",
       "No per-seat pricing",
     ],
-    pricing: "Contact for pricing",
+    pricing: "Starting at $999",
+    comparisonPrice: "vs $15/seat/month competitors",
     href: "https://desk.lemonbrand.io",
     external: true,
-    highlight: false,
+    highlight: true,
   },
 ];
 

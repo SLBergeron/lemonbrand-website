@@ -385,8 +385,8 @@ export default function HomeContent() {
                 </p>
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                   <div>
-                    <p className="font-semibold text-foreground">Contact for pricing</p>
-                    <p className="text-xs text-muted-foreground">one-time purchase</p>
+                    <p className="font-semibold text-foreground">Starting at $999</p>
+                    <p className="text-xs text-muted-foreground">vs $15/seat/month competitors</p>
                   </div>
                   <Button variant="accent" size="sm" asChild>
                     <Link href="https://desk.lemonbrand.io" target="_blank" rel="noopener noreferrer">
