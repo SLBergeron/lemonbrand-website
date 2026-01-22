@@ -96,7 +96,24 @@ export default function HomeContent() {
             >
               Tools you own.
               <br />
-              <span className="font-light text-muted-foreground">No subscriptions.</span>
+              <span className="font-light text-muted-foreground">
+                <span className="relative inline-block">
+                  <span className="relative">
+                    No
+                    <span
+                      className="absolute font-mono font-semibold text-accent text-[0.28em] sm:text-[0.25em] md:text-[0.22em] whitespace-nowrap"
+                      style={{
+                        transform: 'rotate(8deg)',
+                        bottom: '70%',
+                        left: '90%',
+                      }}
+                    >
+                      (god damn)
+                    </span>
+                  </span>
+                </span>
+                {" "}<span className="relative">subscriptions.</span>
+              </span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
