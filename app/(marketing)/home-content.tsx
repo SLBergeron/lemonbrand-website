@@ -312,7 +312,7 @@ export default function HomeContent() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* ATS Card */}
             <FeatureCard className="bg-card border-accent/30">
               <div className="p-6">
@@ -339,6 +339,40 @@ export default function HomeContent() {
                   </div>
                   <Button variant="accent" size="sm" asChild>
                     <Link href="https://ats.lemonbrand.io" target="_blank" rel="noopener noreferrer">
+                      Learn More
+                      <ExternalLink className="w-4 h-4 ml-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </FeatureCard>
+
+            {/* Book-A-Desk Card */}
+            <FeatureCard className="bg-card border-accent/30">
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <span className="text-xs font-medium text-accent uppercase tracking-wider">
+                      Available Now
+                    </span>
+                    <h3 className="font-display text-xl font-semibold mt-1">
+                      Book-A-Desk
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Workspace reservation made simple.
+                    </p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm mb-4">
+                  Hot desk booking, floor maps, team coordination. Perfect for hybrid offices and coworking spaces.
+                </p>
+                <div className="flex items-center justify-between pt-4 border-t border-border">
+                  <div>
+                    <p className="font-semibold text-foreground">Contact for pricing</p>
+                    <p className="text-xs text-muted-foreground">one-time purchase</p>
+                  </div>
+                  <Button variant="accent" size="sm" asChild>
+                    <Link href="https://desk.lemonbrand.io" target="_blank" rel="noopener noreferrer">
                       Learn More
                       <ExternalLink className="w-4 h-4 ml-1" />
                     </Link>
