@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/context/providers";
@@ -7,10 +7,17 @@ import { ConvexClientProvider } from "@/context/convex-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { generateOrganizationSchema, JsonLd } from "@/lib/seo";
 
-// Builder's Workshop typography: Inter (display/body) + JetBrains Mono (code)
-const inter = Inter({
+// Typography: Outfit (display) + DM Sans (body) + JetBrains Mono (code)
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -131,7 +138,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, jetbrainsMono.variable)}>
+    <html lang="en" className={cn(outfit.variable, dmSans.variable, jetbrainsMono.variable)}>
       <head>
         <JsonLd data={organizationSchema} />
       </head>

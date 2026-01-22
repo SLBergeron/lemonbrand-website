@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -14,11 +15,14 @@ import {
   FileCode,
   Shield,
   Calendar,
+  Sparkles,
+  X,
 } from "lucide-react";
-import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
+import { CallToAction } from "@/components/shared/CallToAction";
 import { useCalEmbed } from "@/app/hooks/useCalEmbed";
 import { CONSTANTS } from "@/constants/links";
+import { cn } from "@/lib/utils";
 
 const process = [
   {
@@ -81,6 +85,7 @@ const pricing = [
       "API integrations",
       "Custom CRM/ERP modules",
     ],
+    featured: true,
   },
   {
     name: "Retainer",
@@ -135,8 +140,26 @@ const badFits = [
   "You want to build the next Salesforce",
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export default function CustomContent() {
-  // Cal.com embed for inline booking
   const calOptions = useCalEmbed({
     namespace: CONSTANTS.CALCOM_NAMESPACE,
     styles: {
@@ -152,240 +175,400 @@ export default function CustomContent() {
   return (
     <main className="pt-16">
       {/* Hero */}
-      <Section className="py-24 sm:py-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm font-medium tracking-wider uppercase text-accent mb-6">
-            Custom Builds
-          </p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-6">
-            We build.
-            <br />
-            <span className="text-muted-foreground">You own.</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-            Bespoke tools built to your spec. You own the source code.
-            No subscriptions, no vendor lock-in. Most projects delivered in 2-4 weeks.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="accent"
-              size="lg"
-              data-cal-namespace={calOptions.namespace}
-              data-cal-link={CONSTANTS.CALCOM_LINK}
-              data-cal-config={`{"layout":"${calOptions.layout}"}`}
+      <section className="relative py-24 sm:py-32 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-glow-accent" />
+        <div className="absolute inset-0 bg-dots" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8"
             >
-              <Calendar className="w-4 h-4 mr-2" />
-              Book Discovery Call
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="#pricing">
-                See Pricing
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </Section>
+              <Sparkles className="w-4 h-4 text-accent" />
+              <span className="text-sm font-semibold text-accent uppercase tracking-wider">
+                Custom Builds
+              </span>
+            </motion.div>
 
-      {/* The Process */}
-      <section id="process" className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              How it works
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              From idea to deployed tool in weeks, not months.
-              You see progress the whole way.
+            {/* Headline with extreme contrast */}
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
+              We build.
+              <br />
+              <span className="font-light text-muted-foreground">You own.</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+              Bespoke tools built to your spec. You own the source code.
+              No subscriptions, no vendor lock-in. Most projects delivered in 2-4 weeks.
             </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {process.map((item) => {
-              const Icon = item.icon;
-              return (
-                <FeatureCard key={item.step} className="bg-card" step={item.step}>
-                  <div className="p-6">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-accent" />
-                    </div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                      {item.duration}
-                    </div>
-                    <h3 className="font-display font-semibold text-lg mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </FeatureCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* What's Included */}
-      <Section width="wide">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-            What&apos;s included in every build
-          </h2>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {whatsIncluded.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div key={item.title} className="text-center">
-                <div className="w-14 h-14 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-7 h-7 text-success" />
-                </div>
-                <h3 className="font-display font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </div>
-            );
-          })}
-        </div>
-      </Section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-16 sm:py-20 px-3 sm:px-4 bg-muted/30 border-y border-border/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              Transparent pricing
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Fixed quotes. The price we agree on is the price you pay.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {pricing.map((tier, index) => (
-              <div
-                key={tier.name}
-                className={`bg-card rounded-lg border ${
-                  index === 1 ? "border-accent shadow-lg shadow-accent/10" : "border-border"
-                } p-6 flex flex-col`}
-              >
-                <h3 className="font-display text-xl font-semibold">{tier.name}</h3>
-                <div className="mt-2 mb-4">
-                  <span className="font-display text-3xl font-bold">{tier.price}</span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-2">{tier.timeline}</p>
-                <p className="text-sm text-muted-foreground mb-6">{tier.description}</p>
-                <div className="border-t border-border pt-4 flex-1">
-                  <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
-                    Examples
-                  </p>
-                  <ul className="space-y-2">
-                    {tier.examples.map((example) => (
-                      <li key={example} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-success mt-0.5 shrink-0" />
-                        <span className="text-muted-foreground">{example}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Good Fit / Bad Fit */}
-      <Section width="wide">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-success/5 border border-success/20 rounded-lg p-6">
-            <h3 className="font-display text-xl font-semibold mb-4 flex items-center gap-2">
-              <Check className="w-5 h-5 text-success" />
-              Good fit if...
-            </h3>
-            <ul className="space-y-3">
-              {goodFits.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm">
-                  <Check className="w-4 h-4 text-success mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-muted/50 border border-border rounded-lg p-6">
-            <h3 className="font-display text-xl font-semibold mb-4 flex items-center gap-2">
-              <span className="text-muted-foreground">—</span>
-              Probably not a fit if...
-            </h3>
-            <ul className="space-y-3">
-              {badFits.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="text-muted-foreground mt-0.5">—</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* CTA */}
-      <Section>
-        <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border p-8 sm:p-12">
-          <div className="text-center">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-              Let&apos;s talk about what you need
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              30-minute discovery call. No pitch, just a conversation about your problem.
-              If we can help, we&apos;ll tell you how. If we can&apos;t, we&apos;ll tell you that too.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              {["Free 30-minute call", "Fixed quote within 48 hours", "No obligation"].map((benefit) => (
-                <div key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check className="w-4 h-4 text-success" />
-                  <span>{benefit}</span>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Button
                 variant="accent"
                 size="lg"
+                className="h-14 px-8 text-base font-semibold shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30"
                 data-cal-namespace={calOptions.namespace}
                 data-cal-link={CONSTANTS.CALCOM_LINK}
                 data-cal-config={`{"layout":"${calOptions.layout}"}`}
               >
-                <Calendar className="w-4 h-4 mr-2" />
+                <Calendar className="w-5 h-5 mr-2" />
                 Book Discovery Call
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link href="/tools">
-                  See our tools
+              <Button variant="outline" size="lg" className="h-14 px-8 text-base font-medium border-2" asChild>
+                <Link href="#pricing">
+                  See Pricing
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </Section>
+      </section>
+
+      {/* The Process */}
+      <section id="process" className="relative py-20 sm:py-28 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/50 to-background" />
+        <div className="absolute inset-0 bg-grid opacity-50" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+              How it works
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mx-auto">
+              From idea to deployed tool in weeks, not months.
+              You see progress the whole way.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {process.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div key={item.step} variants={itemVariants}>
+                  <FeatureCard className="h-full bg-card/80 backdrop-blur-sm" step={item.step}>
+                    <div className="p-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/5 rounded-xl flex items-center justify-center mb-5 border border-accent/20">
+                        <Icon className="w-7 h-7 text-accent" />
+                      </div>
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                        {item.duration}
+                      </div>
+                      <h3 className="font-display font-bold text-xl mb-3">{item.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </FeatureCard>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section className="relative py-20 sm:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-mesh" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+              What&apos;s included in every build
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {whatsIncluded.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={itemVariants}
+                  className="group text-center"
+                >
+                  <div className="relative w-20 h-20 mx-auto mb-6">
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 bg-success/20 rounded-2xl blur-xl group-hover:bg-success/30 transition-colors duration-500" />
+                    <div className="relative w-full h-full bg-gradient-to-br from-success/20 to-success/5 rounded-2xl flex items-center justify-center border border-success/20 group-hover:border-success/40 transition-colors duration-300">
+                      <Icon className="w-9 h-9 text-success" />
+                    </div>
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.description}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="relative py-20 sm:py-28 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="absolute inset-0 bg-dots opacity-50" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+              Transparent pricing
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mx-auto">
+              Fixed quotes. The price we agree on is the price you pay.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-6 lg:gap-8"
+          >
+            {pricing.map((tier, index) => (
+              <motion.div
+                key={tier.name}
+                variants={itemVariants}
+                className={cn(
+                  "group relative rounded-2xl p-8 flex flex-col transition-all duration-300",
+                  "bg-card border",
+                  tier.featured
+                    ? "border-accent/40 shadow-xl shadow-accent/10 hover:shadow-2xl hover:shadow-accent/20"
+                    : "border-border/60 hover:border-border hover:shadow-lg"
+                )}
+              >
+                {/* Featured badge */}
+                {tier.featured && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-semibold uppercase tracking-wider">
+                      <Sparkles className="w-3 h-3" />
+                      Most Popular
+                    </div>
+                  </div>
+                )}
+
+                {/* Glow effect for featured */}
+                {tier.featured && (
+                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-accent/20 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                )}
+
+                <div className="relative">
+                  <h3 className="font-display text-xl font-bold">{tier.name}</h3>
+                  <div className="mt-4 mb-2">
+                    <span className="font-display text-4xl font-extrabold">{tier.price}</span>
+                  </div>
+                  <p className="text-sm font-medium text-accent mb-2">{tier.timeline}</p>
+                  <p className="text-muted-foreground mb-6">{tier.description}</p>
+
+                  <div className="border-t border-border/50 pt-6 flex-1">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                      Examples
+                    </p>
+                    <ul className="space-y-3">
+                      {tier.examples.map((example) => (
+                        <li key={example} className="flex items-start gap-3 text-sm">
+                          <div className="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center mt-0.5 shrink-0">
+                            <Check className="w-3 h-3 text-success" />
+                          </div>
+                          <span className="text-muted-foreground">{example}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Good Fit / Bad Fit */}
+      <section className="relative py-20 sm:py-28 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8"
+          >
+            {/* Good Fit */}
+            <motion.div
+              variants={itemVariants}
+              className="group relative rounded-2xl overflow-hidden"
+            >
+              {/* Border gradient */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-success/30 via-success/10 to-transparent p-px">
+                <div className="w-full h-full rounded-2xl bg-card" />
+              </div>
+
+              <div className="relative p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center">
+                    <Check className="w-6 h-6 text-success" />
+                  </div>
+                  <h3 className="font-display text-2xl font-bold">
+                    Good fit if...
+                  </h3>
+                </div>
+                <ul className="space-y-4">
+                  {goodFits.map((item, index) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center mt-0.5 shrink-0">
+                        <Check className="w-3.5 h-3.5 text-success" />
+                      </div>
+                      <span className="text-muted-foreground">{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Bad Fit */}
+            <motion.div
+              variants={itemVariants}
+              className="group relative rounded-2xl overflow-hidden"
+            >
+              {/* Border */}
+              <div className="absolute inset-0 rounded-2xl border border-border/60" />
+              <div className="absolute inset-0 rounded-2xl bg-muted/30" />
+
+              <div className="relative p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                    <X className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <h3 className="font-display text-2xl font-bold text-muted-foreground">
+                    Probably not a fit if...
+                  </h3>
+                </div>
+                <ul className="space-y-4">
+                  {badFits.map((item, index) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start gap-3 text-muted-foreground"
+                    >
+                      <span className="w-6 h-6 flex items-center justify-center mt-0.5 shrink-0 text-lg">
+                        —
+                      </span>
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <CallToAction
+            variant="accent"
+            title="Let's talk about what you need"
+            description="30-minute discovery call. No pitch, just a conversation about your problem. If we can help, we'll tell you how. If we can't, we'll tell you that too."
+            primaryCtaText="Book Discovery Call"
+            primaryCtaLink={CONSTANTS.CALCOM_LINK}
+            secondaryCtaText="See our tools"
+            secondaryCtaLink="/tools"
+            benefits={["Free 30-minute call", "Fixed quote within 48 hours", "No obligation"]}
+          />
+        </div>
+      </section>
 
       {/* DIY Option */}
-      <section className="py-16 sm:py-20 px-3 sm:px-4 border-t border-border/50">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm font-medium text-muted-foreground mb-4">
-            Budget tight?
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
-            Learn to build it yourself
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Our programs teach non-developers to build production tools with AI.
-            Same methods we use for custom builds.
-          </p>
-          <Button variant="outline" size="lg" asChild>
-            <Link href="/sprint">
-              Learn about the programs
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
+      <section className="relative py-20 sm:py-28 overflow-hidden border-t border-border/50">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+              Budget tight?
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+              Learn to build it yourself
+            </h2>
+            <p className="text-lg text-muted-foreground font-light mb-8 max-w-xl mx-auto">
+              Our programs teach non-developers to build production tools with AI.
+              Same methods we use for custom builds.
+            </p>
+            <Button
+              variant="outline"
+              size="lg"
+              className="h-14 px-8 text-base font-medium border-2"
+              asChild
+            >
+              <Link href="/sprint">
+                Learn about the programs
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
     </main>

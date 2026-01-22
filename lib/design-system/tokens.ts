@@ -79,6 +79,7 @@ export const typography = {
     heading: 'var(--font-weight-heading)',
     body: 'var(--font-weight-body)',
     medium: 'var(--font-weight-medium)',
+    light: 'var(--font-weight-light)',
   },
   lineHeight: {
     tight: 'var(--leading-tight)',
