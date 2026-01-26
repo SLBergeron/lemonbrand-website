@@ -1,0 +1,73 @@
+I keep seeing it.
+
+Someone tries Cursor or Claude, types "build me a landing page" and something appears.
+
+It works. They're hooked.
+
+Then they try to build something real and it falls apart.
+
+Not immediately.
+
+It works for a bit. You get most of the way there.
+
+Then you hit something the model doesn't get. You rephrase. Try different words. It breaks something else.
+
+You start over.
+
+I've done this. A lot.
+
+---
+
+I was tired of writing proposals.
+
+Same structure every time. Copy the last one, change the names, change the numbers.
+
+Boring. Takes forever.
+
+So I asked Claude to build me a proposal generator.
+
+Boom - form, fields, button. I was flying.
+
+Then I needed PDF export.
+
+You can't just make a PDF. You build a React thing, style it, add a print button, print-to-PDF.
+
+I didn't know that.
+
+Then colors looked wrong when printed. Print stylesheets. Didn't know those existed.
+
+Then I needed different sections for different clients. Had to learn JSON.
+
+Every layer revealed something I didn't know I didn't know.
+
+---
+
+The problem isn't prompting.
+
+It's how you work.
+
+Most people treat AI like a magic box. Throw in a request, hope for output. Doesn't work, start over.
+
+Starting over almost never fixes it.
+
+Better context does. Systems that let you keep going instead of restart.
+
+---
+
+What actually helped:
+
+1. Talk before you build. Not "build me this." More like "ask me questions about what i need"
+
+2. Put context in files. Model forgets. A file called CLAUDE.md that tells it what the project is. "read claude.md and lets keep going"
+
+3. Make the model push back. "pls poke holes in this. whats wrong with it"
+
+---
+
+I turned this into a 7-day sprint.
+
+First two days are free. No email, no signup.
+
+Link in comments if you want them.
+
+Still figuring out the rest.
