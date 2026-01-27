@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@lemonbrand/ui";
 import { ArrowRight, Play, CheckCircle2, Clock, Lock } from "lucide-react";
+import { lessons } from "@/lib/lessons";
 
 export const metadata: Metadata = {
   title: "7-Day Sprint | Build Your First AI Tool",
@@ -31,64 +32,23 @@ export const metadata: Metadata = {
   },
 };
 
+// Build DAYS from lesson data to keep durations in sync
 const DAYS = [
-  {
-    day: 0,
-    title: "Setup + Project Selection",
-    description: "Install Claude Code, define your project idea, create your CLAUDE.md",
-    duration: 45,
-    isFree: true,
-  },
-  {
-    day: 1,
-    title: "Scope + First Build",
-    description: "Narrow scope, describe your MVP, get your first working code",
-    duration: 60,
-    isFree: true,
-  },
-  {
-    day: 2,
-    title: "Foundation",
-    description: "Build the core data structures and basic functionality",
-    duration: 90,
-    isFree: false,
-  },
-  {
-    day: 3,
-    title: "Structure",
-    description: "Add navigation, layouts, and connect components",
-    duration: 90,
-    isFree: false,
-  },
-  {
-    day: 4,
-    title: "Core Features",
-    description: "Implement the main functionality that makes your tool valuable",
-    duration: 120,
-    isFree: false,
-  },
-  {
-    day: 5,
-    title: "Expand",
-    description: "Add secondary features, error handling, edge cases",
-    duration: 90,
-    isFree: false,
-  },
-  {
-    day: 6,
-    title: "Polish",
-    description: "Improve UI/UX, add loading states, fix bugs",
-    duration: 90,
-    isFree: false,
-  },
-  {
-    day: 7,
-    title: "Ship It",
-    description: "Deploy your tool, share with the world",
-    duration: 60,
-    isFree: false,
-  },
-];
+  { day: 0, isFree: true },
+  { day: 1, isFree: true },
+  { day: 2, isFree: false },
+  { day: 3, isFree: false },
+  { day: 4, isFree: false },
+  { day: 5, isFree: false },
+  { day: 6, isFree: false },
+  { day: 7, isFree: false },
+].map(({ day, isFree }) => ({
+  day,
+  title: lessons[day].title,
+  description: lessons[day].subtitle,
+  duration: lessons[day].duration,
+  isFree,
+}));
 
 export default function SprintOverviewPage() {
   return (
