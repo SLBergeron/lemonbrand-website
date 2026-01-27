@@ -245,17 +245,10 @@ export default function ClaudemdContent() {
               What People Say
             </h2>
 
-            <motion.div
-              className="grid md:grid-cols-3 gap-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
+            <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((testimonial, i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={fadeInUp}
                   className="bg-card border border-border/50 rounded-lg p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:border-accent/30"
                 >
                   <p className="text-muted-foreground mb-4 italic">
@@ -265,9 +258,9 @@ export default function ClaudemdContent() {
                     <p className="font-semibold">{testimonial.name}</p>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </Section>
       </section>

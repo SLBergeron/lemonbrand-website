@@ -361,32 +361,20 @@ export default function ToolsContent() {
         <div className="absolute inset-0 bg-mesh opacity-50" />
 
         <div className="relative max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3">
               Try Our Free Tools
             </h2>
             <p className="text-muted-foreground text-lg">
               No signup required. Make smarter software decisions.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {freeTools.map((tool, index) => (
               <FreeToolCard key={tool.name} tool={tool} index={index} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -397,12 +385,7 @@ export default function ToolsContent() {
 
         <div className="relative max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+            <div>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-6">
                 The subscription trap
               </h2>
@@ -419,15 +402,9 @@ export default function ToolsContent() {
                   There&apos;s another way.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-6 sm:p-8"
-            >
+            <div className="rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-6 sm:p-8">
               <div className="space-y-5">
                 <div className="flex justify-between items-center pb-4 border-b border-border/50">
                   <span className="text-muted-foreground">Typical SaaS (3 years)</span>
@@ -446,7 +423,7 @@ export default function ToolsContent() {
                   <span className="font-bold text-success">Everything</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -455,62 +432,38 @@ export default function ToolsContent() {
       <Section width="wide" className="relative">
         <div className="absolute inset-0 bg-glow-primary opacity-30" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative max-w-3xl mb-12"
-        >
+        <div className="relative max-w-3xl mb-12">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">
             Available tools
           </h2>
           <p className="text-muted-foreground text-lg">
             Pre-built solutions for common problems. One-time purchase, you own it forever.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="relative grid md:grid-cols-2 gap-6 lg:gap-8"
-        >
+        <div className="relative grid md:grid-cols-2 gap-6 lg:gap-8">
           {products.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))}
-        </motion.div>
+        </div>
       </Section>
 
       {/* Coming Soon */}
       <Section width="wide" className="relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">
             More subscription killers coming
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             We&apos;re building alternatives to expensive subscriptions. Same model: one-time purchase, you own it.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {comingSoon.map((item, index) => (
             <ComingSoonCard key={item.name} item={item} index={index} />
           ))}
-        </motion.div>
+        </div>
       </Section>
 
       {/* Custom Build CTA */}
@@ -531,13 +484,7 @@ export default function ToolsContent() {
       <section className="relative py-20 sm:py-24 px-3 sm:px-4 overflow-hidden">
         <div className="absolute inset-0 bg-dots opacity-30" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative max-w-3xl mx-auto text-center"
-        >
+        <div className="relative max-w-3xl mx-auto text-center">
           <p className="text-sm font-medium text-accent uppercase tracking-wider mb-4">
             Want to build your own tools?
           </p>
@@ -554,7 +501,7 @@ export default function ToolsContent() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
-        </motion.div>
+        </div>
       </section>
     </main>
   );

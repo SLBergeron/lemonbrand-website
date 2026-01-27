@@ -500,12 +500,7 @@ export default function HomeContent() {
 
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
+              <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
                   <span className="text-xs font-semibold text-accent uppercase tracking-wider">
                     For the DIYers
@@ -542,16 +537,10 @@ export default function HomeContent() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-              </motion.div>
+              </div>
 
               {/* Programs Overview */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="space-y-4"
-              >
+              <div className="space-y-4">
                 {[
                   { href: "/sprint", name: "7-Day Sprint", price: "Free to start", desc: "Build your first tool. $297 to unlock Days 2-7.", color: "accent" },
                   { href: "/8-week", name: "8-Week Program", price: "$997+", desc: "Master the skill. Databases, auth, deployment.", color: "primary" },
@@ -588,7 +577,7 @@ export default function HomeContent() {
                     </div>
                   </Link>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -615,13 +604,7 @@ export default function HomeContent() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent" />
           <div className="absolute inset-0 bg-grid opacity-[0.02]" />
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center relative z-10"
-          >
+          <div className="max-w-3xl mx-auto text-center relative z-10">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-8">
               Two paths to the same destination
             </h2>
@@ -677,7 +660,7 @@ export default function HomeContent() {
               </Link>
               . Next cohort starts {nextCohort}.
             </p>
-          </motion.div>
+          </div>
         </section>
 
         {/* Subscription Status Toast */}

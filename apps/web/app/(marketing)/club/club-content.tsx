@@ -431,23 +431,17 @@ export default function ClubContent() {
                 The Club is for people who:
               </h2>
 
-              <motion.div
-                className="grid md:grid-cols-2 gap-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-              >
+              <div className="grid md:grid-cols-2 gap-4">
                 {forYouItems.map((item, i) => (
-                  <motion.div
+                  <div
                     key={i}
                     className="flex items-center gap-3 p-4 bg-accent/5 rounded-lg border border-accent/20 transition-all duration-200 hover:border-accent/40"
                   >
                     <Check className="w-5 h-5 text-accent flex-shrink-0" />
                     <span className="text-muted-foreground">{item}</span>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* Not for you */}
@@ -456,15 +450,9 @@ export default function ClubContent() {
                 The Club is NOT for people who:
               </h3>
 
-              <motion.div
-                className="grid md:grid-cols-3 gap-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-              >
+              <div className="grid md:grid-cols-3 gap-4">
                 {notForYouItems.map((item, i) => (
-                  <motion.div
+                  <div
                     key={i}
                     className="flex items-center gap-3 p-4 bg-muted/30 rounded-lg"
                   >
@@ -477,9 +465,9 @@ export default function ClubContent() {
                         </span>
                       )}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
 
               <p className="text-center text-muted-foreground pt-4">
                 If you&apos;re not going to build anything,
@@ -500,12 +488,8 @@ export default function ClubContent() {
 
             <div className="space-y-4">
               {sampleMonth.map((week, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
                   className="bg-card border border-border/50 rounded-lg p-5 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:border-accent/30"
                 >
                   <div className="flex items-start gap-4">
@@ -519,7 +503,7 @@ export default function ClubContent() {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

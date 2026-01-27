@@ -247,13 +247,7 @@ export default function CustomContent() {
         <div className="absolute inset-0 bg-grid opacity-50" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               How it works
             </h2>
@@ -261,19 +255,13 @@ export default function CustomContent() {
               From idea to deployed tool in weeks, not months.
               You see progress the whole way.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.div key={item.step} variants={itemVariants}>
+                <div key={item.step}>
                   <FeatureCard className="h-full bg-card/80 backdrop-blur-sm" step={item.step}>
                     <div className="p-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/5 rounded-xl flex items-center justify-center mb-5 border border-accent/20">
@@ -288,10 +276,10 @@ export default function CustomContent() {
                       </p>
                     </div>
                   </FeatureCard>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -300,31 +288,18 @@ export default function CustomContent() {
         <div className="absolute inset-0 bg-mesh" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               What&apos;s included in every build
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {whatsIncluded.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.div
+                <div
                   key={item.title}
-                  variants={itemVariants}
                   className="group text-center"
                 >
                   <div className="relative w-20 h-20 mx-auto mb-6">
@@ -336,10 +311,10 @@ export default function CustomContent() {
                   </div>
                   <h3 className="font-display font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -350,32 +325,19 @@ export default function CustomContent() {
         <div className="absolute inset-0 bg-dots opacity-50" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               Transparent pricing
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mx-auto">
               Fixed quotes. The price we agree on is the price you pay.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-6 lg:gap-8"
-          >
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {pricing.map((tier, index) => (
-              <motion.div
+              <div
                 key={tier.name}
-                variants={itemVariants}
                 className={cn(
                   "group relative rounded-2xl p-8 flex flex-col transition-all duration-300",
                   "bg-card border",
@@ -423,27 +385,18 @@ export default function CustomContent() {
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Good Fit / Bad Fit */}
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8"
-          >
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Good Fit */}
-            <motion.div
-              variants={itemVariants}
-              className="group relative rounded-2xl overflow-hidden"
-            >
+            <div className="group relative rounded-2xl overflow-hidden">
               {/* Border gradient */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-success/30 via-success/10 to-transparent p-px">
                 <div className="w-full h-full rounded-2xl bg-card" />
@@ -460,29 +413,22 @@ export default function CustomContent() {
                 </div>
                 <ul className="space-y-4">
                   {goodFits.map((item, index) => (
-                    <motion.li
+                    <li
                       key={item}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                       className="flex items-start gap-3"
                     >
                       <div className="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center mt-0.5 shrink-0">
                         <Check className="w-3.5 h-3.5 text-success" />
                       </div>
                       <span className="text-muted-foreground">{item}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </div>
 
             {/* Bad Fit */}
-            <motion.div
-              variants={itemVariants}
-              className="group relative rounded-2xl overflow-hidden"
-            >
+            <div className="group relative rounded-2xl overflow-hidden">
               {/* Border */}
               <div className="absolute inset-0 rounded-2xl border border-border/60" />
               <div className="absolute inset-0 rounded-2xl bg-muted/30" />
@@ -498,24 +444,20 @@ export default function CustomContent() {
                 </div>
                 <ul className="space-y-4">
                   {badFits.map((item, index) => (
-                    <motion.li
+                    <li
                       key={item}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                       className="flex items-start gap-3 text-muted-foreground"
                     >
                       <span className="w-6 h-6 flex items-center justify-center mt-0.5 shrink-0 text-lg">
                         —
                       </span>
                       <span>{item}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -541,34 +483,27 @@ export default function CustomContent() {
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+            Budget tight?
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+            Learn to build it yourself
+          </h2>
+          <p className="text-lg text-muted-foreground font-light mb-8 max-w-xl mx-auto">
+            Our programs teach non-developers to build production tools with AI.
+            Same methods we use for custom builds.
+          </p>
+          <Button
+            variant="outline"
+            size="lg"
+            className="h-14 px-8 text-base font-medium border-2"
+            asChild
           >
-            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-              Budget tight?
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
-              Learn to build it yourself
-            </h2>
-            <p className="text-lg text-muted-foreground font-light mb-8 max-w-xl mx-auto">
-              Our programs teach non-developers to build production tools with AI.
-              Same methods we use for custom builds.
-            </p>
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-14 px-8 text-base font-medium border-2"
-              asChild
-            >
-              <Link href="/sprint">
-                Learn about the programs
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </motion.div>
+            <Link href="/sprint">
+              Learn about the programs
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
         </div>
       </section>
     </main>
