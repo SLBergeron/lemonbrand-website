@@ -14,3 +14,6 @@ export * from "./prdRateLimits";
 
 // Re-export the generated api for use in Next.js API routes
 export { api, internal } from "./_generated/api";
+
+// Re-export types from dataModel for use in Next.js
+export type { Id, Doc, TableNames, DataModel } from "./_generated/dataModel";

@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@lemonbrand/convex";
-import { Id } from "@/convex/_generated/dataModel";
+import { Id } from "@lemonbrand/convex";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;

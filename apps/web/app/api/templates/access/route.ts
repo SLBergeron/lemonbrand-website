@@ -4,7 +4,7 @@ import { resend, EMAIL_FROM, SITE_URL } from "@/lib/resend";
 import { api } from "@lemonbrand/convex";
 import ConfirmationEmail from "@/emails/confirmation";
 import { render } from "@react-email/components";
-import { Id } from "@/convex/_generated/dataModel";
+import { Id } from "@lemonbrand/convex";
 
 export async function POST(request: Request) {
   try {

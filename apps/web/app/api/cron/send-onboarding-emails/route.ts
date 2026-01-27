@@ -3,7 +3,7 @@ import { getConvexClient } from "@/lib/convex";
 import { resend, EMAIL_FROM } from "@/lib/resend";
 import { api } from "@lemonbrand/convex";
 import { render } from "@react-email/components";
-import { Id } from "@/convex/_generated/dataModel";
+import { Id } from "@lemonbrand/convex";
 
 // Email templates
 import Day2ContextEmail from "@/emails/onboarding/day-2-context";
