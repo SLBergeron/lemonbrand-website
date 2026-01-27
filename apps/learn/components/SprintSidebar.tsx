@@ -87,7 +87,7 @@ export function SprintSidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 flex flex-col transition-all duration-300 ease-out",
+        "fixed inset-y-0 left-0 z-40 flex flex-col transition-all duration-300 ease-out overflow-hidden",
         "bg-background border-r border-border/40",
         isCollapsed ? "w-0 opacity-0 pointer-events-none" : "w-56",
         className
