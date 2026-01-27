@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       convexUrl,
       urlContainsExpected,
       expectedDeployment,
@@ -94,7 +94,15 @@ export async function GET(request: NextRequest) {
         } : null,
       },
       timestamp: new Date().toISOString(),
+      random: Math.random(), // Proof this is not cached
     });
+
+    // Prevent any caching
+    response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+
+    return response;
   } catch (error) {
     return NextResponse.json({
       error: error instanceof Error ? error.message : "Unknown error",
