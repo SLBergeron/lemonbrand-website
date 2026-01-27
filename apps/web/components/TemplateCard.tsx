@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Play, Users, Check, ArrowRight } from "lucide-react";
-import { Id } from "@lemonbrand/convex";
+import { Id } from "@lemonbrand/convex/client";
 
 export interface Template {
   _id: Id<"templates">;

@@ -1,4 +1,7 @@
-// Re-export schema and all convex functions
+// Server-side exports (Convex functions)
+// NOTE: For client-side React code, import from "@lemonbrand/convex/client" instead
+// to avoid bundling server code into the browser
+
 export { default as schema } from "./schema";
 export * from "./auth";
 export * from "./sprintCohorts";
@@ -12,8 +15,6 @@ export * from "./seedSprintContent";
 export * from "./users";
 export * from "./prdRateLimits";
 
-// Re-export the generated api for use in Next.js API routes
+// Also re-export client-safe exports for convenience in server contexts
 export { api, internal } from "./_generated/api";
-
-// Re-export types from dataModel for use in Next.js
 export type { Id, Doc, TableNames, DataModel } from "./_generated/dataModel";

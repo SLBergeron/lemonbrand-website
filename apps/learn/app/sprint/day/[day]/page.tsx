@@ -5,7 +5,7 @@ import { notFound, useRouter, useParams } from "next/navigation";
 import { LessonPage } from "@/components/LessonPage";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@lemonbrand/convex";
+import { api } from "@lemonbrand/convex/client";
 import { Loader2 } from "lucide-react";
 
 // Days 0-1 redirect to preview, 2-7 require enrollment

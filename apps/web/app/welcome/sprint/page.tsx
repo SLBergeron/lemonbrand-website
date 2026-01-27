@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@lemonbrand/convex";
+import { api } from "@lemonbrand/convex/client";
 import { Button } from "@/components/ui/button";
 import { Confetti } from "@/components/sprint/Confetti";
 import { Countdown } from "@/components/sprint/Countdown";

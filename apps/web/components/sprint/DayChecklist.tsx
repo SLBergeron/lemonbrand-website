@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useMutation } from "convex/react";
-import { api } from "@lemonbrand/convex";
-import { Id } from "@lemonbrand/convex";
+import { api, Id } from "@lemonbrand/convex/client";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { motion, AnimatePresence } from "framer-motion";

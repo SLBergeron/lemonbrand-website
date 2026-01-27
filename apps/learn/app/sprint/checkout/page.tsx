@@ -7,7 +7,7 @@ import { Button } from "@lemonbrand/ui";
 import { ArrowLeft, Check, Lock, Shield, Zap, Mail, Loader2 } from "lucide-react";
 import { signIn, useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@lemonbrand/convex";
+import { api } from "@lemonbrand/convex/client";
 
 const FEATURES = [
   "8 video lessons (Days 0-7)",

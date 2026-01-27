@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "convex/react";
-import { api } from "@lemonbrand/convex";
+import { api } from "@lemonbrand/convex/client";
 import TemplateAccessModal from "./TemplateAccessModal";
 import { Template } from "./TemplateCard";
 import { ArrowRight } from "lucide-react";

@@ -20,7 +20,7 @@ import { useLocalProgress } from "@/hooks/useLocalProgress";
 import { getLesson } from "@/lib/lessons";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@lemonbrand/convex";
+import { api } from "@lemonbrand/convex/client";
 
 interface SprintSidebarProps {
   className?: string;
