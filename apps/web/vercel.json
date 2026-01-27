@@ -1,4 +1,7 @@
 {
+  "buildCommand": "cd ../.. && pnpm build --filter=@lemonbrand/web",
+  "installCommand": "cd ../.. && pnpm install",
+  "framework": "nextjs",
   "crons": [
     {
       "path": "/api/cron/send-onboarding-emails",
