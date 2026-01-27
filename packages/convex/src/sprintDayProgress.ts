@@ -281,20 +281,46 @@ export const getCurrentDayByAuthId = query({
       .withIndex("by_user", (q) => q.eq("userId", user._id))
       .collect();
 
-    if (allProgress.length === 0) return null;
+    // If sprintDayProgress records exist, use them
+    if (allProgress.length > 0) {
+      // Sort by day
+      const sorted = allProgress.sort((a, b) => a.day - b.day);
 
-    // Sort by day
-    const sorted = allProgress.sort((a, b) => a.day - b.day);
+      // Find the first incomplete day (not "completed")
+      for (const progress of sorted) {
+        if (progress.status !== "completed") {
+          return progress.day;
+        }
+      }
 
-    // Find the first incomplete day (not "completed")
-    // This ensures we return the earliest day that still needs work
-    for (const progress of sorted) {
-      if (progress.status !== "completed") {
-        return progress.day;
+      // All days completed, return day 7
+      return 7;
+    }
+
+    // Fallback: Check checklist progress for users without sprintDayProgress records
+    // This handles users enrolled before the progress tracking was added
+    const checklistItems = await ctx.db
+      .query("sprintChecklistProgress")
+      .withIndex("by_user_day", (q) => q.eq("userId", user._id))
+      .collect();
+
+    // Group by day and count completions
+    const dayCompletions = new Map<number, number>();
+    for (const item of checklistItems) {
+      dayCompletions.set(item.day, (dayCompletions.get(item.day) || 0) + 1);
+    }
+
+    // Find first day with incomplete checklist (< 3 items typically means incomplete)
+    // Or first day not started at all
+    for (let day = 0; day <= 7; day++) {
+      const completedCount = dayCompletions.get(day) || 0;
+      // If day has no completions or very few, it's the current day
+      if (completedCount < 3) {
+        return day;
       }
     }
 
-    // All days completed, return day 7
+    // All days seem complete
     return 7;
   },
 });

@@ -109,6 +109,25 @@ export async function POST(request: NextRequest) {
       throw lastError || new Error("Failed to create enrollment");
     }
 
+    // Get the Convex user for subsequent operations
+    const convexUser = await convex.query(api.users.getByAuthId, {
+      betterAuthId: userId,
+    });
+
+    // Initialize day progress records (Days 0-7)
+    if (convexUser) {
+      try {
+        await convex.mutation(api.sprintDayProgress.initializeForEnrollment, {
+          userId: convexUser._id,
+          enrollmentId: enrollmentId as any,
+        });
+        console.log(`[complete-signup] Initialized day progress for user: ${convexUser._id}`);
+      } catch (e) {
+        // Non-critical for existing users who may already have progress
+        console.log("Could not initialize day progress (may already exist):", e);
+      }
+    }
+
     // Sync local progress if available
     if (pendingPurchase.localProgress) {
       try {
@@ -123,21 +142,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Migrate anonymous progress to user's permanent tables
-    if (pendingPurchase.visitorId) {
+    if (pendingPurchase.visitorId && convexUser) {
       try {
-        // Get the Convex user to get their internal ID
-        const convexUser = await convex.query(api.users.getByAuthId, {
-          betterAuthId: userId,
+        await convex.mutation(api.anonymousProgress.migrateToUser, {
+          visitorId: pendingPurchase.visitorId,
+          userId: convexUser._id,
+          enrollmentId: enrollmentId as any,
         });
-
-        if (convexUser) {
-          await convex.mutation(api.anonymousProgress.migrateToUser, {
-            visitorId: pendingPurchase.visitorId,
-            userId: convexUser._id,
-            enrollmentId: enrollmentId as any, // Type cast as it's a string from the mutation
-          });
-          console.log(`[complete-signup] Migrated anonymous progress for visitor: ${pendingPurchase.visitorId}`);
-        }
+        console.log(`[complete-signup] Migrated anonymous progress for visitor: ${pendingPurchase.visitorId}`);
       } catch (e) {
         // Non-critical, log but don't fail
         console.log("Could not migrate anonymous progress:", e);
