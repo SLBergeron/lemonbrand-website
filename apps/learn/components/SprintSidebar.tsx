@@ -50,10 +50,10 @@ export function SprintSidebar({
   const { data: session } = useSession();
 
   // Check enrollment status
-  const userId = session?.user?.id;
+  const betterAuthId = session?.user?.id;
   const hasEnrollment = useQuery(
-    api.sprintEnrollments.hasActiveEnrollment,
-    userId ? { userId: userId as any } : "skip"
+    api.sprintEnrollments.hasActiveEnrollmentByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
   );
 
   const isEnrolled = hasEnrollment === true;

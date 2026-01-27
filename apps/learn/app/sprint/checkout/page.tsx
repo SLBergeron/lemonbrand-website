@@ -43,10 +43,10 @@ function CheckoutContent() {
   const canceled = searchParams.get("canceled") === "true";
 
   // Check if user is already enrolled
-  const userId = session?.user?.id as string | undefined;
+  const betterAuthId = session?.user?.id as string | undefined;
   const enrollment = useQuery(
-    api.sprintEnrollments.hasActiveEnrollment,
-    userId ? { userId: userId as any } : "skip"
+    api.sprintEnrollments.hasActiveEnrollmentByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
   );
 
   // Redirect if already enrolled

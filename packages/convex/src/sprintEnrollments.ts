@@ -109,13 +109,43 @@ export const getByCheckoutSession = query({
   },
 });
 
-// Check if user has active enrollment
+// Check if user has active enrollment (by Convex user ID)
 export const hasActiveEnrollment = query({
   args: { userId: v.id("users") },
   handler: async (ctx, args) => {
     const enrollment = await ctx.db
       .query("sprintEnrollments")
       .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("status"), "active"),
+          q.eq(q.field("status"), "completed")
+        )
+      )
+      .first();
+
+    return !!enrollment;
+  },
+});
+
+// Check if user has active enrollment (by Better Auth ID)
+export const hasActiveEnrollmentByAuthId = query({
+  args: { betterAuthId: v.string() },
+  handler: async (ctx, args) => {
+    // First, find the Convex user by their Better Auth ID
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_betterAuthId", (q) => q.eq("betterAuthId", args.betterAuthId))
+      .first();
+
+    if (!user) {
+      return false;
+    }
+
+    // Then check their enrollment
+    const enrollment = await ctx.db
+      .query("sprintEnrollments")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
       .filter((q) =>
         q.or(
           q.eq(q.field("status"), "active"),

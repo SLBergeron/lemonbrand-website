@@ -10,6 +10,7 @@
 
 import type * as achievements from "../achievements.js";
 import type * as auth from "../auth.js";
+import type * as client from "../client.js";
 import type * as http from "../http.js";
 import type * as index from "../index.js";
 import type * as modules from "../modules.js";
@@ -38,6 +39,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   achievements: typeof achievements;
   auth: typeof auth;
+  client: typeof client;
   http: typeof http;
   index: typeof index;
   modules: typeof modules;

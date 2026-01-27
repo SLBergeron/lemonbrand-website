@@ -24,10 +24,10 @@ export default function DayPage() {
   const isValidDay = !isNaN(dayNum) && dayNum >= 0 && dayNum <= 7;
 
   // Check enrollment if user is logged in
-  const userId = session?.user?.id;
+  const betterAuthId = session?.user?.id;
   const hasEnrollment = useQuery(
-    api.sprintEnrollments.hasActiveEnrollment,
-    userId ? { userId: userId as any } : "skip"
+    api.sprintEnrollments.hasActiveEnrollmentByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
   );
 
   // Redirect preview days to preview route
