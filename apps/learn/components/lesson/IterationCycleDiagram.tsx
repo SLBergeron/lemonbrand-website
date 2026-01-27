@@ -166,7 +166,7 @@ export function IterationCycleDiagram() {
           {/* Loop back arrow */}
           <motion.div variants={itemVariants} className="flex items-center gap-2 mt-2 text-muted-foreground">
             <RefreshCw className="size-4" />
-            <span className="text-xs">Repeat until it's right</span>
+            <span className="text-xs">Repeat until it&apos;s right</span>
           </motion.div>
         </div>
 
