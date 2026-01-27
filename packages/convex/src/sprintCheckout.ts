@@ -148,6 +148,60 @@ export const createSelfPacedEnrollment = mutation({
   },
 });
 
+// Create self-paced enrollment by Better Auth ID
+export const createSelfPacedEnrollmentByAuthId = mutation({
+  args: {
+    betterAuthId: v.string(),
+    stripeSessionId: v.string(),
+    stripeCustomerId: v.optional(v.string()),
+    stripePaymentIntentId: v.optional(v.string()),
+    amountPaid: v.number(),
+    currency: v.string(),
+  },
+  handler: async (ctx, args) => {
+    // Find the Convex user by Better Auth ID
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_betterAuthId", (q) => q.eq("betterAuthId", args.betterAuthId))
+      .first();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Check if user already has an enrollment
+    const existing = await ctx.db
+      .query("sprintEnrollments")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("status"), "active"),
+          q.eq(q.field("status"), "completed")
+        )
+      )
+      .first();
+
+    if (existing) {
+      // Already enrolled (idempotent)
+      return existing._id;
+    }
+
+    // Create active enrollment (already paid via pending purchase)
+    return await ctx.db.insert("sprintEnrollments", {
+      userId: user._id,
+      cohortId: "self-paced",
+      stripeCheckoutSessionId: args.stripeSessionId,
+      stripeCustomerId: args.stripeCustomerId,
+      stripePaymentIntentId: args.stripePaymentIntentId,
+      status: "active",
+      enrollmentType: "self-paced",
+      amountPaid: args.amountPaid,
+      currency: args.currency,
+      enrolledAt: Date.now(),
+    });
+  },
+});
+
 // Sync local progress to Convex after enrollment
 export const syncLocalProgress = mutation({
   args: {
@@ -183,6 +237,60 @@ export const syncLocalProgress = mutation({
         if (!existing) {
           await ctx.db.insert("sprintChecklistProgress", {
             userId: args.userId,
+            day,
+            itemId,
+            completedAt: Date.now(),
+          });
+        }
+      }
+    }
+
+    return { synced: true };
+  },
+});
+
+// Sync local progress by Better Auth ID
+export const syncLocalProgressByAuthId = mutation({
+  args: {
+    betterAuthId: v.string(),
+    localProgress: v.any(),
+  },
+  handler: async (ctx, args) => {
+    const { localProgress } = args;
+
+    if (!localProgress) return { synced: false };
+
+    // Find the Convex user by Better Auth ID
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_betterAuthId", (q) => q.eq("betterAuthId", args.betterAuthId))
+      .first();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Sync checklist items (Days 0-1 only during preview)
+    if (localProgress.completedItems && Array.isArray(localProgress.completedItems)) {
+      for (const itemKey of localProgress.completedItems) {
+        const match = itemKey.match(/^day-(\d+)-(.+)$/);
+        if (!match) continue;
+
+        const day = parseInt(match[1], 10);
+        const itemId = match[2];
+
+        if (day > 1) continue;
+
+        const existing = await ctx.db
+          .query("sprintChecklistProgress")
+          .withIndex("by_user_day_item", (q) =>
+            q.eq("userId", user._id).eq("day", day).eq("itemId", itemId)
+          )
+          .first();
+
+        if (!existing) {
+          await ctx.db.insert("sprintChecklistProgress", {
+            userId: user._id,
             day,
             itemId,
             completedAt: Date.now(),

@@ -49,11 +49,11 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Create the self-paced enrollment
+    // Create the self-paced enrollment (userId here is the Better Auth ID)
     const enrollmentId = await convex.mutation(
-      api.sprintCheckout.createSelfPacedEnrollment,
+      api.sprintCheckout.createSelfPacedEnrollmentByAuthId,
       {
-        userId,
+        betterAuthId: userId,
         stripeSessionId: sessionId,
         stripeCustomerId: pendingPurchase.stripeCustomerId,
         stripePaymentIntentId: stripeSession.payment_intent as string,
@@ -64,8 +64,8 @@ export async function POST(request: NextRequest) {
 
     // Sync local progress if available
     if (pendingPurchase.localProgress) {
-      await convex.mutation(api.sprintCheckout.syncLocalProgress, {
-        userId,
+      await convex.mutation(api.sprintCheckout.syncLocalProgressByAuthId, {
+        betterAuthId: userId,
         localProgress: pendingPurchase.localProgress,
       });
     }

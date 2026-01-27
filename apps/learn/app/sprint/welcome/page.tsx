@@ -249,6 +249,7 @@ function WelcomeContent() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
+              autoComplete="name"
               className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
               disabled={pageState === "creating_account"}
             />
@@ -263,6 +264,7 @@ function WelcomeContent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a password (8+ characters)"
+                autoComplete="new-password"
                 className="w-full px-4 py-3 pr-12 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
                 disabled={pageState === "creating_account"}
                 required
