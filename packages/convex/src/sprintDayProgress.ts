@@ -264,6 +264,41 @@ export const getCurrentDay = query({
   },
 });
 
+// Get current day by Better Auth ID
+export const getCurrentDayByAuthId = query({
+  args: { betterAuthId: v.string() },
+  handler: async (ctx, args) => {
+    // Find the Convex user by Better Auth ID
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_betterAuthId", (q) => q.eq("betterAuthId", args.betterAuthId))
+      .first();
+
+    if (!user) return null;
+
+    const allProgress = await ctx.db
+      .query("sprintDayProgress")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    if (allProgress.length === 0) return null;
+
+    // Sort by day
+    const sorted = allProgress.sort((a, b) => a.day - b.day);
+
+    // Find the first incomplete day (not "completed")
+    // This ensures we return the earliest day that still needs work
+    for (const progress of sorted) {
+      if (progress.status !== "completed") {
+        return progress.day;
+      }
+    }
+
+    // All days completed, return day 7
+    return 7;
+  },
+});
+
 // Get overall Sprint progress
 export const getOverallProgress = query({
   args: { userId: v.id("users") },

@@ -38,6 +38,15 @@ export function SprintContent() {
 
   const isEnrolled = hasEnrollment === true;
 
+  // Get current day for enrolled users
+  const currentDay = useQuery(
+    api.sprintDayProgress.getCurrentDayByAuthId,
+    betterAuthId && isEnrolled ? { betterAuthId } : "skip"
+  );
+
+  // Default to day 0 if no progress found
+  const continueToDay = currentDay ?? 0;
+
   return (
     <div className="space-y-12">
       {/* Header */}
@@ -109,8 +118,8 @@ export function SprintContent() {
               </p>
             </div>
             <Button asChild variant="accent" size="lg" className="shrink-0">
-              <Link href="/sprint/day/2">
-                Continue to Day 2
+              <Link href={`/sprint/day/${continueToDay}`}>
+                Continue to Day {continueToDay}
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
