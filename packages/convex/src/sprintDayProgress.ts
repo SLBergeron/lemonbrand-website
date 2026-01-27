@@ -304,11 +304,18 @@ export const getCurrentDayByAuthId = query({
       .withIndex("by_user_day", (q) => q.eq("userId", user._id))
       .collect();
 
+    // If no form responses in Convex at all, user likely enrolled before
+    // Convex tracking was added. Default to Day 1 since they completed
+    // Day 0-1 preview to enroll.
+    if (formResponses.length === 0) {
+      return 1;
+    }
+
     // Get set of days with form submissions
     const daysWithForms = new Set(formResponses.map((f) => f.day));
 
-    // Find first day without a form submission
-    for (let day = 0; day <= 7; day++) {
+    // Find first day without a form submission (starting from Day 1 for enrolled users)
+    for (let day = 1; day <= 7; day++) {
       if (!daysWithForms.has(day)) {
         return day;
       }
