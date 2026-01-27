@@ -158,6 +158,43 @@ export const hasActiveEnrollmentByAuthId = query({
   },
 });
 
+// Debug: Get enrollment info by email (for troubleshooting)
+export const getEnrollmentByEmail = query({
+  args: { email: v.string() },
+  handler: async (ctx, args) => {
+    // Find user by email
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .first();
+
+    if (!user) {
+      return { error: "User not found", user: null, enrollment: null };
+    }
+
+    // Find enrollment
+    const enrollment = await ctx.db
+      .query("sprintEnrollments")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .first();
+
+    return {
+      user: {
+        _id: user._id,
+        email: user.email,
+        betterAuthId: user.betterAuthId,
+        name: user.name,
+      },
+      enrollment: enrollment ? {
+        _id: enrollment._id,
+        status: enrollment.status,
+        cohortId: enrollment.cohortId,
+        enrolledAt: enrollment.enrolledAt,
+      } : null,
+    };
+  },
+});
+
 // Mark Sprint as completed
 export const markCompleted = mutation({
   args: { enrollmentId: v.id("sprintEnrollments") },

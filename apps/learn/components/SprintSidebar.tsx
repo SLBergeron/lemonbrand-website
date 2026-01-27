@@ -11,6 +11,7 @@ import {
   MessageCircle,
   PanelLeftClose,
   PanelLeft,
+  LogOut,
 } from "lucide-react";
 import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
@@ -18,7 +19,7 @@ import { AchievementsLink } from "./achievements";
 import { useAchievementContext } from "@/context/AchievementContext";
 import { useLocalProgress } from "@/hooks/useLocalProgress";
 import { getLesson } from "@/lib/lessons";
-import { useSession } from "@/lib/auth-client";
+import { useSession, signOut } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
 
@@ -267,6 +268,15 @@ export function SprintSidebar({
             <HelpCircle className="size-3.5" />
             Help
           </a>
+          {session?.user && (
+            <button
+              onClick={() => signOut({ fetchOptions: { onSuccess: () => window.location.href = "/login" } })}
+              className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-1 w-full text-left"
+            >
+              <LogOut className="size-3.5" />
+              Sign Out
+            </button>
+          )}
         </div>
       </div>
     </aside>
