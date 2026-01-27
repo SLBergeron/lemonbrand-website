@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Banner - Simon Bergeron</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .banner {
+      width: 1584px;
+      height: 396px;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle grid pattern */
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+
+    .main-text {
+      color: #fafafa;
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .main-text .highlight {
+      color: #eab308;
+    }
+
+    .tagline {
+      color: #a3a3a3;
+      font-size: 24px;
+      font-weight: 400;
+      margin-top: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Bottom strip */
+    .bottom-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .bottom-strip span {
+      color: #0a0a0a;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .bottom-strip .separator {
+      color: #0a0a0a;
+      opacity: 0.4;
+    }
+
+    /* Instructions */
+    .instructions {
+      color: #666;
+      font-size: 14px;
+      margin-top: 30px;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .instructions code {
+      background: #333;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #eab308;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="banner">
+      <div class="content">
+        <div class="main-text">
+          Tools you <span class="highlight">own.</span><br>
+          No subscriptions.
+        </div>
+        <div class="tagline">One-time purchase. Full source code.</div>
+      </div>
+      <div class="bottom-strip">
+        <span>Custom Tools</span>
+        <span class="separator">|</span>
+        <span>AI Education</span>
+        <span class="separator">|</span>
+        <span>lemonbrand.io</span>
+      </div>
+    </div>
+
+    <p class="instructions">
+      <strong>To save:</strong> Open this file in Chrome, right-click the banner, select "Inspect",
+      then right-click the <code>.banner</code> element → "Capture node screenshot"<br>
+      Or use a screenshot tool to capture exactly 1584×396 pixels.
+    </p>
+  </div>
+</body>
+</html>

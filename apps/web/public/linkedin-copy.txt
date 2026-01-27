@@ -1,0 +1,193 @@
+================================================================================
+LINKEDIN PROFILE COPY - SIMON BERGERON
+================================================================================
+
+---[ HEADLINE ]---
+(220 characters max)
+
+I build custom tools businesses own forever. No subscriptions. One-time purchase. | Teaching operators to build their own with AI.
+
+
+---[ ABOUT SECTION ]---
+(2,600 characters max)
+
+I build tools businesses own forever.
+
+No subscriptions. No vendor lock-in. One-time purchase, you own the code.
+
+---
+
+13 years in the startup ecosystem. PM, automation, sales, web dev. Self-taught everything.
+
+When AI coding tools matured, I realized something: businesses don't need to rent software anymore. The tools they need can be built fast and owned forever.
+
+What I've built:
+→ VerifiedNode: 58,000+ contractor records, paying customers. Built with Claude Code.
+→ LemonBrand ATS: Ontario ESA-compliant applicant tracking. One-time purchase.
+→ Dozens of custom client tools: dashboards, automation, internal systems.
+
+---
+
+If you're here, you're probably:
+• Tired of SaaS subscriptions that creep from $49/month to $299/month
+• Paying for software that's 80% right and 20% wrong
+• Wondering if there's another way
+
+There is.
+
+---
+
+CUSTOM TOOL DEVELOPMENT
+$5-30K one-time. 2-8 weeks. You own everything.
+Working prototype in 1-2 weeks. Fixed pricing, no surprises.
+
+TEACHING OPERATORS TO BUILD
+Same methods I use. No coding background required.
+• 7-Day Sprint: Build your first tool ($297)
+• 8-Week Program: Master production apps ($997+)
+• AI Builders Club: Ongoing community ($97/mo)
+
+The skill is communication, not coding.
+
+---
+
+Results:
+• HVAC contractor: $23K captured in month 1
+• Plumber: Quote conversion 22% → 41%
+• Electrician: $31K reactivated in 11 days
+• Edison Motors: Helped raise $20M+
+• Gym Express: $70K → $230K revenue in 2 years
+
+---
+
+Want to work together?
+
+Option 1: I build it for you → lemonbrand.io/custom
+Option 2: Learn to build yourself → lemonbrand.io/sprint
+
+Either way, you end up with tools you own.
+
+
+================================================================================
+FEATURED SECTION (Add 4 items in this order)
+================================================================================
+
+---[ FEATURED 1 ]---
+Title: VerifiedNode
+Description: Built with Claude Code in ~2 months. 58,000+ records. Proof I practice what I teach.
+Link: https://verifiednode.com
+
+---[ FEATURED 2 ]---
+Title: LemonBrand ATS
+Description: Stop paying $500/mo for hiring software. Ontario-compliant. One-time purchase.
+Link: https://ats.lemonbrand.io
+
+---[ FEATURED 3 ]---
+Title: Custom Development
+Description: $5-30K. 2-8 weeks. You own the code.
+Link: https://lemonbrand.io/custom
+
+---[ FEATURED 4 ]---
+Title: 7-Day Sprint
+Description: Build your first AI tool. $297.
+Link: https://lemonbrand.io/sprint
+
+
+================================================================================
+SERVICES (Configure in LinkedIn Services section)
+================================================================================
+
+---[ SERVICE 1: Custom Tool Development ]---
+
+I build custom business tools you own forever. No subscriptions, no vendor lock-in.
+
+$5,000-$30,000 one-time | 2-8 weeks | Full source code ownership
+
+Process:
+1. Discovery call (30 min) → Fixed quote within 48 hours
+2. Working prototype in 1-2 weeks
+3. Deploy to your infrastructure
+4. 30 days support included
+
+Book at lemonbrand.io/custom
+
+
+---[ SERVICE 2: AI Tool Building Education ]---
+
+I teach non-developers to build production tools with Claude Code.
+
+• 7-Day Sprint ($297): Ship your first tool
+• 8-Week Program ($997-$4,997): Master production apps
+• AI Builders Club ($97/mo): Ongoing community
+
+No coding background required. The skill is communication, not coding.
+
+Start at lemonbrand.io/sprint
+
+
+================================================================================
+URL VERIFICATION (All confirmed working)
+================================================================================
+
+✓ https://verifiednode.com - Credential verification platform for contractors
+✓ https://ats.lemonbrand.io - Ontario ESA-compliant ATS, one-time purchase
+✓ https://lemonbrand.io/custom - Custom development service page
+✓ https://lemonbrand.io/sprint - 7-Day Claude Code Sprint ($297)
+
+
+================================================================================
+BANNER IMAGE
+================================================================================
+
+File: public/linkedin-banner.html
+
+Open in browser, then:
+1. Chrome DevTools → Right-click banner → "Capture node screenshot"
+2. Or screenshot at exactly 1584×396 pixels
+
+Colors used:
+- Background: #0a0a0a (neutral-950)
+- Accent: #eab308 (yellow-500)
+- Text: #fafafa (white)
+- Subtext: #a3a3a3 (gray)
+
+
+================================================================================
+COMMENT REPLIES
+================================================================================
+
+---[ Reply to Grant Everett - "Offline Coding" Thread ]---
+Date: 2026-01-22
+
+Grant Everett You're right - the "why" matters. That's actually my point.
+
+Old path: syntax → loops → data structures → years later, architectural decisions.
+
+New path: start with the problem → "what are my options here?" → learn the tradeoffs in context.
+
+Both get you there. One's pull, one's push.
+
+Where we agree: vibe-coding to production isn't learning. If you can't explain why you chose something, you just copy-pasted with extra steps.
+
+But "can you code offline?" tests memorization, not understanding. I've met devs who write sort functions from memory but can't tell you when NOT to use one.
+
+Better metric: Can you defend your architecture to someone trying to break it?
+
+That requires understanding. Doesn't require being offline.
+
+
+---[ Reply to Copywriter - "Career Decay" Thread ]---
+Date: 2026-01-22
+
+"under these conditions, why wouldn't AI be a suitable replacement for a human writer?"
+
+You answered your own question.
+
+If the people paying you can't tell the difference between AI slop and your work, they never needed *you*. They needed content to exist. Box checked. Ship it.
+
+I build tools. Same disease, different symptom. Client says they want custom, then asks why it doesn't look like the SaaS they saw on Product Hunt. "Creative" until it's unfamiliar. "Bold" until someone in the room gets nervous.
+
+The work isn't the problem. It's making things for people who don't actually want what they're asking for.
+
+You've got this.
+

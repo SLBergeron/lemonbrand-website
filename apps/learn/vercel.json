@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd ../.. && pnpm build --filter=@lemonbrand/learn",
+  "installCommand": "cd ../.. && pnpm install",
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/cron/send-cart-abandonment",
+      "schedule": "0 * * * *"
+    }
+  ]
+}

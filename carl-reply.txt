@@ -1,0 +1,16 @@
+@Carl Coddington — That architecture makes more sense now. You're not building a chatbot with memory bolted on, you're building something where the cognitive layer *is* the product.
+
+A few things I've learned building agent systems:
+
+**1. The orchestration layer is where complexity lives.**
+By orchestration I mean: the code that decides *which* agent handles *which* request, and how data flows between them. When you have multiple agents being called based on different commands, that routing logic becomes the hardest part to get right. I've found it helps to think of it like a dispatcher — clear handoff rules, explicit context passing, and (this is key) knowing when to *not* call an agent and just return structured data.
+
+**2. Associative memory is tricky at scale.**
+Most AI apps just do basic retrieval — "find the 5 most similar documents to this query." What you're describing sounds more like actual associative recall: the system surfaces *related* context the user didn't explicitly ask for, the way your brain connects ideas. If that's the goal, you'll hit latency and relevance trade-offs fast. What's your strategy for keeping retrieval fast without losing that "adjacent context" that makes associations useful?
+
+**3. Post-trained inference — clarifying what you mean.**
+When you say "post-trained inference on the LLM," are you fine-tuning the model itself (training it on your own data), or building a reasoning layer that sits *on top* of the base model and shapes how it responds? The distinction matters for how you handle drift over time and how much control you have over behavior.
+
+Chris is right about the Claude Agents SDK being worth a look. I've been building with Claude Code daily and their tooling for structured agent flows has gotten solid. OpenAI's approach (defining "functions" the model can call) is more battle-tested if you need predictability over flexibility.
+
+Happy to jump on a call if you want to walk through the architecture. This is the stuff I find most interesting to dig into.

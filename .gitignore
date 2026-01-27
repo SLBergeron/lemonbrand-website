@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 .npm-cache
@@ -10,12 +10,16 @@
 /coverage
 
 # next.js
-/.next/
+.next/
 /out/
 .next-dev.log
 
 # production
 /build
+dist/
+
+# turbo
+.turbo
 
 # misc
 .DS_Store
@@ -43,3 +47,9 @@ next-env.d.ts
 *.swp
 *.swo
 test-results/
+
+# Python
+.venv/
+__pycache__/
+*.py
+*.pyc
