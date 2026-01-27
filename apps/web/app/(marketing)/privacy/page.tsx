@@ -1,10 +1,22 @@
-import { Metadata } from "next";
+import {
+  createPageMetadata,
+  generateWebPageSchema,
+  JsonLd,
+} from "@/lib/seo";
 import { LegalContentWithToc } from "@/components/LegalContentWithToc";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy | LemonBrand",
-  description: "How we handle your data. Clear. Direct. No legal BS.",
-};
+  description:
+    "How we handle your data. Clear. Direct. No legal BS. We collect what we need to deliver the service, don't sell your data, and you can leave anytime.",
+  path: "/privacy",
+  aiMetadata: {
+    "ai:page-type": "legal",
+    "ai:document-type": "privacy-policy",
+    "ai:summary":
+      "LemonBrand collects minimal data needed for service delivery. No data selling. Users own everything built together. GDPR compliant.",
+  },
+});
 
 const tocLinks = [
   { title: "Here's the deal", href: "#heres-the-deal" },
@@ -275,13 +287,23 @@ I'll reply within 48 hours. Usually faster.
 `;
 
 export default function PrivacyPage() {
+  const webPageSchema = generateWebPageSchema({
+    name: "Privacy Policy | LemonBrand",
+    description:
+      "How we handle your data. Clear. Direct. No legal BS.",
+    url: "https://lemonbrand.io/privacy",
+  });
+
   return (
-    <LegalContentWithToc
-      title="Privacy Policy"
-      lastUpdated="September 30, 2025"
-      tldr={tldr}
-      content={privacyContent}
-      tocLinks={tocLinks}
-    />
+    <>
+      <JsonLd data={webPageSchema} />
+      <LegalContentWithToc
+        title="Privacy Policy"
+        lastUpdated="September 30, 2025"
+        tldr={tldr}
+        content={privacyContent}
+        tocLinks={tocLinks}
+      />
+    </>
   );
 }

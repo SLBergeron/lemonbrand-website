@@ -1,10 +1,22 @@
-import { Metadata } from "next";
+import {
+  createPageMetadata,
+  generateWebPageSchema,
+  JsonLd,
+} from "@/lib/seo";
 import { LegalContentWithToc } from "@/components/LegalContentWithToc";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Cookie Policy | LemonBrand",
-  description: "What cookies we use and why. No tracking circus, just functional basics.",
-};
+  description:
+    "What cookies we use and why. No tracking circus, just functional basics. Essential cookies, analytics, and third-party service cookies explained.",
+  path: "/cookies",
+  aiMetadata: {
+    "ai:page-type": "legal",
+    "ai:document-type": "cookie-policy",
+    "ai:summary":
+      "LemonBrand uses essential cookies for site function, optional analytics, and third-party cookies from Kit, Cal.com, and Stripe. No advertising or cross-site tracking.",
+  },
+});
 
 const tocLinks = [
   { title: "What cookies are", href: "#what-cookies-are" },
@@ -239,13 +251,23 @@ I'll respond within 48 hours.
 `;
 
 export default function CookiesPage() {
+  const webPageSchema = generateWebPageSchema({
+    name: "Cookie Policy | LemonBrand",
+    description:
+      "What cookies we use and why. No tracking circus, just functional basics.",
+    url: "https://lemonbrand.io/cookies",
+  });
+
   return (
-    <LegalContentWithToc
-      title="Cookie Policy"
-      lastUpdated="September 30, 2025"
-      tldr={tldr}
-      content={cookiesContent}
-      tocLinks={tocLinks}
-    />
+    <>
+      <JsonLd data={webPageSchema} />
+      <LegalContentWithToc
+        title="Cookie Policy"
+        lastUpdated="September 30, 2025"
+        tldr={tldr}
+        content={cookiesContent}
+        tocLinks={tocLinks}
+      />
+    </>
   );
 }

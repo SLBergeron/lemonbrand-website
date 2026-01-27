@@ -54,6 +54,11 @@ export const faqCategories: FAQCategory[] = [
         answer:
           "The Sprint is 7 days. Most people have working code by Day 3. By Day 7, you ship a complete tool. The 8-Week goes deeper—databases, auth, APIs—but you're building real things the whole way.",
       },
+      {
+        question: "Can I try before I pay?",
+        answer:
+          "Yes. Days 0-1 of the Sprint are completely free. You'll set up Claude Code, pick your project, and use Claude as a thinking partner to scope your MVP. If you like what you see, $297 unlocks Days 2-7 where you actually build and ship.",
+      },
     ],
   },
   {
@@ -79,6 +84,16 @@ export const faqCategories: FAQCategory[] = [
         answer:
           "The Sprint is cohort-based—7 days with a group, daily trainings, Discord channel, Ship Day at the end. The structure and accountability help people actually finish.",
       },
+      {
+        question: "What do I build during the free days?",
+        answer:
+          "Day 0: Install your tools (Cursor or Claude Code), set up billing, pick YOUR project idea. Day 1: No code—you'll scope your MVP using Claude as a thinking partner, generate a project-scope.md, and surface problems before you start building.",
+      },
+      {
+        question: "What tools do I need for the Sprint?",
+        answer:
+          "You need either Cursor ($20/mo visual IDE) or Claude Code via Claude Pro ($20/mo). You'll also need a text editor and a free GitHub account. Day 0 walks you through the complete setup—everything is covered in the training.",
+      },
     ],
   },
   {
@@ -103,6 +118,11 @@ export const faqCategories: FAQCategory[] = [
         question: "What if I get stuck?",
         answer:
           "You're not alone. The Sprint has a Discord cohort channel and daily check-ins. The 8-Week has weekly office hours and priority support on higher tiers. Help is built into the structure.",
+      },
+      {
+        question: "What if I can't finish in 7 days?",
+        answer:
+          "You keep access to all the training materials after the cohort ends. You can complete the Sprint at your own pace—there's no expiration. The 7-day structure is a guide, not a hard deadline.",
       },
     ],
   },

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DotGridBackground } from "@/components/dot-grid-background";
-import { SprintTimeline } from "@/components/timeline-progress";
 import { Section } from "@/components/shared/Section";
 import { FeatureCard } from "@/components/shared/FeatureCard";
 import { SubtleGradientBackground } from "@/components/gradient-blob";
@@ -26,6 +25,13 @@ import {
   Hammer,
   Rocket,
   Search,
+  Play,
+  Settings,
+  Code,
+  Globe,
+  Lightbulb,
+  Flag,
+  Trophy,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -89,131 +95,136 @@ const notForYouItems = [
 ];
 
 
-// Day by day breakdown
-const sprintDays = [
+// Detailed curriculum data
+const curriculumDays = [
   {
-    days: "DAYS 0-1",
-    title: "Setup + Project Selection",
+    day: "0",
+    title: "Get Ready to Build",
+    duration: "30 min",
+    isFree: true,
+    icon: Settings,
+    fascination: "You're not learning to code. You're learning to communicate with something that codes.",
+    whatHappens: [
+      "Choose your path: Cursor ($20/mo visual IDE) or Claude Code Terminal ($20/mo for Claude Pro)",
+      "Set up billing and verify everything works",
+      "Optional: Set up voice input (Wispr Flow) — talk faster than you type",
+      "Pick YOUR project — a tool that does ONE thing well",
+      "Generate your project-idea.md — Claude helps you clarify what you're actually building",
+    ],
+    keyInsight: "Before you write a single line of code, you'll have a clear project brief that sets up everything that follows.",
+  },
+  {
+    day: "1",
+    title: "Scope Your Project",
+    duration: "60 min",
+    isFree: true,
     icon: Target,
-    description: `Before the Sprint starts, you install Claude Code and join Discord.
-Day 1, you pick what you're building.
-
-Not a tutorial project—YOUR project.
-
-Could be a personal tool (recipe tracker, workout log).
-Could be work automation (data processing, dashboards).
-Could be a business idea (simple SaaS, internal tool).
-
-The worksheet helps you scope it.
-We give feedback if it's too big or too small.`,
-    outcome: "You know exactly what you're building.",
+    fascination: "You don't know what you need until you talk it through.",
+    whatHappens: [
+      "No code today — that's intentional",
+      "Use Claude as a thinking partner to scope your project",
+      "Learn to reference files instead of pasting (scales as project grows)",
+      "Make Claude disagree with you — surface problems before Day 5",
+      "Generate project-scope.md with core feature, what's out, open questions",
+    ],
+    keyInsight: "Planning catches mistakes before they become code. Changing a plan is free. Changing code costs time.",
   },
   {
-    days: "DAYS 2-3",
-    title: "Foundation",
+    day: "2",
+    title: "Build Your Foundation",
+    duration: "90 min",
+    isFree: false,
     icon: Search,
-    description: `You create your context file—the secret weapon that makes Claude remember your project, your preferences, your constraints.
-
-Without it, every conversation starts from zero.
-With it, Claude has the context to help you properly.
-
-Then you learn the 3-part request structure:
-1. Context (what exists, what you're trying to do)
-2. Task (the specific thing you want built)
-3. Constraints (how you want it done)`,
-    outcome: "Working code that does something. It probably won't be perfect. That's expected.",
+    fascination: "The thinking is the hard part. The code is the cheap part.",
+    whatHappens: [
+      "Create CLAUDE.md — your project's persistent memory across sessions",
+      "Learn Plan Mode vs Build Mode (when to review vs when to let Claude execute)",
+      "Visualize your project with HTML before building it",
+      "See your tool's flow before writing application code",
+      "Test context: open fresh session, Claude already knows your project",
+    ],
+    keyInsight: "When you're stuck thinking, ask Claude to visualize it. HTML files are disposable thinking tools.",
   },
   {
-    days: "DAYS 4-5",
-    title: "Build",
-    icon: Hammer,
-    description: `The main construction happens here.
-
-Yesterday you built something. Today you fix it and expand it.
-
-You'll learn:
-• How to describe what's wrong when you don't understand the code
-• Why starting over is almost never the answer
-• The 2-3 exchange pattern that closes the gap between "what I got" and "what I wanted"
-
-Day 5 is the longest work day. 2-3 hours.`,
-    outcome: "60-70% of your project complete.",
+    day: "3",
+    title: "Build Your First Feature",
+    duration: "2.5 hrs",
+    isFree: false,
+    icon: Code,
+    fascination: "This is the fun part.",
+    whatHappens: [
+      "Create a real Next.js project (Claude sets everything up)",
+      "See your app running at localhost:3000",
+      "Set up Git and GitHub — your save point system",
+      "Identify your critical first feature and build it",
+      "Learn that errors are information, not failure — just paste them to Claude",
+    ],
+    keyInsight: "You're not expected to understand every line. Try things, see what happens, shape what emerges.",
   },
   {
-    days: "DAYS 6-7",
-    title: "Polish + Ship",
-    icon: Rocket,
-    description: `Day 6: Turn your prototype into something finished.
-• Add a database if you need one
-• Clean up the interface
-• Handle edge cases
-• Add the details that make it feel complete
-
-Day 7: Ship Day.
-Submit your project. Demo to the cohort.
-Your $297 becomes credit toward the 8-Week.`,
-    outcome: "You've shipped something real.",
-  },
-];
-
-// Testimonials
-const testimonials = [
-  {
-    name: "Sarah M.",
-    role: "Marketing Consultant",
-    project: "Proposal Generator",
-    story: `Sarah spent 3 hours on every client proposal.
-
-"I'd open a Google Doc," she told me, "and stare at it. Then I'd look at the last proposal I wrote and start copy-pasting sections. But every client is different, so I'd rewrite half of it anyway."
-
-She thought she needed to hire an assistant.
-
-Day 1 of the Sprint, she scoped a proposal generator.
-Day 5, she had a working prototype.
-Day 7, she used it on a real client.
-
-"I paste in their brief. The tool generates a draft. I edit for 20 minutes instead of 3 hours."
-
-She built it in 7 days. No code. No assistant.
-Just the communication patterns she learned in the Sprint.`,
+    day: "4",
+    title: "Make It Real",
+    duration: "2.5 hrs",
+    isFree: false,
+    icon: Globe,
+    fascination: "Anyone with a link can see it. That changes everything.",
+    whatHappens: [
+      "Learn the start-of-session ritual: recontextualize Claude in 30 seconds",
+      "Deploy to Vercel (free) — your project goes live on the internet",
+      "Experience push → live workflow (change code, push, see it live in 30 seconds)",
+      "Fix common problems: mobile issues, layout problems, generic AI look",
+      "Master the 2-3 Exchange Pattern: \"Here's what I have / what's wrong / what I wanted\"",
+      "Share your URL, get real feedback from someone outside the Sprint",
+    ],
+    keyInsight: "Iterate, don't start over. Starting over throws away everything you've learned.",
   },
   {
-    name: "Mike T.",
-    role: "Account Manager",
-    project: "Meeting Notes Summarizer",
-    story: `Mike has 4-5 client calls a day.
-
-"After every call, I'd spend 20-30 minutes writing up notes. What we discussed. Action items. Follow-ups. By the end of the day, I was exhausted just from admin work."
-
-He'd tried transcription tools. They gave him a wall of text. He still had to extract the important parts himself.
-
-Day 3 of the Sprint, he built a meeting notes summarizer.
-It takes the transcript and extracts:
-• Key decisions made
-• Action items (with owners)
-• Follow-ups needed
-• Important quotes
-
-All in his exact format. Ready to paste into his CRM.
-
-"I saved 2 hours a day. Not exaggerating. I actually have energy left at 5pm now."`,
-  },
-];
-
-const otherProjects = [
-  {
-    title: "Inventory Tracker",
-    quote:
-      "I run a small retail business. I needed to track stock across two locations. Every app was either too simple or too complicated. I built exactly what I needed.",
-    name: "James K.",
-    role: "Small Business Owner",
+    day: "5",
+    title: "Add Real Value",
+    duration: "2.5 hrs",
+    isFree: false,
+    icon: Lightbulb,
+    fascination: "You have a system now.",
+    whatHappens: [
+      "Turn yesterday's feedback into today's features",
+      "Add capabilities (things that matter) not features (things you list)",
+      "Recognize the paradigm shift: agents aren't just for software",
+      "Start capturing future project ideas — the habit that compounds",
+      "Understand: 80% of what you do on a computer can be done better through an agent",
+    ],
+    keyInsight: "You didn't just learn to build an app. You learned a new way of using your computer.",
   },
   {
-    title: "Personal Reading Tracker",
-    quote:
-      "I wanted to track books I've read, with notes and ratings, in a way that actually makes sense to me. Goodreads wasn't it. So I made my own.",
-    name: "Lisa D.",
-    role: "Product Manager",
+    day: "6",
+    title: "Finish, Don't Perfect",
+    duration: "90 min",
+    isFree: false,
+    icon: Flag,
+    fascination: "Today is about stopping.",
+    whatHappens: [
+      "Recognize and resist the feature trap (\"just one more thing...\")",
+      "Ask the 5 robustness questions: empty fields, unexpected input, empty states, too much data, obvious breaks",
+      "Basic security check (2 minutes, not an audit)",
+      "Final polish: loading states, confirmation messages, cleaner layout",
+      "Prepare your one-sentence description for tomorrow",
+    ],
+    keyInsight: "You get better by building more things, not by perfecting one thing.",
+  },
+  {
+    day: "7",
+    title: "You Built Something Real",
+    duration: "60 min",
+    isFree: false,
+    icon: Trophy,
+    fascination: "Most people never build anything. You actually did it.",
+    whatHappens: [
+      "Record a 2-5 minute demo video (Loom or any screen recorder)",
+      "Share with the cohort — video, live URL, one thing you learned",
+      "Watch others' demos, celebrate each other",
+      "Reflect on what you learned and decide what's next",
+      "You're a builder now. That matters.",
+    ],
+    keyInsight: "Seven days ago, you had an idea. Now you have a working tool, live on the internet, that you built.",
   },
 ];
 
@@ -323,6 +334,108 @@ function FAQItem({
           >
             <div className="pb-5">
               <p className="text-muted-foreground whitespace-pre-line">{answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Curriculum Day Accordion component
+interface CurriculumDayData {
+  day: string;
+  title: string;
+  duration: string;
+  isFree: boolean;
+  icon: typeof Settings;
+  fascination: string;
+  whatHappens: string[];
+  keyInsight: string;
+}
+
+function CurriculumDay({ day }: { day: CurriculumDayData }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const Icon = day.icon;
+
+  return (
+    <div className="border border-border/50 rounded-lg overflow-hidden bg-card">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-4 flex items-center gap-4 text-left group hover:bg-muted/30 transition-colors"
+      >
+        {/* Day number */}
+        <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+          <Icon className="w-5 h-5 text-accent" />
+        </div>
+
+        {/* Title and metadata */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-mono text-sm font-semibold text-accent">
+              Day {day.day}
+            </span>
+            <span className="text-muted-foreground">|</span>
+            <span className="font-semibold truncate">{day.title}</span>
+          </div>
+          <div className="flex items-center gap-2 mt-1">
+            <span className="text-sm text-muted-foreground">{day.duration}</span>
+            {day.isFree ? (
+              <Badge variant="outline" className="bg-success/10 text-success border-success/30 text-xs">
+                FREE
+              </Badge>
+            ) : (
+              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30 text-xs">
+                PAID
+              </Badge>
+            )}
+          </div>
+        </div>
+
+        {/* Chevron */}
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 space-y-4 border-t border-border/50 pt-4">
+              {/* Fascination quote */}
+              <p className="text-foreground font-medium italic">
+                &ldquo;{day.fascination}&rdquo;
+              </p>
+
+              {/* What happens */}
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-2">What happens:</p>
+                <ul className="space-y-2">
+                  {day.whatHappens.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Key insight */}
+              <div className="bg-accent/5 border border-accent/20 rounded-md px-4 py-3">
+                <p className="text-sm">
+                  <span className="font-medium text-accent">Key insight:</span>{" "}
+                  <span className="text-muted-foreground">{day.keyInsight}</span>
+                </p>
+              </div>
             </div>
           </motion.div>
         )}
@@ -474,6 +587,45 @@ export default function SprintContent() {
         </DotGridBackground>
       </SubtleGradientBackground>
 
+      {/* Video Section */}
+      <Section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <div className="text-center mb-8">
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-3">
+              See What You&apos;ll Build
+            </h2>
+            <p className="text-muted-foreground">
+              Watch a 3-minute walkthrough of the Sprint experience
+            </p>
+          </div>
+
+          {/* Video Placeholder */}
+          <div className="relative aspect-video bg-gradient-to-br from-muted/50 to-muted rounded-xl border border-border/50 overflow-hidden group cursor-pointer">
+            {/* Subtle background pattern */}
+            <div className="absolute inset-0 bg-grid opacity-[0.03]" />
+
+            {/* Play button overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-20 h-20 bg-accent/90 rounded-full flex items-center justify-center shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform duration-300">
+                <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+              </div>
+            </div>
+
+            {/* Coming soon label */}
+            <div className="absolute bottom-4 left-4">
+              <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
+                Video coming soon
+              </Badge>
+            </div>
+          </div>
+        </motion.div>
+      </Section>
+
       {/* Section 1: What This Is */}
       <section className="py-20 px-4 bg-muted/30 border-y border-border/50">
         <Section className="py-0 px-0">
@@ -594,63 +746,65 @@ export default function SprintContent() {
         </div>
       </Section>
 
-      {/* Section 3: Day-by-Day Breakdown */}
+      {/* Section 3: Detailed Curriculum */}
       <section className="py-20 px-4 bg-muted/30 border-y border-border/50">
         <Section width="wide" className="py-0 px-0">
           <div className="space-y-8">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold text-center">
-              What happens each day
-            </h2>
-
-            {/* Timeline overview */}
-            <div className="py-6 overflow-x-auto">
-              <SprintTimeline className="min-w-max mx-auto" />
+            <div className="text-center space-y-3">
+              <h2 className="font-display text-2xl sm:text-3xl font-semibold">
+                What You&apos;ll Learn — Day by Day
+              </h2>
+              <p className="text-muted-foreground">
+                ~13 hours over 7 days. No fluff. Just building.
+              </p>
             </div>
 
-            <div className="space-y-6">
-              {sprintDays.map((day, i) => {
-                const Icon = day.icon;
-                return (
-                  <FeatureCard
-                    key={i}
-                    className="hover:border-accent/50 border-border/50 bg-card group overflow-visible"
-                    media={
-                      <div className="w-64 h-64 -mr-12 -mt-12 bg-accent/5 rounded-full flex items-center justify-center opacity-50 blur-3xl transform group-hover:scale-110 transition-transform duration-700">
-                        <Icon className="w-32 h-32 text-accent/20" />
-                      </div>
-                    }
-                  >
-                    <div className="flex items-start gap-4 p-4 relative z-10">
-                      <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                        <span className="font-mono text-sm font-semibold text-accent">
-                          {day.days.split(" ")[1]}
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg mb-2">
-                          {day.days}: {day.title}
-                        </h3>
-                        <p className="text-muted-foreground whitespace-pre-line text-sm mb-4 leading-relaxed">
-                          {day.description}
-                        </p>
-                        <div className="bg-accent/5 border border-accent/20 rounded-md px-4 py-2 inline-block">
-                          <p className="text-sm">
-                            <span className="font-medium text-accent">
-                              By end of Day {day.days.split(" ")[1]}:
-                            </span>{" "}
-                            {day.outcome}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </FeatureCard>
-                );
-              })}
+            {/* Curriculum Accordion */}
+            <div className="max-w-3xl mx-auto space-y-3">
+              {curriculumDays.map((day, i) => (
+                <CurriculumDay key={i} day={day} />
+              ))}
+            </div>
+
+            {/* Total Time Summary */}
+            <div className="max-w-xl mx-auto bg-card border border-border/50 rounded-lg p-6">
+              <div className="text-center space-y-3">
+                <p className="font-semibold">Total: ~13 hours over 7 days</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center text-sm text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2">
+                    <Badge variant="outline" className="bg-success/10 text-success border-success/30">FREE</Badge>
+                    <span>Days 0-1: 1.5 hours — setup + scope</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">$297</Badge>
+                    <span>Days 2-7: 11.5 hours — build + ship</span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground pt-2">
+                  Self-paced. Start anytime. Keep access forever.
+                </p>
+              </div>
             </div>
           </div>
         </Section>
       </section>
 
+      {/* Mid-Page CTA 1: After Free Days */}
+      <Section>
+        <div className="max-w-xl mx-auto text-center space-y-4">
+          <p className="text-lg text-muted-foreground">
+            Days 0-1 are free. See if this is for you.
+          </p>
+          <Button variant="accent" size="lg" asChild>
+            <Link href="https://learn.lemonbrand.io/sprint">
+              Start Free
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
+        </div>
+      </Section>
+
+      {/* Section 4: Who This Is For (already exists above) - now add Risk Reversal */}
       {/* Section 4: Win Your Money Back */}
       <Section>
         <div className="space-y-6">
@@ -702,84 +856,29 @@ export default function SprintContent() {
         </div>
       </Section>
 
-      {/* Section 5: What Past Sprint Participants Built */}
-      <section className="py-20 px-4 bg-muted/30 border-y border-border/50">
-        <Section width="wide" className="py-0 px-0">
-          <div className="space-y-12">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold text-center">
-              Real projects from real Sprints
-            </h2>
-
-            {/* Featured testimonials */}
-            <motion.div
-              className="grid md:grid-cols-2 gap-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              {testimonials.map((testimonial, i) => (
-                <motion.div key={i} variants={fadeInUp}>
-                  <FeatureCard className="bg-card h-full">
-                    <div className="p-4">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                          <span className="text-lg font-semibold text-accent">
-                            {testimonial.name.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <p className="font-semibold">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {testimonial.role}
-                          </p>
-                          <p className="text-sm text-accent font-medium">
-                            Built: {testimonial.project}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground whitespace-pre-line text-sm leading-relaxed">
-                        {testimonial.story}
-                      </p>
-                    </div>
-                  </FeatureCard>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Other projects */}
-            <motion.div
-              className="grid md:grid-cols-2 gap-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              {otherProjects.map((project, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeInUp}
-                  className="bg-card border border-border/50 rounded-lg p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:border-accent/30"
-                >
-                  <h3 className="font-semibold mb-3">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 italic">
-                    &quot;{project.quote}&quot;
-                  </p>
-                  <div>
-                    <p className="font-medium text-sm">{project.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {project.role}
-                    </p>
-                    <p className="text-xs text-accent mt-1">Time: 7 days</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+      {/* Mid-Page CTA 2: After Risk Reversal */}
+      <section className="py-12 px-4 bg-muted/30 border-y border-border/50">
+        <div className="max-w-xl mx-auto text-center space-y-4">
+          <p className="text-lg text-muted-foreground">
+            Ready to build your first tool?
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button variant="accent" size="lg" asChild>
+              <Link href="https://learn.lemonbrand.io/sprint">
+                Start Free
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/pricing">
+                See Pricing
+              </Link>
+            </Button>
           </div>
-        </Section>
+        </div>
       </section>
 
-      {/* Section 6: FAQ */}
+      {/* Section 5: FAQ */}
       <Section>
         <div className="space-y-8">
           <h2 className="font-display text-2xl sm:text-3xl font-semibold text-center mb-8">

@@ -137,8 +137,8 @@ export default function HomeContent() {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/custom">
-                  Get a Custom Quote
+                <Link href="https://learn.lemonbrand.io/sprint">
+                  Start learning for free
                 </Link>
               </Button>
             </motion.div>

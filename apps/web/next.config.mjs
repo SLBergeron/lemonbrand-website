@@ -61,6 +61,17 @@ const nextConfig = {
         destination: '/custom',
         permanent: true,
       },
+      // Auth redirects to Learn app
+      {
+        source: '/login',
+        destination: 'https://learn.lemonbrand.io/login',
+        permanent: false,
+      },
+      {
+        source: '/signup',
+        destination: 'https://learn.lemonbrand.io/signup',
+        permanent: false,
+      },
     ];
   },
 };

@@ -1,10 +1,22 @@
-import { Metadata } from "next";
+import {
+  createPageMetadata,
+  generateWebPageSchema,
+  JsonLd,
+} from "@/lib/seo";
 import { LegalContentWithToc } from "@/components/LegalContentWithToc";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Service | LemonBrand",
-  description: "The deal between us. What you get, what I deliver, how we work together.",
-};
+  description:
+    "The deal between us. What you get, what I deliver, how we work together. Plain English terms for custom tool development and learning programs.",
+  path: "/terms",
+  aiMetadata: {
+    "ai:page-type": "legal",
+    "ai:document-type": "terms-of-service",
+    "ai:summary":
+      "LemonBrand builds AI automation systems on client infrastructure. Clients own everything. 50% upfront, 50% on delivery. 30-day post-launch support included. Canadian law applies.",
+  },
+});
 
 const tocLinks = [
   { title: "The agreement", href: "#the-agreement" },
@@ -350,13 +362,23 @@ I'll respond within 48 hours. Usually faster.
 `;
 
 export default function TermsPage() {
+  const webPageSchema = generateWebPageSchema({
+    name: "Terms of Service | LemonBrand",
+    description:
+      "The deal between us. What you get, what I deliver, how we work together.",
+    url: "https://lemonbrand.io/terms",
+  });
+
   return (
-    <LegalContentWithToc
-      title="Terms of Service"
-      lastUpdated="September 30, 2025"
-      tldr={tldr}
-      content={termsContent}
-      tocLinks={tocLinks}
-    />
+    <>
+      <JsonLd data={webPageSchema} />
+      <LegalContentWithToc
+        title="Terms of Service"
+        lastUpdated="September 30, 2025"
+        tldr={tldr}
+        content={termsContent}
+        tocLinks={tocLinks}
+      />
+    </>
   );
 }
