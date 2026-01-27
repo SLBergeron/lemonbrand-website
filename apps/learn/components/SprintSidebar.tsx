@@ -57,6 +57,15 @@ export function SprintSidebar({
     betterAuthId ? { betterAuthId } : "skip"
   );
 
+  // Debug logging - remove after fixing
+  console.log("[SprintSidebar] Debug:", {
+    sessionUserId: session?.user?.id,
+    sessionEmail: session?.user?.email,
+    betterAuthId,
+    hasEnrollment,
+    querySkipped: !betterAuthId,
+  });
+
   const isEnrolled = hasEnrollment === true;
 
   const dayMatch = pathname.match(/\/day\/(\d+)/);
