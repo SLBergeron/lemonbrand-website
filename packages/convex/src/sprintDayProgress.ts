@@ -297,30 +297,24 @@ export const getCurrentDayByAuthId = query({
       return 7;
     }
 
-    // Fallback: Check checklist progress for users without sprintDayProgress records
-    // This handles users enrolled before the progress tracking was added
-    const checklistItems = await ctx.db
-      .query("sprintChecklistProgress")
+    // Fallback: Check form submissions for users without sprintDayProgress records
+    // Form submission is the best indicator of day completion
+    const formResponses = await ctx.db
+      .query("sprintFormResponses")
       .withIndex("by_user_day", (q) => q.eq("userId", user._id))
       .collect();
 
-    // Group by day and count completions
-    const dayCompletions = new Map<number, number>();
-    for (const item of checklistItems) {
-      dayCompletions.set(item.day, (dayCompletions.get(item.day) || 0) + 1);
-    }
+    // Get set of days with form submissions
+    const daysWithForms = new Set(formResponses.map((f) => f.day));
 
-    // Find first day with incomplete checklist (< 3 items typically means incomplete)
-    // Or first day not started at all
+    // Find first day without a form submission
     for (let day = 0; day <= 7; day++) {
-      const completedCount = dayCompletions.get(day) || 0;
-      // If day has no completions or very few, it's the current day
-      if (completedCount < 3) {
+      if (!daysWithForms.has(day)) {
         return day;
       }
     }
 
-    // All days seem complete
+    // All days have forms submitted
     return 7;
   },
 });
