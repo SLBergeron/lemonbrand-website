@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getConvexClient } from "@/lib/convex";
-import { api } from "@/convex/_generated/api";
+import { api } from "@lemonbrand/convex";
 import { SITE_URL } from "@/lib/resend";
 
 export async function POST(request: Request) {

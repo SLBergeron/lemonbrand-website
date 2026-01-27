@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import { api } from "@lemonbrand/convex";
 import { Loader2 } from "lucide-react";
 
 export default function SprintDashboardPage() {

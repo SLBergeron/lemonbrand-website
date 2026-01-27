@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getConvexClient } from "@/lib/convex";
 import { resend, EMAIL_FROM, SITE_URL } from "@/lib/resend";
-import { api } from "@/convex/_generated/api";
+import { api } from "@lemonbrand/convex";
 import Day0WelcomeEmail from "@/emails/onboarding/day-0-welcome";
 import { render } from "@react-email/components";
 

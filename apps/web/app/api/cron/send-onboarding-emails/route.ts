@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getConvexClient } from "@/lib/convex";
 import { resend, EMAIL_FROM } from "@/lib/resend";
-import { api } from "@/convex/_generated/api";
+import { api } from "@lemonbrand/convex";
 import { render } from "@react-email/components";
 import { Id } from "@/convex/_generated/dataModel";
 

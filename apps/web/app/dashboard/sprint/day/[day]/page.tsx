@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import { api } from "@lemonbrand/convex";
 import { DayChecklist } from "@/components/sprint/DayChecklist";
 import { Button } from "@/components/ui/button";
 import { Loader2, Play, FileText, ArrowRight, Lock } from "lucide-react";
