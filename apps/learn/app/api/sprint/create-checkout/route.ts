@@ -9,7 +9,7 @@ const SPRINT_AMOUNT = 29700; // $297 in cents
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, localProgress, userId, returnUrl } = body;
+    const { email, localProgress, userId, returnUrl, visitorId } = body;
 
     // Validate email
     if (!email || typeof email !== "string" || !email.includes("@")) {
@@ -74,12 +74,26 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Store pending purchase in Convex
+    // Store pending purchase in Convex (with visitorId for anonymous tracking)
     await convex.mutation(api.sprintCheckout.createPendingPurchase, {
       email: email.toLowerCase(),
       stripeSessionId: session.id,
       localProgress: localProgress || null,
+      visitorId: visitorId || null,
     });
+
+    // Link anonymous progress to this email (for outreach on abandoned carts)
+    if (visitorId) {
+      try {
+        await convex.mutation(api.anonymousProgress.linkVisitorToEmail, {
+          visitorId,
+          email: email.toLowerCase(),
+        });
+      } catch (e) {
+        // Non-critical: log but don't fail checkout
+        console.log("Could not link visitor to email:", e);
+      }
+    }
 
     return NextResponse.json({
       url: session.url,

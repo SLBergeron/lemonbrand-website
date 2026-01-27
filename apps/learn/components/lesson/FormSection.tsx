@@ -5,6 +5,10 @@ import { Download, Check, Loader2, Mic, Sparkles } from "lucide-react";
 import { Button, cn } from "@lemonbrand/ui";
 import { useState, useEffect, useRef } from "react";
 import { useAchievementContext } from "@/context/AchievementContext";
+import { useVisitorId } from "@/hooks/useVisitorId";
+import { useSession } from "@/lib/auth-client";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@lemonbrand/convex/client";
 
 interface Props {
   section: FormSection;
@@ -25,6 +29,30 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
   const [justGenerated, setJustGenerated] = useState(false);
   const { recordWordCount, recordFormEdit } = useAchievementContext();
   const hasSubmittedOnce = useRef(false);
+
+  // Visitor ID for anonymous tracking
+  const { visitorId } = useVisitorId();
+
+  // Session and enrollment state
+  const { data: session } = useSession();
+  const betterAuthId = session?.user?.id;
+
+  // Get user from Convex (for enrolled users)
+  const convexUser = useQuery(
+    api.users.getByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
+  );
+
+  // Check enrollment status
+  const hasEnrollment = useQuery(
+    api.sprintEnrollments.hasActiveEnrollmentByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
+  );
+  const isEnrolled = hasEnrollment === true;
+
+  // Convex mutations
+  const saveAnonymousProgress = useMutation(api.anonymousProgress.saveAnonymousProgress);
+  const saveFormResponse = useMutation(api.sprintFormResponses.save);
 
   // Clear the "just generated" state after animation completes
   useEffect(() => {
@@ -107,9 +135,37 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
     setSubmitted(true);
     setJustGenerated(true);
 
+    // Always save to localStorage for preview days (fallback)
     if (isPreview) {
       const key = `sprint-day-${day}-form`;
       localStorage.setItem(key, JSON.stringify(formData));
+    }
+
+    // Save to Convex based on enrollment status
+    try {
+      if (isEnrolled && convexUser) {
+        // Enrolled user: save to sprintFormResponses
+        await saveFormResponse({
+          userId: convexUser._id,
+          day,
+          responses: formData,
+          generatedContent: generatedFile || undefined,
+        });
+      } else if (visitorId) {
+        // Anonymous visitor: save to anonymousProgress
+        await saveAnonymousProgress({
+          visitorId,
+          type: "form",
+          day,
+          data: {
+            responses: formData,
+            generatedContent: generatedFile || undefined,
+          },
+        });
+      }
+    } catch (error) {
+      // Non-critical: localStorage backup exists, log and continue
+      console.error("Failed to save form response to Convex:", error);
     }
 
     // Track word counts for verbose achievement (Day 0 project brief)

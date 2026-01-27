@@ -8,6 +8,7 @@ export const createPendingPurchase = mutation({
     email: v.string(),
     stripeSessionId: v.string(),
     localProgress: v.optional(v.any()),
+    visitorId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     // Check if email already has a pending purchase
@@ -22,6 +23,7 @@ export const createPendingPurchase = mutation({
       await ctx.db.patch(existing._id, {
         stripeSessionId: args.stripeSessionId,
         localProgress: args.localProgress,
+        visitorId: args.visitorId ?? existing.visitorId,
       });
       return existing._id;
     }
@@ -32,6 +34,7 @@ export const createPendingPurchase = mutation({
       stripeSessionId: args.stripeSessionId,
       status: "pending",
       localProgress: args.localProgress,
+      visitorId: args.visitorId,
       createdAt: Date.now(),
     });
   },
@@ -270,7 +273,7 @@ export const syncLocalProgressByAuthId = mutation({
       throw new Error("User not found");
     }
 
-    // Sync checklist items (Days 0-1 only during preview)
+    // Handle old format: completedItems array
     if (localProgress.completedItems && Array.isArray(localProgress.completedItems)) {
       for (const itemKey of localProgress.completedItems) {
         const match = itemKey.match(/^day-(\d+)-(.+)$/);
@@ -294,6 +297,54 @@ export const syncLocalProgressByAuthId = mutation({
             day,
             itemId,
             completedAt: Date.now(),
+          });
+        }
+      }
+    }
+
+    // Handle new format: { day0: { checklist, formResponses }, day1: { ... } }
+    for (const dayKey of ["day0", "day1"]) {
+      const dayData = localProgress[dayKey];
+      if (!dayData) continue;
+
+      const day = parseInt(dayKey.replace("day", ""), 10);
+
+      // Sync checklist items
+      if (dayData.checklist && Array.isArray(dayData.checklist)) {
+        for (const itemId of dayData.checklist) {
+          const existing = await ctx.db
+            .query("sprintChecklistProgress")
+            .withIndex("by_user_day_item", (q) =>
+              q.eq("userId", user._id).eq("day", day).eq("itemId", itemId)
+            )
+            .first();
+
+          if (!existing) {
+            await ctx.db.insert("sprintChecklistProgress", {
+              userId: user._id,
+              day,
+              itemId,
+              completedAt: dayData.completedAt || Date.now(),
+            });
+          }
+        }
+      }
+
+      // Sync form responses
+      if (dayData.formResponses && Object.keys(dayData.formResponses).length > 0) {
+        const existingForm = await ctx.db
+          .query("sprintFormResponses")
+          .withIndex("by_user_day", (q) =>
+            q.eq("userId", user._id).eq("day", day)
+          )
+          .first();
+
+        if (!existingForm) {
+          await ctx.db.insert("sprintFormResponses", {
+            userId: user._id,
+            day,
+            responses: dayData.formResponses,
+            submittedAt: dayData.formSubmittedAt || Date.now(),
           });
         }
       }

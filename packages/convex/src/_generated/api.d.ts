@@ -9,6 +9,7 @@
  */
 
 import type * as achievements from "../achievements.js";
+import type * as anonymousProgress from "../anonymousProgress.js";
 import type * as auth from "../auth.js";
 import type * as client from "../client.js";
 import type * as http from "../http.js";
@@ -38,6 +39,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   achievements: typeof achievements;
+  anonymousProgress: typeof anonymousProgress;
   auth: typeof auth;
   client: typeof client;
   http: typeof http;

@@ -383,13 +383,15 @@ export default defineSchema({
       v.literal("expired") // Abandoned checkout (24h timeout)
     ),
     localProgress: v.optional(v.any()), // Stored Day 0-1 progress from localStorage
+    visitorId: v.optional(v.string()), // Links to anonymousProgress for pre-checkout tracking
     createdAt: v.number(),
     completedAt: v.optional(v.number()),
     abandonmentEmailSentAt: v.optional(v.number()), // When cart abandonment email was sent
   })
     .index("by_email", ["email"])
     .index("by_session", ["stripeSessionId"])
-    .index("by_status", ["status"]),
+    .index("by_status", ["status"])
+    .index("by_visitor", ["visitorId"]),
 
   // Sprint day progress (Days 0-7)
   sprintDayProgress: defineTable({
@@ -489,4 +491,26 @@ export default defineSchema({
     requestCount: v.number(),
     windowStart: v.number(), // Timestamp of window start
   }).index("by_identifier", ["identifier"]),
+
+  // ============================================
+  // Anonymous Progress Tracking (Pre-enrollment)
+  // ============================================
+
+  // Track form responses and checklist completions before user is identified
+  // Links to user when they provide email at checkout or create account
+  anonymousProgress: defineTable({
+    visitorId: v.string(), // UUID stored in localStorage
+    type: v.union(v.literal("form"), v.literal("checklist")),
+    day: v.number(), // 0-7
+    data: v.any(), // Form responses or checklist state
+    updatedAt: v.number(),
+    // Linking fields - populated when visitor provides email or creates account
+    linkedEmail: v.optional(v.string()), // Set when email entered at checkout
+    linkedUserId: v.optional(v.id("users")), // Set when account created
+    migratedAt: v.optional(v.number()), // When data was copied to user's permanent tables
+  })
+    .index("by_visitor", ["visitorId"])
+    .index("by_visitor_type_day", ["visitorId", "type", "day"])
+    .index("by_email", ["linkedEmail"])
+    .index("by_user", ["linkedUserId"]),
 });

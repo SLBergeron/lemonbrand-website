@@ -8,6 +8,7 @@ import { ArrowLeft, Check, Lock, Shield, Zap, Mail, Loader2 } from "lucide-react
 import { signIn, useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
+import { getVisitorId } from "@/hooks/useVisitorId";
 
 const FEATURES = [
   "8 video lessons (Days 0-7)",
@@ -97,8 +98,9 @@ function CheckoutContent() {
     }
 
     try {
-      // Capture local progress before redirect
+      // Capture local progress and visitor ID before redirect
       const localProgress = getLocalProgress();
+      const visitorId = getVisitorId();
 
       const res = await fetch("/api/sprint/create-checkout", {
         method: "POST",
@@ -107,6 +109,7 @@ function CheckoutContent() {
           email: email.toLowerCase(),
           localProgress,
           userId: session?.user?.id || null,
+          visitorId,
         }),
       });
 
@@ -141,6 +144,7 @@ function CheckoutContent() {
 
     try {
       const localProgress = getLocalProgress();
+      const visitorId = getVisitorId();
 
       const res = await fetch("/api/sprint/create-checkout", {
         method: "POST",
@@ -149,6 +153,7 @@ function CheckoutContent() {
           email: session.user.email.toLowerCase(),
           localProgress,
           userId: session.user.id,
+          visitorId,
         }),
       });
 

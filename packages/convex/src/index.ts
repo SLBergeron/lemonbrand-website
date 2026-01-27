@@ -11,6 +11,7 @@ export * from "./sprintEnrollments";
 export * from "./sprintCheckout";
 export * from "./sprintFormResponses";
 export * from "./sprintChecklistProgress";
+export * from "./anonymousProgress";
 export * from "./seedSprintContent";
 export * from "./users";
 export * from "./prdRateLimits";

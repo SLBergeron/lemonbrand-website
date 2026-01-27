@@ -122,6 +122,28 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Migrate anonymous progress to user's permanent tables
+    if (pendingPurchase.visitorId) {
+      try {
+        // Get the Convex user to get their internal ID
+        const convexUser = await convex.query(api.users.getByAuthId, {
+          betterAuthId: userId,
+        });
+
+        if (convexUser) {
+          await convex.mutation(api.anonymousProgress.migrateToUser, {
+            visitorId: pendingPurchase.visitorId,
+            userId: convexUser._id,
+            enrollmentId: enrollmentId as any, // Type cast as it's a string from the mutation
+          });
+          console.log(`[complete-signup] Migrated anonymous progress for visitor: ${pendingPurchase.visitorId}`);
+        }
+      } catch (e) {
+        // Non-critical, log but don't fail
+        console.log("Could not migrate anonymous progress:", e);
+      }
+    }
+
     // Update user name if provided and different
     if (name) {
       try {
