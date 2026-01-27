@@ -12,6 +12,7 @@ import { SubtleGradientBackground } from "@/components/gradient-blob";
 import { Badge } from "@/components/ui/badge";
 import {
   ArrowRight,
+  Calendar,
   Check,
   X,
   Clock,
