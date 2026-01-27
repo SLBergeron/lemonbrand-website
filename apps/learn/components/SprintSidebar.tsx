@@ -270,7 +270,7 @@ export function SprintSidebar({
           </a>
           {session?.user && (
             <button
-              onClick={() => signOut({ fetchOptions: { onSuccess: () => window.location.href = "/login" } })}
+              onClick={() => signOut({ fetchOptions: { onSuccess: () => { window.location.href = "/login"; } } })}
               className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-1 w-full text-left"
             >
               <LogOut className="size-3.5" />
