@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@lemonbrand/ui";
 import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
@@ -112,9 +113,22 @@ export default function LoginPage() {
         <div className="text-center space-y-2">
           <Link
             href="https://lemonbrand.io"
-            className="font-display font-bold text-2xl tracking-tight"
+            className="inline-flex items-center gap-2"
           >
-            LemonBrand
+            <Image
+              src="/assets/logo_lemonbrand_256x256.svg"
+              alt="LemonBrand"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+            />
+            <Image
+              src="/assets/Lemonbrand_Wordmark.svg"
+              alt="LemonBrand"
+              width={140}
+              height={20}
+              className="h-5 w-auto"
+            />
           </Link>
           <h1 className="font-display text-3xl font-bold tracking-tight mt-6">
             Welcome back
