@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time errors
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 // Email configuration
 const EMAIL_FROM = "Simon Bergeron <hello@lemonbrand.io>";
@@ -49,7 +56,7 @@ export async function POST(request: Request) {
     // Send emails using Resend
     try {
       // Send to customer
-      const customerEmail = await resend.emails.send({
+      const customerEmail = await getResend().emails.send({
         from: EMAIL_FROM,
         to: [quoteForm.email],
         replyTo: ADMIN_EMAIL,
@@ -62,7 +69,7 @@ export async function POST(request: Request) {
       }
 
       // Send to admin and partner
-      const adminEmail = await resend.emails.send({
+      const adminEmail = await getResend().emails.send({
         from: EMAIL_FROM,
         to: [ADMIN_EMAIL, PARTNER_EMAIL],
         replyTo: quoteForm.email,

@@ -1,5 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "RESEND_API_KEY",
+    "BETTER_AUTH_SECRET",
+    "SITE_URL",
+    "STRIPE_KEY",
+    "STRIPE_WEBHOOK_SECRET",
+    "CRON_SECRET",
+    "CONVEX_URL",
+    "NEXT_PUBLIC_CONVEX_URL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
