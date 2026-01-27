@@ -13,6 +13,9 @@ import { useAchievementContext } from "@/context/AchievementContext";
 import { BlitzModeMessage } from "./achievements";
 import { isBlitzModeEligible } from "@/lib/achievements";
 import { useState, useEffect, useRef } from "react";
+import { useSession } from "@/lib/auth-client";
+import { useQuery } from "convex/react";
+import { api } from "@lemonbrand/convex/client";
 
 interface LessonPageProps {
   day: number;
@@ -55,6 +58,15 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
   const lesson = getLesson(day);
   const pageLoadTime = useRef(Date.now());
   const hasRecordedScroll = useRef(false);
+
+  // Check enrollment status
+  const { data: session } = useSession();
+  const betterAuthId = session?.user?.id;
+  const hasEnrollment = useQuery(
+    api.sprintEnrollments.hasActiveEnrollmentByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
+  );
+  const isEnrolled = hasEnrollment === true;
 
   // Track if user has scrolled
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -193,7 +205,7 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
             <Clock className="size-3.5" />
             {lesson.duration} min
           </span>
-          {isPreview && (
+          {isPreview && !isEnrolled && (
             <Badge variant="success" className="text-xs">
               Free
             </Badge>
@@ -310,8 +322,8 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
         </motion.p>
       )}
 
-      {/* Trial CTA */}
-      {isPreview && day === 1 && (
+      {/* Trial CTA - hide for enrolled users */}
+      {isPreview && day === 1 && !isEnrolled && (
         <motion.div variants={itemVariants} className="mt-16">
           <TrialCTA />
         </motion.div>
@@ -327,9 +339,11 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
             <Button variant="ghost" asChild size="sm">
               <Link
                 href={
-                  day <= 1
-                    ? `/sprint/preview/day/${day - 1}`
-                    : `/sprint/day/${day - 1}`
+                  isEnrolled
+                    ? `/sprint/day/${day - 1}`
+                    : day <= 1
+                      ? `/sprint/preview/day/${day - 1}`
+                      : `/sprint/day/${day - 1}`
                 }
               >
                 <ChevronRight className="size-4 rotate-180 mr-1" />
@@ -341,7 +355,7 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
           )}
 
           <Button asChild variant="accent">
-            {day === 1 && isPreview ? (
+            {day === 1 && isPreview && !isEnrolled ? (
               <Link href="/sprint/checkout">
                 Unlock Full Course
                 <Lock className="size-4 ml-2" />
@@ -349,9 +363,11 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
             ) : (
               <Link
                 href={
-                  day < 1
-                    ? `/sprint/preview/day/${day + 1}`
-                    : `/sprint/day/${day + 1}`
+                  isEnrolled
+                    ? `/sprint/day/${day + 1}`
+                    : day < 1
+                      ? `/sprint/preview/day/${day + 1}`
+                      : `/sprint/day/${day + 1}`
                 }
               >
                 Day {day + 1}
