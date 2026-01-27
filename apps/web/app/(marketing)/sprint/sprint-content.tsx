@@ -393,12 +393,11 @@ function CurriculumDay({ day }: { day: CurriculumDayData }) {
         </div>
 
         {/* Chevron */}
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        <div
+          className={`transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}
         >
           <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-        </motion.div>
+        </div>
       </button>
 
       <AnimatePresence initial={false}>
@@ -760,11 +759,19 @@ export default function SprintContent() {
             </div>
 
             {/* Curriculum Accordion */}
-            <div className="max-w-3xl mx-auto space-y-3">
+            <motion.div
+              className="max-w-3xl mx-auto space-y-3"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={staggerContainer}
+            >
               {curriculumDays.map((day, i) => (
-                <CurriculumDay key={i} day={day} />
+                <motion.div key={i} variants={fadeInUp}>
+                  <CurriculumDay day={day} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Total Time Summary */}
             <div className="max-w-xl mx-auto bg-card border border-border/50 rounded-lg p-6">
