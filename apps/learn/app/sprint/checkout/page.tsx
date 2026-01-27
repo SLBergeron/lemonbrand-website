@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@lemonbrand/ui";
@@ -30,7 +30,7 @@ function getLocalProgress() {
   }
 }
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const { data: session, isPending: sessionLoading } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -367,5 +367,21 @@ export default function CheckoutPage() {
         If you don&apos;t ship a working tool, get a full refund.
       </div>
     </div>
+  );
+}
+
+function CheckoutLoadingFallback() {
+  return (
+    <div className="max-w-2xl mx-auto flex items-center justify-center min-h-[400px]">
+      <Loader2 className="size-8 animate-spin text-muted-foreground" />
+    </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<CheckoutLoadingFallback />}>
+      <CheckoutContent />
+    </Suspense>
   );
 }

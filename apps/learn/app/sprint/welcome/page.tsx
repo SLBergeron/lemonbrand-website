@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@lemonbrand/ui";
@@ -26,7 +26,7 @@ function clearLocalProgress() {
   }
 }
 
-export default function WelcomePage() {
+function WelcomeContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { data: session, isPending: sessionLoading } = useSession();
@@ -50,6 +50,7 @@ export default function WelcomePage() {
     }
 
     checkPurchaseStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
   // Handle already-authenticated users
@@ -58,6 +59,7 @@ export default function WelcomePage() {
       // User is already signed in (e.g., Google auth) - complete enrollment
       completeEnrollment(session.user.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session?.user, pageState]);
 
   const checkPurchaseStatus = async () => {
@@ -388,5 +390,22 @@ export default function WelcomePage() {
         </a>
       </p>
     </div>
+  );
+}
+
+function WelcomeLoadingFallback() {
+  return (
+    <div className="max-w-2xl mx-auto text-center space-y-6 py-16">
+      <Loader2 className="size-12 mx-auto animate-spin text-muted-foreground" />
+      <p className="text-muted-foreground">Loading...</p>
+    </div>
+  );
+}
+
+export default function WelcomePage() {
+  return (
+    <Suspense fallback={<WelcomeLoadingFallback />}>
+      <WelcomeContent />
+    </Suspense>
   );
 }
