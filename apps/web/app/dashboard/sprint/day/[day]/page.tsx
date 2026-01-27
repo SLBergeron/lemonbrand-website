@@ -204,7 +204,7 @@ export default function DayPage() {
                 Today&apos;s Objectives
               </h2>
               <ul className="space-y-2">
-                {content.objectives.map((obj, i) => (
+                {content.objectives.map((obj: string, i: number) => (
                   <li
                     key={i}
                     className="flex items-start gap-2 text-muted-foreground"

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
-import LinkTransition from "next-view-transitions";
+import { Link as LinkTransition } from "next-view-transitions";
 
 export const Button = ({
   href,
@@ -19,7 +19,7 @@ export const Button = ({
 } & (
   | React.ComponentPropsWithoutRef<"a">
   | React.ComponentPropsWithoutRef<"button">
-  | typeof LinkTransition
+  | React.ComponentProps<typeof LinkTransition>
 )) => {
   const baseStyles =
     "px-5 py-2.5 rounded-sm text-sm font-medium tracking-wide relative cursor-pointer transition-all duration-200 ease-out inline-flex items-center justify-center text-center";
@@ -39,13 +39,14 @@ export const Button = ({
       "bg-accent text-accent-foreground shadow-[0_2px_0_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(200,140,30,0.3)] active:translate-y-0",
   };
 
+  const Component = Tag as React.ElementType;
   return (
-    <Tag
+    <Component
       href={href || undefined}
       className={cn(baseStyles, variantStyles[variant], className)}
       {...props}
     >
       {children}
-    </Tag>
+    </Component>
   );
 };

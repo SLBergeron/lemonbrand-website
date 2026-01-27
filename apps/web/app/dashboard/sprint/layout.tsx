@@ -59,11 +59,11 @@ export default function SprintDashboardLayout({
 
   // Transform day progress for sidebar
   const sidebarProgress = dayProgress
-    .map((p) => ({
+    .map((p: { day: number; status: string }) => ({
       day: p.day,
       status: p.status,
     }))
-    .sort((a, b) => a.day - b.day);
+    .sort((a: { day: number }, b: { day: number }) => a.day - b.day);
 
   return (
     <div className="min-h-screen bg-background flex">
