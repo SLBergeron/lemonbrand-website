@@ -12,7 +12,10 @@ import {
   CheckCircle2,
   Circle,
   Lock,
+  LogIn,
+  LogOut,
 } from "lucide-react";
+import { useSession, signOut } from "@/lib/auth-client";
 import { ThemeToggle } from "./ThemeToggle";
 
 interface MobileNavProps {
@@ -33,6 +36,7 @@ const DAYS = [
 export function MobileNav({ className }: MobileNavProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   // Extract current day from pathname
   const dayMatch = pathname.match(/\/day\/(\d+)/);
@@ -140,7 +144,7 @@ export function MobileNav({ className }: MobileNavProps) {
             </div>
 
             {/* Day List */}
-            <div className="overflow-y-auto p-2 pb-4">
+            <div className="overflow-y-auto p-2">
               {DAYS.map(({ day, title, isFree }) => {
                 const isActive = currentDay === day;
                 const href = isFree
@@ -193,6 +197,31 @@ export function MobileNav({ className }: MobileNavProps) {
                   </Link>
                 );
               })}
+            </div>
+
+            {/* Auth Footer */}
+            <div className="border-t border-border p-4">
+              {session?.user ? (
+                <button
+                  onClick={() => {
+                    setIsDrawerOpen(false);
+                    signOut({ fetchOptions: { onSuccess: () => { window.location.href = "/login"; } } });
+                  }}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full"
+                >
+                  <LogOut className="size-4" />
+                  Sign Out
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <LogIn className="size-4" />
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
         </>

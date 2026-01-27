@@ -12,6 +12,7 @@ import {
   PanelLeftClose,
   PanelLeft,
   LogOut,
+  LogIn,
 } from "lucide-react";
 import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
@@ -277,7 +278,7 @@ export function SprintSidebar({
             <HelpCircle className="size-3.5" />
             Help
           </a>
-          {session?.user && (
+          {session?.user ? (
             <button
               onClick={() => signOut({ fetchOptions: { onSuccess: () => { window.location.href = "/login"; } } })}
               className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-1 w-full text-left"
@@ -285,6 +286,14 @@ export function SprintSidebar({
               <LogOut className="size-3.5" />
               Sign Out
             </button>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-1"
+            >
+              <LogIn className="size-3.5" />
+              Sign In
+            </Link>
           )}
         </div>
       </div>

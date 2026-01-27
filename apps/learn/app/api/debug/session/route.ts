@@ -44,9 +44,13 @@ export async function GET(request: NextRequest) {
       // ignore
     }
 
-    // Check enrollments
+    // Check enrollments (both hasActiveEnrollment and full enrollment details)
     let lemonbrandEnrollment = null;
+    let lemonbrandEnrollmentDetails = null;
+    let lemonbrandPendingPurchase = null;
     let gmailEnrollment = null;
+    let gmailEnrollmentDetails = null;
+    let gmailPendingPurchase = null;
 
     if (users?.betterAuthId) {
       try {
@@ -59,6 +63,26 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Get full enrollment details (including non-active)
+    try {
+      lemonbrandEnrollmentDetails = await convex.query(
+        api.sprintEnrollments.getAllEnrollmentsByEmail,
+        { email: "simon@lemonbrand.io" }
+      );
+    } catch (e) {
+      lemonbrandEnrollmentDetails = { error: e instanceof Error ? e.message : "Unknown" };
+    }
+
+    // Get pending purchase status
+    try {
+      lemonbrandPendingPurchase = await convex.query(
+        api.sprintCheckout.getPendingPurchaseByEmail,
+        { email: "simon@lemonbrand.io" }
+      );
+    } catch (e) {
+      lemonbrandPendingPurchase = { error: e instanceof Error ? e.message : "Unknown" };
+    }
+
     if (gmailUser?.betterAuthId) {
       try {
         gmailEnrollment = await convex.query(
@@ -68,6 +92,26 @@ export async function GET(request: NextRequest) {
       } catch (e) {
         gmailEnrollment = { error: e instanceof Error ? e.message : "Unknown" };
       }
+    }
+
+    // Get full enrollment details for gmail user
+    try {
+      gmailEnrollmentDetails = await convex.query(
+        api.sprintEnrollments.getAllEnrollmentsByEmail,
+        { email: "simon.l.bergeron@gmail.com" }
+      );
+    } catch (e) {
+      gmailEnrollmentDetails = { error: e instanceof Error ? e.message : "Unknown" };
+    }
+
+    // Get pending purchase status for gmail
+    try {
+      gmailPendingPurchase = await convex.query(
+        api.sprintCheckout.getPendingPurchaseByEmail,
+        { email: "simon.l.bergeron@gmail.com" }
+      );
+    } catch (e) {
+      gmailPendingPurchase = { error: e instanceof Error ? e.message : "Unknown" };
     }
 
     const response = NextResponse.json({
@@ -85,12 +129,26 @@ export async function GET(request: NextRequest) {
           email: users.email,
           betterAuthId: users.betterAuthId,
           hasEnrollment: lemonbrandEnrollment,
+          allEnrollments: lemonbrandEnrollmentDetails,
+          pendingPurchase: lemonbrandPendingPurchase ? {
+            status: lemonbrandPendingPurchase.status,
+            stripeSessionId: lemonbrandPendingPurchase.stripeSessionId,
+            createdAt: lemonbrandPendingPurchase.createdAt,
+            completedAt: lemonbrandPendingPurchase.completedAt,
+          } : null,
         } : null,
         "simon.l.bergeron@gmail.com": gmailUser ? {
           id: gmailUser._id,
           email: gmailUser.email,
           betterAuthId: gmailUser.betterAuthId,
           hasEnrollment: gmailEnrollment,
+          allEnrollments: gmailEnrollmentDetails,
+          pendingPurchase: gmailPendingPurchase ? {
+            status: gmailPendingPurchase.status,
+            stripeSessionId: gmailPendingPurchase.stripeSessionId,
+            createdAt: gmailPendingPurchase.createdAt,
+            completedAt: gmailPendingPurchase.completedAt,
+          } : null,
         } : null,
       },
       timestamp: new Date().toISOString(),

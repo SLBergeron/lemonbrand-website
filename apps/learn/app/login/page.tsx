@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@lemonbrand/ui";
-import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Loader2, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { signIn, useSession } from "@/lib/auth-client";
 import { useEffect } from "react";
 
@@ -109,6 +109,17 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md space-y-8">
+        {/* Back button */}
+        <div>
+          <Link
+            href="/sprint"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="size-4" />
+            Back to course
+          </Link>
+        </div>
+
         {/* Header */}
         <div className="text-center space-y-2">
           <Link

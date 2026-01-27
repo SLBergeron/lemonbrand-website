@@ -21,6 +21,11 @@ function UserSyncProvider({ children }: { children: ReactNode }) {
       // Only sync once per user ID to avoid redundant calls
       if (hasSynced.current === session.user.id) return;
 
+      console.log("[UserSyncProvider] Starting sync for:", {
+        email: session.user.email,
+        betterAuthId: session.user.id,
+      });
+
       hasSynced.current = session.user.id;
 
       syncFromAuth({
@@ -28,11 +33,22 @@ function UserSyncProvider({ children }: { children: ReactNode }) {
         email: session.user.email,
         name: session.user.name || undefined,
         avatarUrl: session.user.image || undefined,
-      }).catch((err) => {
-        console.error("Failed to sync user:", err);
-        // Reset so it can retry
-        hasSynced.current = null;
-      });
+      })
+        .then((result) => {
+          console.log("[UserSyncProvider] Sync completed successfully:", {
+            email: session.user.email,
+            convexUserId: result,
+          });
+        })
+        .catch((err) => {
+          console.error("[UserSyncProvider] Failed to sync user:", {
+            email: session.user.email,
+            betterAuthId: session.user.id,
+            error: err,
+          });
+          // Reset so it can retry
+          hasSynced.current = null;
+        });
     }
   }, [session?.user?.id, session?.user?.email, session?.user?.name, session?.user?.image, syncFromAuth]);
 

@@ -3,6 +3,9 @@ import { stripe } from "@/lib/stripe";
 import { getConvexClient } from "@/lib/convex-server";
 import { api } from "@lemonbrand/convex";
 
+// Helper to delay execution
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -49,25 +52,74 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Create the self-paced enrollment (userId here is the Better Auth ID)
-    const enrollmentId = await convex.mutation(
-      api.sprintCheckout.createSelfPacedEnrollmentByAuthId,
-      {
-        betterAuthId: userId,
-        stripeSessionId: sessionId,
-        stripeCustomerId: pendingPurchase.stripeCustomerId,
-        stripePaymentIntentId: stripeSession.payment_intent as string,
-        amountPaid: stripeSession.amount_total || 29700,
-        currency: stripeSession.currency || "usd",
+    // Create the self-paced enrollment with retry logic for user sync timing
+    // The user might not exist in Convex yet if UserSyncProvider hasn't completed
+    const maxRetries = 5;
+    let enrollmentId: string | null = null;
+    let lastError: Error | null = null;
+
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        console.log(`[complete-signup] Attempt ${attempt + 1}/${maxRetries} to create enrollment for betterAuthId: ${userId}`);
+
+        // Create the self-paced enrollment (userId here is the Better Auth ID)
+        enrollmentId = await convex.mutation(
+          api.sprintCheckout.createSelfPacedEnrollmentByAuthId,
+          {
+            betterAuthId: userId,
+            stripeSessionId: sessionId,
+            stripeCustomerId: pendingPurchase.stripeCustomerId,
+            stripePaymentIntentId: stripeSession.payment_intent as string,
+            amountPaid: stripeSession.amount_total || 29700,
+            currency: stripeSession.currency || "usd",
+          }
+        );
+
+        console.log(`[complete-signup] Enrollment created successfully: ${enrollmentId}`);
+        break; // Success, exit retry loop
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+
+        // Check if it's a "User not found" error (sync timing issue)
+        if (lastError.message.includes("User not found")) {
+          console.log(`[complete-signup] User not found in Convex yet, waiting before retry...`);
+          // Exponential backoff: 500ms, 1s, 2s, 4s, 8s
+          await delay(500 * Math.pow(2, attempt));
+          continue;
+        }
+
+        // For other errors, don't retry
+        throw error;
       }
-    );
+    }
+
+    // If all retries failed due to user sync timing
+    if (!enrollmentId && lastError?.message.includes("User not found")) {
+      console.error(`[complete-signup] User sync failed after ${maxRetries} attempts`);
+      return NextResponse.json(
+        {
+          error: "User sync still pending. Please try again.",
+          code: "USER_SYNC_PENDING",
+        },
+        { status: 503 }
+      );
+    }
+
+    if (!enrollmentId) {
+      throw lastError || new Error("Failed to create enrollment");
+    }
 
     // Sync local progress if available
     if (pendingPurchase.localProgress) {
-      await convex.mutation(api.sprintCheckout.syncLocalProgressByAuthId, {
-        betterAuthId: userId,
-        localProgress: pendingPurchase.localProgress,
-      });
+      try {
+        await convex.mutation(api.sprintCheckout.syncLocalProgressByAuthId, {
+          betterAuthId: userId,
+          localProgress: pendingPurchase.localProgress,
+        });
+      } catch (e) {
+        // Non-critical, log but don't fail
+        console.log("Could not sync local progress:", e);
+      }
     }
 
     // Update user name if provided and different

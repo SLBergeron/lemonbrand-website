@@ -259,3 +259,103 @@ export const updateProjectIdea = mutation({
     });
   },
 });
+
+// Admin mutation to manually create enrollment by email
+// Use this to fix enrollment issues for users who paid but don't have an enrollment
+export const createManualEnrollmentByEmail = mutation({
+  args: {
+    email: v.string(),
+    cohortId: v.string(),
+    amountPaid: v.number(),
+    currency: v.string(),
+  },
+  handler: async (ctx, args) => {
+    // Find user by email
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .first();
+
+    if (!user) {
+      throw new Error(`User not found with email: ${args.email}`);
+    }
+
+    // Check if user already has an active enrollment (idempotent)
+    const existing = await ctx.db
+      .query("sprintEnrollments")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("status"), "active"),
+          q.eq(q.field("status"), "completed")
+        )
+      )
+      .first();
+
+    if (existing) {
+      // Already enrolled - return existing enrollment
+      return {
+        enrollmentId: existing._id,
+        alreadyEnrolled: true,
+        status: existing.status,
+      };
+    }
+
+    // Create active enrollment
+    const enrollmentId = await ctx.db.insert("sprintEnrollments", {
+      userId: user._id,
+      cohortId: args.cohortId,
+      status: "active",
+      enrollmentType: "self-paced",
+      amountPaid: args.amountPaid,
+      currency: args.currency,
+      enrolledAt: Date.now(),
+    });
+
+    return {
+      enrollmentId,
+      alreadyEnrolled: false,
+      status: "active",
+    };
+  },
+});
+
+// Get all enrollments for a user by email (including non-active, for debugging)
+export const getAllEnrollmentsByEmail = query({
+  args: { email: v.string() },
+  handler: async (ctx, args) => {
+    // Find user by email
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .first();
+
+    if (!user) {
+      return { error: "User not found", user: null, enrollments: [] };
+    }
+
+    // Get ALL enrollments for this user
+    const enrollments = await ctx.db
+      .query("sprintEnrollments")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    return {
+      user: {
+        _id: user._id,
+        email: user.email,
+        betterAuthId: user.betterAuthId,
+        name: user.name,
+      },
+      enrollments: enrollments.map((e) => ({
+        _id: e._id,
+        status: e.status,
+        cohortId: e.cohortId,
+        enrolledAt: e.enrolledAt,
+        enrollmentType: e.enrollmentType,
+        amountPaid: e.amountPaid,
+        currency: e.currency,
+      })),
+    };
+  },
+});

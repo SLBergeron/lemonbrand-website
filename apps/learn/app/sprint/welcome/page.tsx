@@ -14,7 +14,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { signUp, useSession } from "@/lib/auth-client";
+import { signUp, useSession, getSession } from "@/lib/auth-client";
 
 type PageState = "loading" | "needs_account" | "creating_account" | "success" | "error";
 
@@ -93,6 +93,29 @@ function WelcomeContent() {
     }
   };
 
+  // Poll for session to be ready after account creation
+  // This handles the race condition where Better Auth sets the session
+  // but UserSyncProvider hasn't synced the user to Convex yet
+  const waitForSessionAndComplete = async (maxAttempts = 10): Promise<void> => {
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      try {
+        const sessionRes = await getSession();
+        if (sessionRes.data?.user?.id) {
+          console.log(`[Welcome] Session ready on attempt ${attempt + 1}, completing enrollment`);
+          await completeEnrollment(sessionRes.data.user.id);
+          return;
+        }
+      } catch (err) {
+        console.log(`[Welcome] Session check attempt ${attempt + 1} failed:`, err);
+      }
+      // Wait before next attempt (500ms between attempts)
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+    // If we get here, session never became ready
+    setPageState("error");
+    setError("Account created but session not ready. Please refresh the page to continue.");
+  };
+
   const handleCreateAccount = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -116,13 +139,10 @@ function WelcomeContent() {
         throw new Error(result.error.message || "Failed to create account");
       }
 
-      // Account created - now complete enrollment
-      // The session should be set automatically by Better Auth
-      // Wait a moment for session to propagate
-      setTimeout(async () => {
-        // Try to complete enrollment with the new user
-        await completeEnrollmentWithSession();
-      }, 1000);
+      // Account created - poll for session to be ready
+      // This gives UserSyncProvider time to sync the user to Convex
+      console.log("[Welcome] Account created, polling for session...");
+      await waitForSessionAndComplete();
     } catch (err) {
       console.error("Create account error:", err);
       setPageState("needs_account");
@@ -159,33 +179,51 @@ function WelcomeContent() {
     setPageState("success");
   };
 
-  const completeEnrollment = async (userId: string) => {
-    try {
-      setPageState("creating_account");
+  const completeEnrollment = async (userId: string, maxRetries = 5) => {
+    setPageState("creating_account");
 
-      const res = await fetch("/api/sprint/complete-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId,
-          userId,
-          name: session?.user?.name || name,
-        }),
-      });
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        console.log(`[Welcome] Completing enrollment attempt ${attempt + 1}/${maxRetries}`);
 
-      const data = await res.json();
+        const res = await fetch("/api/sprint/complete-signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId,
+            userId,
+            name: session?.user?.name || name,
+          }),
+        });
 
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to complete enrollment");
+        const data = await res.json();
+
+        // Handle user sync pending - API returns 503 if user not yet in Convex
+        if (res.status === 503 && data.code === "USER_SYNC_PENDING") {
+          console.log(`[Welcome] User sync pending, retrying in ${500 * Math.pow(2, attempt)}ms...`);
+          await new Promise((resolve) => setTimeout(resolve, 500 * Math.pow(2, attempt)));
+          continue;
+        }
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to complete enrollment");
+        }
+
+        // Clear local progress after syncing
+        clearLocalProgress();
+        setPageState("success");
+        return;
+      } catch (err) {
+        console.error(`Complete enrollment attempt ${attempt + 1} error:`, err);
+        // If this is the last attempt, throw the error
+        if (attempt === maxRetries - 1) {
+          setPageState("error");
+          setError(err instanceof Error ? err.message : "Failed to complete enrollment");
+          return;
+        }
+        // Otherwise wait before retrying
+        await new Promise((resolve) => setTimeout(resolve, 500 * Math.pow(2, attempt)));
       }
-
-      // Clear local progress after syncing
-      clearLocalProgress();
-      setPageState("success");
-    } catch (err) {
-      console.error("Complete enrollment error:", err);
-      setPageState("error");
-      setError(err instanceof Error ? err.message : "Failed to complete enrollment");
     }
   };
 
