@@ -7,6 +7,7 @@ export * from "./label"
 export * from "./textarea"
 export * from "./tabs"
 export * from "./badge"
+export * from "./tooltip"
 
 // Utilities
 export * from "./utils"

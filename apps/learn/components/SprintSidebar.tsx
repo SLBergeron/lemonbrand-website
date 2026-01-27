@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@lemonbrand/ui";
+import { cn, Tooltip, TooltipTrigger, TooltipContent } from "@lemonbrand/ui";
 import {
   CheckCircle2,
   Circle,
@@ -162,26 +162,24 @@ export function SprintSidebar({
             // For locked days, render as a non-clickable element with tooltip
             if (isLocked) {
               return (
-                <div
-                  key={day}
-                  className="group relative flex items-center gap-2.5 px-3 py-2 rounded-md text-sm opacity-50 cursor-not-allowed"
-                  title="Complete checkout to unlock"
-                >
-                  <span className="shrink-0">
-                    <Lock className="size-4 text-muted-foreground" />
-                  </span>
+                <Tooltip key={day}>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm opacity-50 cursor-not-allowed">
+                      <span className="shrink-0">
+                        <Lock className="size-4 text-muted-foreground" />
+                      </span>
 
-                  <span className="flex-1 truncate text-muted-foreground">
-                    <span className="font-mono text-xs">{day}</span>
-                    <span className="mx-1.5 opacity-30">·</span>
-                    {title}
-                  </span>
-
-                  {/* Tooltip on hover */}
-                  <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-popover border border-border rounded-md text-xs text-muted-foreground whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50 shadow-md">
+                      <span className="flex-1 truncate text-muted-foreground">
+                        <span className="font-mono text-xs">{day}</span>
+                        <span className="mx-1.5 opacity-30">·</span>
+                        {title}
+                      </span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
                     Complete checkout to unlock
-                  </div>
-                </div>
+                  </TooltipContent>
+                </Tooltip>
               );
             }
 
