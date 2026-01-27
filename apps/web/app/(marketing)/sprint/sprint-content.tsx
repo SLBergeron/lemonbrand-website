@@ -588,12 +588,7 @@ export default function SprintContent() {
 
       {/* Video Section */}
       <Section>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto"
-        >
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-3">
               See What You&apos;ll Build
@@ -622,7 +617,7 @@ export default function SprintContent() {
               </Badge>
             </div>
           </div>
-        </motion.div>
+        </div>
       </Section>
 
       {/* Section 1: What This Is */}
@@ -683,17 +678,10 @@ export default function SprintContent() {
               This is for people who:
             </h2>
 
-            <motion.div
-              className="grid md:grid-cols-2 gap-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
+            <div className="grid md:grid-cols-2 gap-4">
               {forYouItems.map((item, i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={fadeInUp}
                   className="flex items-start gap-4 p-4 bg-accent/5 rounded-lg border border-accent/20 transition-all duration-200 hover:border-accent/40"
                 >
                   <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -705,9 +693,9 @@ export default function SprintContent() {
                       {item.subtext}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Not for you */}
@@ -716,17 +704,10 @@ export default function SprintContent() {
               This is NOT for people who:
             </h3>
 
-            <motion.div
-              className="grid md:grid-cols-3 gap-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
+            <div className="grid md:grid-cols-3 gap-4">
               {notForYouItems.map((item, i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={fadeInUp}
                   className="flex items-start gap-4 p-4 bg-muted/30 rounded-lg"
                 >
                   <div className="w-6 h-6 bg-destructive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -738,9 +719,9 @@ export default function SprintContent() {
                       {item.subtext}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </Section>
@@ -759,19 +740,11 @@ export default function SprintContent() {
             </div>
 
             {/* Curriculum Accordion */}
-            <motion.div
-              className="max-w-3xl mx-auto space-y-3"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={staggerContainer}
-            >
+            <div className="max-w-3xl mx-auto space-y-3">
               {curriculumDays.map((day, i) => (
-                <motion.div key={i} variants={fadeInUp}>
-                  <CurriculumDay day={day} />
-                </motion.div>
+                <CurriculumDay key={i} day={day} />
               ))}
-            </motion.div>
+            </div>
 
             {/* Total Time Summary */}
             <div className="max-w-xl mx-auto bg-card border border-border/50 rounded-lg p-6">
@@ -892,19 +865,11 @@ export default function SprintContent() {
             Questions you probably have
           </h2>
 
-          <motion.div
-            className="divide-y divide-border/50"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
+          <div className="divide-y divide-border/50">
             {faqItems.map((item, i) => (
-              <motion.div key={i} variants={fadeInUp}>
-                <FAQItem question={item.question} answer={item.answer} />
-              </motion.div>
+              <FAQItem key={i} question={item.question} answer={item.answer} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </Section>
 
