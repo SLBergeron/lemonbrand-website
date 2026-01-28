@@ -19,10 +19,17 @@ import { ThemeToggle } from "./ThemeToggle";
 import { AchievementsLink } from "./achievements";
 import { useAchievementContext } from "@/context/AchievementContext";
 import { useLocalProgress } from "@/hooks/useLocalProgress";
-import { getLesson } from "@/lib/lessons";
+import { getLesson, lessons } from "@/lib/lessons";
 import { useSession, signOut } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
+
+// Get the required checklist count for each day
+const CHECKLIST_COUNTS: Record<number, number> = {};
+for (let day = 0; day <= 7; day++) {
+  const lesson = getLesson(day);
+  CHECKLIST_COUNTS[day] = lesson?.checklist.length || 0;
+}
 
 interface SprintSidebarProps {
   className?: string;
@@ -58,38 +65,42 @@ export function SprintSidebar({
     betterAuthId ? { betterAuthId } : "skip"
   );
 
-  // Debug logging - remove after fixing
-  console.log("[SprintSidebar] Debug:", {
-    sessionUserId: session?.user?.id,
-    sessionEmail: session?.user?.email,
-    betterAuthId,
-    hasEnrollment,
-    querySkipped: !betterAuthId,
-  });
-
   const isEnrolled = hasEnrollment === true;
+
+  // Query Convex for checklist progress (for enrolled users)
+  const convexChecklistProgress = useQuery(
+    api.sprintChecklistProgress.getSummaryByAuthId,
+    betterAuthId && isEnrolled ? { betterAuthId } : "skip"
+  );
 
   const dayMatch = pathname.match(/\/day\/(\d+)/);
   const currentDay = dayMatch ? parseInt(dayMatch[1]) : null;
 
   // Calculate completed days from progress (based on checklist completion)
   const completedDays: number[] = [];
-  if (progressLoaded) {
-    // Check Day 0
-    const day0Lesson = getLesson(0);
+
+  // For enrolled users, use Convex data for all days
+  // For non-enrolled users, use localStorage for Days 0-1
+  if (isEnrolled && convexChecklistProgress) {
+    // Check each day against required checklist count
+    for (let day = 0; day <= 7; day++) {
+      const completedItems = convexChecklistProgress[day] || [];
+      const requiredCount = CHECKLIST_COUNTS[day];
+      if (completedItems.length >= requiredCount && requiredCount > 0) {
+        completedDays.push(day);
+      }
+    }
+  } else if (progressLoaded) {
+    // Non-enrolled: check localStorage for Days 0-1
     const day0Checklist = progress.day0?.checklist || [];
-    if (day0Lesson && day0Checklist.length >= day0Lesson.checklist.length) {
+    if (day0Checklist.length >= CHECKLIST_COUNTS[0]) {
       completedDays.push(0);
     }
 
-    // Check Day 1
-    const day1Lesson = getLesson(1);
     const day1Checklist = progress.day1?.checklist || [];
-    if (day1Lesson && day1Checklist.length >= day1Lesson.checklist.length) {
+    if (day1Checklist.length >= CHECKLIST_COUNTS[1]) {
       completedDays.push(1);
     }
-    // Days 2-7 completion would come from Convex for enrolled users
-    // TODO: Integrate with sprintDayProgress for enrolled users
   }
 
   const completedCount = completedDays.length;

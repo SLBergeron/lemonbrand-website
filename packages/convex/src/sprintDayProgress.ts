@@ -264,6 +264,18 @@ export const getCurrentDay = query({
   },
 });
 
+// Required checklist item counts per day (must match lesson definitions)
+const CHECKLIST_COUNTS: Record<number, number> = {
+  0: 6,
+  1: 7,
+  2: 7,
+  3: 8,
+  4: 10,
+  5: 11,
+  6: 9,
+  7: 6,
+};
+
 // Get current day by Better Auth ID
 export const getCurrentDayByAuthId = query({
   args: { betterAuthId: v.string() },
@@ -276,52 +288,44 @@ export const getCurrentDayByAuthId = query({
 
     if (!user) return null;
 
-    const allProgress = await ctx.db
+    // Check sprintDayProgress first (if records exist)
+    const dayProgress = await ctx.db
       .query("sprintDayProgress")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
       .collect();
 
-    // If sprintDayProgress records exist, use them
-    if (allProgress.length > 0) {
-      // Sort by day
-      const sorted = allProgress.sort((a, b) => a.day - b.day);
-
-      // Find the first incomplete day (not "completed")
+    if (dayProgress.length > 0) {
+      const sorted = dayProgress.sort((a, b) => a.day - b.day);
       for (const progress of sorted) {
         if (progress.status !== "completed") {
           return progress.day;
         }
       }
-
-      // All days completed, return day 7
-      return 7;
+      return 7; // All completed
     }
 
-    // Fallback: Check form submissions for users without sprintDayProgress records
-    // Form submission is the best indicator of day completion
-    const formResponses = await ctx.db
-      .query("sprintFormResponses")
+    // Fallback: Check checklist progress directly
+    const checklistProgress = await ctx.db
+      .query("sprintChecklistProgress")
       .withIndex("by_user_day", (q) => q.eq("userId", user._id))
       .collect();
 
-    // If no form responses in Convex at all, user likely enrolled before
-    // Convex tracking was added. Default to Day 1 since they completed
-    // Day 0-1 preview to enroll.
-    if (formResponses.length === 0) {
-      return 1;
+    // Group by day
+    const completedByDay: Record<number, number> = {};
+    for (const item of checklistProgress) {
+      completedByDay[item.day] = (completedByDay[item.day] || 0) + 1;
     }
 
-    // Get set of days with form submissions
-    const daysWithForms = new Set(formResponses.map((f) => f.day));
-
-    // Find first day without a form submission (starting from Day 1 for enrolled users)
-    for (let day = 1; day <= 7; day++) {
-      if (!daysWithForms.has(day)) {
+    // Find first incomplete day
+    for (let day = 0; day <= 7; day++) {
+      const completed = completedByDay[day] || 0;
+      const required = CHECKLIST_COUNTS[day] || 5;
+      if (completed < required) {
         return day;
       }
     }
 
-    // All days have forms submitted
+    // All days completed
     return 7;
   },
 });

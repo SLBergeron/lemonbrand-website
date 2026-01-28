@@ -171,3 +171,33 @@ export const getSummary = query({
     return byDay;
   },
 });
+
+// Get checklist progress summary by Better Auth ID
+export const getSummaryByAuthId = query({
+  args: { betterAuthId: v.string() },
+  handler: async (ctx, args) => {
+    // Find the Convex user by Better Auth ID
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_betterAuthId", (q) => q.eq("betterAuthId", args.betterAuthId))
+      .first();
+
+    if (!user) return {};
+
+    const allProgress = await ctx.db
+      .query("sprintChecklistProgress")
+      .withIndex("by_user_day", (q) => q.eq("userId", user._id))
+      .collect();
+
+    // Group by day
+    const byDay: Record<number, string[]> = {};
+    for (const item of allProgress) {
+      if (!byDay[item.day]) {
+        byDay[item.day] = [];
+      }
+      byDay[item.day].push(item.itemId);
+    }
+
+    return byDay;
+  },
+});
