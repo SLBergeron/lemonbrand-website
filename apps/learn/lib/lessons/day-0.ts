@@ -5,6 +5,7 @@ export const day0: LessonData = {
   title: "Get Ready to Build",
   subtitle: "Pick your tool, set it up, decide what you're building.",
   duration: 30,
+  videoUrl: "https://www.youtube.com/embed/TsG6cMgFfxc",
   objectives: [
     "Choose Cursor or Terminal",
     "Set up your tools",

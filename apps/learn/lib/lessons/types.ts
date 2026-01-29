@@ -248,6 +248,7 @@ export interface LessonData {
   title: string;
   subtitle: string;
   duration: number; // minutes
+  videoUrl?: string; // YouTube/Vimeo embed URL
   objectives: string[];
   sections: AnySection[];
   checklist: ChecklistItem[];

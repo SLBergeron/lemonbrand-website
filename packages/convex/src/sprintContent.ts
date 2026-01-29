@@ -78,6 +78,35 @@ export const upsert = mutation({
   },
 });
 
+// Update video URL for a specific day
+export const updateVideoUrl = mutation({
+  args: {
+    day: v.number(),
+    trainingVideoUrl: v.string(),
+    trainingDurationMinutes: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("sprintContent")
+      .withIndex("by_day", (q) => q.eq("day", args.day))
+      .first();
+
+    if (!existing) {
+      throw new Error(`No sprint content found for day ${args.day}`);
+    }
+
+    const updates: Record<string, unknown> = {
+      trainingVideoUrl: args.trainingVideoUrl,
+    };
+    if (args.trainingDurationMinutes !== undefined) {
+      updates.trainingDurationMinutes = args.trainingDurationMinutes;
+    }
+
+    await ctx.db.patch(existing._id, updates);
+    return existing._id;
+  },
+});
+
 // Seed initial Day 0 content
 export const seedDay0 = mutation({
   args: {},

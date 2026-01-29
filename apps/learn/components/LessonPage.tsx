@@ -243,16 +243,27 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
         </ul>
       </motion.section>
 
-      {/* Video Placeholder */}
+      {/* Video */}
       <motion.section variants={itemVariants} className="mb-20">
-        <div className="aspect-video rounded-lg bg-muted/30 border border-border/50 flex items-center justify-center">
-          <div className="text-center">
-            <div className="size-14 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-3">
-              <Play className="size-6 text-muted-foreground ml-0.5" />
-            </div>
-            <p className="text-sm text-muted-foreground">Video coming soon</p>
+        {lesson.videoUrl ? (
+          <div className="aspect-video rounded-lg overflow-hidden border border-border/50">
+            <iframe
+              src={lesson.videoUrl}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
-        </div>
+        ) : (
+          <div className="aspect-video rounded-lg bg-muted/30 border border-border/50 flex items-center justify-center">
+            <div className="text-center">
+              <div className="size-14 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-3">
+                <Play className="size-6 text-muted-foreground ml-0.5" />
+              </div>
+              <p className="text-sm text-muted-foreground">Video coming soon</p>
+            </div>
+          </div>
+        )}
       </motion.section>
 
       <SectionDivider />
