@@ -235,6 +235,10 @@ export function ProjectDiscovery({ section, isPreview, day }: Props) {
   const handleDescribeContinue = () => {
     fetchReflection();
     setStep("context");
+    // Save project idea for the bonus section prompt
+    if (data.whatToBuild.trim()) {
+      localStorage.setItem("sprint-project-idea", data.whatToBuild.trim());
+    }
   };
 
   // ---------- Step 2C: IdeaFinder ----------
@@ -286,16 +290,19 @@ export function ProjectDiscovery({ section, isPreview, day }: Props) {
       "My clients": "clients",
       Public: "public",
     };
+    const ideaText = `${idea.name}: ${idea.oneLiner}`;
     setData((prev) => ({
       ...prev,
-      whatToBuild: `${idea.name}: ${idea.oneLiner}`,
+      whatToBuild: ideaText,
       whoIsItFor: whoMap[idea.suggestedTargetUser] || "me",
       currentProcess: idea.suggestedCurrentProcess || "",
     }));
+    // Save project idea for the bonus section prompt
+    localStorage.setItem("sprint-project-idea", ideaText);
     // If currentProcess was pre-filled by IdeaFinder, skip straight to context
     // but still fetch reflection
     fetchReflectionWith(
-      `${idea.name}: ${idea.oneLiner}`,
+      ideaText,
       whoMap[idea.suggestedTargetUser] || "me"
     );
     setStep("context");

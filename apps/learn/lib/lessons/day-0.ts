@@ -195,18 +195,31 @@ Saving data locally is fine — trackers, planners, and logs all work great. Jus
       },
     },
 
+    // Ready to move on note
+    {
+      id: "ready-note",
+      type: "callout",
+      calloutType: "info",
+      content: `This is a self-paced course. The "days" are a suggested rhythm for someone balancing this with a job or other commitments. If you're feeling good and want to keep going, head straight to Day 1. There's no wrong pace.`,
+    },
+
     // Bonus
     {
       id: "bonus",
       type: "bonus",
       title: "Start the conversation",
-      content: `Done with setup? Warm up by talking to Claude about your project.
+      content: `Want a head start before Day 1? Open Claude and have a scoping conversation about your project.
 
-Open Claude and paste this:
+Paste this to get started:
 
-> I want to build [your project idea]. Ask me questions to help clarify what it should do.
+> I want to build {{projectIdea}}. I'm not ready to build yet — I just want to talk through the idea. Ask me questions to help clarify what it should do, who it's for, and where the edges are. Do not write any code or create any files. Just help me think.
 
-Don't build anything yet. Just talk. See what questions come up. Let Claude help you think through the edges of your idea.
+**Important:** Claude will want to jump ahead and start building. That's what it does. You have to hold the line — keep saying "don't build yet, just help me scope this." The goal is a clear picture of what you're making, not a single line of code.
+
+Good questions to explore together:
+- What's the simplest version that's still useful?
+- What inputs does it need? What does the output look like?
+- What can I cut to keep this achievable in a week?
 
 This is practice for Day 1, where we scope your project properly.`,
       collapsed: true,

@@ -3,7 +3,7 @@
 import { BonusSection } from "@/lib/lessons/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift, ChevronDown, Copy, Check } from "lucide-react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { cn } from "@lemonbrand/ui";
 import ReactMarkdown from "react-markdown";
 
@@ -82,6 +82,21 @@ function CopyablePrompt({ children }: { children: React.ReactNode }) {
 
 export function BonusSectionComponent({ section }: Props) {
   const [isOpen, setIsOpen] = useState(!section.collapsed);
+  const [projectIdea, setProjectIdea] = useState<string | null>(null);
+
+  // Read project idea from localStorage (saved by ProjectDiscovery)
+  useEffect(() => {
+    const saved = localStorage.getItem("sprint-project-idea");
+    if (saved) setProjectIdea(saved);
+  }, []);
+
+  // Also check when the section is expanded (user may have filled form after page load)
+  useEffect(() => {
+    if (isOpen) {
+      const saved = localStorage.getItem("sprint-project-idea");
+      if (saved) setProjectIdea(saved);
+    }
+  }, [isOpen]);
 
   return (
     <motion.section
@@ -200,7 +215,10 @@ export function BonusSectionComponent({ section }: Props) {
                       ),
                     }}
                   >
-                    {section.content}
+                    {section.content.replace(
+                      "{{projectIdea}}",
+                      projectIdea || "[your project idea]"
+                    )}
                   </ReactMarkdown>
                 </div>
               </div>
