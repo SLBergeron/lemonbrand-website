@@ -8,6 +8,7 @@ import { getLesson } from "@/lib/lessons";
 import { SectionRenderer, SectionDivider } from "./lesson";
 import { LessonChecklist } from "./LessonChecklist";
 import { TrialCTA } from "./TrialCTA";
+import { AIDialogueModule } from "./AIDialogueModule";
 import { useLocalProgress } from "@/hooks/useLocalProgress";
 import { useAchievementContext } from "@/context/AchievementContext";
 import { BlitzModeMessage } from "./achievements";
@@ -67,6 +68,12 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
     betterAuthId ? { betterAuthId } : "skip"
   );
   const isEnrolled = hasEnrollment === true;
+
+  // Get Convex user for AI dialogue
+  const convexUser = useQuery(
+    api.users.getByAuthId,
+    betterAuthId ? { betterAuthId } : "skip"
+  );
 
   // Track if user has scrolled
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -265,6 +272,13 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
           </div>
         )}
       </motion.section>
+
+      {/* AI Dialogue - personalized tips for enrolled users */}
+      {isEnrolled && convexUser && (
+        <motion.section variants={itemVariants} className="mb-12">
+          <AIDialogueModule userId={convexUser._id} day={day} />
+        </motion.section>
+      )}
 
       <SectionDivider />
 

@@ -449,6 +449,12 @@ export default defineSchema({
         placeholder: v.optional(v.string()),
         required: v.optional(v.boolean()),
         options: v.optional(v.array(v.string())),
+        conditionalOn: v.optional(v.object({
+          fieldId: v.string(),
+          operator: v.union(v.literal("eq"), v.literal("neq")),
+          value: v.string(),
+        })),
+        minLengthHint: v.optional(v.number()),
       })
     )), // Dynamic form fields per day
     generatedFileTemplate: v.optional(v.string()), // Template for downloads
@@ -480,6 +486,17 @@ export default defineSchema({
   })
     .index("by_user_day", ["userId", "day"])
     .index("by_user_day_item", ["userId", "day", "itemId"]),
+
+  // Sprint AI Dialogue (cached personalized tips per day)
+  sprintAiDialogue: defineTable({
+    userId: v.id("users"),
+    day: v.number(),
+    content: v.string(),
+    contextHash: v.string(),
+    generatedAt: v.number(),
+    model: v.string(),
+  })
+    .index("by_user_day", ["userId", "day"]),
 
   // ============================================
   // PRD Generation Rate Limiting

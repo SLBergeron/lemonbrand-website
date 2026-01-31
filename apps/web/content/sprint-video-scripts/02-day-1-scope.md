@@ -175,11 +175,11 @@ That's how you scope down gracefully. You're not giving up - you're being strate
 
 ---
 
-## [07:00-08:00] DATA PERSISTENCE CHECK
+## [07:00-08:00] THE "SAVE" QUESTION
 
 [TALKING HEAD]
 
-There's one question that's critical to ask during scoping.
+There's one limit we need to talk about.
 
 [SCREEN SHARE: Show typing the question]
 
@@ -187,28 +187,27 @@ There's one question that's critical to ask during scoping.
 
 [TALKING HEAD]
 
-This is the fork in the road.
+If the answer is no - if it's a calculator or a generator - great. That's the easiest path.
 
-If the answer is no - if it's a generator or calculator that just takes input and produces output - great. That's perfect for the Sprint.
-
-If the answer is yes - if you need to save things and come back to them later - you've got a choice:
+If the answer is yes, we need to distinguish between "saving a file" and "building a database."
 
 [Beat]
 
-Option one: simplify for the Sprint. Can you make this a generator instead of a tracker?
+Building a full database - with user accounts, passwords, and cloud storage - is out of scope for this week. It adds too much complexity.
 
-[SCREEN SHARE: Show example]
+But saving a simple file? That's fine.
 
-"Client follow-up tracker" becomes "Follow-up email generator."
-"Reading tracker" becomes "Reading notes formatter."
+If you want to save your standard rates, or your favorite recipes, or your settings - we can do that. We'll just tell Claude to "save this to a local JSON file."
+
+[SCREEN SHARE: Show simple visual]
+- Complex Database: User accounts, logins, cloud sync (Out of Scope)
+- Simple File: Settings, lists, local data (In Scope)
 
 [TALKING HEAD]
 
-Option two: accept that your project needs data persistence and know that we'll add localStorage on Day 3. It'll work for you, in one browser, but it won't sync across devices.
+So if your idea relies on users logging in and syncing data across their phone and laptop... scope it down.
 
-Option three: save this idea for the 8-Week program where we cover real databases.
-
-The point is to surface this now, not on Day 4 when you're trying to deploy.
+But if it just needs to remember some things on your computer? You're clear to build.
 
 ---
 

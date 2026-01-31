@@ -34,7 +34,7 @@ Let's build.
 
 Before we dive in, I need you to hear this.
 
-This is the hard part. Days 0-2 were about thinking and planning. That's comfortable. Day 3 is where things break.
+Days 0-2 were about thinking and planning. That's comfortable. Day 3 is where things break.
 
 If you get stuck, you're not failing. You're building.
 
@@ -79,6 +79,35 @@ Watch what Claude does. It's going to:
 You're seeing commands like `npx create-next-app` and `npm install`. You don't need to memorize these. Just observe.
 
 [Beat]
+
+[TALKING HEAD]
+
+You'll see permission pop-ups. Claude will ask to run commands, create files, install packages.
+
+This is normal. This is expected.
+
+[Beat]
+
+Remember: you gave Claude access to a specific folder - YOUR project folder. That's its sandbox. Claude can't touch your photos, your documents, your system files. It can only work within the space you gave it.
+
+[SCREEN SHARE: Show a permission prompt example]
+
+When you see these prompts:
+- "Run npm install" - Yes. Installing project dependencies.
+- "Create file" - Yes. Building your project structure.
+- "Run npx create-next-app" - Yes. Setting up your framework.
+
+These are the building blocks. Without permission to run these, Claude can't build for you.
+
+[Beat]
+
+The only commands to pause on are destructive ones. Things like `rm` (remove files) or commands that affect files outside your project folder. But Claude is trained to be careful. It will explain what it's doing. If you're ever unsure, just ask: "What does this command do before I approve it?"
+
+For everything else - the npm installs, the file creations, the dev server startups - click approve and let Claude work.
+
+[Beat]
+
+Trust the process. You're in a safe space.
 
 Now, here's where things might go wrong.
 

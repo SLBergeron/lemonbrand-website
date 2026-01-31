@@ -21,6 +21,7 @@ import type * as prdRateLimits from "../prdRateLimits.js";
 import type * as progress from "../progress.js";
 import type * as quizzes from "../quizzes.js";
 import type * as seedSprintContent from "../seedSprintContent.js";
+import type * as sprintAiDialogue from "../sprintAiDialogue.js";
 import type * as sprintChecklistProgress from "../sprintChecklistProgress.js";
 import type * as sprintCheckout from "../sprintCheckout.js";
 import type * as sprintCohorts from "../sprintCohorts.js";
@@ -51,6 +52,7 @@ declare const fullApi: ApiFromModules<{
   progress: typeof progress;
   quizzes: typeof quizzes;
   seedSprintContent: typeof seedSprintContent;
+  sprintAiDialogue: typeof sprintAiDialogue;
   sprintChecklistProgress: typeof sprintChecklistProgress;
   sprintCheckout: typeof sprintCheckout;
   sprintCohorts: typeof sprintCohorts;

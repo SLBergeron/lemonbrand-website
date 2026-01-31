@@ -57,6 +57,12 @@ export interface FormField {
   required?: boolean;
   voiceEnabled?: boolean; // Show voice input hint
   helpText?: string;
+  conditionalOn?: {
+    fieldId: string;
+    operator: "eq" | "neq";
+    value: string;
+  };
+  minLengthHint?: number; // Show "Add more detail for better tips" if under this length
 }
 
 export interface FormSection extends LessonSection {

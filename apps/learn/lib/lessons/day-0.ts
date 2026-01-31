@@ -161,9 +161,41 @@ Build simple first. Add complexity later.`,
     {
       id: "project-form",
       type: "form",
-      title: "Define Your Project",
-      description: "Answer these questions to generate your project brief.",
+      title: "Who You Are + What You're Building",
+      description: "Your answers here personalize your tips and advice for your specific project.",
       fields: [
+        {
+          id: "role",
+          label: "What do you do for work? (or what did you do?)",
+          type: "textarea",
+          placeholder: "e.g., I'm a product manager at a marketing agency",
+          required: true,
+          voiceEnabled: true,
+          minLengthHint: 20,
+        },
+        {
+          id: "tech-comfort",
+          label: "How comfortable are you with technology?",
+          type: "select",
+          options: [
+            { value: "apps-daily", label: "I use apps daily but never built one" },
+            { value: "spreadsheets", label: "I've customized spreadsheets, automations, or no-code tools" },
+            { value: "some-code", label: "I've written some code before" },
+            { value: "professional", label: "I write code professionally" },
+          ],
+          required: true,
+        },
+        {
+          id: "has-idea",
+          label: "Do you have a project idea?",
+          type: "select",
+          options: [
+            { value: "yes", label: "Yes, I know what I want to build" },
+            { value: "rough", label: "I have a rough idea" },
+            { value: "no-idea", label: "No idea yet — help me find one" },
+          ],
+          required: true,
+        },
         {
           id: "whatToBuild",
           label: "What do you want to build?",
@@ -172,6 +204,8 @@ Build simple first. Add complexity later.`,
             "Example: A proposal generator that takes client name, project description, and pricing, then outputs a formatted proposal I can send",
           required: true,
           voiceEnabled: true,
+          minLengthHint: 30,
+          conditionalOn: { fieldId: "has-idea", operator: "neq", value: "no-idea" },
         },
         {
           id: "whoIsItFor",
@@ -181,6 +215,7 @@ Build simple first. Add complexity later.`,
             { value: "me", label: "Just me" },
             { value: "team", label: "My team" },
             { value: "clients", label: "My clients" },
+            { value: "public", label: "Public" },
           ],
           required: true,
         },
@@ -192,11 +227,31 @@ Build simple first. Add complexity later.`,
             "Example: Every week I spend 2 hours copying client info into a Google Doc template, adjusting the pricing section, and reformatting it to look professional",
           required: true,
           voiceEnabled: true,
+          minLengthHint: 30,
+        },
+        {
+          id: "why-matters",
+          label: "Why does this matter to you?",
+          type: "textarea",
+          placeholder: "e.g., I'm tired of wasting time on this every week...",
+          voiceEnabled: true,
+          helpText: "Helps personalize encouragement throughout the Sprint.",
+        },
+        {
+          id: "success-looks-like",
+          label: "What does success look like at the end of the week?",
+          type: "textarea",
+          placeholder: "I'd be happy if...",
+          voiceEnabled: true,
         },
       ],
       generateFile: {
         filename: "project-idea.md",
         template: `# Project Idea
+
+## About Me
+**Role:** {{role}}
+**Tech comfort:** {{tech-comfort}}
 
 ## What I'm Building
 {{whatToBuild}}
@@ -206,6 +261,12 @@ Build simple first. Add complexity later.`,
 
 ## Current Process
 {{currentProcess}}
+
+## Why It Matters
+{{why-matters}}
+
+## Success Looks Like
+{{success-looks-like}}
 `,
         aiGeneration: {
           enabled: true,

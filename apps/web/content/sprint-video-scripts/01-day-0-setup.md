@@ -62,7 +62,7 @@ You can always switch later. This isn't a permanent choice.
 
 [Beat]
 
-One more thing: both cost about $20 a month. Cursor Pro is $20. Claude Pro, which you need for Claude Code, is also $20. We're not talking about huge investments here.
+One more thing: both cost about $20 a month. Cursor Pro is $20. Claude Pro, which you need for Claude Code, is also $20. We're not talking about huge investments here. You just need to be aware of your token budget. You might hit a wall. At that point, you can always upgrade or switch to API (pay-as-you-go).
 
 ---
 

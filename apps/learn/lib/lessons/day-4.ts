@@ -328,8 +328,8 @@ Feedback from real people is worth 10x your own assumptions. You're not asking "
     {
       id: "reflection-form",
       type: "form",
-      title: "Capture Your Progress",
-      description: "Your project is live. What happened today?",
+      title: "Deploy + Feedback Report",
+      description: "Your answers here personalize tomorrow's expansion tips for your specific project.",
       fields: [
         {
           id: "vercel-url",
@@ -337,6 +337,13 @@ Feedback from real people is worth 10x your own assumptions. You're not asking "
           type: "text",
           placeholder: "https://your-project.vercel.app",
           required: true,
+        },
+        {
+          id: "deploy-issues",
+          label: "What broke during deployment? How did you fix it?",
+          type: "textarea",
+          placeholder: "During deploy, I ran into...",
+          voiceEnabled: true,
         },
         {
           id: "biggest-fix",
@@ -354,6 +361,16 @@ Feedback from real people is worth 10x your own assumptions. You're not asking "
           required: true,
           voiceEnabled: true,
           helpText: "Even harsh feedback is valuable. Write it down.",
+          minLengthHint: 30,
+        },
+        {
+          id: "improvement-ideas",
+          label: "Based on feedback, what 2-3 things would make this better?",
+          type: "textarea",
+          placeholder: "1. ... 2. ... 3. ...",
+          required: true,
+          voiceEnabled: true,
+          helpText: "Tomorrow's tips will directly reference these as priorities.",
         },
       ],
       submitLabel: "Save Progress",

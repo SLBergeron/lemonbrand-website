@@ -210,7 +210,7 @@ function WelcomeSprintContent() {
           className="text-center"
         >
           <Button variant="accent" size="lg" asChild>
-            <Link href="/dashboard/sprint">
+            <Link href="https://learn.lemonbrand.io/sprint">
               Start Day 0 Now
               <ArrowRight className="w-4 h-4" />
             </Link>

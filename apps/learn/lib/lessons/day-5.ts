@@ -322,8 +322,8 @@ By the end of today, this should feel like a tool you'd actually use — not jus
     {
       id: "reflection-form",
       type: "form",
-      title: "Capture Your Progress",
-      description: "What did you add today? What ideas are brewing?",
+      title: "Expansion Report",
+      description: "Your answers here personalize tomorrow's polish tips for your specific project.",
       fields: [
         {
           id: "capability-added",
@@ -332,14 +332,41 @@ By the end of today, this should feel like a tool you'd actually use — not jus
           placeholder: "I added... because the feedback showed...",
           required: true,
           voiceEnabled: true,
+          minLengthHint: 20,
+        },
+        {
+          id: "feedback-acted-on",
+          label: "What feedback did you act on? What did you skip and why?",
+          type: "textarea",
+          placeholder: "I acted on... I skipped... because...",
+          required: true,
+          voiceEnabled: true,
+        },
+        {
+          id: "tool-description-now",
+          label: "What does your tool do now that it didn't do yesterday?",
+          type: "textarea",
+          placeholder: "Now it can also...",
+          required: true,
+          voiceEnabled: true,
         },
         {
           id: "project-idea",
           label: "What's one project idea you captured today? (Just the rough concept)",
           type: "textarea",
           placeholder: "I want to build something that...",
-          required: true,
           voiceEnabled: true,
+        },
+        {
+          id: "usefulness-rating",
+          label: "How useful is this tool to you right now?",
+          type: "select",
+          options: [
+            { value: "very-useful", label: "Very useful — I'd use this daily" },
+            { value: "somewhat", label: "Somewhat — needs more work" },
+            { value: "not-yet", label: "Not yet — but I can see the potential" },
+          ],
+          required: true,
         },
       ],
       submitLabel: "Save Progress",
