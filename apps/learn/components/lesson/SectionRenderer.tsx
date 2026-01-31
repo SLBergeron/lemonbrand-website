@@ -17,6 +17,7 @@ import { ParadigmSectionComponent } from "./ParadigmSection";
 import { AffirmationSectionComponent } from "./AffirmationSection";
 import { SocialFollowSectionComponent } from "./SocialFollowSection";
 import { ReferralSectionComponent } from "./ReferralSection";
+import { ProjectDiscovery } from "@/components/ProjectDiscovery";
 import { SectionDivider } from "./SectionDivider";
 
 export { SectionDivider };
@@ -72,6 +73,14 @@ export function SectionRenderer({
         return <SocialFollowSectionComponent section={section} />;
       case "referral":
         return <ReferralSectionComponent section={section} />;
+      case "project-discovery":
+        return (
+          <ProjectDiscovery
+            section={section}
+            isPreview={isPreview}
+            day={day}
+          />
+        );
       default:
         return null;
     }
