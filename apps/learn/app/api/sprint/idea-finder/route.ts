@@ -11,7 +11,7 @@ GOOD projects (suggest these):
 - Calculators (pricing, ROI, conversion, estimation)
 - Formatters/transformers (restructure data, convert formats)
 - Dashboards (visualize data from CSV/JSON input)
-- Trackers/planners WITH localStorage or JSON file persistence
+- Trackers/planners WITH localStorage or JSON file persistence (habit trackers, workout logs, reading lists, meal planners)
 - Simple tools with clear INPUT → PROCESS → OUTPUT flow
 
 BAD projects (avoid suggesting):

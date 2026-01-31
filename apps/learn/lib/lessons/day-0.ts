@@ -101,7 +101,7 @@ I'm on Claude's $200/month max plan. It's paid for itself many times over throug
       title: "What to Build",
       content: `A tool. Not a platform. Not a business. One thing that does one thing well.
 
-Something you already do manually that could be faster. Something achievable in 7 days.`,
+It could be something for work — automating a process that eats your time. Or something personal — tracking a habit, organizing recipes, logging workouts. If you can describe what it does in one sentence, it's the right size.`,
     },
 
     {
@@ -115,8 +115,11 @@ Something you already do manually that could be faster. Something achievable in 
         { icon: "3dicons-copy-dynamic-color.png", label: "Email templates" },
         { icon: "3dicons-roll-brush-dynamic-color.png", label: "Content formatter" },
         { icon: "3dicons-chart-dynamic-color.png", label: "Data dashboard" },
+        { icon: "3dicons-gym-dynamic-color.png", label: "Workout tracker" },
+        { icon: "3dicons-cup-dynamic-color.png", label: "Recipe keeper" },
+        { icon: "3dicons-calender-dynamic-color.png", label: "Habit tracker" },
       ],
-      footnote: "The test: Can you explain it in one sentence? If not, it's too big.",
+      footnote: "The test: Can you describe it in one sentence? Then it's the right size.",
     },
 
     {
@@ -124,12 +127,12 @@ Something you already do manually that could be faster. Something achievable in 
       type: "callout",
       calloutType: "warning",
       title: "Skip these for now",
-      content: `- Anything with user accounts
-- Anything that saves data between sessions
+      content: `- Anything with user accounts or login
 - Anything with payments
+- Anything that syncs across devices
 - Anything "like [successful product]"
 
-Build simple first. Add complexity later.`,
+Saving data locally is fine — trackers, planners, and logs all work great. Just skip cloud databases and multi-device sync for now.`,
     },
 
     // Setup exercise
