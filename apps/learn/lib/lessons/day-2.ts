@@ -7,8 +7,8 @@ export const day2: LessonData = {
   duration: 90,
   objectives: [
     "Create CLAUDE.md — your project's persistent memory",
-    "Learn when to plan vs. when to build",
-    "Visualize your project with HTML",
+    "Stay in Plan Mode — no application code today",
+    "Visualize your project with an interactive playground",
     "See your tool before you build it",
   ],
 
@@ -32,18 +32,16 @@ It's a file Claude reads automatically when it enters your project folder. Once 
 No more explaining your project from scratch. No more lost context.`,
     },
 
-    // Core concept: Visualize with code
+    // Core concept: Visualize with code — introduces playgrounds
     {
       id: "visualize-concept",
       type: "concept",
       title: "Use Code to Think",
       content: `The scoping you did yesterday? That was the valuable work. The code that implements it? Disposable.
 
-Here's the trick: when you're stuck thinking, ask Claude to **visualize** it. The keyword is **HTML**.
+Here's the trick: when you're stuck thinking, ask Claude to make it **visual**. Claude can generate interactive HTML files called **playgrounds** — not static pages, but tools you can click through, adjust, and explore.
 
-Claude can generate a simple webpage in seconds that helps you see what you're building. Today you'll learn this skill — you'll ask Claude to create an HTML file that shows your project's flow.
-
-No coding required. Just ask, and look.`,
+Today you'll use a playground to see your project's flow before writing a line of application code.`,
     },
 
     // HTML files are local
@@ -52,44 +50,20 @@ No coding required. Just ask, and look.`,
       type: "callout",
       calloutType: "tip",
       title: "HTML files just work",
-      content: `HTML files open directly in your browser. Double-click the file, it opens. No uploading, no deployment, no servers.
+      content: `Double-click an HTML file, it opens in your browser. No uploading, no deployment, no servers.
 
-This is what makes them so powerful for quick visualization. Spin one up, look at it, learn from it, move on. They're disposable thinking tools.`,
+Playgrounds take this further — they're interactive. Explore different views, click through flows, adjust settings. Use them freely. They're disposable thinking tools.`,
     },
 
-    // Plan mode vs Build mode - interactive toggle
+    // Mode reminder — replaces mode-toggle + plan-mode-callout
     {
-      id: "plan-vs-build",
-      type: "mode-toggle",
-      title: "Two Modes of Working",
-      planMode: {
-        label: "When you're in Plan Mode",
-        items: [
-          "Creating context files like CLAUDE.md",
-          "Scoping, designing, making decisions",
-          "Read everything Claude produces",
-          "Push back and refine until it's right",
-          "Today: CLAUDE.md and plan-visual.html",
-        ],
-      },
-      buildMode: {
-        label: "When Accept Edits is on",
-        items: [
-          "Writing code, implementing features",
-          "Fixing bugs, making changes",
-          "Let Claude execute while you guide",
-          "Auto-accept is often fine — code is cheap",
-          "Starting Day 3: real code, real features",
-        ],
-      },
-      hint: "Press Shift+Tab to cycle between modes in Claude Code",
-    },
-
-    {
-      id: "plan-mode-callout",
+      id: "mode-reminder",
       type: "callout",
       calloutType: "warning",
-      content: `Today you're in **Plan Mode**. You're creating foundational files. If they're wrong, everything built on top will be wrong. Take the time to read.`,
+      title: "Still in Plan Mode",
+      content: `You learned about Plan Mode and Build Mode yesterday. Today you're still in Plan Mode — creating CLAUDE.md and visualizations, not application code.
+
+If Claude starts generating app code, pull it back: "We're not building yet. Today is about foundation files."`,
     },
 
     // Exercise: Create CLAUDE.md
@@ -103,7 +77,7 @@ This is what makes them so powerful for quick visualization. Spin one up, look a
         "Read what Claude produces — don't just accept it",
         "Push back on anything that's wrong or missing",
       ],
-      prompt: `Read project-idea.md and project-scope.md. Based on these files, create a CLAUDE.md for this project.
+      prompt: `Read project-idea.md, project-scope.md, and scope-snapshot.md. Based on these files, create a CLAUDE.md for this project.
 
 This is a 7-day sprint to build a simple web app using Next.js and React. The CLAUDE.md should give you all the context you need to help me build this. Include:
 
@@ -166,6 +140,36 @@ If something's off, tell Claude what to fix.`,
       content: `If Claude seems confused, your CLAUDE.md needs work. Go back and improve it until the context test passes.`,
     },
 
+    // Skills concept — introduces Skills + playground
+    {
+      id: "skills-concept",
+      type: "concept",
+      title: "Skills: Specialized Abilities",
+      content: `Claude can be extended with **skills** — specialized prompts that make it better at specific tasks. Think of them like tools in a toolbelt.
+
+One skill is particularly useful right now: **playground**. It creates interactive HTML files that let you visualize a problem, interact with it, and even generate prompts to paste back into Claude.
+
+You'll use it in a moment to see your project come to life.`,
+    },
+
+    // Install playground
+    {
+      id: "install-playground",
+      type: "exercise",
+      title: "Install the Playground Skill",
+      instructions: [
+        "Run the install command for your tool",
+        "Confirm the skill is available",
+      ],
+      prompt: `**Claude Code (Terminal):**
+/plugin marketplace update claude-plugins-official
+/plugin install playground@claude-plugins-official
+
+**Cursor:**
+Go to skills.sh in your browser. Find the playground skill. Follow the install instructions for Cursor.`,
+      expectedOutcome: "The playground skill is installed and ready to use.",
+    },
+
     // Visual: The flow diagram
     {
       id: "flow-diagram",
@@ -177,18 +181,18 @@ If something's off, tell Claude what to fix.`,
       copyable: false,
     },
 
-    // Exercise: Visualize
+    // Exercise: Visualize — uses playground skill
     {
       id: "visualize",
       type: "exercise",
       title: "See Your Project",
       instructions: [
-        "Ask Claude to create an HTML visualization",
+        "Ask Claude to create an interactive playground",
         "Double-click the file to open it in your browser",
-        "Review it — does it match your mental model?",
+        "Click through the flow — does it match your mental model?",
         "Refine until it clicks",
       ],
-      prompt: `Create an HTML file called plan-visual.html that visualizes my project. Show:
+      prompt: `Use the playground skill to visualize my project. Show:
 
 1. **The core purpose** — what this tool does in one sentence
 2. **The trigger** — what happens right before someone uses it
@@ -197,12 +201,12 @@ If something's off, tell Claude what to fix.`,
 5. **The outputs** — what comes out
 6. **The next step** — what happens after using the output
 
-Make it visual and clear. Use boxes, arrows, colors. I want to SEE the flow, not just read about it. Modern styling, clean typography.`,
+Make it interactive — let me click through each stage to see details. I want to explore the flow, not just read about it.`,
       expectedOutcome:
-        "An HTML file you can open in your browser that shows your project's flow visually.",
+        "An interactive HTML playground you can explore in your browser that shows your project's flow.",
     },
 
-    // Folder structure
+    // Folder structure — updated with scope-snapshot.md
     {
       id: "folder-structure",
       type: "code",
@@ -211,8 +215,9 @@ Make it visual and clear. Use boxes, arrows, colors. I want to SEE the flow, not
       code: `my-project/
 ├── project-idea.md      # From Day 0
 ├── project-scope.md     # From Day 1
+├── scope-snapshot.md    # From Day 1
 ├── CLAUDE.md            # NEW: Your project's memory
-├── plan-visual.html     # NEW: Your plan visualized
+├── plan-visual.html     # NEW: Your plan as an interactive playground
 └── src/                 # Still empty — real code starts Day 3`,
       copyable: false,
     },
@@ -240,16 +245,41 @@ This is how you'll work from now on:
       content: `Use your voice when answering the form below. You set up voice-to-text on Day 0 — use it.`,
     },
 
-    // Form
+    // Form — redesigned with radios and conditionals
     {
       id: "reflection-form",
       type: "form",
-      title: "Foundation Capture",
-      description: "Your answers here personalize tomorrow's tips for your specific project.",
+      title: "Check Your Foundation",
+      description:
+        "Quick check before build day. Your answers shape tomorrow's advice.",
       fields: [
         {
+          id: "context-test",
+          label: "Did Claude pass the context test?",
+          type: "radio",
+          options: [
+            { value: "nailed", label: "Nailed it" },
+            { value: "close", label: "Close but needed fixes" },
+            { value: "lost", label: "Didn't know my project" },
+          ],
+          required: true,
+        },
+        {
+          id: "context-fix",
+          label: "What did you have to fix in CLAUDE.md?",
+          type: "textarea",
+          placeholder: "I had to change...",
+          voiceEnabled: true,
+          conditionalOn: {
+            fieldId: "context-test",
+            operator: "neq",
+            value: "nailed",
+          },
+        },
+        {
           id: "input-process-output",
-          label: "Describe your tool's flow: What goes in? What happens? What comes out?",
+          label:
+            "Your tool's flow: what goes in, what happens, what comes out?",
           type: "textarea",
           placeholder: "Input: ... → Process: ... → Output: ...",
           required: true,
@@ -257,68 +287,94 @@ This is how you'll work from now on:
           minLengthHint: 30,
         },
         {
-          id: "claude-md-focus",
-          label: "What did your CLAUDE.md end up focusing on?",
-          type: "textarea",
-          placeholder: "The main things I told Claude about my project were...",
+          id: "visualization-reaction",
+          label: "What happened when you saw your project visualized?",
+          type: "radio",
+          options: [
+            { value: "changed", label: "Changed my thinking" },
+            { value: "confirmed", label: "Confirmed my plan" },
+            { value: "complex", label: "Revealed it's too complex" },
+          ],
           required: true,
-          voiceEnabled: true,
         },
         {
-          id: "visualization",
-          label: "Link to your plan-visual.html (or paste a screenshot URL)",
-          type: "text",
-          placeholder: "Drag and drop or paste a link",
+          id: "what-shifted",
+          label: "What shifted when you saw it?",
+          type: "textarea",
+          placeholder: "When I saw it visualized, I realized...",
+          voiceEnabled: true,
+          conditionalOn: {
+            fieldId: "visualization-reaction",
+            operator: "neq",
+            value: "confirmed",
+          },
         },
         {
-          id: "insight",
-          label: "What did you learn about your project by seeing it visualized?",
-          type: "textarea",
-          placeholder: "Seeing it helped me realize...",
+          id: "build-readiness",
+          label: "Ready for build day?",
+          type: "radio",
+          options: [
+            { value: "ready", label: "Let's go" },
+            { value: "almost", label: "Almost there" },
+            { value: "unsure", label: "Not sure yet" },
+          ],
           required: true,
-          voiceEnabled: true,
         },
         {
           id: "open-questions",
-          label: "Any open questions going into build day?",
+          label: "Anything unresolved going into build day?",
           type: "textarea",
           placeholder: "I'm still wondering about...",
           voiceEnabled: true,
           helpText: "Tomorrow's tips will specifically address these.",
         },
       ],
-      submitLabel: "Save Progress",
+      submitLabel: "Ready for Build Day",
+      generateFile: {
+        filename: "foundation-check.md",
+        template: `# Foundation Check — Day 2
+
+## Context Test
+**Result:** {{context-test}}
+{{context-fix}}
+
+## Tool Flow
+{{input-process-output}}
+
+## Visualization
+**Reaction:** {{visualization-reaction}}
+{{what-shifted}}
+
+## Build Readiness
+**Status:** {{build-readiness}}
+
+## Open Questions
+{{open-questions}}`,
+      },
     },
 
-    // Bonus: Skills
+    // Self-paced note
+    {
+      id: "ready-note",
+      type: "callout",
+      calloutType: "info",
+      content: `Foundation set? You can move straight to Day 3 — no need to wait. The "days" are a suggested rhythm, not a requirement.`,
+    },
+
+    // Bonus: Deeper playground experiments
     {
       id: "bonus",
       type: "bonus",
-      title: "Make it beautiful with Skills",
-      content: `Your visualization works, but it might look generic. There's a way to fix that.
+      title: "More playground experiments",
+      content: `Playgrounds aren't just for project flows. Try these:
 
-**Claude has Skills** — specialized prompts that make it better at specific tasks. One skill is perfect for this: \`/frontend-aesthetics\`.
+> Use the playground skill to show the architecture of my project — what components exist and how they connect. Let me click on each component to see details.
 
-To use it, install skills from [skills.sh](https://skills.sh):
+> Use the playground skill to explore layout options for my tool's main screen. Show three different approaches I can compare.
 
-> Go to skills.sh in your browser. Find the frontend-aesthetics skill. Follow the install instructions for your setup (Cursor or Claude Code).
+> Use the /frontend-aesthetics skill to refine my plan-visual.html. Combat the generic AI look — improve typography, add atmospheric backgrounds, use intentional color choices.
 
-Once installed, try this prompt:
-
-> Use the /frontend-aesthetics skill to refine my plan-visual.html. Combat the generic AI look. Improve typography, add atmospheric backgrounds, use intentional color choices. Make it feel crafted, not generated.
-
-Or explore different directions:
-
-> Create three visual variants of my project visualization using /frontend-aesthetics:
-> 1. Minimal and clean
-> 2. Bold and confident
-> 3. Warm and approachable
->
-> Generate separate HTML files for each.
-
-Open all three. See which feels like YOUR project.
-
-**Skills are optional but powerful.** As you build more, you'll discover skills for testing, documentation, code review, and more. For now, just know they exist.`,
+**Tip:** Think of a unique way of interacting with the model and ask it to express that as a playground. The results might surprise you.`,
       collapsed: true,
     },
   ],
@@ -327,10 +383,11 @@ Open all three. See which feels like YOUR project.
     { id: "create-claude-md", label: "Create CLAUDE.md" },
     { id: "read-review", label: "Read and review — stay in Plan Mode" },
     { id: "test-context", label: "Test in a fresh session" },
-    { id: "create-visual", label: "Generate plan-visual.html" },
+    { id: "install-skill", label: "Install the playground skill" },
+    { id: "create-visual", label: "Create your project playground" },
     { id: "open-browser", label: "Open it in your browser" },
     { id: "review-visual", label: "Refine until it matches your mental model" },
-    { id: "save-progress", label: "Complete the form above" },
+    { id: "save-progress", label: "Complete the foundation check" },
   ],
 
   nextDayTeaser:
