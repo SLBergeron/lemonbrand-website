@@ -227,17 +227,6 @@ Ask Claude: "This feels too big. What's the smallest version that would still be
           },
         },
         {
-          id: "pushback-moment",
-          label: "What did Claude push back on — or what should it have?",
-          type: "textarea",
-          placeholder:
-            "Claude flagged... and it changed my thinking because...",
-          required: true,
-          voiceEnabled: true,
-          helpText:
-            "If Claude just agreed with everything, that's worth noting too.",
-        },
-        {
           id: "scope-confidence",
           label: "Confidence check — ready to build on this scope?",
           type: "radio",
@@ -275,9 +264,6 @@ Ask Claude: "This feels too big. What's the smallest version that would still be
 
 ## What's Out of Scope
 {{what-stayed-out}}
-
-## Pushback Moments
-{{pushback-moment}}
 
 ## Open Questions
 {{open-questions}}
