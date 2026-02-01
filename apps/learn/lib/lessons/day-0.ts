@@ -111,7 +111,7 @@ It could be something for work — automating a process that eats your time. Or 
       ideas: [
         { icon: "3dicons-file-dynamic-color.png", label: "Proposal generator" },
         { icon: "3dicons-calculator-dynamic-color.png", label: "Quote calculator" },
-        { icon: "3dicons-explorer-dynamic-color.png", label: "Landing page" },
+        { icon: "3dicons-computer-dynamic-color.png", label: "Landing page" },
         { icon: "3dicons-copy-dynamic-color.png", label: "Email templates" },
         { icon: "3dicons-roll-brush-dynamic-color.png", label: "Content formatter" },
         { icon: "3dicons-chart-dynamic-color.png", label: "Data dashboard" },
