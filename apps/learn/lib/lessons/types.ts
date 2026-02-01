@@ -17,7 +17,8 @@ export type SectionType =
   | "paradigm"
   | "affirmation"
   | "social-follow"
-  | "referral";
+  | "referral"
+  | "project-discovery";
 
 export type CalloutType = "tip" | "warning" | "info" | "voice";
 
@@ -57,6 +58,12 @@ export interface FormField {
   required?: boolean;
   voiceEnabled?: boolean; // Show voice input hint
   helpText?: string;
+  conditionalOn?: {
+    fieldId: string;
+    operator: "eq" | "neq";
+    value: string;
+  };
+  minLengthHint?: number; // Show "Add more detail for better tips" if under this length
 }
 
 export interface FormSection extends LessonSection {
@@ -219,6 +226,19 @@ export interface ReferralSection extends LessonSection {
   ctaLabel: string;
 }
 
+export interface ProjectDiscoverySection extends LessonSection {
+  type: "project-discovery";
+  generateFile: {
+    filename: string;
+    template: string;
+    aiGeneration?: {
+      enabled: boolean;
+      endpoint: string;
+      loadingText?: string;
+    };
+  };
+}
+
 export type AnySection =
   | IntroSection
   | ConceptSection
@@ -235,7 +255,8 @@ export type AnySection =
   | ParadigmSection
   | AffirmationSection
   | SocialFollowSection
-  | ReferralSection;
+  | ReferralSection
+  | ProjectDiscoverySection;
 
 export interface ChecklistItem {
   id: string;

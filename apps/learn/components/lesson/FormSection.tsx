@@ -9,6 +9,7 @@ import { useVisitorId } from "@/hooks/useVisitorId";
 import { useSession } from "@/lib/auth-client";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
+import { IdeaFinder } from "@/components/IdeaFinder";
 
 interface Props {
   section: FormSection;
@@ -27,6 +28,7 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedFile, setGeneratedFile] = useState<string | null>(null);
   const [justGenerated, setJustGenerated] = useState(false);
+  const [showIdeaFinder, setShowIdeaFinder] = useState(false);
   const { recordWordCount, recordFormEdit } = useAchievementContext();
   const hasSubmittedOnce = useRef(false);
 
@@ -64,6 +66,35 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
 
   const handleChange = (fieldId: string, value: string) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
+
+    // Trigger IdeaFinder when user selects "no idea" on Day 0
+    if (fieldId === "has-idea" && value === "no-idea" && day === 0) {
+      setShowIdeaFinder(true);
+    }
+  };
+
+  const handleIdeaSelected = (idea: {
+    projectIdea: string;
+    targetUser: string;
+    currentProcess: string;
+  }) => {
+    setFormData((prev) => ({
+      ...prev,
+      "has-idea": "rough",
+      whatToBuild: idea.projectIdea,
+      currentProcess: idea.currentProcess,
+      ...(idea.targetUser && {
+        whoIsItFor:
+          idea.targetUser === "Just me"
+            ? "me"
+            : idea.targetUser === "My team"
+              ? "team"
+              : idea.targetUser === "My clients"
+                ? "clients"
+                : "public",
+      }),
+    }));
+    setShowIdeaFinder(false);
   };
 
   const generateMarkdownFromTemplate = () => {
@@ -208,7 +239,20 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
   };
 
   const isComplete = section.fields
-    .filter((f) => f.required)
+    .filter((f) => {
+      if (!f.required) return false;
+      // Exclude hidden conditional fields from required check
+      if (f.conditionalOn) {
+        const { fieldId, operator, value: condValue } = f.conditionalOn;
+        const currentValue = formData[fieldId] || "";
+        const isVisible =
+          operator === "eq"
+            ? currentValue === condValue
+            : currentValue !== condValue;
+        if (!isVisible) return false;
+      }
+      return true;
+    })
     .every((f) => formData[f.id]?.trim());
 
   return (
@@ -223,15 +267,41 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {section.fields.map((field) => (
-          <FormFieldComponent
-            key={field.id}
-            field={field}
-            value={formData[field.id] || ""}
-            onChange={(value) => handleChange(field.id, value)}
-            disabled={submitted || isGenerating}
+        {section.fields.map((field) => {
+          // Handle conditional field visibility
+          if (field.conditionalOn) {
+            const { fieldId, operator, value: condValue } = field.conditionalOn;
+            const currentValue = formData[fieldId] || "";
+            const isVisible =
+              operator === "eq"
+                ? currentValue === condValue
+                : currentValue !== condValue;
+            if (!isVisible) return null;
+          }
+
+          return (
+            <FormFieldComponent
+              key={field.id}
+              field={field}
+              value={formData[field.id] || ""}
+              onChange={(value) => handleChange(field.id, value)}
+              disabled={submitted || isGenerating}
+            />
+          );
+        })}
+
+        {/* IdeaFinder inline for Day 0 "no idea" users */}
+        {showIdeaFinder && day === 0 && (
+          <IdeaFinder
+            role={formData["role"] || ""}
+            techComfort={formData["tech-comfort"] || ""}
+            onIdeaSelected={handleIdeaSelected}
+            onCancel={() => {
+              setShowIdeaFinder(false);
+              setFormData((prev) => ({ ...prev, "has-idea": "rough" }));
+            }}
           />
-        ))}
+        )}
 
         {!submitted && !isGenerating ? (
           <Button
@@ -408,6 +478,15 @@ function FormFieldComponent({
           ))}
         </select>
       )}
+
+      {field.minLengthHint &&
+        (field.type === "textarea" || field.type === "text") &&
+        value.length > 0 &&
+        value.length < field.minLengthHint && (
+          <p className="text-xs text-amber-500">
+            Add more detail for better personalized tips.
+          </p>
+        )}
 
       {field.helpText && (
         <p className="text-xs text-muted-foreground">{field.helpText}</p>

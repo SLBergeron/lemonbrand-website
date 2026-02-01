@@ -23,24 +23,29 @@ GOOD projects:
 - Landing pages
 - Email template generators
 - Data visualizers (input data → chart/display)
-- Simple trackers/planners WITH LOCAL STORAGE ONLY
+- Trackers, planners, and apps that remember things (with local persistence)
+- Simple dashboards
+- Habit trackers, workout logs, project trackers (all great with localStorage)
 
 BAD projects (better for 8-week program):
 - Anything requiring user accounts or authentication
 - Anything with payments
-- Multi-page apps with complex navigation
 - Apps that need cloud databases (PostgreSQL, Convex, Supabase, Firebase)
 - Apps that need to sync data across devices
+- Apps requiring environment variable setup or deployment configuration for databases
 
 ## Key Principle
 The ideal Sprint project has a clear flow: INPUT → PROCESS → OUTPUT
 
-For persistence, ONLY use local/simple options:
-- localStorage (browser) - simplest, works for small data
+## Persistence is encouraged
+Projects CAN and SHOULD have persistence when it makes them more useful:
+- localStorage (browser) - simplest, works for small data, persists across sessions
 - JSON file - good for local tools
 - SQLite - good for more structured local data
 
-AVOID cloud databases entirely. They add complexity (setup, authentication, environment variables, deployment config) that derails beginners.
+These are all Sprint-friendly. Trackers, planners, and apps that remember things are GREAT projects.
+
+AVOID cloud databases entirely (PostgreSQL, Convex, Supabase, Firebase). They add complexity (setup, authentication, environment variables, deployment config) that derails beginners.
 
 ## Your Role
 Create a brief that:
@@ -84,12 +89,12 @@ Keep this tiny. A beginner should be able to build this in ~3 focused hours on D
 - [Add 2-3 specific features they might be tempted to add based on their idea]
 
 ## Data Storage Approach
-[Choose the simplest option that works:]
-- **No persistence needed** → Data resets on refresh (fine for generators)
-- **Small amounts of data** → localStorage (persists in browser)
+[Choose the simplest option that makes the tool useful:]
+- **No persistence needed** → Data resets on refresh (fine for generators/calculators)
+- **Small amounts of data** → localStorage (persists in browser, great for trackers and planners)
 - **More structured data** → SQLite or JSON file (local only)
 
-Keep it local. Cloud databases are an 8-week topic.
+Local persistence is encouraged — it makes projects more useful and satisfying. Cloud databases are an 8-week topic.
 
 ## Technical Context
 - Single-page Next.js web app

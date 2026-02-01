@@ -101,7 +101,7 @@ I'm on Claude's $200/month max plan. It's paid for itself many times over throug
       title: "What to Build",
       content: `A tool. Not a platform. Not a business. One thing that does one thing well.
 
-Something you already do manually that could be faster. Something achievable in 7 days.`,
+It could be something for work — automating a process that eats your time. Or something personal — tracking a habit, organizing recipes, logging workouts. If you can describe what it does in one sentence, it's the right size.`,
     },
 
     {
@@ -111,12 +111,15 @@ Something you already do manually that could be faster. Something achievable in 
       ideas: [
         { icon: "3dicons-file-dynamic-color.png", label: "Proposal generator" },
         { icon: "3dicons-calculator-dynamic-color.png", label: "Quote calculator" },
-        { icon: "3dicons-explorer-dynamic-color.png", label: "Landing page" },
+        { icon: "3dicons-computer-dynamic-color.png", label: "Landing page" },
         { icon: "3dicons-copy-dynamic-color.png", label: "Email templates" },
         { icon: "3dicons-roll-brush-dynamic-color.png", label: "Content formatter" },
         { icon: "3dicons-chart-dynamic-color.png", label: "Data dashboard" },
+        { icon: "3dicons-gym-dynamic-color.png", label: "Workout tracker" },
+        { icon: "3dicons-cup-dynamic-color.png", label: "Recipe keeper" },
+        { icon: "3dicons-calender-dynamic-color.png", label: "Habit tracker" },
       ],
-      footnote: "The test: Can you explain it in one sentence? If not, it's too big.",
+      footnote: "The test: Can you describe it in one sentence? Then it's the right size.",
     },
 
     {
@@ -124,12 +127,12 @@ Something you already do manually that could be faster. Something achievable in 
       type: "callout",
       calloutType: "warning",
       title: "Skip these for now",
-      content: `- Anything with user accounts
-- Anything that saves data between sessions
+      content: `- Anything with user accounts or login
 - Anything with payments
+- Anything that syncs across devices
 - Anything "like [successful product]"
 
-Build simple first. Add complexity later.`,
+Saving data locally is fine — trackers, planners, and logs all work great. Just skip cloud databases and multi-device sync for now.`,
     },
 
     // Setup exercise
@@ -157,46 +160,17 @@ Build simple first. Add complexity later.`,
       content: `This icon is a reminder to use your voice. Talking is faster than typing.`,
     },
 
-    // Project form
+    // Project discovery — guided multi-step experience
     {
-      id: "project-form",
-      type: "form",
-      title: "Define Your Project",
-      description: "Answer these questions to generate your project brief.",
-      fields: [
-        {
-          id: "whatToBuild",
-          label: "What do you want to build?",
-          type: "textarea",
-          placeholder:
-            "Example: A proposal generator that takes client name, project description, and pricing, then outputs a formatted proposal I can send",
-          required: true,
-          voiceEnabled: true,
-        },
-        {
-          id: "whoIsItFor",
-          label: "Who is it for?",
-          type: "radio",
-          options: [
-            { value: "me", label: "Just me" },
-            { value: "team", label: "My team" },
-            { value: "clients", label: "My clients" },
-          ],
-          required: true,
-        },
-        {
-          id: "currentProcess",
-          label: "What do you do manually today that this would replace?",
-          type: "textarea",
-          placeholder:
-            "Example: Every week I spend 2 hours copying client info into a Google Doc template, adjusting the pricing section, and reformatting it to look professional",
-          required: true,
-          voiceEnabled: true,
-        },
-      ],
+      id: "project-discovery",
+      type: "project-discovery",
       generateFile: {
         filename: "project-idea.md",
         template: `# Project Idea
+
+## About Me
+**Role:** {{role}}
+**Tech comfort:** {{tech-comfort}}
 
 ## What I'm Building
 {{whatToBuild}}
@@ -206,6 +180,12 @@ Build simple first. Add complexity later.`,
 
 ## Current Process
 {{currentProcess}}
+
+## Why It Matters
+{{why-matters}}
+
+## Success Looks Like
+{{success-looks-like}}
 `,
         aiGeneration: {
           enabled: true,
@@ -213,7 +193,14 @@ Build simple first. Add complexity later.`,
           loadingText: "Generating your project brief...",
         },
       },
-      submitLabel: "Generate project-idea.md",
+    },
+
+    // Ready to move on note
+    {
+      id: "ready-note",
+      type: "callout",
+      calloutType: "info",
+      content: `This is a self-paced course. The "days" are a suggested rhythm for someone balancing this with a job or other commitments. If you're feeling good and want to keep going, head straight to Day 1. There's no wrong pace.`,
     },
 
     // Bonus
@@ -221,13 +208,18 @@ Build simple first. Add complexity later.`,
       id: "bonus",
       type: "bonus",
       title: "Start the conversation",
-      content: `Done with setup? Warm up by talking to Claude about your project.
+      content: `Want a head start before Day 1? Open Claude and have a scoping conversation about your project.
 
-Open Claude and paste this:
+Paste this to get started:
 
-> I want to build [your project idea]. Ask me questions to help clarify what it should do.
+> I want to build {{projectIdea}}. I'm not ready to build yet — I just want to talk through the idea. Ask me questions to help clarify what it should do, who it's for, and where the edges are. Do not write any code or create any files. Just help me think.
 
-Don't build anything yet. Just talk. See what questions come up. Let Claude help you think through the edges of your idea.
+**Important:** Claude will want to jump ahead and start building. That's what it does. You have to hold the line — keep saying "don't build yet, just help me scope this." The goal is a clear picture of what you're making, not a single line of code.
+
+Good questions to explore together:
+- What's the simplest version that's still useful?
+- What inputs does it need? What does the output look like?
+- What can I cut to keep this achievable in a week?
 
 This is practice for Day 1, where we scope your project properly.`,
       collapsed: true,

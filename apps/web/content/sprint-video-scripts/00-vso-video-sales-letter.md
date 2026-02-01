@@ -92,51 +92,53 @@ By the end of Day 7, you have a working tool. Live on the internet. Something th
 
 ---
 
-## [02:30-03:30] PROOF - What Others Built
+## [02:30-03:30] EXAMPLES - What You Could Build
 
-[SCREEN SHARE: Show actual Sprint projects from previous cohorts - if not available, show mockups of project types]
+[SCREEN SHARE: Show demo project mockups]
 
-Here's what Sprint graduates have built:
+Let me show you what's actually possible in 7 days.
 
-[SCREEN SHARE: Proposal generator interface]
+[SCREEN SHARE: Unit converter tool demo]
 
-A proposal generator. She was writing the same proposals over and over for her consulting clients. Now she inputs the client name, the project scope, the pricing - and it outputs a formatted proposal she can send in minutes.
+A unit converter. Not just inches to centimeters - YOUR units. Fabric yardage. Recipe portions. Construction materials. Whatever weird conversion you do ten times a week.
 
-[SCREEN SHARE: Client qualifier tool]
+[SCREEN SHARE: Budget tracker demo]
 
-A client qualifier. He was taking discovery calls with bad-fit prospects. Now he has a tool that asks the right questions and tells him whether to book the call.
+A personal budget tracker. Something that actually fits how YOU think about money. Categories that make sense to you. Calculations that match your specific situation.
 
-[SCREEN SHARE: Invoice calculator]
+[SCREEN SHARE: Recipe scaler demo]
 
-An invoice calculator. She was using spreadsheets to calculate complex project invoices. Now she has a tool that does it in seconds.
+A recipe scaler and timer. Input your recipe, scale it up or down, get adjusted measurements and cooking times. Saves it locally so you can use it offline.
 
 [TALKING HEAD]
 
-None of these people had coding backgrounds. They had an idea. They had 7 days. They had a system.
+Notice what these have in common: they run entirely in your browser. No servers. No monthly hosting costs. Just a URL you can open on any device.
 
-That's it.
+That's the sweet spot for your first build. Useful enough to actually use. Simple enough to ship in a week.
 
 ---
 
-## [03:30-04:30] OFFER - Risk Reversal
+## [03:30-04:30] WHAT YOU'LL LEARN
 
-[TALKING HEAD: Direct, sincere]
+[TALKING HEAD: Teaching mode]
 
-Here's how it works.
+Let me tell you what you're actually learning in these 7 days.
 
-Days 0 and 1 are completely free. No credit card. You set up your tools, you scope your project, you see if this is for you.
+First, you learn how to scope. Most people fail because they try to build something too big. Day 0 teaches you how to cut a project down to something you can actually finish.
 
-If it's not? You walk away. No pressure.
+[SCREEN SHARE: Show project scope example]
 
-If it is? $297 unlocks Days 2 through 7. That's the full build-and-ship experience.
+Second, you learn how to communicate with AI. Not prompting - communicating. How to describe what you want. How to give context. How to debug when things go wrong. This is the skill that transfers to every future project.
 
-And here's the thing most people don't expect:
+[SCREEN SHARE: Show Claude Code conversation]
 
-If you complete all 7 days - and I mean actually complete them, do the work, ship the thing - that $297 becomes credit toward the 8-Week program.
+Third, you learn how to deploy. Your tool will be live on the internet by Day 5. A real URL anyone can visit. You'll understand how that works, and you'll be able to do it again.
 
-So you're not paying to learn. You're paying to ship. And if you want to go deeper after, the money transfers.
+[TALKING HEAD]
 
-48-hour money-back guarantee. If you buy and it's not what you expected, full refund, no questions asked.
+Fourth, you learn how to iterate. Ship something rough, get feedback, improve it. That loop is how real software gets built.
+
+By Day 7, you don't just have a tool. You have a system you can repeat. That's the actual product here.
 
 ---
 
@@ -169,14 +171,16 @@ Click below. Start free. Build something that didn't exist before you made it.
   - ChatGPT conversation with broken code
   - Cursor with error messages
   - YouTube tutorial paused
-  - Simple Sprint project examples (proposal generator, calculator, qualifier)
+  - Demo project mockups (unit converter, budget tracker, recipe scaler)
+  - Project scope example document
+  - Claude Code conversation in action
   - 7-day arc visual/timeline
 
 ### Key Phrases to Hit
 - "You're not learning to code. You're learning to communicate."
 - "Not a tutorial - YOUR project"
-- "Something that exists because you built it"
-- "You're not paying to learn. You're paying to ship."
+- "No servers. No monthly hosting costs."
+- "By Day 7, you don't just have a tool. You have a system you can repeat."
 
 ### Tone Notes
 - Direct, not hype
