@@ -109,8 +109,8 @@ export function AIDialogueModule({ userId, day }: AIDialogueModuleProps) {
   }
 
   return (
-    <div className="p-5 rounded-lg bg-accent/5 border border-accent/20">
-      <div className="flex items-center justify-between mb-4">
+    <div className="p-6 sm:p-8 rounded-lg bg-accent/5 border border-accent/20">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Sparkles className="size-5 text-accent" />
           <h2 className="font-display font-semibold text-foreground">
@@ -151,10 +151,12 @@ export function AIDialogueModule({ userId, day }: AIDialogueModuleProps) {
             animate={{ opacity: 1, y: 0 }}
           >
             <div
-              className="prose prose-sm max-w-none text-muted-foreground
+              className="prose prose-base max-w-none text-muted-foreground
                 [&_strong]:text-foreground [&_li]:text-muted-foreground
                 [&_p]:text-muted-foreground [&_h1]:text-foreground
-                [&_h2]:text-foreground [&_h3]:text-foreground"
+                [&_h2]:text-foreground [&_h3]:text-foreground
+                [&_h2]:mt-6 [&_h3]:mt-5 [&_ul]:my-3 [&_ol]:my-3
+                [&_p]:my-3 [&_li]:my-1"
               dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }}
             />
 
@@ -209,9 +211,18 @@ export function AIDialogueModule({ userId, day }: AIDialogueModuleProps) {
 
 /**
  * Simple markdown to HTML converter for the dialogue content.
+ * Normalizes model output so headings, lists, and paragraphs
+ * are always separated into distinct blocks.
  */
 function markdownToHtml(md: string): string {
-  return md
+  // Normalize: ensure a blank line before headings and list items
+  // so they aren't merged with the preceding block.
+  const normalized = md
+    .replace(/\n(#{1,3} )/g, "\n\n$1")
+    .replace(/\n([-*] )/g, "\n\n$1")
+    .replace(/\n(\d+\. )/g, "\n\n$1");
+
+  return normalized
     .split("\n\n")
     .map((block) => {
       block = block.trim();
@@ -240,7 +251,7 @@ function markdownToHtml(md: string): string {
 
       return `<p>${inline(block.replace(/\n/g, " "))}</p>`;
     })
-    .join("");
+    .join("\n");
 }
 
 function inline(text: string): string {
