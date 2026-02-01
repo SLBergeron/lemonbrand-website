@@ -69,6 +69,50 @@ As your project grows, you'll have multiple context files. Claude manages them. 
       copyable: false,
     },
 
+    // Plan mode vs Build mode - interactive toggle
+    {
+      id: "plan-vs-build",
+      type: "mode-toggle",
+      title: "Two Modes of Working",
+      planMode: {
+        label: "Plan Mode — where you are today",
+        items: [
+          "Type /plan to enter planning mode",
+          "Claude thinks out loud instead of writing code",
+          "Ask questions, explore trade-offs, scope decisions",
+          "Read everything Claude produces — push back if it's off",
+          "Today: scope your project without writing a line of code",
+        ],
+      },
+      buildMode: {
+        label: "Build Mode — starting Day 3",
+        items: [
+          "Claude writes and edits code directly",
+          "Accept Edits lets changes happen automatically",
+          "You guide direction, Claude handles implementation",
+          "Great once your scope is locked — risky before that",
+          "Not today. Today is about getting the plan right.",
+        ],
+      },
+      hint: "Press Shift+Tab to cycle between modes in Claude Code",
+    },
+
+    // Pushback warning - before scoping exercise so users know to watch for this
+    {
+      id: "pushback",
+      type: "callout",
+      calloutType: "warning",
+      title: "Claude agrees too easily",
+      content: `Models default to agreement. During scoping, this means Claude will say "great idea!" to everything — even features that will blow up your timeline.
+
+Push back. Try:
+- "What's wrong with this plan?"
+- "If this fails, what's probably why?"
+- "Is this actually buildable in a week?"
+
+You want problems surfaced now, not on Day 5.`,
+    },
+
     // Main exercise
     {
       id: "scoping-exercise",
@@ -83,7 +127,7 @@ As your project grows, you'll have multiple context files. Claude manages them. 
       ],
       prompt: `Read project-idea.md. I want to scope this for a 7-day sprint where I'm learning to build with AI.
 
-Help me figure out what's realistic. Ask me questions to clarify what I actually need.`,
+Help me figure out what's realistic. Ask me questions to clarify what I actually need. Don't write any code or start building — just help me think through the scope.`,
       expectedOutcome:
         "A conversation that surfaces what you actually need to build.",
     },
@@ -116,21 +160,6 @@ Help me figure out what's realistic. Ask me questions to clarify what I actually
       expectedOutcome: "A project-scope.md file you can reference tomorrow.",
     },
 
-    // Get pushback
-    {
-      id: "pushback",
-      type: "concept",
-      title: "Make Claude Disagree",
-      content: `Models agree with humans. This is a problem when you need honest feedback.
-
-Try these:
-- "What's wrong with this plan?"
-- "If this fails, what's probably why?"
-- "What am I not seeing?"
-
-The goal: surface problems now, not on Day 5.`,
-    },
-
     {
       id: "scope-warning",
       type: "callout",
@@ -148,62 +177,129 @@ Ask Claude: "This feels too big. What's the smallest version that would still be
     {
       id: "reflection-form",
       type: "form",
-      title: "Scope Capture",
-      description: "Your answers here personalize tomorrow's tips for your specific project.",
+      title: "Lock In Your Scope",
+      description:
+        "Quick check on where you landed. Your answers shape tomorrow's tips.",
       fields: [
         {
+          id: "scope-feeling",
+          label: "How does your scope feel right now?",
+          type: "radio",
+          options: [
+            { value: "locked", label: "Laser focused" },
+            { value: "mostly", label: "Mostly clear" },
+            { value: "fuzzy", label: "Still fuzzy" },
+          ],
+          required: true,
+        },
+        {
           id: "coreFeature",
-          label: "What's your ONE core feature? Describe it in one sentence.",
+          label: "Your ONE core feature — one sentence.",
           type: "textarea",
           placeholder: "User provides X → tool does Y → user gets Z",
           required: true,
           minLengthHint: 20,
+          helpText:
+            "If you can't say it in one sentence, the scope might not be tight enough yet.",
         },
         {
-          id: "model-summary",
-          label: "Paste your model's scoping summary here",
-          type: "textarea",
-          placeholder: "Copy the summary Claude gave you during scoping...",
+          id: "cut-amount",
+          label: "How much did you cut during scoping?",
+          type: "radio",
+          options: [
+            { value: "nothing", label: "Nothing — already lean" },
+            { value: "some", label: "A few nice-to-haves" },
+            { value: "lots", label: "Killed my darlings" },
+            { value: "not-enough", label: "Still too much in there" },
+          ],
           required: true,
-          voiceEnabled: true,
-          helpText: "The curriculum asks you to get this from Claude. Paste it here.",
         },
         {
-          id: "what-got-cut",
-          label: "What ideas did you cut during scoping? What got moved to \"v2\"?",
+          id: "what-stayed-out",
+          label: "What got moved to v2?",
           type: "textarea",
-          placeholder: "I wanted to include... but we cut it because...",
+          placeholder: "We decided not to include... because...",
+          voiceEnabled: true,
+          conditionalOn: {
+            fieldId: "cut-amount",
+            operator: "neq",
+            value: "nothing",
+          },
+        },
+        {
+          id: "pushback-moment",
+          label: "What did Claude push back on — or what should it have?",
+          type: "textarea",
+          placeholder:
+            "Claude flagged... and it changed my thinking because...",
           required: true,
           voiceEnabled: true,
+          helpText:
+            "If Claude just agreed with everything, that's worth noting too.",
         },
         {
           id: "scope-confidence",
-          label: "How confident are you in this scope?",
-          type: "select",
+          label: "Confidence check — ready to build on this scope?",
+          type: "radio",
           options: [
-            { value: "very", label: "Very confident" },
-            { value: "mostly", label: "Mostly confident" },
+            { value: "ready", label: "Ready to build" },
+            { value: "mostly", label: "Close enough" },
             { value: "questions", label: "Still have questions" },
           ],
           required: true,
         },
         {
-          id: "surprise",
-          label: "What surprised you during the scoping conversation?",
+          id: "open-questions",
+          label: "What's still unresolved?",
           type: "textarea",
-          placeholder: "I didn't expect...",
+          placeholder: "I'm not sure about... and need to figure out...",
           voiceEnabled: true,
+          conditionalOn: {
+            fieldId: "scope-confidence",
+            operator: "eq",
+            value: "questions",
+          },
         },
       ],
-      submitLabel: "Save Progress",
+      generateFile: {
+        filename: "scope-snapshot.md",
+        template: `# Scope Snapshot — Day 1
+
+## How It Feels
+**Scope clarity:** {{scope-feeling}}
+**Confidence:** {{scope-confidence}}
+**How much got cut:** {{cut-amount}}
+
+## Core Feature
+{{coreFeature}}
+
+## What's Out of Scope
+{{what-stayed-out}}
+
+## Pushback Moments
+{{pushback-moment}}
+
+## Open Questions
+{{open-questions}}
+`,
+      },
+      submitLabel: "Lock It In",
+    },
+
+    // Self-paced note
+    {
+      id: "ready-note",
+      type: "callout",
+      calloutType: "info",
+      content: `Done scoping? You can move straight to Day 2 — no need to wait. The "days" are a suggested rhythm, not a requirement.`,
     },
 
     // Bonus
     {
       id: "bonus",
       type: "bonus",
-      title: "Make Claude disagree",
-      content: `Want Claude to really push back? Try these prompts:
+      title: "Go deeper on pushback",
+      content: `Already got Claude to poke holes? Push harder with these:
 
 > Steelman the opposite. Make the best case for NOT building this.
 
