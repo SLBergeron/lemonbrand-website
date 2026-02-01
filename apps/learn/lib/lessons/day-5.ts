@@ -323,11 +323,23 @@ By the end of today, this should feel like a tool you'd actually use — not jus
       id: "reflection-form",
       type: "form",
       title: "Expansion Report",
-      description: "Your answers here personalize tomorrow's polish tips for your specific project.",
+      description:
+        "Your answers shape tomorrow's polish priorities.",
       fields: [
         {
+          id: "usefulness-rating",
+          label: "How useful is your tool right now?",
+          type: "radio",
+          options: [
+            { value: "very-useful", label: "I'd use this daily" },
+            { value: "somewhat", label: "Getting there" },
+            { value: "not-yet", label: "Not yet — but I see the potential" },
+          ],
+          required: true,
+        },
+        {
           id: "capability-added",
-          label: "What capability did you add today, and why did you choose it?",
+          label: "What did you add today, and why?",
           type: "textarea",
           placeholder: "I added... because the feedback showed...",
           required: true,
@@ -335,16 +347,8 @@ By the end of today, this should feel like a tool you'd actually use — not jus
           minLengthHint: 20,
         },
         {
-          id: "feedback-acted-on",
-          label: "What feedback did you act on? What did you skip and why?",
-          type: "textarea",
-          placeholder: "I acted on... I skipped... because...",
-          required: true,
-          voiceEnabled: true,
-        },
-        {
           id: "tool-description-now",
-          label: "What does your tool do now that it didn't do yesterday?",
+          label: "What does your tool do now that it didn't yesterday?",
           type: "textarea",
           placeholder: "Now it can also...",
           required: true,
@@ -352,24 +356,13 @@ By the end of today, this should feel like a tool you'd actually use — not jus
         },
         {
           id: "project-idea",
-          label: "What's one project idea you captured today? (Just the rough concept)",
+          label: "Captured any new project ideas?",
           type: "textarea",
           placeholder: "I want to build something that...",
           voiceEnabled: true,
         },
-        {
-          id: "usefulness-rating",
-          label: "How useful is this tool to you right now?",
-          type: "select",
-          options: [
-            { value: "very-useful", label: "Very useful — I'd use this daily" },
-            { value: "somewhat", label: "Somewhat — needs more work" },
-            { value: "not-yet", label: "Not yet — but I can see the potential" },
-          ],
-          required: true,
-        },
       ],
-      submitLabel: "Save Progress",
+      submitLabel: "Save Expansion Notes",
     },
 
     // Bonus

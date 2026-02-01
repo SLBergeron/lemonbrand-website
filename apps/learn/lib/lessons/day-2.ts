@@ -298,18 +298,6 @@ This is how you'll work from now on:
           required: true,
         },
         {
-          id: "what-shifted",
-          label: "What shifted when you saw it?",
-          type: "textarea",
-          placeholder: "When I saw it visualized, I realized...",
-          voiceEnabled: true,
-          conditionalOn: {
-            fieldId: "visualization-reaction",
-            operator: "neq",
-            value: "confirmed",
-          },
-        },
-        {
           id: "build-readiness",
           label: "Ready for build day?",
           type: "radio",
@@ -343,7 +331,6 @@ This is how you'll work from now on:
 
 ## Visualization
 **Reaction:** {{visualization-reaction}}
-{{what-shifted}}
 
 ## Build Readiness
 **Status:** {{build-readiness}}
