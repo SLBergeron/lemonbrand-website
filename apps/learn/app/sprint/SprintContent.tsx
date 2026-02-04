@@ -7,6 +7,8 @@ import { lessons } from "@/lib/lessons";
 import { useSession } from "@/lib/auth-client";
 import { useQuery } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
+import { WaitlistBanner } from "@/components/WaitlistBanner";
+import { SPRINT_CONFIG } from "@/lib/config";
 
 // Build DAYS from lesson data to keep durations in sync
 const DAYS = [
@@ -67,8 +69,13 @@ export function SprintContent() {
         </p>
       </header>
 
-      {/* Free Trial CTA - hide for enrolled users */}
-      {!isEnrolled && (
+      {/* Waitlist CTA - show when in waitlist mode and not enrolled */}
+      {SPRINT_CONFIG.waitlistMode && !isEnrolled && (
+        <WaitlistBanner variant="homepage" />
+      )}
+
+      {/* Free Trial CTA - hide for enrolled users and when in waitlist mode */}
+      {!SPRINT_CONFIG.waitlistMode && !isEnrolled && (
         <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card shadow-lg">
           {/* Accent glow */}
           <div className="absolute -top-24 -right-24 size-48 rounded-full bg-accent/20 blur-3xl" />

@@ -8,6 +8,8 @@ import { getLesson } from "@/lib/lessons";
 import { SectionRenderer, SectionDivider } from "./lesson";
 import { LessonChecklist } from "./LessonChecklist";
 import { TrialCTA } from "./TrialCTA";
+import { WaitlistBanner } from "./WaitlistBanner";
+import { SPRINT_CONFIG } from "@/lib/config";
 import { AIDialogueModule } from "./AIDialogueModule";
 import { useLocalProgress } from "@/hooks/useLocalProgress";
 import { useAchievementContext } from "@/context/AchievementContext";
@@ -347,10 +349,14 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
         </motion.p>
       )}
 
-      {/* Trial CTA - hide for enrolled users */}
+      {/* Trial CTA or Waitlist - hide for enrolled users */}
       {isPreview && day === 1 && !isEnrolled && (
         <motion.div variants={itemVariants} className="mt-16">
-          <TrialCTA />
+          {SPRINT_CONFIG.waitlistMode ? (
+            <WaitlistBanner variant="lesson" />
+          ) : (
+            <TrialCTA />
+          )}
         </motion.div>
       )}
 
@@ -381,10 +387,17 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
 
           <Button asChild variant="accent">
             {day === 1 && isPreview && !isEnrolled ? (
-              <Link href="/sprint/checkout">
-                Unlock Full Course
-                <Lock className="size-4 ml-2" />
-              </Link>
+              SPRINT_CONFIG.waitlistMode ? (
+                <Link href="/sprint/checkout">
+                  Join Waitlist
+                  <ChevronRight className="size-4 ml-1" />
+                </Link>
+              ) : (
+                <Link href="/sprint/checkout">
+                  Unlock Full Course
+                  <Lock className="size-4 ml-2" />
+                </Link>
+              )
             ) : (
               <Link
                 href={
