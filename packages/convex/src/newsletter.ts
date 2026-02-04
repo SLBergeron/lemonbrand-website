@@ -330,6 +330,23 @@ export const updateSubstackStep = mutation({
 // Sprint Waitlist
 // ============================================
 
+// Get sprint waitlist subscribers
+export const getWaitlistSubscribers = query({
+  handler: async (ctx) => {
+    const subscribers = await ctx.db
+      .query("newsletterSubscribers")
+      .collect();
+
+    return subscribers
+      .filter((s) => s.tags?.includes("sprint-waitlist"))
+      .map((s) => ({
+        email: s.email,
+        subscribedAt: s.subscribedAt,
+        status: s.status,
+      }));
+  },
+});
+
 // Subscribe to sprint waitlist (no confirmation required)
 export const subscribeWaitlist = mutation({
   args: {

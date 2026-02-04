@@ -5,6 +5,7 @@ import {
   Head,
   Heading,
   Html,
+  Img,
   Link,
   Preview,
   Section,
@@ -25,11 +26,21 @@ export default function WaitlistWelcome({
       <Preview>You're on the 7-Day Sprint waitlist</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={heading}>You're on the list.</Heading>
+          {/* Header with icon */}
+          <Section style={headerSection}>
+            <Img
+              src="https://learn.lemonbrand.io/assets/3dicons-flash-dynamic-color.png"
+              alt="7-Day Sprint"
+              width={64}
+              height={64}
+              style={icon}
+            />
+            <Heading style={heading}>You're on the list.</Heading>
+          </Section>
 
           <Text style={text}>
             Thanks for signing up for the 7-Day Sprint waitlist. The course is
-            almost complete — I'm finishing up the video lessons now.
+            almost complete. I'm finishing up the video lessons now.
           </Text>
 
           <Text style={text}>
@@ -53,11 +64,11 @@ export default function WaitlistWelcome({
           </Section>
 
           <Text style={text}>
-            Have questions? Reply to this email — I read everything.
+            Have questions? Reply to this email. I read everything.
           </Text>
 
           <Text style={signature}>
-            — Simon
+            Simon
             <br />
             <span style={signatureSubtext}>Lemonbrand</span>
           </Text>
@@ -79,11 +90,20 @@ const container = {
   maxWidth: "480px",
 };
 
+const headerSection = {
+  textAlign: "center" as const,
+  marginBottom: "24px",
+};
+
+const icon = {
+  margin: "0 auto 16px",
+};
+
 const heading = {
   fontSize: "24px",
   fontWeight: "700" as const,
   color: "#000000",
-  marginBottom: "24px",
+  margin: "0",
 };
 
 const text = {
