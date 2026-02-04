@@ -40,12 +40,21 @@ export async function POST(request: Request) {
     if (!result.alreadySubscribed) {
       const emailHtml = await render(WaitlistWelcome({ email }));
 
-      await resend.emails.send({
-        from: EMAIL_FROM,
-        to: email,
-        subject: "You're on the 7-Day Sprint waitlist",
-        html: emailHtml,
-      });
+      // Send welcome email to subscriber and notification to Simon
+      await Promise.all([
+        resend.emails.send({
+          from: EMAIL_FROM,
+          to: email,
+          subject: "You're on the 7-Day Sprint waitlist",
+          html: emailHtml,
+        }),
+        resend.emails.send({
+          from: EMAIL_FROM,
+          to: "hello@lemonbrand.io",
+          subject: `New Sprint waitlist signup: ${email}`,
+          text: `${email} just joined the 7-Day Sprint waitlist.`,
+        }),
+      ]);
     }
 
     return NextResponse.json({
