@@ -66,7 +66,7 @@ export function WaitlistBanner({ variant = "homepage" }: WaitlistBannerProps) {
 
   if (variant === "homepage") {
     return (
-      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card shadow-premium-lg">
         {/* Accent glow */}
         <div className="absolute -top-24 -right-24 size-48 rounded-full bg-accent/20 blur-3xl" />
         <div className="absolute -bottom-16 -left-16 size-32 rounded-full bg-success/15 blur-2xl" />
@@ -75,78 +75,98 @@ export function WaitlistBanner({ variant = "homepage" }: WaitlistBannerProps) {
           {submitted ? (
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
               <div className="flex items-center gap-4">
-                <div className="size-12 rounded-full bg-success/20 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="size-6 text-success" />
+                <div className="size-14 rounded-full bg-success/20 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="size-7 text-success" />
                 </div>
                 <div>
                   <h2 className="font-display font-bold text-xl">
                     You&apos;re on the list!
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    We&apos;ll notify you when the course launches.
+                    Check your email for confirmation.
                   </p>
                 </div>
               </div>
-              <Button asChild variant="secondary" className="shrink-0">
+              <Button asChild variant="accent" className="shrink-0">
                 <Link href="/sprint/preview/day/0">
-                  Preview Days 0-1
+                  Start Free Preview
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
             </div>
           ) : (
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-              <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
-                  <Play className="size-3" />
-                  Coming Soon
-                </div>
-                <h2 className="font-display font-bold text-xl lg:text-2xl">
-                  Join the Waitlist
-                </h2>
-                <p className="text-sm text-muted-foreground max-w-md">
-                  The course is almost ready. Get notified the moment it
-                  launches and lock in early access pricing.
-                </p>
-              </div>
-
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row gap-3 shrink-0 lg:w-auto"
-              >
-                <div className="relative flex-1 sm:w-64">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm"
-                    disabled={loading}
-                    required
+            <div className="space-y-6">
+              {/* Header with icon */}
+              <div className="flex gap-5 items-start">
+                <div className="shrink-0 hidden sm:block">
+                  <Image
+                    src="/assets/3dicons-mail-dynamic-gradient.png"
+                    alt="Join waitlist"
+                    width={72}
+                    height={72}
+                    className="drop-shadow-lg"
                   />
                 </div>
-                <Button
-                  type="submit"
-                  variant="accent"
-                  disabled={loading || !email}
-                  className="shrink-0"
-                >
-                  {loading ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    <>
-                      Join Waitlist
-                      <ArrowRight className="size-4" />
-                    </>
-                  )}
-                </Button>
-              </form>
-            </div>
-          )}
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
+                    <Sparkles className="size-3 text-accent" />
+                    <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <h2 className="font-display font-bold text-xl lg:text-2xl">
+                    Join the Waitlist
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    The course is almost ready. Get notified when it launches
+                    and lock in early access pricing.
+                  </p>
+                </div>
+              </div>
 
-          {error && (
-            <p className="text-sm text-destructive mt-3">{error}</p>
+              {/* Form */}
+              <div className="pt-5 border-t border-border/50">
+                {error && (
+                  <p className="text-sm text-destructive mb-3">{error}</p>
+                )}
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col sm:flex-row gap-3"
+                >
+                  <div className="relative flex-1">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all"
+                      disabled={loading}
+                      required
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    variant="accent"
+                    size="lg"
+                    disabled={loading || !email}
+                    className="shrink-0 shadow-accent hover:shadow-glow transition-shadow"
+                  >
+                    {loading ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      <>
+                        Join Waitlist
+                        <ArrowRight className="size-4" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+                <p className="text-xs text-muted-foreground mt-3">
+                  No spam, ever. Unsubscribe anytime.
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </div>
