@@ -325,3 +325,47 @@ export const updateSubstackStep = mutation({
     return { success: true };
   },
 });
+
+// ============================================
+// Sprint Waitlist
+// ============================================
+
+// Subscribe to sprint waitlist (no confirmation required)
+export const subscribeWaitlist = mutation({
+  args: {
+    email: v.string(),
+    source: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const email = args.email.toLowerCase().trim();
+    const source = args.source || "sprint-waitlist";
+
+    // Check for existing subscriber
+    const existing = await ctx.db
+      .query("newsletterSubscribers")
+      .withIndex("by_email", (q) => q.eq("email", email))
+      .first();
+
+    if (existing) {
+      // Add tag if not already on waitlist
+      const tags = existing.tags || [];
+      if (!tags.includes("sprint-waitlist")) {
+        await ctx.db.patch(existing._id, {
+          tags: [...tags, "sprint-waitlist"],
+        });
+      }
+      return { success: true, alreadySubscribed: existing.status === "active" };
+    }
+
+    // Create new subscriber
+    await ctx.db.insert("newsletterSubscribers", {
+      email,
+      status: "active",
+      subscribedAt: Date.now(),
+      source,
+      tags: ["sprint-waitlist"],
+    });
+
+    return { success: true };
+  },
+});
