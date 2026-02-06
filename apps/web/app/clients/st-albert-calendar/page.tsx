@@ -1190,14 +1190,6 @@ function CalendarContent({ language, setLanguage }: { language: Language; setLan
               <span>{t.launchDate}</span>
             </div>
 
-            <Button
-              onClick={handlePrint}
-              variant="outline"
-              className="gap-2 rounded-full border-[#001d4a]/20 text-[#001d4a]/70 hover:bg-[#001d4a]/5 print:hidden"
-            >
-              <Printer className="h-4 w-4" />
-              {t.printCalendar}
-            </Button>
           </div>
         </motion.div>
 
