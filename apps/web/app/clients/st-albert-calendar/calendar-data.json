@@ -248,7 +248,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/contest?lang=fr&format=facebook",
+                "url": "/clients/st-albert/graphics/contest-fr-facebook.png",
                 "description": { "fr": "Graphique annonce concours", "en": "Contest announcement graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#FromageStAlbert"],
@@ -266,7 +266,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/contest?lang=en&format=facebook",
+                "url": "/clients/st-albert/graphics/contest-en-facebook.png",
                 "description": { "fr": "Graphique annonce concours", "en": "Contest announcement graphic" }
               },
               "hashtags": ["#StAlbert", "#RecipeContest", "#CheeseLovers", "#LocalFood"]
@@ -283,7 +283,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/contest?lang=fr&format=reel",
+                "url": "/clients/st-albert/graphics/contest-fr-reel.png",
                 "description": { "fr": "Graphique format Reel", "en": "Reel format graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#CheeseLovers"]
@@ -557,7 +557,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=fr&format=facebook",
+                "url": "/clients/st-albert/graphics/loyalty-fr-facebook.png",
                 "description": { "fr": "Graphique programme fidélité", "en": "Loyalty program graphic" }
               },
               "hashtags": ["#StAlbert", "#ProgrammeFidelite", "#LoyaltyProgram", "#FromageGratuit", "#FreeCheese"]
@@ -574,7 +574,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=en&format=facebook",
+                "url": "/clients/st-albert/graphics/loyalty-en-facebook.png",
                 "description": { "fr": "Graphique programme fidélité", "en": "Loyalty program graphic" }
               },
               "hashtags": ["#StAlbert", "#LoyaltyProgram", "#FreeCheese", "#CheeseLovers"]
@@ -591,7 +591,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=fr&format=reel",
+                "url": "/clients/st-albert/graphics/loyalty-fr-reel.png",
                 "description": { "fr": "Graphique animé", "en": "Animated graphic" }
               },
               "hashtags": ["#StAlbert", "#ProgrammeFidelite", "#LoyaltyProgram", "#FreeCheese"]
@@ -717,7 +717,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/voting?lang=fr&format=facebook",
+                "url": "/clients/st-albert/graphics/voting-fr-facebook.png",
                 "description": { "fr": "Graphique vote ouvert", "en": "Voting open graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Vote", "#FromageStAlbert"]
@@ -734,7 +734,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/voting?lang=en&format=facebook",
+                "url": "/clients/st-albert/graphics/voting-en-facebook.png",
                 "description": { "fr": "Graphique vote ouvert", "en": "Voting open graphic" }
               },
               "hashtags": ["#StAlbert", "#RecipeContest", "#Vote", "#CheeseLovers"]
@@ -751,7 +751,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/voting?lang=fr&format=reel",
+                "url": "/clients/st-albert/graphics/voting-fr-reel.png",
                 "description": { "fr": "Graphique animé vote", "en": "Animated voting graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Vote"]
@@ -964,7 +964,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/winner?variant=closed&lang=fr&format=facebook",
+                "url": "/clients/st-albert/graphics/winner-closed-fr-facebook.png",
                 "description": { "fr": "Graphique vote fermé", "en": "Voting closed graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Jury", "#Gagnants"]
@@ -981,7 +981,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/winner?variant=closed&lang=fr&format=story",
+                "url": "/clients/st-albert/graphics/winner-closed-fr-story.png",
                 "description": { "fr": "Graphique teaser", "en": "Teaser graphic" }
               }
             }
@@ -1174,7 +1174,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=fr&format=facebook",
+                "url": "/clients/st-albert/graphics/winner-restart-fr-facebook.png",
                 "description": { "fr": "Graphique nouvelle édition", "en": "New edition graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#NouvelleEdition", "#NewEdition"]
@@ -1191,7 +1191,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=en&format=facebook",
+                "url": "/clients/st-albert/graphics/winner-restart-en-facebook.png",
                 "description": { "fr": "Graphique nouvelle édition", "en": "New edition graphic" }
               },
               "hashtags": ["#StAlbert", "#RecipeContest", "#CheeseLovers", "#NewEdition"]
@@ -1208,7 +1208,7 @@
               },
               "asset": {
                 "type": "graphic",
-                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=fr&format=reel",
+                "url": "/clients/st-albert/graphics/winner-restart-fr-reel.png",
                 "description": { "fr": "Graphique animé", "en": "Animated graphic" }
               },
               "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#NouvelleEdition"]
