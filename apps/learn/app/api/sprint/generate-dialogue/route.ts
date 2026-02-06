@@ -29,11 +29,19 @@ export async function POST(request: NextRequest) {
     }
 
     const convex = getConvexClient();
+    const typedUserId = userId as Id<"users">;
 
-    // Rate limit: 10 requests/hour per user
+    // Check if user has active enrollment for higher rate limits
+    const enrollment = await convex.query(
+      api.sprintEnrollments.getEnrollmentByUser,
+      { userId: typedUserId }
+    );
+    const isPaid = enrollment?.status === "active" || enrollment?.status === "completed";
+
+    // Rate limit: 50/hour for paid users, 5/hour for free
     const rateLimit = await convex.mutation(
       api.prdRateLimits.checkAndIncrement,
-      { identifier: `dialogue-${userId}` }
+      { identifier: `dialogue-${userId}`, limit: isPaid ? 50 : undefined }
     );
 
     if (!rateLimit.allowed) {
@@ -47,12 +55,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Gather context from Convex
-    const typedUserId = userId as Id<"users">;
-
-    const [enrollment, allFormResponses, previousDialogue] = await Promise.all([
-      convex.query(api.sprintEnrollments.getEnrollmentByUser, {
-        userId: typedUserId,
-      }),
+    const [, allFormResponses, previousDialogue] = await Promise.all([
+      // enrollment already fetched above for rate limit check
+      Promise.resolve(enrollment),
       convex.query(api.sprintFormResponses.getFormResponsesByUser, {
         userId: typedUserId,
       }),

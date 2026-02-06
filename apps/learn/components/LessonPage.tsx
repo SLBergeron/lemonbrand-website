@@ -17,7 +17,7 @@ import { BlitzModeMessage } from "./achievements";
 import { isBlitzModeEligible } from "@/lib/achievements";
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "@/lib/auth-client";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@lemonbrand/convex/client";
 
 interface LessonPageProps {
@@ -77,16 +77,49 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
     betterAuthId ? { betterAuthId } : "skip"
   );
 
+  // Convex checklist progress for enrolled users
+  const convexCompletedItems = useQuery(
+    api.sprintChecklistProgress.getCompletedItemIds,
+    isEnrolled && convexUser ? { userId: convexUser._id, day } : "skip"
+  );
+  const toggleChecklistConvex = useMutation(api.sprintChecklistProgress.toggle);
+  const completeChecklistConvex = useMutation(api.sprintChecklistProgress.complete);
+
   // Track if user has scrolled
   const [hasScrolled, setHasScrolled] = useState(false);
   const [showBlitzMode, setShowBlitzMode] = useState(false);
 
   const dayProgress = getDayProgress(day as 0 | 1);
-  const completedItems = dayProgress?.checklist || [];
+  // Use Convex data for enrolled users, localStorage for preview
+  const completedItems = isEnrolled && convexCompletedItems
+    ? convexCompletedItems
+    : dayProgress?.checklist || [];
   const totalItems = lesson?.checklist.length || 0;
   const progressPercent = totalItems > 0
     ? Math.round((completedItems.length / totalItems) * 100)
     : 0;
+
+  // Migrate localStorage checklist to Convex for enrolled users (days 0-1)
+  const hasMigrated = useRef(false);
+  useEffect(() => {
+    if (!isEnrolled || !convexUser || hasMigrated.current) return;
+    if (day !== 0 && day !== 1) return;
+    if (convexCompletedItems === undefined) return; // still loading
+
+    const localChecklist = dayProgress?.checklist || [];
+    if (localChecklist.length === 0) return;
+
+    // Only migrate items not already in Convex
+    const missing = localChecklist.filter(
+      (id: string) => !convexCompletedItems.includes(id)
+    );
+    if (missing.length === 0) return;
+
+    hasMigrated.current = true;
+    missing.forEach((itemId: string) => {
+      completeChecklistConvex({ userId: convexUser._id, day, itemId });
+    });
+  }, [isEnrolled, convexUser, convexCompletedItems, day, dayProgress, completeChecklistConvex]);
 
   // Record day start on first visit
   useEffect(() => {
@@ -305,11 +338,13 @@ export function LessonPage({ day, isPreview }: LessonPageProps) {
           items={lesson.checklist}
           completedItems={completedItems}
           onToggle={(itemId) => {
-            if (isPreview && (day === 0 || day === 1)) {
+            if (isEnrolled && convexUser) {
+              toggleChecklistConvex({ userId: convexUser._id, day, itemId });
+            } else if (isPreview && (day === 0 || day === 1)) {
               toggleChecklistItem(day as 0 | 1, itemId);
             }
           }}
-          disabled={!isPreview}
+          disabled={!isPreview && !isEnrolled}
         />
       </motion.div>
 

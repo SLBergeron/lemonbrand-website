@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getConvexClient } from "@/lib/convex-server";
 import { api } from "@lemonbrand/convex";
+import { Id } from "@lemonbrand/convex";
 
 const SYSTEM_PROMPT = `You're a friendly build coach. In 1-2 casual sentences, reflect back what the user wants to build and affirm it's achievable in a 7-day sprint. Be specific to their idea. No exclamation marks. No generic praise. No questions. Just mirror what they said and ground it.`;
 
@@ -23,7 +24,7 @@ function getClientIP(request: NextRequest): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { whatToBuild, whoIsItFor } = body;
+    const { whatToBuild, whoIsItFor, userId } = body;
 
     if (!whatToBuild || !whoIsItFor) {
       return NextResponse.json(
@@ -35,9 +36,27 @@ export async function POST(request: NextRequest) {
     // Rate limit via Convex (reuse prdRateLimits)
     const convex = getConvexClient();
     const clientIP = getClientIP(request);
+
+    // Check if paid user for higher rate limits
+    let isPaid = false;
+    if (userId) {
+      try {
+        const enrollment = await convex.query(
+          api.sprintEnrollments.getEnrollmentByUser,
+          { userId: userId as Id<"users"> }
+        );
+        isPaid = enrollment?.status === "active" || enrollment?.status === "completed";
+      } catch {
+        // Ignore - use default rate limit
+      }
+    }
+
     const rateLimit = await convex.mutation(
       api.prdRateLimits.checkAndIncrement,
-      { identifier: `reflect-${clientIP}` }
+      {
+        identifier: userId ? `reflect-${userId}` : `reflect-${clientIP}`,
+        limit: isPaid ? 50 : undefined,
+      }
     );
 
     if (!rateLimit.allowed) {

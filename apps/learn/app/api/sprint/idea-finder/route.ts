@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getConvexClient } from "@/lib/convex-server";
 import { api } from "@lemonbrand/convex";
+import { Id } from "@lemonbrand/convex";
 
 const SYSTEM_PROMPT = `You are helping someone find their first software project to build in a 7-Day Sprint.
 
@@ -64,7 +65,7 @@ function getClientIP(request: NextRequest): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { role, techComfort, annoyance, magicWand, dataDealtWith } = body;
+    const { role, techComfort, annoyance, magicWand, dataDealtWith, userId } = body;
 
     if (!role || !techComfort) {
       return NextResponse.json(
@@ -75,11 +76,28 @@ export async function POST(request: NextRequest) {
 
     const convex = getConvexClient();
 
-    // Rate limit: 3 requests/hour per IP
+    // Check if paid user for higher rate limits
+    let isPaid = false;
+    if (userId) {
+      try {
+        const enrollment = await convex.query(
+          api.sprintEnrollments.getEnrollmentByUser,
+          { userId: userId as Id<"users"> }
+        );
+        isPaid = enrollment?.status === "active" || enrollment?.status === "completed";
+      } catch {
+        // Ignore - use default rate limit
+      }
+    }
+
+    // Rate limit: 50/hour for paid users, 5/hour for free
     const clientIP = getClientIP(request);
     const rateLimit = await convex.mutation(
       api.prdRateLimits.checkAndIncrement,
-      { identifier: `ideafinder-${clientIP}` }
+      {
+        identifier: userId ? `ideafinder-${userId}` : `ideafinder-${clientIP}`,
+        limit: isPaid ? 50 : undefined,
+      }
     );
 
     if (!rateLimit.allowed) {

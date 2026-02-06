@@ -55,6 +55,7 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
   // Convex mutations
   const saveAnonymousProgress = useMutation(api.anonymousProgress.saveAnonymousProgress);
   const saveFormResponse = useMutation(api.sprintFormResponses.save);
+  const completeChecklistItem = useMutation(api.sprintChecklistProgress.complete);
 
   // Clear the "just generated" state after animation completes
   useEffect(() => {
@@ -115,7 +116,10 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
       const response = await fetch(aiConfig.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          ...(isEnrolled && convexUser ? { userId: convexUser._id } : {}),
+        }),
       });
 
       if (!response.ok) {
@@ -182,6 +186,12 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
           responses: formData,
           generatedContent: generatedFile || undefined,
         });
+        // Auto-complete the "define-project" checklist item
+        await completeChecklistItem({
+          userId: convexUser._id,
+          day,
+          itemId: "define-project",
+        });
       } else if (visitorId) {
         // Anonymous visitor: save to anonymousProgress
         await saveAnonymousProgress({
@@ -236,6 +246,15 @@ export function FormSectionComponent({ section, isPreview, day }: Props) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    // Auto-complete the "download" checklist item for enrolled users
+    if (isEnrolled && convexUser) {
+      completeChecklistItem({
+        userId: convexUser._id,
+        day,
+        itemId: "download",
+      });
+    }
   };
 
   const isComplete = section.fields

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getConvexClient } from "@/lib/convex-server";
 import { api } from "@lemonbrand/convex";
+import { Id } from "@lemonbrand/convex";
 
 const SYSTEM_PROMPT = `You are helping a beginner create a project brief for their first AI-built tool during a 7-Day Sprint.
 
@@ -150,7 +151,7 @@ function hashCode(str: string): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { whatToBuild, whoIsItFor, currentProcess } = body;
+    const { whatToBuild, whoIsItFor, currentProcess, userId } = body;
 
     // Validate required fields
     if (!whatToBuild || !whoIsItFor || !currentProcess) {
@@ -164,8 +165,23 @@ export async function POST(request: NextRequest) {
     const convex = getConvexClient();
     const clientIP = getClientIP(request);
 
+    // Check if paid user for higher rate limits
+    let isPaid = false;
+    if (userId) {
+      try {
+        const enrollment = await convex.query(
+          api.sprintEnrollments.getEnrollmentByUser,
+          { userId: userId as Id<"users"> }
+        );
+        isPaid = enrollment?.status === "active" || enrollment?.status === "completed";
+      } catch {
+        // Ignore - use default rate limit
+      }
+    }
+
     const rateLimit = await convex.mutation(api.prdRateLimits.checkAndIncrement, {
-      identifier: clientIP,
+      identifier: userId ? `prd-${userId}` : clientIP,
+      limit: isPaid ? 50 : undefined,
     });
 
     if (!rateLimit.allowed) {

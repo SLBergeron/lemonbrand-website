@@ -30,12 +30,12 @@ export default function DayPage() {
     betterAuthId ? { betterAuthId } : "skip"
   );
 
-  // Redirect preview days to preview route
+  // Redirect preview days to preview route (only for non-enrolled users)
   useEffect(() => {
-    if (isValidDay && PREVIEW_DAYS.includes(dayNum)) {
+    if (isValidDay && PREVIEW_DAYS.includes(dayNum) && hasEnrollment === false) {
       router.replace(`/sprint/preview/day/${dayNum}`);
     }
-  }, [dayNum, isValidDay, router]);
+  }, [dayNum, isValidDay, hasEnrollment, router]);
 
   // Redirect to checkout if accessing paid days without enrollment
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function DayPage() {
   }
 
   // Show loading while checking auth/enrollment
-  if (sessionLoading || (PAID_DAYS.includes(dayNum) && hasEnrollment === undefined)) {
+  if (sessionLoading || hasEnrollment === undefined) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <Loader2 className="size-8 animate-spin text-muted-foreground" />
@@ -72,8 +72,8 @@ export default function DayPage() {
     );
   }
 
-  // Don't render content for preview days (they redirect)
-  if (PREVIEW_DAYS.includes(dayNum)) {
+  // Non-enrolled users on preview days get redirected (effect handles it)
+  if (PREVIEW_DAYS.includes(dayNum) && !hasEnrollment) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <Loader2 className="size-8 animate-spin text-muted-foreground" />
@@ -81,7 +81,7 @@ export default function DayPage() {
     );
   }
 
-  // Don't render if no enrollment (will redirect)
+  // Don't render if no enrollment for paid days (will redirect)
   if (!hasEnrollment) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">

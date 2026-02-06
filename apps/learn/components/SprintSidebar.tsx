@@ -170,9 +170,11 @@ export function SprintSidebar({
             const isAccessible = isFree || isEnrolled;
             const isLocked = !isAccessible;
 
-            const href = isFree
-              ? `/sprint/preview/day/${day}`
-              : `/sprint/day/${day}`;
+            const href = isEnrolled
+              ? `/sprint/day/${day}`
+              : isFree
+                ? `/sprint/preview/day/${day}`
+                : `/sprint/day/${day}`;
 
             const isCompleted = completedDays.includes(day);
             const status: "locked" | "available" | "completed" = isCompleted
