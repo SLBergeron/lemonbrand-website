@@ -550,10 +550,10 @@
               "date": "2026-02-19",
               "platform": "facebook_fr",
               "status": "graphic_needed",
-              "title": { "fr": "Programme fidélité St-Albert. 5 achats de 25$+ = sac de curds gratuit. Simple comme ça.", "en": "St-Albert Loyalty Program. 5 purchases of $25+ = free bag of curds. That simple." },
+              "title": { "fr": "Programme fidélité St-Albert. 7 achats de 25$+ = sac de curds gratuit. Simple comme ça.", "en": "St-Albert Loyalty Program. 7 purchases of $25+ = free bag of curds. That simple." },
               "fullPost": {
-                "fr": "Le programme fidélité St-Albert est lancé.\n\nComment ça marche?\n\n1. Achetez pour 25$+ à la boutique\n2. On tamponne votre carte\n3. Après 5 tampons = sac de curds gratuit\n\nC'est tout. Pas d'application. Pas de compte à créer. Une carte. Des tampons. Du fromage gratuit.\n\nSimple comme ça.\n\n→ Passez à la boutique pour votre carte",
-                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account to create. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
+                "fr": "Le programme fidélité St-Albert est lancé.\n\nComment ça marche?\n\n1. Achetez pour 25$+ à la boutique\n2. On tamponne votre carte\n3. Après 7 tampons = sac de curds gratuit\n\nC'est tout. Pas d'application. Pas de compte à créer. Une carte. Des tampons. Du fromage gratuit.\n\nSimple comme ça.\n\n→ Passez à la boutique pour votre carte",
+                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 7 stamps = free bag of curds\n\nThat's it. No app. No account to create. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
               },
               "asset": {
                 "type": "graphic",
@@ -567,10 +567,10 @@
               "date": "2026-02-19",
               "platform": "facebook_en",
               "status": "graphic_needed",
-              "title": { "fr": "St-Albert Loyalty Program. 5 purchases of $25+ = free bag of curds. That simple.", "en": "St-Albert Loyalty Program. 5 purchases of $25+ = free bag of curds. That simple." },
+              "title": { "fr": "St-Albert Loyalty Program. 7 purchases of $25+ = free bag of curds. That simple.", "en": "St-Albert Loyalty Program. 7 purchases of $25+ = free bag of curds. That simple." },
               "fullPost": {
-                "fr": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card",
-                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
+                "fr": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 7 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card",
+                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $25+ at the shop\n2. We stamp your card\n3. After 7 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
               },
               "asset": {
                 "type": "graphic",
@@ -586,8 +586,8 @@
               "status": "graphic_needed",
               "title": { "fr": "Programme fidélité - format Reel", "en": "Loyalty program - Reel format" },
               "fullPost": {
-                "fr": "Programme fidélité St-Albert\n\n5 achats = curds gratuits\n\nPas d'app. Juste une carte.\n\nPassez à la boutique!\n\n#StAlbert #ProgrammeFidelite #FreeCheese",
-                "en": "St-Albert Loyalty Program\n\n5 purchases = free curds\n\nNo app. Just a card.\n\nStop by the shop!\n\n#StAlbert #LoyaltyProgram #FreeCheese"
+                "fr": "Programme fidélité St-Albert\n\n7 achats = curds gratuits\n\nPas d'app. Juste une carte.\n\nPassez à la boutique!\n\n#StAlbert #ProgrammeFidelite #FreeCheese",
+                "en": "St-Albert Loyalty Program\n\n7 purchases = free curds\n\nNo app. Just a card.\n\nStop by the shop!\n\n#StAlbert #LoyaltyProgram #FreeCheese"
               },
               "asset": {
                 "type": "graphic",
