@@ -151,8 +151,8 @@ const GRAPHICS_NEEDED = [
   { name: { fr: "Annonce concours", en: "Contest announcement" }, platforms: "FB, IG, LinkedIn", priority: { fr: "Haute", en: "High" } },
   { name: { fr: 'Banniere "130 ans" jour de lancement', en: '"130 years" launch day banner' }, platforms: { fr: "Tous", en: "All" }, priority: { fr: "Haute", en: "High" } },
   { name: { fr: "Gabarits themes quotidiens", en: "Daily theme templates" }, platforms: "IG Stories", priority: { fr: "Moyenne", en: "Medium" } },
-  { name: { fr: "Annonce vote ouvert", en: "Voting open announcement" }, platforms: { fr: "Tous", en: "All" }, priority: { fr: "Pour 23 fev", en: "For Feb 23" } },
-  { name: { fr: "Annonce gagnants", en: "Winner announcement" }, platforms: { fr: "Tous", en: "All" }, priority: { fr: "Pour 5 mars", en: "For Mar 5" } },
+  { name: { fr: "Annonce vote ouvert", en: "Voting open announcement" }, platforms: { fr: "Tous", en: "All" }, priority: { fr: "Pour 2 mars", en: "For Mar 2" } },
+  { name: { fr: "Annonce gagnants", en: "Winner announcement" }, platforms: { fr: "Tous", en: "All" }, priority: { fr: "Pour 12 mars", en: "For Mar 12" } },
 ];
 
 // Translations
@@ -953,9 +953,10 @@ function TimelineSummary({ language }: { language: Language }) {
     { date: language === "fr" ? "Sam-Dim" : "Sat-Sun", label: language === "fr" ? "Revision finale" : "Final review", icon: <CheckCircle2 className="h-4 w-4" /> },
     { date: language === "fr" ? "Lun 9" : "Mon 9", label: language === "fr" ? "LANCEMENT" : "GO-LIVE", icon: <Rocket className="h-4 w-4" />, highlight: true },
     { date: language === "fr" ? "Mar 10" : "Tue 10", label: language === "fr" ? "Concours ouvert" : "Contest opens", icon: <Trophy className="h-4 w-4" /> },
-    { date: language === "fr" ? "Lun 23" : "Mon 23", label: language === "fr" ? "Vote commence" : "Voting starts", icon: <Vote className="h-4 w-4" /> },
-    { date: language === "fr" ? "Jeu 5 mars" : "Thu Mar 5", label: language === "fr" ? "Annonce live" : "Live announcement", icon: <Trophy className="h-4 w-4" />, highlight: true },
-    { date: language === "fr" ? "Dim 8 mars" : "Sun Mar 8", label: language === "fr" ? "Concours recommence" : "Contest repeats", icon: <Rocket className="h-4 w-4" /> },
+    { date: language === "fr" ? "Dim 1 mars" : "Sun Mar 1", label: language === "fr" ? "Soumissions ferment" : "Submissions close", icon: <FileText className="h-4 w-4" /> },
+    { date: language === "fr" ? "Lun 2 mars" : "Mon Mar 2", label: language === "fr" ? "Vote commence" : "Voting starts", icon: <Vote className="h-4 w-4" /> },
+    { date: language === "fr" ? "Jeu 12 mars" : "Thu Mar 12", label: language === "fr" ? "Annonce live" : "Live announcement", icon: <Trophy className="h-4 w-4" />, highlight: true },
+    { date: language === "fr" ? "Dim 15 mars" : "Sun Mar 15", label: language === "fr" ? "Concours recommence" : "Contest repeats", icon: <Rocket className="h-4 w-4" /> },
   ];
 
   return (
