@@ -72,7 +72,6 @@ const PLATFORM_COLORS = {
   linkedin: "bg-[#0a66c2] text-white ring-1 ring-[#0a66c2]/20",
   youtube: "bg-[#ff0000] text-white ring-1 ring-[#ff0000]/20",
   newsletter: "bg-[#00a67e] text-white ring-1 ring-[#00a67e]/20",
-  press: "bg-[#374151] text-white ring-1 ring-[#374151]/20",
 };
 
 // Status colors - refined with better contrast
@@ -324,8 +323,6 @@ function PlatformIcon({ platform }: { platform: Platform }) {
       return <Youtube className={iconClass} />;
     case "newsletter":
       return <Mail className={iconClass} />;
-    case "press":
-      return <FileText className={iconClass} />;
     default:
       return null;
   }
@@ -340,7 +337,6 @@ function PlatformLabel({ platform, language }: { platform: Platform; language: L
     linkedin: { fr: "LinkedIn", en: "LinkedIn" },
     youtube: { fr: "YouTube", en: "YouTube" },
     newsletter: { fr: "Email", en: "Email" },
-    press: { fr: "Presse", en: "Press" },
   };
   return <span className="font-mono text-[10px] tracking-wide">{labels[platform][language]}</span>;
 }
