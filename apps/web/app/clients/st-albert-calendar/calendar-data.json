@@ -1,0 +1,1228 @@
+{
+  "weeks": [
+    {
+      "weekNumber": 0,
+      "title": { "fr": "Préparation finale", "en": "Final Prep" },
+      "subtitle": { "fr": "6-8 février", "en": "Feb 6-8" },
+      "days": [
+        {
+          "date": "2026-02-06",
+          "dayName": { "fr": "Ven 6 fév", "en": "Fri Feb 6" },
+          "milestone": { "fr": "AUJOURD'HUI", "en": "TODAY", "type": "today" },
+          "posts": [
+            {
+              "id": "w0-d2-fb-1",
+              "date": "2026-02-06",
+              "platform": "facebook_fr",
+              "status": "to_write",
+              "title": { "fr": "Préparer toutes les publications sociales", "en": "Prepare all social posts" },
+              "fullPost": {
+                "fr": "TÂCHE INTERNE: Finaliser tous les textes de publications pour la semaine de lancement. Valider les traductions FR/EN.",
+                "en": "INTERNAL TASK: Finalize all post copy for launch week. Validate FR/EN translations."
+              },
+              "asset": {
+                "type": "document",
+                "description": { "fr": "Textes FR + EN", "en": "Copy FR + EN" }
+              }
+            },
+            {
+              "id": "w0-d2-ig-1",
+              "date": "2026-02-06",
+              "platform": "instagram_reel",
+              "status": "to_create",
+              "title": { "fr": "Créer graphique annonce concours", "en": "Create contest announcement graphic" },
+              "fullPost": {
+                "fr": "TÂCHE INTERNE: Designer le graphique d'annonce du concours de recettes. Format carré pour feed + vertical pour stories.",
+                "en": "INTERNAL TASK: Design recipe contest announcement graphic. Square format for feed + vertical for stories."
+              },
+              "asset": {
+                "type": "graphic",
+                "description": { "fr": "Graphique", "en": "Graphic" }
+              }
+            },
+            {
+              "id": "w0-d2-nl-1",
+              "date": "2026-02-06",
+              "platform": "newsletter",
+              "status": "to_prepare",
+              "title": { "fr": "Finaliser courriel d'annonce", "en": "Finalize announcement email" },
+              "fullPost": {
+                "fr": "TÂCHE INTERNE: Préparer le courriel d'annonce du lancement du site. Programmer l'envoi pour le 9 février 9h00.",
+                "en": "INTERNAL TASK: Prepare website launch announcement email. Schedule send for February 9 at 9:00 AM."
+              },
+              "asset": {
+                "type": "document",
+                "description": { "fr": "Courriel", "en": "Email" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-07",
+          "dayName": { "fr": "Sam 7 fév", "en": "Sat Feb 7" },
+          "posts": [
+            {
+              "id": "w0-d3-fb-1",
+              "date": "2026-02-07",
+              "platform": "facebook_fr",
+              "status": "draft",
+              "title": { "fr": "Révision finale du contenu", "en": "Final content review" },
+              "fullPost": {
+                "fr": "TÂCHE INTERNE: Révision finale de tout le contenu. Vérifier liens, images, textes.",
+                "en": "INTERNAL TASK: Final review of all content. Check links, images, copy."
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-08",
+          "dayName": { "fr": "Dim 8 fév", "en": "Sun Feb 8" },
+          "posts": [
+            {
+              "id": "w0-d4-fb-1",
+              "date": "2026-02-08",
+              "platform": "facebook_fr",
+              "status": "draft",
+              "title": { "fr": "Dernières vérifications avant lancement", "en": "Final checks before launch" },
+              "fullPost": {
+                "fr": "TÂCHE INTERNE: Vérification finale du site, des publications programmées et des notifications.",
+                "en": "INTERNAL TASK: Final check of website, scheduled posts and notifications."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekNumber": 1,
+      "title": { "fr": "Semaine 1 : Lancement", "en": "Week 1: Launch" },
+      "subtitle": { "fr": "9-15 février", "en": "Feb 9-15" },
+      "days": [
+        {
+          "date": "2026-02-09",
+          "dayName": { "fr": "Lun 9 fév", "en": "Mon Feb 9" },
+          "milestone": { "fr": "JOUR DE LANCEMENT", "en": "LAUNCH DAY", "type": "launch" },
+          "posts": [
+            {
+              "id": "w1-d1-fb-fr",
+              "date": "2026-02-09",
+              "platform": "facebook_fr",
+              "status": "video_needed",
+              "title": { "fr": "Depuis 1894, on fait du fromage. On a enfin un site à notre image.", "en": "Since 1894, we've been making cheese. Finally a website that matches." },
+              "fullPost": {
+                "fr": "Depuis 1894, on fait du fromage à St-Albert.\n\nNotre histoire. Nos produits. Notre façon de faire. Tout est là.\n\nUne coopérative de producteurs locaux de l'Est ontarien. Du lait 100% canadien.\n\nVenez voir ce qu'on a bâti.\n\n→ fromagestalbert.com",
+                "en": "Since 1894, we've been making cheese in St-Albert.\n\nOur history. Our products. Our way. It's all there.\n\nA cooperative of local producers from Eastern Ontario. 100% Canadian milk.\n\nCome see what we've built.\n\n→ fromagestalbert.com"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo desktop de démonstration du site", "en": "Desktop website demo video" }
+              },
+              "hashtags": ["#StAlbert", "#FromageStAlbert", "#Fromagerie", "#Depuis1894", "#MadeInOntario"],
+              "cta": { "fr": "Visitez le site", "en": "Visit the site" }
+            },
+            {
+              "id": "w1-d1-fb-en",
+              "date": "2026-02-09",
+              "platform": "facebook_en",
+              "status": "video_needed",
+              "title": { "fr": "Since 1894, we've been making cheese. Finally a website that matches.", "en": "Since 1894, we've been making cheese. Finally a website that matches." },
+              "fullPost": {
+                "fr": "Since 1894, we've been making cheese in St-Albert.\n\nOur story. Our products. Our way of doing things. It's all there.\n\nA cooperative of local producers from Eastern Ontario. 100% Canadian milk.\n\nCome see what we've built.\n\n→ fromagestalbert.com",
+                "en": "Since 1894, we've been making cheese in St-Albert.\n\nOur story. Our products. Our way of doing things. It's all there.\n\nA cooperative of local producers from Eastern Ontario. 100% Canadian milk.\n\nCome see what we've built.\n\n→ fromagestalbert.com"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo desktop de démonstration du site", "en": "Desktop website demo video" }
+              },
+              "hashtags": ["#StAlbert", "#StAlbertCheese", "#Since1894", "#MadeInOntario", "#LocalFood"],
+              "cta": { "fr": "Visit the site", "en": "Visit the site" }
+            },
+            {
+              "id": "w1-d1-ig-reel",
+              "date": "2026-02-09",
+              "platform": "instagram_reel",
+              "status": "video_needed",
+              "title": { "fr": "Même contenu - format Reel", "en": "Same content - Reel format" },
+              "fullPost": {
+                "fr": "Depuis 1894. Du fromage fait ici.\n\nProducteurs locaux. Lait 100% canadien. Une coop.\n\nNotre nouveau site est en ligne. Lien dans la bio.\n\n#StAlbert #FromageStAlbert #Depuis1894",
+                "en": "Since 1894. Cheese made here.\n\nLocal producers. 100% Canadian milk. A co-op.\n\nOur new site is live. Link in bio.\n\n#StAlbert #CheeseLovers #Since1894"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo mobile (9:16)", "en": "Mobile video (9:16)" }
+              },
+              "hashtags": ["#StAlbert", "#FromageStAlbert", "#Fromagerie", "#Depuis1894", "#CheeseLovers"]
+            },
+            {
+              "id": "w1-d1-ig-story",
+              "date": "2026-02-09",
+              "platform": "instagram_story",
+              "status": "graphic_needed",
+              "title": { "fr": "Teaser: timeline + visite", "en": "Teaser: timeline + visit" },
+              "fullPost": {
+                "fr": "Swipe up pour découvrir notre nouveau site!\n\n→ Notre timeline interactive de 1894 à aujourd'hui\n→ La collection complète de fromages\n→ Planifiez votre visite",
+                "en": "Swipe up to discover our new site!\n\n→ Our interactive timeline from 1894 to today\n→ The complete cheese collection\n→ Plan your visit"
+              },
+              "asset": {
+                "type": "graphic",
+                "description": { "fr": "3-4 images pour stories", "en": "3-4 images for stories" }
+              }
+            },
+            {
+              "id": "w1-d1-li",
+              "date": "2026-02-09",
+              "platform": "linkedin",
+              "status": "video_needed",
+              "title": { "fr": "La coopérative se modernise.", "en": "The co-op modernizes." },
+              "fullPost": {
+                "fr": "Après 20 mois de travail, notre nouveau site web est en ligne.\n\nLa Fromagerie St-Albert existe depuis 1894. C'est une coopérative de producteurs laitiers locaux qui fait du fromage à St-Albert, Ontario.\n\nLe site raconte notre histoire. Présente nos produits. Explique notre façon de faire.\n\nOn a aussi lancé un nouveau programme de fidélité et un concours de recettes qui permettra à nos clients de voir leurs créations sur le site.\n\nMerci à l'équipe de Lemonbrand pour ce travail remarquable.\n\n→ fromagestalbert.com",
+                "en": "After 20 months of work, our new website is live.\n\nSt-Albert Cheese has existed since 1894. It's a cooperative of local dairy producers making cheese in St-Albert, Ontario.\n\nThe site tells our story. Presents our products. Explains our way of doing things.\n\nWe also launched a new loyalty program and a recipe contest that will let our customers see their creations on the site.\n\nThanks to the Lemonbrand team for this remarkable work.\n\n→ fromagestalbert.com"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo desktop", "en": "Desktop video" }
+              },
+              "hashtags": ["#StAlbert", "#Coop", "#MadeInOntario", "#FoodIndustry", "#WebsiteLaunch"]
+            },
+            {
+              "id": "w1-d1-yt",
+              "date": "2026-02-09",
+              "platform": "youtube",
+              "status": "video_needed",
+              "title": { "fr": "Compilation complète avec intro/outro", "en": "Full compilation with intro/outro" },
+              "fullPost": {
+                "fr": "Découvrez le nouveau site web de la Fromagerie St-Albert!\n\nDans cette vidéo:\n0:00 - Introduction\n0:30 - Notre histoire (timeline interactive)\n2:00 - Nos produits\n3:30 - Planifiez votre visite\n4:30 - Boutique et restaurant\n5:00 - Conclusion\n\nVisitez fromagestalbert.com",
+                "en": "Discover the new St-Albert Cheese website!\n\nIn this video:\n0:00 - Introduction\n0:30 - Our history (interactive timeline)\n2:00 - Our products\n3:30 - Plan your visit\n4:30 - Store and restaurant\n5:00 - Conclusion\n\nVisit fromagestalbert.com"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "3 vidéos combinées avec intro/outro", "en": "3 videos combined with intro/outro" }
+              }
+            },
+            {
+              "id": "w1-d1-nl",
+              "date": "2026-02-09",
+              "platform": "newsletter",
+              "status": "to_prepare",
+              "title": { "fr": "Infolettre envoyée (pas promue sur social)", "en": "Newsletter sent (NOT promoted on social)" },
+              "fullPost": {
+                "fr": "Sujet: Notre nouveau site est en ligne!\n\nCher(e) [Prénom],\n\nAprès 20 mois de travail, on est fiers de vous présenter notre nouveau site web.\n\nVous y trouverez:\n• Notre histoire de 1894 à aujourd'hui\n• Tous nos produits avec fiches détaillées\n• Notre nouveau programme de fidélité\n• Un concours de recettes (votre recette pourrait être sur notre site!)\n\nMerci de faire partie de la famille St-Albert.\n\n→ Découvrir le site\n\nL'équipe St-Albert",
+                "en": "Subject: Our new website is live!\n\nDear [First Name],\n\nAfter 20 months of work, we're proud to present our new website.\n\nYou'll find:\n• Our history from 1894 to today\n• All our products with detailed info\n• Our new loyalty program\n• A recipe contest (your recipe could be on our site!)\n\nThank you for being part of the St-Albert family.\n\n→ Discover the site\n\nThe St-Albert Team"
+              },
+              "asset": {
+                "type": "document",
+                "description": { "fr": "Gabarit courriel", "en": "Email template" }
+              }
+            },
+            {
+              "id": "w1-d1-pr",
+              "date": "2026-02-09",
+              "platform": "press",
+              "status": "to_prepare",
+              "title": { "fr": "Communiqué bilingue aux médias", "en": "Bilingual press release to media" },
+              "fullPost": {
+                "fr": "POUR DIFFUSION IMMÉDIATE\n\nLA FROMAGERIE ST-ALBERT LANCE SON NOUVEAU SITE WEB\n\nST-ALBERT, ON - La Fromagerie St-Albert, coopérative fromagère fondée en 1894, annonce le lancement de son nouveau site web fromagestalbert.com.\n\nLe site présente l'histoire de la coopérative à travers une timeline interactive, un catalogue complet de produits, et de nouvelles fonctionnalités incluant un programme de fidélité et un concours de recettes communautaire.\n\nLa coopérative regroupe des producteurs laitiers de l'Est ontarien.\n\nContact média: [info]\n\n###",
+                "en": "FOR IMMEDIATE RELEASE\n\nST-ALBERT CHEESE LAUNCHES NEW WEBSITE\n\nST-ALBERT, ON - St-Albert Cheese, a dairy cooperative founded in 1894, announces the launch of its new website fromagestalbert.com.\n\nThe site presents the cooperative's history through an interactive timeline, a complete product catalog, and new features including a loyalty program and a community recipe contest.\n\nThe cooperative is made up of local dairy producers from Eastern Ontario.\n\nMedia contact: [info]\n\n###"
+              },
+              "asset": {
+                "type": "document",
+                "description": { "fr": "Communiqué de presse", "en": "Press release" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-10",
+          "dayName": { "fr": "Mar 10 fév", "en": "Tue Feb 10" },
+          "milestone": { "fr": "CONCOURS OUVERT", "en": "CONTEST OPENS", "type": "contest" },
+          "posts": [
+            {
+              "id": "w1-d2-fb-fr",
+              "date": "2026-02-10",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "Concours de recettes St-Albert. Partagez votre meilleure création au fromage.", "en": "St-Albert Recipe Contest. Share your best cheese creation." },
+              "fullPost": {
+                "fr": "Votre recette. Sur notre site. Pour toujours.\n\nLe concours de recettes St-Albert est ouvert!\n\n→ Soumettez votre meilleure recette au fromage St-Albert\n→ Les meilleures seront publiées sur notre site\n→ Votez pour vos favorites\n→ Les gagnants remportent des prix fromagers\n\nDate limite: 22 février\n\nC'est votre tour de briller.\n\n→ fromagestalbert.com/concours",
+                "en": "Your recipe. On our site. Forever.\n\nThe St-Albert Recipe Contest is open!\n\n→ Submit your best St-Albert cheese recipe\n→ The best ones will be published on our site\n→ Vote for your favorites\n→ Winners get cheese prizes\n\nDeadline: February 22\n\nIt's your turn to shine.\n\n→ fromagestalbert.com/contest"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/contest?lang=fr&format=facebook",
+                "description": { "fr": "Graphique annonce concours", "en": "Contest announcement graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#FromageStAlbert"],
+              "cta": { "fr": "Soumettez votre recette", "en": "Submit your recipe" }
+            },
+            {
+              "id": "w1-d2-fb-en",
+              "date": "2026-02-10",
+              "platform": "facebook_en",
+              "status": "graphic_needed",
+              "title": { "fr": "St-Albert Recipe Contest. Share your best cheese creation.", "en": "St-Albert Recipe Contest. Share your best cheese creation." },
+              "fullPost": {
+                "fr": "Your recipe. On our site. Forever.\n\nThe St-Albert Recipe Contest is open!\n\n→ Submit your best St-Albert cheese recipe\n→ The best ones will be published on our site\n→ Vote for your favorites\n→ Winners get cheese prizes\n\nDeadline: February 22\n\nIt's your turn to shine.\n\n→ fromagestalbert.com/contest",
+                "en": "Your recipe. On our site. Forever.\n\nThe St-Albert Recipe Contest is open!\n\n→ Submit your best St-Albert cheese recipe\n→ The best ones will be published on our site\n→ Vote for your favorites\n→ Winners get cheese prizes\n\nDeadline: February 22\n\nIt's your turn to shine.\n\n→ fromagestalbert.com/contest"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/contest?lang=en&format=facebook",
+                "description": { "fr": "Graphique annonce concours", "en": "Contest announcement graphic" }
+              },
+              "hashtags": ["#StAlbert", "#RecipeContest", "#CheeseLovers", "#LocalFood"]
+            },
+            {
+              "id": "w1-d2-ig-reel",
+              "date": "2026-02-10",
+              "platform": "instagram_reel",
+              "status": "graphic_needed",
+              "title": { "fr": "Votre recette sur notre site. Ça commence maintenant.", "en": "Your recipe on our site. It starts now." },
+              "fullPost": {
+                "fr": "Concours de recettes St-Albert\n\nVotre création au fromage. Sur notre site. Pour toujours.\n\nSoumettez avant le 22 février.\nLien dans la bio.\n\n#StAlbert #ConcoursRecettes #FromageStAlbert",
+                "en": "St-Albert Recipe Contest\n\nYour cheese creation. On our site. Forever.\n\nSubmit by February 22.\nLink in bio.\n\n#StAlbert #RecipeContest #CheeseLovers"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/contest?lang=fr&format=reel",
+                "description": { "fr": "Graphique format Reel", "en": "Reel format graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#CheeseLovers"]
+            }
+          ]
+        },
+        {
+          "date": "2026-02-11",
+          "dayName": { "fr": "Mer 11 fév", "en": "Wed Feb 11" },
+          "posts": [
+            {
+              "id": "w1-d3-fb-fr",
+              "date": "2026-02-11",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "La section recettes est ouverte. À vos casseroles.", "en": "Recipes section is live. Get cooking." },
+              "fullPost": {
+                "fr": "La section recettes est ouverte sur le site.\n\nDes idées pour utiliser nos fromages. Des classiques. Des surprises.\n\nEt bientôt, vos recettes à vous.\n\nÀ vos casseroles.\n\n→ fromagestalbert.com/recettes",
+                "en": "The recipes section is live on the site.\n\nIdeas for using our cheeses. Classics. Surprises.\n\nAnd soon, your own recipes.\n\nGet cooking.\n\n→ fromagestalbert.com/recipes"
+              },
+              "hashtags": ["#StAlbert", "#Recettes", "#FromageStAlbert", "#CheeseLovers"]
+            },
+            {
+              "id": "w1-d3-ig-story",
+              "date": "2026-02-11",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Recettes", "en": "Theme: Recipes" },
+              "fullPost": {
+                "fr": "Nouvelle section recettes sur le site!\n\nSwipe up pour voir les classiques\n\n→ Poutine traditionnelle\n→ Mac & cheese St-Albert\n→ Grilled cheese parfait",
+                "en": "New recipes section on the site!\n\nSwipe up to see the classics\n\n→ Traditional poutine\n→ St-Albert mac & cheese\n→ Perfect grilled cheese"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-12",
+          "dayName": { "fr": "Jeu 12 fév", "en": "Thu Feb 12" },
+          "posts": [
+            {
+              "id": "w1-d4-fb-fr",
+              "date": "2026-02-12",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "20 mois pour refaire notre site. Le résultat en valait la peine.", "en": "20 months to rebuild our site. Worth every day." },
+              "fullPost": {
+                "fr": "20 mois pour refaire notre site.\n\nPourquoi si long? Parce qu'on voulait bien faire. Pas juste beau. Bien fait.\n\nChaque produit photographié. Chaque date vérifiée. Chaque histoire racontée comme il faut.\n\nLe résultat? Un site qui nous ressemble enfin.\n\nMerci à tous ceux qui ont travaillé là-dessus.\n\n→ fromagestalbert.com",
+                "en": "20 months to rebuild our site.\n\nWhy so long? Because we wanted to do it right. Not just pretty. Well made.\n\nEvery product photographed. Every date verified. Every story told properly.\n\nThe result? A site that finally looks like us.\n\nThanks to everyone who worked on it.\n\n→ fromagestalbert.com"
+              },
+              "hashtags": ["#StAlbert", "#FromageStAlbert", "#Coulisses", "#BehindTheScenes"]
+            },
+            {
+              "id": "w1-d4-ig-story",
+              "date": "2026-02-12",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Coulisses", "en": "Theme: Behind-the-scenes" },
+              "fullPost": {
+                "fr": "Les coulisses du nouveau site:\n\n- Nouvelles photos de tous les produits\n- Textes révisés 3 fois\n- Design fait sur mesure\n\n20 mois de travail. Ça valait la peine.",
+                "en": "Behind the scenes of the new site:\n\n- New photos of all products\n- Copy revised 3 times\n- Custom design\n\n20 months of work. Worth it."
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-13",
+          "dayName": { "fr": "Ven 13 fév", "en": "Fri Feb 13" },
+          "posts": [
+            {
+              "id": "w1-d5-fb-fr",
+              "date": "2026-02-13",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Les premières soumissions arrivent. Et vous?", "en": "First submissions are in. What about you?" },
+              "fullPost": {
+                "fr": "Les premières recettes arrivent pour le concours.\n\nDes poutines. Des fondues. Des gratins. Des surprises.\n\nEt vous, c'est quoi votre création au fromage St-Albert?\n\nIl reste 9 jours pour soumettre.\n\n→ fromagestalbert.com/concours",
+                "en": "First recipes are coming in for the contest.\n\nPoutines. Fondues. Gratins. Surprises.\n\nWhat about you? What's your St-Albert cheese creation?\n\n9 days left to submit.\n\n→ fromagestalbert.com/contest"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#FromageStAlbert"]
+            },
+            {
+              "id": "w1-d5-ig-story",
+              "date": "2026-02-13",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Rappel concours", "en": "Contest reminder" },
+              "fullPost": {
+                "fr": "Concours de recettes St-Albert\n\n9 jours restants\nSoumettez votre recette\nGagnez des prix fromagers\n\nSwipe up!",
+                "en": "St-Albert Recipe Contest\n\n9 days left\nSubmit your recipe\nWin cheese prizes\n\nSwipe up!"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-14",
+          "dayName": { "fr": "Sam 14 fév", "en": "Sat Feb 14" },
+          "milestone": { "fr": "SAINT-VALENTIN", "en": "VALENTINE'S DAY", "type": "holiday" },
+          "posts": [
+            {
+              "id": "w1-d6-fb-fr",
+              "date": "2026-02-14",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Pour la Saint-Valentin, offrez du vrai. Curds frais, cheddar vieilli, amour local.", "en": "For Valentine's, give something real. Fresh curds, aged cheddar, local love." },
+              "fullPost": {
+                "fr": "Pour la Saint-Valentin, offrez du vrai.\n\nPas des chocolats importés. Du fromage d'ici.\n\nCurds frais du jour. Cheddar vieilli 2 ans. Fromage en grains qui fait squick.\n\nC'est ça, l'amour local.\n\nBonne Saint-Valentin de la famille St-Albert",
+                "en": "For Valentine's Day, give something real.\n\nNot imported chocolates. Local cheese.\n\nFresh curds of the day. 2-year aged cheddar. Cheese curds that squeak.\n\nThat's local love.\n\nHappy Valentine's from the St-Albert family"
+              },
+              "hashtags": ["#StAlbert", "#SaintValentin", "#ValentinesDay", "#LocalLove", "#FromageStAlbert"]
+            },
+            {
+              "id": "w1-d6-ig-reel",
+              "date": "2026-02-14",
+              "platform": "instagram_reel",
+              "status": "ready",
+              "title": { "fr": "Contenu Saint-Valentin", "en": "Valentine's content" },
+              "fullPost": {
+                "fr": "L'amour, c'est du fromage qui fait squick\n\nBonne Saint-Valentin!\n\n#StAlbert #SaintValentin #CheeseLovers",
+                "en": "Love is cheese that squeaks\n\nHappy Valentine's Day!\n\n#StAlbert #ValentinesDay #CheeseLovers"
+              },
+              "hashtags": ["#StAlbert", "#SaintValentin", "#ValentinesDay", "#CheeseLovers"]
+            }
+          ]
+        },
+        {
+          "date": "2026-02-15",
+          "dayName": { "fr": "Dim 15 fév", "en": "Sun Feb 15" },
+          "posts": [
+            {
+              "id": "w1-d7-fb-fr",
+              "date": "2026-02-15",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Une coopérative depuis 1894. C'est vous qui nous faites vivre.", "en": "A co-op since 1894. You're why we're still here." },
+              "fullPost": {
+                "fr": "Une coopérative depuis 1894.\n\nPlus de 130 ans qu'on fait du fromage à St-Albert. Pas parce que c'est à la mode. Parce que c'est ce qu'on fait.\n\nNos propriétaires? Des producteurs laitiers de l'Est ontarien.\nNotre mission? Du bon fromage, fait ici.\nNotre force? Vous.\n\nC'est vous qui nous faites vivre. Merci.\n\n→ fromagestalbert.com/origine",
+                "en": "A co-op since 1894.\n\nOver 130 years making cheese in St-Albert. Not because it's trendy. Because it's what we do.\n\nOur owners? Local dairy producers from Eastern Ontario.\nOur mission? Good cheese, made here.\nOur strength? You.\n\nYou're why we're still here. Thank you.\n\n→ fromagestalbert.com/origins"
+              },
+              "hashtags": ["#StAlbert", "#Coop", "#Depuis1894", "#LocalFood", "#FromageStAlbert"]
+            },
+            {
+              "id": "w1-d7-ig-story",
+              "date": "2026-02-15",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Communauté", "en": "Theme: Community" },
+              "fullPost": {
+                "fr": "St-Albert, c'est une coopérative.\n\nPropriété de producteurs laitiers locaux. Depuis 1894.\n\nMerci de nous supporter!",
+                "en": "St-Albert is a co-op.\n\nOwned by local dairy producers. Since 1894.\n\nThanks for supporting us!"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekNumber": 2,
+      "title": { "fr": "Semaine 2 : Fidélité + Soumissions", "en": "Week 2: Loyalty + Submissions" },
+      "subtitle": { "fr": "16-22 février", "en": "Feb 16-22" },
+      "days": [
+        {
+          "date": "2026-02-16",
+          "dayName": { "fr": "Lun 16 fév", "en": "Mon Feb 16" },
+          "posts": [
+            {
+              "id": "w2-d1-fb-fr",
+              "date": "2026-02-16",
+              "platform": "facebook_fr",
+              "status": "video_needed",
+              "title": { "fr": "La timeline interactive. De 1894 à aujourd'hui.", "en": "The interactive timeline. From 1894 to today." },
+              "fullPost": {
+                "fr": "De 1894 à aujourd'hui. Notre histoire en un coup d'œil.\n\nLa timeline interactive sur notre site vous montre:\n\n→ La fondation de la coopérative par 10 directeurs\n→ L'expansion des années 50\n→ Le feu de 2013 et la reconstruction\n→ Notre partenariat avec Montebello en 2025\n\nPlus de 130 ans d'histoire. En 2 minutes.\n\n→ fromagestalbert.com/origine",
+                "en": "From 1894 to today. Our history at a glance.\n\nThe interactive timeline on our site shows:\n\n→ The founding of the co-op by 10 directors\n→ The expansion of the 1950s\n→ The 2013 fire and rebuilding\n→ Our partnership with Montebello in 2025\n\nOver 130 years of history. In 2 minutes.\n\n→ fromagestalbert.com/origins"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Screen recording de la timeline", "en": "Timeline screen recording" }
+              },
+              "hashtags": ["#StAlbert", "#Depuis1894", "#Histoire", "#FromageStAlbert"]
+            },
+            {
+              "id": "w2-d1-ig-reel",
+              "date": "2026-02-16",
+              "platform": "instagram_reel",
+              "status": "video_needed",
+              "title": { "fr": "Thème: Histoire", "en": "Theme: History" },
+              "fullPost": {
+                "fr": "Plus de 130 ans d'histoire. En 30 secondes.\n\n1894 → Fondation\n1950 → Nouvelle usine\n2013 → Le feu\n2015 → Reconstruction\n2026 → Nouveau site!\n\nLien dans la bio pour la timeline complète.\n\n#StAlbert #Depuis1894 #Histoire",
+                "en": "Over 130 years of history. In 30 seconds.\n\n1894 → Founded\n1950 → New plant\n2013 → The fire\n2015 → Rebuilt\n2026 → New site!\n\nLink in bio for full timeline.\n\n#StAlbert #Since1894 #History"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo courte timeline", "en": "Short timeline video" }
+              },
+              "hashtags": ["#StAlbert", "#Depuis1894", "#Since1894", "#Histoire", "#History"]
+            }
+          ]
+        },
+        {
+          "date": "2026-02-17",
+          "dayName": { "fr": "Mar 17 fév", "en": "Tue Feb 17" },
+          "posts": [
+            {
+              "id": "w2-d2-fb-fr",
+              "date": "2026-02-17",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Le cheddar en grains. Frais du jour. Le squick qu'on cherche tous.", "en": "Fresh cheese curds. Made today. That squeak you're looking for." },
+              "fullPost": {
+                "fr": "Le cheddar en grains. Frais du jour.\n\nC'est le squick qu'on cherche tous. Ce son quand on mord dedans. Impossible à imiter.\n\nPourquoi c'est si bon frais? Parce que le squick disparaît après 24h. Après, c'est encore bon. Mais c'est plus pareil.\n\nVenez chercher les vôtres à la boutique. Ou trouvez un point de vente près de chez vous.\n\n→ fromagestalbert.com/produits",
+                "en": "Fresh cheese curds. Made today.\n\nIt's the squeak we're all looking for. That sound when you bite in. Impossible to fake.\n\nWhy are they so good fresh? Because the squeak disappears after 24h. After that, still good. But not the same.\n\nCome get yours at the shop. Or find a retailer near you.\n\n→ fromagestalbert.com/products"
+              },
+              "hashtags": ["#StAlbert", "#CheeseCurds", "#FromageEnGrains", "#Squick", "#FraisDuJour"]
+            },
+            {
+              "id": "w2-d2-ig-story",
+              "date": "2026-02-17",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Produit", "en": "Theme: Product" },
+              "fullPost": {
+                "fr": "Curds frais du jour = squick garanti\n\nTrouvez un point de vente près de chez vous!\n\nSwipe up",
+                "en": "Fresh curds = guaranteed squeak\n\nFind a retailer near you!\n\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-18",
+          "dayName": { "fr": "Mer 18 fév", "en": "Wed Feb 18" },
+          "posts": [
+            {
+              "id": "w2-d3-fb-fr",
+              "date": "2026-02-18",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Soumission du jour. [Nom] nous montre sa recette.", "en": "Today's submission. [Name] shows us their recipe." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser avec une vraie soumission]\n\nSoumission du jour pour le concours de recettes!\n\n[Nom] de [Ville] nous partage sa recette de [nom de la recette].\n\n\"[Citation du participant sur pourquoi cette recette est spéciale]\"\n\nVous aussi, soumettez votre recette avant le 22 février!\n\n→ fromagestalbert.com/concours",
+                "en": "[Note: To customize with real submission]\n\nToday's submission for the recipe contest!\n\n[Name] from [City] shares their [recipe name] recipe.\n\n\"[Quote from participant about why this recipe is special]\"\n\nYou too can submit your recipe before February 22!\n\n→ fromagestalbert.com/contest"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#UGC", "#FromageStAlbert"]
+            },
+            {
+              "id": "w2-d3-ig-story",
+              "date": "2026-02-18",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Recette UGC", "en": "Theme: UGC Recipe" },
+              "fullPost": {
+                "fr": "Soumission du jour!\n\n[Nom] nous partage sa recette.\n\nVotre tour? 4 jours restants!\n\nSwipe up pour soumettre",
+                "en": "Today's submission!\n\n[Name] shares their recipe.\n\nYour turn? 4 days left!\n\nSwipe up to submit"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-19",
+          "dayName": { "fr": "Jeu 19 fév", "en": "Thu Feb 19" },
+          "milestone": { "fr": "LANCEMENT FIDÉLITÉ", "en": "LOYALTY LAUNCH", "type": "loyalty" },
+          "posts": [
+            {
+              "id": "w2-d4-fb-fr",
+              "date": "2026-02-19",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "Programme fidélité St-Albert. 5 achats de 30$+ = sac de curds gratuit. Simple comme ça.", "en": "St-Albert Loyalty Program. 5 purchases of $30+ = free bag of curds. That simple." },
+              "fullPost": {
+                "fr": "Le programme fidélité St-Albert est lancé.\n\nComment ça marche?\n\n1. Achetez pour 30$+ à la boutique\n2. On tamponne votre carte\n3. Après 5 tampons = sac de curds gratuit\n\nC'est tout. Pas d'application. Pas de compte à créer. Une carte. Des tampons. Du fromage gratuit.\n\nSimple comme ça.\n\n→ Passez à la boutique pour votre carte",
+                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $30+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account to create. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=fr&format=facebook",
+                "description": { "fr": "Graphique programme fidélité", "en": "Loyalty program graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ProgrammeFidelite", "#LoyaltyProgram", "#FromageGratuit", "#FreeCheese"]
+            },
+            {
+              "id": "w2-d4-fb-en",
+              "date": "2026-02-19",
+              "platform": "facebook_en",
+              "status": "graphic_needed",
+              "title": { "fr": "St-Albert Loyalty Program. 5 purchases of $30+ = free bag of curds. That simple.", "en": "St-Albert Loyalty Program. 5 purchases of $30+ = free bag of curds. That simple." },
+              "fullPost": {
+                "fr": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $30+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card",
+                "en": "The St-Albert Loyalty Program is here.\n\nHow does it work?\n\n1. Buy $30+ at the shop\n2. We stamp your card\n3. After 5 stamps = free bag of curds\n\nThat's it. No app. No account. A card. Stamps. Free cheese.\n\nThat simple.\n\n→ Stop by the shop for your card"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=en&format=facebook",
+                "description": { "fr": "Graphique programme fidélité", "en": "Loyalty program graphic" }
+              },
+              "hashtags": ["#StAlbert", "#LoyaltyProgram", "#FreeCheese", "#CheeseLovers"]
+            },
+            {
+              "id": "w2-d4-ig-reel",
+              "date": "2026-02-19",
+              "platform": "instagram_reel",
+              "status": "graphic_needed",
+              "title": { "fr": "Programme fidélité - format Reel", "en": "Loyalty program - Reel format" },
+              "fullPost": {
+                "fr": "Programme fidélité St-Albert\n\n5 achats = curds gratuits\n\nPas d'app. Juste une carte.\n\nPassez à la boutique!\n\n#StAlbert #ProgrammeFidelite #FreeCheese",
+                "en": "St-Albert Loyalty Program\n\n5 purchases = free curds\n\nNo app. Just a card.\n\nStop by the shop!\n\n#StAlbert #LoyaltyProgram #FreeCheese"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/loyalty?lang=fr&format=reel",
+                "description": { "fr": "Graphique animé", "en": "Animated graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ProgrammeFidelite", "#LoyaltyProgram", "#FreeCheese"]
+            }
+          ]
+        },
+        {
+          "date": "2026-02-20",
+          "dayName": { "fr": "Ven 20 fév", "en": "Fri Feb 20" },
+          "posts": [
+            {
+              "id": "w2-d5-fb-fr",
+              "date": "2026-02-20",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Plus que quelques jours pour soumettre votre recette. On attend la vôtre.", "en": "A few days left to submit your recipe. We're waiting for yours." },
+              "fullPost": {
+                "fr": "Plus que 2 jours pour soumettre votre recette.\n\nLes soumissions ferment dimanche soir. Après, c'est le vote.\n\nVotre mac & cheese secret? Votre poutine signature? Votre grilled cheese légendaire?\n\nC'est le moment.\n\n→ fromagestalbert.com/concours",
+                "en": "Only 2 days left to submit your recipe.\n\nSubmissions close Sunday night. Then, voting begins.\n\nYour secret mac & cheese? Your signature poutine? Your legendary grilled cheese?\n\nNow's the time.\n\n→ fromagestalbert.com/contest"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#DerniereChance"]
+            },
+            {
+              "id": "w2-d5-ig-story",
+              "date": "2026-02-20",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Rappel concours", "en": "Contest reminder" },
+              "fullPost": {
+                "fr": "2 JOURS RESTANTS\n\nSoumettez votre recette avant dimanche!\n\nSwipe up",
+                "en": "2 DAYS LEFT\n\nSubmit your recipe before Sunday!\n\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-21",
+          "dayName": { "fr": "Sam 21 fév", "en": "Sat Feb 21" },
+          "posts": [
+            {
+              "id": "w2-d6-fb-fr",
+              "date": "2026-02-21",
+              "platform": "facebook_fr",
+              "status": "video_needed",
+              "title": { "fr": "Visitez la fromagerie. On vous montre comment on fait.", "en": "Visit the cheese factory. We'll show you how it's done." },
+              "fullPost": {
+                "fr": "Vous voulez voir comment on fait le fromage?\n\nNotre galerie d'observation est ouverte tous les jours, gratuitement. Vous pouvez voir la production en direct.\n\nVous voulez plus? Réservez une visite guidée avec dégustation.\n\nEt tant qu'à y être, arrêtez au restaurant pour une poutine et à la boutique pour repartir avec vos achats.\n\nOuvert 9h-18h, 361 jours par année.\n\n→ fromagestalbert.com/visite",
+                "en": "Want to see how we make cheese?\n\nOur viewing gallery is open daily, free of charge. You can watch production live.\n\nWant more? Book a guided tour with tasting.\n\nAnd while you're there, stop by the restaurant for poutine and the shop to take home your purchases.\n\nOpen 9am-6pm, 361 days a year.\n\n→ fromagestalbert.com/visit"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo courte de la fromagerie", "en": "Short factory video" }
+              },
+              "hashtags": ["#StAlbert", "#Visite", "#Tour", "#Fromagerie", "#CheeseFactory"]
+            },
+            {
+              "id": "w2-d6-ig-story",
+              "date": "2026-02-21",
+              "platform": "instagram_story",
+              "status": "video_needed",
+              "title": { "fr": "Thème: Visite", "en": "Theme: Tour" },
+              "fullPost": {
+                "fr": "Visitez la fromagerie!\n\n→ Galerie d'observation gratuite\n→ Visites guidées disponibles\n→ Restaurant + Boutique\n\nOuvert 9h-18h tous les jours!",
+                "en": "Visit the cheese factory!\n\n→ Free viewing gallery\n→ Guided tours available\n→ Restaurant + Shop\n\nOpen 9am-6pm every day!"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo stories de la visite", "en": "Tour stories video" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-22",
+          "dayName": { "fr": "Dim 22 fév", "en": "Sun Feb 22" },
+          "posts": [
+            {
+              "id": "w2-d7-fb-fr",
+              "date": "2026-02-22",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Nos producteurs laitiers. Sans eux, pas de St-Albert.", "en": "Our dairy farmers. Without them, no St-Albert." },
+              "fullPost": {
+                "fr": "Nos producteurs laitiers.\n\nSt-Albert, c'est une coopérative. Ça veut dire que nos propriétaires sont des producteurs laitiers de l'Est ontarien.\n\nIls nous fournissent le lait. On fait le fromage. Les profits retournent dans la communauté.\n\nLe lait vient de moins de 50 km de la fromagerie. 100% canadien.\n\nSans eux, pas de St-Albert.\n\n→ fromagestalbert.com/origine",
+                "en": "Our dairy farmers.\n\nSt-Albert is a co-op. That means our owners are local dairy producers from Eastern Ontario.\n\nThey supply the milk. We make the cheese. Profits go back to the community.\n\nThe milk comes from within 50 km of the factory. 100% Canadian.\n\nWithout them, no St-Albert.\n\n→ fromagestalbert.com/origins"
+              },
+              "hashtags": ["#StAlbert", "#Coop", "#ProducteursLaitiers", "#DairyFarmers", "#LocalFood"]
+            },
+            {
+              "id": "w2-d7-ig-story",
+              "date": "2026-02-22",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Producteurs", "en": "Theme: Farmers" },
+              "fullPost": {
+                "fr": "Merci à nos producteurs membres!\n\nSans leur lait de qualité, pas de fromage St-Albert.\n\nCoopérative depuis 1894.",
+                "en": "Thanks to our member producers!\n\nWithout their quality milk, no St-Albert cheese.\n\nCo-op since 1894."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekNumber": 3,
+      "title": { "fr": "Semaine 3 : Vote", "en": "Week 3: Voting" },
+      "subtitle": { "fr": "23 fév - 1 mars", "en": "Feb 23 - Mar 1" },
+      "days": [
+        {
+          "date": "2026-02-23",
+          "dayName": { "fr": "Lun 23 fév", "en": "Mon Feb 23" },
+          "milestone": { "fr": "SOUMISSIONS FERMÉES", "en": "SUBMISSIONS CLOSE", "type": "contest" },
+          "posts": [
+            {
+              "id": "w3-d1-fb-fr",
+              "date": "2026-02-23",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "Soumissions fermées. Le vote commence.", "en": "Submissions closed. Voting starts." },
+              "fullPost": {
+                "fr": "Les soumissions sont fermées. Le vote commence!\n\nMerci à tous ceux qui ont partagé leurs recettes. On a reçu [X] soumissions incroyables.\n\nMaintenant, c'est à vous de voter. Les finalistes sont sur le site.\n\nLe vote est ouvert jusqu'au 1er mars.\n\n→ fromagestalbert.com/concours/vote",
+                "en": "Submissions are closed. Voting begins!\n\nThanks to everyone who shared their recipes. We received [X] amazing submissions.\n\nNow it's up to you to vote. The finalists are on the site.\n\nVoting is open until March 1.\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/voting?lang=fr&format=facebook",
+                "description": { "fr": "Graphique vote ouvert", "en": "Voting open graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Vote", "#FromageStAlbert"]
+            },
+            {
+              "id": "w3-d1-fb-en",
+              "date": "2026-02-23",
+              "platform": "facebook_en",
+              "status": "graphic_needed",
+              "title": { "fr": "Submissions closed. Voting starts.", "en": "Submissions closed. Voting starts." },
+              "fullPost": {
+                "fr": "Submissions are closed. Voting begins!\n\nThanks to everyone who shared their recipes. We received [X] amazing submissions.\n\nNow it's up to you to vote. The finalists are on the site.\n\nVoting is open until March 1.\n\n→ fromagestalbert.com/contest/vote",
+                "en": "Submissions are closed. Voting begins!\n\nThanks to everyone who shared their recipes. We received [X] amazing submissions.\n\nNow it's up to you to vote. The finalists are on the site.\n\nVoting is open until March 1.\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/voting?lang=en&format=facebook",
+                "description": { "fr": "Graphique vote ouvert", "en": "Voting open graphic" }
+              },
+              "hashtags": ["#StAlbert", "#RecipeContest", "#Vote", "#CheeseLovers"]
+            },
+            {
+              "id": "w3-d1-ig-reel",
+              "date": "2026-02-23",
+              "platform": "instagram_reel",
+              "status": "graphic_needed",
+              "title": { "fr": "Vote ouvert - format Reel", "en": "Voting opens - Reel format" },
+              "fullPost": {
+                "fr": "Le vote est OUVERT!\n\n[X] recettes finalistes. 1 gagnant.\n\nVotez pour votre favorite!\n\nLien dans la bio.\n\n#StAlbert #ConcoursRecettes #Vote",
+                "en": "Voting is OPEN!\n\n[X] finalist recipes. 1 winner.\n\nVote for your favorite!\n\nLink in bio.\n\n#StAlbert #RecipeContest #Vote"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/voting?lang=fr&format=reel",
+                "description": { "fr": "Graphique animé vote", "en": "Animated voting graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Vote"]
+            }
+          ]
+        },
+        {
+          "date": "2026-02-24",
+          "dayName": { "fr": "Mar 24 fév", "en": "Tue Feb 24" },
+          "posts": [
+            {
+              "id": "w3-d2-fb-fr",
+              "date": "2026-02-24",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Recette finaliste : [Nom]. Votez sur notre site.", "en": "Finalist recipe: [Name]. Vote on our site." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser avec vraie recette finaliste]\n\nRecette finaliste #1\n\n[Nom de la recette] par [Prénom] de [Ville]\n\n\"[Description courte de la recette et pourquoi elle est spéciale]\"\n\nIngrédients vedettes: Cheddar St-Albert + [autres ingrédients]\n\nVotez pour cette recette!\n\n→ fromagestalbert.com/concours/vote",
+                "en": "[Note: To customize with real finalist recipe]\n\nFinalist recipe #1\n\n[Recipe name] by [First name] from [City]\n\n\"[Short description of recipe and why it's special]\"\n\nStar ingredients: St-Albert Cheddar + [other ingredients]\n\nVote for this recipe!\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Finaliste", "#Vote"]
+            },
+            {
+              "id": "w3-d2-ig-story",
+              "date": "2026-02-24",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Finaliste #1", "en": "Finalist #1" },
+              "fullPost": {
+                "fr": "Finaliste #1\n\n[Nom de la recette]\npar [Prénom]\n\nVotez maintenant!\nSwipe up",
+                "en": "Finalist #1\n\n[Recipe name]\nby [First name]\n\nVote now!\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-25",
+          "dayName": { "fr": "Mer 25 fév", "en": "Wed Feb 25" },
+          "posts": [
+            {
+              "id": "w3-d3-fb-fr",
+              "date": "2026-02-25",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Recette finaliste : [Nom].", "en": "Finalist recipe: [Name]." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser avec vraie recette finaliste]\n\nRecette finaliste #2\n\n[Nom de la recette] par [Prénom] de [Ville]\n\n\"[Description courte de la recette et pourquoi elle est spéciale]\"\n\nVotez pour cette recette!\n\n→ fromagestalbert.com/concours/vote",
+                "en": "[Note: To customize with real finalist recipe]\n\nFinalist recipe #2\n\n[Recipe name] by [First name] from [City]\n\n\"[Short description of recipe and why it's special]\"\n\nVote for this recipe!\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Finaliste", "#Vote"]
+            },
+            {
+              "id": "w3-d3-ig-story",
+              "date": "2026-02-25",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Finaliste #2", "en": "Finalist #2" },
+              "fullPost": {
+                "fr": "Finaliste #2\n\n[Nom de la recette]\npar [Prénom]\n\nVotez maintenant!\nSwipe up",
+                "en": "Finalist #2\n\n[Recipe name]\nby [First name]\n\nVote now!\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-26",
+          "dayName": { "fr": "Jeu 26 fév", "en": "Thu Feb 26" },
+          "posts": [
+            {
+              "id": "w3-d4-fb-fr",
+              "date": "2026-02-26",
+              "platform": "facebook_fr",
+              "status": "video_needed",
+              "title": { "fr": "Devenir détaillant St-Albert. Le formulaire est sur le site.", "en": "Become a St-Albert retailer. The form is on the site." },
+              "fullPost": {
+                "fr": "Vous voulez vendre du fromage St-Albert?\n\nOn cherche toujours de nouveaux partenaires. Épiceries, restaurants, dépanneurs, marchés.\n\nCommande minimum: 75$\nSupport marketing inclus\nLivraison disponible\n\n→ fromagestalbert.com/devenir-distributeur",
+                "en": "Want to sell St-Albert cheese?\n\nWe're always looking for new partners. Groceries, restaurants, convenience stores, markets.\n\nMinimum order: $75\nMarketing support included\nDelivery available\n\n→ fromagestalbert.com/become-a-distributor"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo témoignage détaillant", "en": "Retailer testimonial video" }
+              },
+              "hashtags": ["#StAlbert", "#Distributeur", "#Retailer", "#Partenariat", "#B2B"]
+            },
+            {
+              "id": "w3-d4-ig-story",
+              "date": "2026-02-26",
+              "platform": "instagram_story",
+              "status": "video_needed",
+              "title": { "fr": "Thème: Détaillant", "en": "Theme: Retailer" },
+              "fullPost": {
+                "fr": "Vous voulez vendre St-Albert?\n\nOn cherche des partenaires!\n\nRestaurants - Épiceries - Marchés\n\nSwipe up pour le formulaire",
+                "en": "Want to sell St-Albert?\n\nWe're looking for partners!\n\nRestaurants - Groceries - Markets\n\nSwipe up for the form"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo stories", "en": "Stories video" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-27",
+          "dayName": { "fr": "Ven 27 fév", "en": "Fri Feb 27" },
+          "posts": [
+            {
+              "id": "w3-d5-fb-fr",
+              "date": "2026-02-27",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Recette finaliste : [Nom].", "en": "Finalist recipe: [Name]." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser avec vraie recette finaliste]\n\nRecette finaliste #3\n\n[Nom de la recette] par [Prénom] de [Ville]\n\n\"[Description courte de la recette et pourquoi elle est spéciale]\"\n\nLe vote ferme dimanche! Votez maintenant!\n\n→ fromagestalbert.com/concours/vote",
+                "en": "[Note: To customize with real finalist recipe]\n\nFinalist recipe #3\n\n[Recipe name] by [First name] from [City]\n\n\"[Short description of recipe and why it's special]\"\n\nVoting closes Sunday! Vote now!\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Finaliste", "#Vote"]
+            },
+            {
+              "id": "w3-d5-ig-story",
+              "date": "2026-02-27",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Finaliste #3", "en": "Finalist #3" },
+              "fullPost": {
+                "fr": "Finaliste #3\n\n[Nom de la recette]\npar [Prénom]\n\nVote ferme dimanche!\nSwipe up",
+                "en": "Finalist #3\n\n[Recipe name]\nby [First name]\n\nVoting closes Sunday!\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-02-28",
+          "dayName": { "fr": "Sam 28 fév", "en": "Sat Feb 28" },
+          "posts": [
+            {
+              "id": "w3-d6-fb-fr",
+              "date": "2026-02-28",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Dernier week-end pour voter. Votre voix compte.", "en": "Last weekend to vote. Your voice matters." },
+              "fullPost": {
+                "fr": "Dernier week-end pour voter!\n\nLe vote ferme demain soir. Après, le jury délibère.\n\nVotre voix compte. Chaque vote rapproche un participant de la victoire.\n\nAllez voir les recettes. Votez pour votre favorite.\n\n→ fromagestalbert.com/concours/vote",
+                "en": "Last weekend to vote!\n\nVoting closes tomorrow night. Then the jury deliberates.\n\nYour voice matters. Every vote brings a participant closer to winning.\n\nGo see the recipes. Vote for your favorite.\n\n→ fromagestalbert.com/contest/vote"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Vote", "#DerniereChance"]
+            },
+            {
+              "id": "w3-d6-ig-story",
+              "date": "2026-02-28",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Rappel vote", "en": "Vote reminder" },
+              "fullPost": {
+                "fr": "DERNIÈRE CHANCE!\n\nLe vote ferme DEMAIN.\n\nVotez maintenant!\nSwipe up",
+                "en": "LAST CHANCE!\n\nVoting closes TOMORROW.\n\nVote now!\nSwipe up"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-01",
+          "dayName": { "fr": "Dim 1 mars", "en": "Sun Mar 1" },
+          "posts": [
+            {
+              "id": "w3-d7-fb-fr",
+              "date": "2026-03-01",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Le vote se termine ce soir. Merci à tous les participants.", "en": "Voting ends tonight. Thanks to all participants." },
+              "fullPost": {
+                "fr": "Le vote ferme ce soir à minuit.\n\nMerci à tous ceux qui ont soumis une recette. Merci à tous ceux qui ont voté.\n\nLe jury se réunit cette semaine. Les gagnants seront annoncés jeudi en direct!\n\nStay tuned.\n\n→ fromagestalbert.com/concours",
+                "en": "Voting closes tonight at midnight.\n\nThanks to everyone who submitted a recipe. Thanks to everyone who voted.\n\nThe jury meets this week. Winners will be announced Thursday live!\n\nStay tuned.\n\n→ fromagestalbert.com/contest"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Merci", "#Thanks"]
+            },
+            {
+              "id": "w3-d7-ig-story",
+              "date": "2026-03-01",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Thème: Communauté", "en": "Theme: Community" },
+              "fullPost": {
+                "fr": "Merci à tous!\n\nVote ferme ce soir.\nGagnants annoncés jeudi!\n\n#StAlbert #Merci",
+                "en": "Thanks everyone!\n\nVoting closes tonight.\nWinners announced Thursday!\n\n#StAlbert #Thanks"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekNumber": 4,
+      "title": { "fr": "Semaine 4 : Gagnants", "en": "Week 4: Winners" },
+      "subtitle": { "fr": "2-8 mars", "en": "Mar 2-8" },
+      "days": [
+        {
+          "date": "2026-03-02",
+          "dayName": { "fr": "Lun 2 mars", "en": "Mon Mar 2" },
+          "milestone": { "fr": "VOTE FERMÉ", "en": "VOTING CLOSES", "type": "contest" },
+          "posts": [
+            {
+              "id": "w4-d1-fb-fr",
+              "date": "2026-03-02",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "Vote fermé. Le jury délibère. Gagnants annoncés jeudi.", "en": "Voting closed. Jury deliberates. Winners announced Thursday." },
+              "fullPost": {
+                "fr": "Le vote est fermé!\n\nMerci aux [X] personnes qui ont voté. Le jury se réunit maintenant pour choisir les gagnants.\n\nComment ça marche?\n→ Les votes du public comptent pour 50%\n→ Le jury compte pour 50%\n\nAnnonce des gagnants: Jeudi 5 mars, en direct sur Facebook et Instagram.\n\nÀ jeudi!",
+                "en": "Voting is closed!\n\nThanks to the [X] people who voted. The jury is now meeting to choose the winners.\n\nHow does it work?\n→ Public votes count for 50%\n→ Jury counts for 50%\n\nWinner announcement: Thursday March 5, live on Facebook and Instagram.\n\nSee you Thursday!"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/winner?variant=closed&lang=fr&format=facebook",
+                "description": { "fr": "Graphique vote fermé", "en": "Voting closed graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Jury", "#Gagnants"]
+            },
+            {
+              "id": "w4-d1-ig-story",
+              "date": "2026-03-02",
+              "platform": "instagram_story",
+              "status": "graphic_needed",
+              "title": { "fr": "Teaser gagnants", "en": "Winners teaser" },
+              "fullPost": {
+                "fr": "VOTE FERMÉ!\n\nLe jury délibère...\n\nGagnants annoncés JEUDI en direct!\n\nStay tuned",
+                "en": "VOTING CLOSED!\n\nThe jury deliberates...\n\nWinners announced THURSDAY live!\n\nStay tuned"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/winner?variant=closed&lang=fr&format=story",
+                "description": { "fr": "Graphique teaser", "en": "Teaser graphic" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-03",
+          "dayName": { "fr": "Mar 3 mars", "en": "Tue Mar 3" },
+          "posts": [
+            {
+              "id": "w4-d2-fb-fr",
+              "date": "2026-03-03",
+              "platform": "facebook_fr",
+              "status": "video_needed",
+              "title": { "fr": "Notre partenariat avec Montebello. L'Adoray arrive chez nous.", "en": "Our partnership with Montebello. Adoray comes to us." },
+              "fullPost": {
+                "fr": "En 2025, on est devenus partenaires de la Fromagerie Montebello.\n\nLeur fromage vedette? L'Adoray. Pâte molle, croûte mixte, affiné 21 jours. Double lauréat Caseus.\n\nVous pouvez maintenant le trouver à notre boutique de St-Albert et à notre magasin de Mirabel.\n\nDeux fromageries. Une passion commune.\n\n→ fromagestalbert.com/produits",
+                "en": "In 2025, we became partners with Fromagerie Montebello.\n\nTheir star cheese? L'Adoray. Soft paste, mixed rind, aged 21 days. Double Caseus winner.\n\nYou can now find it at our St-Albert shop and our Mirabel store.\n\nTwo cheese makers. One shared passion.\n\n→ fromagestalbert.com/products"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo partenariat Montebello", "en": "Montebello partnership video" }
+              },
+              "hashtags": ["#StAlbert", "#Montebello", "#Adoray", "#Caseus", "#Partenariat"]
+            },
+            {
+              "id": "w4-d2-ig-story",
+              "date": "2026-03-03",
+              "platform": "instagram_story",
+              "status": "video_needed",
+              "title": { "fr": "Spotlight: Partenariat Montebello", "en": "Spotlight: Montebello Partnership" },
+              "fullPost": {
+                "fr": "Nouveau partenariat!\n\nSt-Albert + Montebello\n\nL'Adoray disponible chez nous.\nDouble lauréat Caseus.\n\nSwipe up pour en savoir plus",
+                "en": "New partnership!\n\nSt-Albert + Montebello\n\nAdoray available at our shops.\nDouble Caseus winner.\n\nSwipe up to learn more"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Vidéo stories partenariat", "en": "Partnership stories video" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-04",
+          "dayName": { "fr": "Mer 4 mars", "en": "Wed Mar 4" },
+          "posts": [
+            {
+              "id": "w4-d3-fb-fr",
+              "date": "2026-03-04",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "Demain, on annonce les gagnants. Préparez-vous.", "en": "Tomorrow, we announce the winners. Get ready." },
+              "fullPost": {
+                "fr": "DEMAIN.\n\nAnnonce des gagnants du concours de recettes.\n\nEn direct sur Facebook et Instagram. 18h00.\n\n→ 1er prix: [À déterminer]\n→ 2e prix: [À déterminer]\n→ Prix du public: [À déterminer]\n\nLes gagnants verront leur recette publiée sur notre site. Pour toujours.\n\nOn se voit demain!",
+                "en": "TOMORROW.\n\nRecipe contest winner announcement.\n\nLive on Facebook and Instagram. 6:00 PM.\n\n→ 1st prize: [TBD]\n→ 2nd prize: [TBD]\n→ People's choice: [TBD]\n\nWinners will have their recipe published on our site. Forever.\n\nSee you tomorrow!"
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Gagnants", "#Winners", "#Live"]
+            },
+            {
+              "id": "w4-d3-ig-story",
+              "date": "2026-03-04",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Teaser finale", "en": "Final teaser" },
+              "fullPost": {
+                "fr": "DEMAIN 18H\n\nAnnonce des gagnants EN DIRECT!\n\nSet your reminders!",
+                "en": "TOMORROW 6PM\n\nWinner announcement LIVE!\n\nSet your reminders!"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-05",
+          "dayName": { "fr": "Jeu 5 mars", "en": "Thu Mar 5" },
+          "milestone": { "fr": "GAGNANTS EN DIRECT", "en": "WINNERS LIVE", "type": "winners" },
+          "posts": [
+            {
+              "id": "w4-d4-fb-fr",
+              "date": "2026-03-05",
+              "platform": "facebook_fr",
+              "status": "to_prepare",
+              "title": { "fr": "ANNONCE DES GAGNANTS EN DIRECT", "en": "WINNERS ANNOUNCED LIVE" },
+              "fullPost": {
+                "fr": "EN DIRECT - ANNONCE DES GAGNANTS\n\nBienvenue au live du concours de recettes St-Albert!\n\nAujourd'hui, on annonce:\n→ Le grand gagnant (choix du jury + public)\n→ Le prix du public\n→ Les mentions spéciales\n\nMerci à tous les participants. Merci à tous les votants.\n\nC'est parti!",
+                "en": "LIVE - WINNER ANNOUNCEMENT\n\nWelcome to the St-Albert Recipe Contest live!\n\nToday, we announce:\n→ The grand winner (jury + public choice)\n→ People's choice award\n→ Special mentions\n\nThanks to all participants. Thanks to all voters.\n\nHere we go!"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Diffusion en direct", "en": "Live stream" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Live", "#Gagnants"]
+            },
+            {
+              "id": "w4-d4-ig-live",
+              "date": "2026-03-05",
+              "platform": "instagram_reel",
+              "status": "to_prepare",
+              "title": { "fr": "Live Instagram simultané", "en": "Simultaneous Instagram Live" },
+              "fullPost": {
+                "fr": "EN DIRECT\n\nAnnonce des gagnants du concours de recettes!\n\nRestez avec nous pour découvrir les gagnants\n\n#StAlbert #Live #Gagnants",
+                "en": "LIVE\n\nRecipe contest winner announcement!\n\nStay with us to find out the winners\n\n#StAlbert #Live #Winners"
+              },
+              "asset": {
+                "type": "video",
+                "description": { "fr": "Diffusion en direct", "en": "Live stream" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-06",
+          "dayName": { "fr": "Ven 6 mars", "en": "Fri Mar 6" },
+          "posts": [
+            {
+              "id": "w4-d5-fb-fr",
+              "date": "2026-03-06",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "1er prix : [Nom]. Leur recette est maintenant sur le site.", "en": "1st place: [Name]. Their recipe is now on the site." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser avec le vrai gagnant]\n\nFélicitations à [Prénom] de [Ville]!\n\nGrand gagnant du premier concours de recettes St-Albert avec sa recette de [nom de la recette].\n\n\"[Citation du gagnant]\"\n\nSa recette est maintenant sur notre site. Pour toujours.\n\n→ fromagestalbert.com/recettes/[slug]\n\nMerci à tous les participants!",
+                "en": "[Note: To customize with real winner]\n\nCongratulations to [First name] from [City]!\n\nGrand winner of the first St-Albert Recipe Contest with their [recipe name].\n\n\"[Winner quote]\"\n\nTheir recipe is now on our site. Forever.\n\n→ fromagestalbert.com/recipes/[slug]\n\nThanks to all participants!"
+              },
+              "asset": {
+                "type": "photo",
+                "description": { "fr": "Photo du gagnant/recette", "en": "Winner/recipe photo" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#Gagnant", "#Winner", "#Felicitations"]
+            },
+            {
+              "id": "w4-d5-ig-reel",
+              "date": "2026-03-06",
+              "platform": "instagram_reel",
+              "status": "graphic_needed",
+              "title": { "fr": "Feature gagnant", "en": "Winner feature" },
+              "fullPost": {
+                "fr": "Notre gagnant!\n\n[Prénom] de [Ville]\n[Nom de la recette]\n\nSa recette est sur le site!\n\nLien dans la bio\n\n#StAlbert #Gagnant #RecipeContest",
+                "en": "Our winner!\n\n[First name] from [City]\n[Recipe name]\n\nTheir recipe is on the site!\n\nLink in bio\n\n#StAlbert #Winner #RecipeContest"
+              },
+              "asset": {
+                "type": "photo",
+                "description": { "fr": "Photo/vidéo gagnant", "en": "Winner photo/video" }
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-07",
+          "dayName": { "fr": "Sam 7 mars", "en": "Sat Mar 7" },
+          "posts": [
+            {
+              "id": "w4-d6-fb-fr",
+              "date": "2026-03-07",
+              "platform": "facebook_fr",
+              "status": "ready",
+              "title": { "fr": "L'histoire derrière la recette gagnante.", "en": "The story behind the winning recipe." },
+              "fullPost": {
+                "fr": "[Note: À personnaliser]\n\nL'histoire derrière la recette gagnante.\n\n[Prénom] nous raconte:\n\n\"[Histoire personnelle sur pourquoi cette recette est importante pour lui/elle. Comment le fromage St-Albert fait partie de sa vie.]\"\n\nMerci de partager votre histoire avec nous, [Prénom].\n\n→ fromagestalbert.com/recettes/[slug]",
+                "en": "[Note: To customize]\n\nThe story behind the winning recipe.\n\n[First name] tells us:\n\n\"[Personal story about why this recipe is important to them. How St-Albert cheese is part of their life.]\"\n\nThanks for sharing your story with us, [First name].\n\n→ fromagestalbert.com/recipes/[slug]"
+              },
+              "hashtags": ["#StAlbert", "#Gagnant", "#Winner", "#Histoire", "#Story", "#FromageStAlbert"]
+            },
+            {
+              "id": "w4-d6-ig-story",
+              "date": "2026-03-07",
+              "platform": "instagram_story",
+              "status": "ready",
+              "title": { "fr": "Histoire du gagnant", "en": "Winner story" },
+              "fullPost": {
+                "fr": "L'histoire de [Prénom]\n\n\"[Quote courte]\"\n\nSwipe up pour lire la recette",
+                "en": "[First name]'s story\n\n\"[Short quote]\"\n\nSwipe up to read the recipe"
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-03-08",
+          "dayName": { "fr": "Dim 8 mars", "en": "Sun Mar 8" },
+          "milestone": { "fr": "CONCOURS RECOMMENCE", "en": "CONTEST REPEATS", "type": "contest" },
+          "posts": [
+            {
+              "id": "w4-d7-fb-fr",
+              "date": "2026-03-08",
+              "platform": "facebook_fr",
+              "status": "graphic_needed",
+              "title": { "fr": "Le concours recommence. Vous avez une nouvelle chance.", "en": "The contest starts again. You have another chance." },
+              "fullPost": {
+                "fr": "Le concours recommence!\n\nVous n'avez pas eu le temps de soumettre? Vous avez une nouvelle recette à partager? C'est reparti.\n\nMême principe:\n→ Soumettez votre recette au fromage St-Albert\n→ Les meilleures vont sur le site\n→ Le public vote\n→ Les gagnants remportent des prix\n\nNouvelle édition. Nouvelle chance.\n\n→ fromagestalbert.com/concours",
+                "en": "The contest is back!\n\nDidn't have time to submit? Have a new recipe to share? Here we go again.\n\nSame principle:\n→ Submit your St-Albert cheese recipe\n→ Best ones go on the site\n→ Public votes\n→ Winners get prizes\n\nNew edition. New chance.\n\n→ fromagestalbert.com/contest"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=fr&format=facebook",
+                "description": { "fr": "Graphique nouvelle édition", "en": "New edition graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#NouvelleEdition", "#NewEdition"]
+            },
+            {
+              "id": "w4-d7-fb-en",
+              "date": "2026-03-08",
+              "platform": "facebook_en",
+              "status": "graphic_needed",
+              "title": { "fr": "The contest starts again. You have another chance.", "en": "The contest starts again. You have another chance." },
+              "fullPost": {
+                "fr": "The contest is back!\n\nDidn't have time to submit? Have a new recipe to share? Here we go again.\n\nSame principle:\n→ Submit your St-Albert cheese recipe\n→ Best ones go on the site\n→ Public votes\n→ Winners get prizes\n\nNew edition. New chance.\n\n→ fromagestalbert.com/contest",
+                "en": "The contest is back!\n\nDidn't have time to submit? Have a new recipe to share? Here we go again.\n\nSame principle:\n→ Submit your St-Albert cheese recipe\n→ Best ones go on the site\n→ Public votes\n→ Winners get prizes\n\nNew edition. New chance.\n\n→ fromagestalbert.com/contest"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=en&format=facebook",
+                "description": { "fr": "Graphique nouvelle édition", "en": "New edition graphic" }
+              },
+              "hashtags": ["#StAlbert", "#RecipeContest", "#CheeseLovers", "#NewEdition"]
+            },
+            {
+              "id": "w4-d7-ig-reel",
+              "date": "2026-03-08",
+              "platform": "instagram_reel",
+              "status": "graphic_needed",
+              "title": { "fr": "Nouvelle édition du concours", "en": "New contest edition" },
+              "fullPost": {
+                "fr": "C'est reparti!\n\nNouvelle édition du concours de recettes.\n\nSoumettez la vôtre!\nLien dans la bio.\n\n#StAlbert #ConcoursRecettes #NouvelleEdition",
+                "en": "It's back!\n\nNew edition of the recipe contest.\n\nSubmit yours!\nLink in bio.\n\n#StAlbert #RecipeContest #NewEdition"
+              },
+              "asset": {
+                "type": "graphic",
+                "_placeholder_url": "http://localhost:3004/api/winner?variant=restart&lang=fr&format=reel",
+                "description": { "fr": "Graphique animé", "en": "Animated graphic" }
+              },
+              "hashtags": ["#StAlbert", "#ConcoursRecettes", "#RecipeContest", "#NouvelleEdition"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "hashtags": {
+    "core": ["#StAlbert", "#FromageStAlbert", "#Fromagerie"],
+    "contest": ["#ConcoursRecettes", "#RecipeContest"],
+    "products": ["#CheeseLovers", "#FromageEnGrains", "#Cheddar", "#CheeseCurds"],
+    "local": ["#MadeInOntario", "#LocalFood", "#Coop"],
+    "history": ["#Depuis1894", "#Since1894"]
+  }
+}

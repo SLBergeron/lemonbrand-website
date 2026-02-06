@@ -53,3 +53,6 @@ test-results/
 __pycache__/
 *.py
 *.pyc
+
+# Large media files
+apps/web/public/clients/st-albert/videos/
