@@ -78,6 +78,7 @@ const PLATFORM_COLORS = {
 // Status colors - refined with better contrast
 const STATUS_COLORS = {
   ready: "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/30",
+  completed: "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/30",
   video_needed: "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/30",
   graphic_needed: "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/30",
   draft: "bg-slate-500/10 text-slate-600 ring-1 ring-slate-500/30",
@@ -348,6 +349,7 @@ function StatusIcon({ status }: { status: Status }) {
   const iconClass = "h-3 w-3";
   switch (status) {
     case "ready":
+    case "completed":
       return <CheckCircle2 className={iconClass} />;
     case "video_needed":
     case "to_record":
@@ -368,6 +370,7 @@ function StatusLabel({ status, language }: { status: Status; language: Language 
   const t = TRANSLATIONS[language];
   const labels: Record<Status, string> = {
     ready: t.ready,
+    completed: t.ready,
     video_needed: t.videoNeeded,
     graphic_needed: t.graphicNeeded,
     draft: t.draft,
@@ -610,7 +613,11 @@ function ContentCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.03, duration: 0.25 }}
       onClick={() => onExpand(post)}
-      className="group relative rounded-lg p-3.5 bg-white border border-[#001d4a]/8 hover:border-[#001d4a]/15 hover:shadow-md hover:shadow-[#001d4a]/5 transition-all duration-200 cursor-pointer"
+      className={`group relative rounded-lg p-3.5 border transition-all duration-200 cursor-pointer ${
+        post.status === "completed"
+          ? "bg-[#001d4a]/[0.02] border-[#001d4a]/5 opacity-60"
+          : "bg-white border-[#001d4a]/8 hover:border-[#001d4a]/15 hover:shadow-md hover:shadow-[#001d4a]/5"
+      }`}
     >
       {/* Platform & Status badges */}
       <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -625,10 +632,10 @@ function ContentCard({
       </div>
 
       {/* Title */}
-      <p className="text-[13px] text-[#001d4a] font-medium leading-relaxed">{post.title[language]}</p>
+      <p className={`text-[13px] font-medium leading-relaxed ${post.status === "completed" ? "text-[#001d4a]/40 line-through" : "text-[#001d4a]"}`}>{post.title[language]}</p>
 
       {/* Preview text */}
-      <p className="text-xs text-[#001d4a]/50 mt-1.5 line-clamp-2">
+      <p className={`text-xs mt-1.5 line-clamp-2 ${post.status === "completed" ? "text-[#001d4a]/30 line-through" : "text-[#001d4a]/50"}`}>
         {previewText}{hasMore ? "..." : ""}
       </p>
 
